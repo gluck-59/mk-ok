@@ -31,10 +31,10 @@
                     </div>
                     <div class="d-flex align-items-center f_col justify-content-end">
                         {* Callback *}
-                        <a class="fn_callback callback d-inline-flex align-items-center" href="#fn_callback" data-language="index_back_call">
-                            {include file="svg.tpl" svgId="support_icon"}
-                            <span>{$lang->index_back_call}</span>
-                        </a>
+{*                        <a class="fn_callback callback d-inline-flex align-items-center" href="#fn_callback" data-language="index_back_call">*}
+{*                            {include file="svg.tpl" svgId="support_icon"}*}
+{*                            <span>{$lang->index_back_call}</span>*}
+{*                        </a>*}
                         {* Language & Currency *}
                         <div class="switcher d-flex align-items-center">
                             {include file="switcher.tpl"}
@@ -224,12 +224,12 @@
                                 </div>
                             </div>
                         {/if}
-                        <div class="footer__contact_item">
-                            <a class="fn_callback callback d-inline-flex align-items-center" href="#fn_callback" data-language="index_back_call">
-                                {include file="svg.tpl" svgId="support_icon"}
-                                <span>{$lang->index_back_call}</span>
-                            </a>
-                        </div>
+{*                        <div class="footer__contact_item">*}
+{*                            <a class="fn_callback callback d-inline-flex align-items-center" href="#fn_callback" data-language="index_back_call">*}
+{*                                {include file="svg.tpl" svgId="support_icon"}*}
+{*                                <span>{$lang->index_back_call}</span>*}
+{*                            </a>*}
+{*                        </div>*}
                     </div>
                 </div>
                 {* Main menu *}

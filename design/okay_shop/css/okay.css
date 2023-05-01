@@ -49,7 +49,7 @@ html {
   height: 100%;
 }
 body {
-  font-family: "Montserrat", arial, sans-serif;
+  font-family: PT Sans Caption, Arial, Helvetica, Sans-Serif;
   background-color: var(--okay-bg);
   color: var(--okay-body-text);
   font-size: 14px;
@@ -112,7 +112,11 @@ h6,
   color: var(--okay-body-heading);
   line-height: 1.2;
   font-weight: 500;
-  margin: 0 0 1.5rem;
+  /*margin: 0 0 1.5rem;*/
+}
+h1:not(:first-child), h2:not(:first-child), h3:not(:first-child), h4:not(:first-child),h5:not(:first-child), h6:not(:first-child),
+.h1:not(:first-child), .h2:not(:first-child), .h3:not(:first-child), .h4:not(:first-child),.h5:not(:first-child), .h6:not(:first-child) {
+  margin: 2rem 0 0.5rem 0;
 }
 h1,
 .h1 {
@@ -215,7 +219,7 @@ svg:not(:root) {
 }
 p {
   line-height: 1.6;
-  margin: 0 0 1.5rem;
+  /*margin: 0 0 1.5rem;*/
 }
 p:last-child {
   margin-bottom: 0;
@@ -237,7 +241,7 @@ ul {
 ol li,
 ul li {
   font-weight: 500;
-  margin: 0 0 1rem 0;
+  /*margin: 0 0 1rem 0;*/
 }
 blockquote {
   margin: 1rem 0 1.5rem;
@@ -634,7 +638,9 @@ blockquote cite:before {
 .block__description ol li {
   font-weight: 500;
   font-family: inherit;
-  font-size: 15px;
+  /*font-size: 15px;*/
+  font-size: 1em;
+  line-height: 2em;
 }
 
 .boxed {

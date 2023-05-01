@@ -187,10 +187,10 @@ header {
 /***** #Logo *************************************************************************/
 .header__logo {
   -webkit-box-flex: 0;
-  -webkit-flex: 1 0 285px;
-  -ms-flex: 1 0 285px;
-  flex: 1 0 285px;
-  max-width: 285px;
+  /*-webkit-flex: 1 0 285px;*/
+  /*-ms-flex: 1 0 285px;*/
+  /*flex: 1 0 285px;*/
+  /*max-width: 285px;*/
 }
 .logo__link {
   position: relative;

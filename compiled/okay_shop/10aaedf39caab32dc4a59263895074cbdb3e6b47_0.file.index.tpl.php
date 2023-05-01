@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.40, created on 2023-04-30 09:24:48
+/* Smarty version 3.1.40, created on 2023-05-01 20:45:17
   from '/Users/gluck/Sites/motokofr.ok/design/okay_shop/html/index.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_644ded906764e0_62231784',
+  'unifunc' => 'content_644fde8da69fd6_02613169',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '10aaedf39caab32dc4a59263895074cbdb3e6b47' => 
     array (
       0 => '/Users/gluck/Sites/motokofr.ok/design/okay_shop/html/index.tpl',
-      1 => 1682807752,
+      1 => 1682859609,
       2 => 'file',
     ),
   ),
@@ -20,8 +20,8 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
     'file:head.tpl' => 1,
     'file:user_informer.tpl' => 1,
-    'file:svg.tpl' => 16,
     'file:switcher.tpl' => 1,
+    'file:svg.tpl' => 14,
     'file:wishlist_informer.tpl' => 1,
     'file:comparison_informer.tpl' => 1,
     'file:cart_informer.tpl' => 1,
@@ -32,7 +32,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:pop_up_cart.tpl' => 1,
   ),
 ),false)) {
-function content_644ded906764e0_62231784 (Smarty_Internal_Template $_smarty_tpl) {
+function content_644fde8da69fd6_02613169 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/Users/gluck/Sites/motokofr.ok/vendor/smarty/smarty/libs/plugins/modifier.date_format.php','function'=>'smarty_modifier_date_format',),));
 ?>
 <!DOCTYPE html>
@@ -84,13 +84,7 @@ if ($_prefixVariable3) {?>
 ?>
                     </div>
                     <div class="d-flex align-items-center f_col justify-content-end">
-                                                <a class="fn_callback callback d-inline-flex align-items-center" href="#fn_callback" data-language="index_back_call">
-                            <?php $_smarty_tpl->_subTemplateRender("file:svg.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('svgId'=>"support_icon"), 0, false);
-?>
-                            <span><?php echo $_smarty_tpl->tpl_vars['lang']->value->index_back_call;?>
-</span>
-                        </a>
-                                                <div class="switcher d-flex align-items-center">
+                                                                        <div class="switcher d-flex align-items-center">
                             <?php $_smarty_tpl->_subTemplateRender("file:switcher.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0, false);
 ?>
                         </div>
@@ -139,7 +133,7 @@ if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['phone']->value) 
 $_smarty_tpl->tpl_vars['phone']->do_else = false;
 $_smarty_tpl->tpl_vars['phone']->index++;
 $_smarty_tpl->tpl_vars['phone']->first = !$_smarty_tpl->tpl_vars['phone']->index;
-$__foreach_phone_11_saved = $_smarty_tpl->tpl_vars['phone'];
+$__foreach_phone_2_saved = $_smarty_tpl->tpl_vars['phone'];
 ?>
                                     <div class="header-contact__item header-contact--phone<?php if ($_smarty_tpl->tpl_vars['phone']->first) {?> header-contact__item--visible<?php }?>">
                                         <a class="d-flex align-items-center header-contact__section" href="tel:<?php echo preg_replace('~[^0-9\+]~','',$_smarty_tpl->tpl_vars['phone']->value);?>
@@ -151,7 +145,7 @@ $__foreach_phone_11_saved = $_smarty_tpl->tpl_vars['phone'];
                                         </a>
                                     </div>
                                 <?php
-$_smarty_tpl->tpl_vars['phone'] = $__foreach_phone_11_saved;
+$_smarty_tpl->tpl_vars['phone'] = $__foreach_phone_2_saved;
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                             <?php }?>
@@ -292,7 +286,7 @@ if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['phone']->value) 
 $_smarty_tpl->tpl_vars['phone']->do_else = false;
 $_smarty_tpl->tpl_vars['phone']->index++;
 $_smarty_tpl->tpl_vars['phone']->first = !$_smarty_tpl->tpl_vars['phone']->index;
-$__foreach_phone_12_saved = $_smarty_tpl->tpl_vars['phone'];
+$__foreach_phone_3_saved = $_smarty_tpl->tpl_vars['phone'];
 ?>
                                 <div class="footer__contact_item">
                                     <a class="d-flex align-items-start phone" href="tel:<?php echo preg_replace('~[^0-9\+]~','',$_smarty_tpl->tpl_vars['phone']->value);?>
@@ -304,7 +298,7 @@ $__foreach_phone_12_saved = $_smarty_tpl->tpl_vars['phone'];
                                     </a>
                                 </div>
                             <?php
-$_smarty_tpl->tpl_vars['phone'] = $__foreach_phone_12_saved;
+$_smarty_tpl->tpl_vars['phone'] = $__foreach_phone_3_saved;
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                         <?php }?>
@@ -329,14 +323,6 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                                 </div>
                             </div>
                         <?php }?>
-                        <div class="footer__contact_item">
-                            <a class="fn_callback callback d-inline-flex align-items-center" href="#fn_callback" data-language="index_back_call">
-                                <?php $_smarty_tpl->_subTemplateRender("file:svg.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('svgId'=>"support_icon"), 0, true);
-?>
-                                <span><?php echo $_smarty_tpl->tpl_vars['lang']->value->index_back_call;?>
-</span>
-                            </a>
-                        </div>
                     </div>
                 </div>
                                 <div class="f_col-lg">
