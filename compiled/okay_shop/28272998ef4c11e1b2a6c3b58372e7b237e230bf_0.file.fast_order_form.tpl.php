@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2023-04-30 09:24:48
+/* Smarty version 3.1.40, created on 2023-05-01 20:45:17
   from '/Users/gluck/Sites/motokofr.ok/Okay/Modules/OkayCMS/FastOrder/design/html/fast_order_form.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_644ded9095e336_98485522',
+  'unifunc' => 'content_644fde8dd35bd2_88186335',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_644ded9095e336_98485522 (Smarty_Internal_Template $_smarty_tpl) {
+function content_644fde8dd35bd2_88186335 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="hidden">
     <form id="fn_fast_order" class="form form--boxed popup popup_animated fn_validate_fast_order" method="post" action="<?php echo call_user_func_array( $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['url_generator'][0], array( array('route'=>"OkayCMS.FastOrder.CreateOrder",'absolute'=>1),$_smarty_tpl ) );?>
 "

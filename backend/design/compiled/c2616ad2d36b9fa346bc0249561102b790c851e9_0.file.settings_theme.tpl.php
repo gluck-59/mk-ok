@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2023-04-30 17:33:04
+/* Smarty version 3.1.40, created on 2023-05-01 20:46:57
   from '/Users/gluck/Sites/motokofr.ok/backend/design/html/settings_theme.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_644e6000c3a666_56054213',
+  'unifunc' => 'content_644fdef10cdc74_95586460',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:svg_icon.tpl' => 11,
   ),
 ),false)) {
-function content_644e6000c3a666_56054213 (Smarty_Internal_Template $_smarty_tpl) {
+function content_644fdef10cdc74_95586460 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_assignInScope('meta_title', $_smarty_tpl->tpl_vars['btr']->value->settings_general_design ,false ,32);?>
 
 <div class="row">

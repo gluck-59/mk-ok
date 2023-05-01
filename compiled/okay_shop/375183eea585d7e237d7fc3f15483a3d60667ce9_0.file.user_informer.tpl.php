@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2023-04-30 09:24:48
+/* Smarty version 3.1.40, created on 2023-05-01 20:45:17
   from '/Users/gluck/Sites/motokofr.ok/design/okay_shop/html/user_informer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_644ded90784d17_54038229',
+  'unifunc' => 'content_644fde8db78d91_52762766',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:svg.tpl' => 2,
   ),
 ),false)) {
-function content_644ded90784d17_54038229 (Smarty_Internal_Template $_smarty_tpl) {
+function content_644fde8db78d91_52762766 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- User account -->
 <?php if ($_smarty_tpl->tpl_vars['user']->value) {?>
 	<a class="d-inline-flex align-items-center account__link" href="<?php echo call_user_func_array( $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['url_generator'][0], array( array('route'=>'user'),$_smarty_tpl ) );?>

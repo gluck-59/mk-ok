@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2023-04-30 09:29:28
+/* Smarty version 3.1.40, created on 2023-05-01 20:47:22
   from '/Users/gluck/Sites/motokofr.ok/backend/design/js/admintooltip/tooltip.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_644deea89552d8_33303798',
+  'unifunc' => 'content_644fdf0a89b5d9_72629518',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_644deea89552d8_33303798 (Smarty_Internal_Template $_smarty_tpl) {
+function content_644fdf0a89b5d9_72629518 (Smarty_Internal_Template $_smarty_tpl) {
 ?>$(function() {
     tooltip = $(".fn_tooltip");
     $(document).on('mouseleave', '.tooltip', function(){ tooltipcanclose=true;setTimeout("close_tooltip();", 700); });

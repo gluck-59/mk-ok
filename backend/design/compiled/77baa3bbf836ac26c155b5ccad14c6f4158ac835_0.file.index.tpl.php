@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2023-04-30 09:26:14
+/* Smarty version 3.1.40, created on 2023-05-01 20:45:16
   from '/Users/gluck/Sites/motokofr.ok/backend/design/html/index.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_644dede64b1e88_52051231',
+  'unifunc' => 'content_644fde8ce00019_98389806',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -23,7 +23,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:include_languages.tpl' => 1,
   ),
 ),false)) {
-function content_644dede64b1e88_52051231 (Smarty_Internal_Template $_smarty_tpl) {
+function content_644fde8ce00019_98389806 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/Users/gluck/Sites/motokofr.ok/vendor/smarty/smarty/libs/plugins/modifier.date_format.php','function'=>'smarty_modifier_date_format',),));
 ?>
 <!DOCTYPE html>
@@ -113,8 +113,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     <?php if (in_array($_GET['controller'],array("OrdersAdmin","PostAdmin","ReportStatsAdmin","CouponsAdmin","CategoryStatsAdmin"))) {?>
         <?php ob_start();
 echo htmlspecialchars($_smarty_tpl->tpl_vars['manager']->value->lang, ENT_QUOTES, 'UTF-8', true);
-$_prefixVariable1=ob_get_clean();
-echo call_user_func_array( $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['js'][0], array( array('file'=>"jquery/datepicker/jquery.ui.datepicker-".$_prefixVariable1.".js",'admin'=>true),$_smarty_tpl ) );?>
+$_prefixVariable2=ob_get_clean();
+echo call_user_func_array( $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['js'][0], array( array('file'=>"jquery/datepicker/jquery.ui.datepicker-".$_prefixVariable2.".js",'admin'=>true),$_smarty_tpl ) );?>
 
         <?php echo call_user_func_array( $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['js'][0], array( array('file'=>"jquery/datepicker/jquery.datepicker.extension.range.min.js",'admin'=>true),$_smarty_tpl ) );?>
 
@@ -392,8 +392,8 @@ $_smarty_tpl->tpl_vars['items']->do_else = false;
                                         <span class="<?php echo $_smarty_tpl->tpl_vars['section']->value;?>
  title"><?php ob_start();
 echo $_smarty_tpl->tpl_vars['section']->value;
-$_prefixVariable2 = ob_get_clean();
-echo $_smarty_tpl->tpl_vars['btr']->value->getTranslation($_prefixVariable2);?>
+$_prefixVariable3 = ob_get_clean();
+echo $_smarty_tpl->tpl_vars['btr']->value->getTranslation($_prefixVariable3);?>
 </span>
                                         <span class="icon-thumbnail">
                                             <?php if (!empty($_smarty_tpl->tpl_vars['additional_section_icons']->value[$_smarty_tpl->tpl_vars['section']->value])) {?>
@@ -408,19 +408,19 @@ echo $_smarty_tpl->tpl_vars['btr']->value->getTranslation($_prefixVariable2);?>
                                             <?php } else { ?>
                                                 <?php ob_start();
 $_smarty_tpl->_subTemplateRender('file:svg_icon.tpl', $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array('svgId'=>$_smarty_tpl->tpl_vars['section']->value), 0, true);
-$_prefixVariable3 = ob_get_clean();
-$_smarty_tpl->_assignInScope('svg_icon', $_prefixVariable3);?>
+$_prefixVariable4 = ob_get_clean();
+$_smarty_tpl->_assignInScope('svg_icon', $_prefixVariable4);?>
                                                 <?php if ($_smarty_tpl->tpl_vars['svg_icon']->value) {?>
                                                     <?php echo $_smarty_tpl->tpl_vars['svg_icon']->value;?>
 
                                                 <?php } else { ?>
                                                     <?php ob_start();
 echo $_smarty_tpl->tpl_vars['section']->value;
-$_prefixVariable4 = ob_get_clean();
-ob_start();
-echo $_smarty_tpl->tpl_vars['btr']->value->getTranslation($_prefixVariable4);
 $_prefixVariable5 = ob_get_clean();
-$_smarty_tpl->_assignInScope('translation', $_prefixVariable5);?>
+ob_start();
+echo $_smarty_tpl->tpl_vars['btr']->value->getTranslation($_prefixVariable5);
+$_prefixVariable6 = ob_get_clean();
+$_smarty_tpl->_assignInScope('translation', $_prefixVariable6);?>
                                                     <span class="manager_menu_section_icon"><?php echo call_user_func_array($_smarty_tpl->registered_plugins[ 'modifier' ][ 'first_letter' ][ 0 ], array( $_smarty_tpl->tpl_vars['translation']->value ));?>
 </span>
                                                 <?php }?>
@@ -467,15 +467,15 @@ if (!empty($_smarty_tpl->tpl_vars['item']->value['method'])) {?>@<?php echo $_sm
                                                             <?php }?>
                                                             <?php ob_start();
 echo $_smarty_tpl->tpl_vars['title']->value;
-$_prefixVariable6 = ob_get_clean();
-echo call_user_func_array($_smarty_tpl->registered_plugins[ 'modifier' ][ 'first_letter' ][ 0 ], array( $_smarty_tpl->tpl_vars['btr']->value->getTranslation($_prefixVariable6) ));?>
+$_prefixVariable7 = ob_get_clean();
+echo call_user_func_array($_smarty_tpl->registered_plugins[ 'modifier' ][ 'first_letter' ][ 0 ], array( $_smarty_tpl->tpl_vars['btr']->value->getTranslation($_prefixVariable7) ));?>
 
                                                         </span>
                                                         <span class="<?php echo $_smarty_tpl->tpl_vars['title']->value;?>
  title"><?php ob_start();
 echo $_smarty_tpl->tpl_vars['title']->value;
-$_prefixVariable7 = ob_get_clean();
-echo $_smarty_tpl->tpl_vars['btr']->value->getTranslation($_prefixVariable7);?>
+$_prefixVariable8 = ob_get_clean();
+echo $_smarty_tpl->tpl_vars['btr']->value->getTranslation($_prefixVariable8);?>
 </span>
                                                     </a>
                                                 </li>
@@ -596,8 +596,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 
 <?php ob_start();
 echo call_user_func_array( $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['get_design_block'][0], array( array('block'=>"main_custom_block_before_js"),$_smarty_tpl ) );
-$_prefixVariable8 = ob_get_clean();
-$_smarty_tpl->_assignInScope('block', $_prefixVariable8);
+$_prefixVariable9 = ob_get_clean();
+$_smarty_tpl->_assignInScope('block', $_prefixVariable9);
 if (!empty($_smarty_tpl->tpl_vars['block']->value)) {?>
     <div>
         <?php echo $_smarty_tpl->tpl_vars['block']->value;?>
@@ -1362,8 +1362,8 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 
 <?php ob_start();
 echo call_user_func_array( $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['get_design_block'][0], array( array('block'=>"main_custom_block_after_js"),$_smarty_tpl ) );
-$_prefixVariable9 = ob_get_clean();
-$_smarty_tpl->_assignInScope('block', $_prefixVariable9);
+$_prefixVariable10 = ob_get_clean();
+$_smarty_tpl->_assignInScope('block', $_prefixVariable10);
 if (!empty($_smarty_tpl->tpl_vars['block']->value)) {?>
     <div>
         <?php echo $_smarty_tpl->tpl_vars['block']->value;?>

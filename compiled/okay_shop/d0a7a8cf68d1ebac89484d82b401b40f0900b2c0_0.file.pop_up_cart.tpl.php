@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2023-04-30 09:24:48
+/* Smarty version 3.1.40, created on 2023-05-01 20:45:17
   from '/Users/gluck/Sites/motokofr.ok/design/okay_shop/html/pop_up_cart.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_644ded909351b7_69225649',
+  'unifunc' => 'content_644fde8dd0d150_84696998',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:svg.tpl' => 2,
   ),
 ),false)) {
-function content_644ded909351b7_69225649 (Smarty_Internal_Template $_smarty_tpl) {
+function content_644fde8dd0d150_84696998 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['cart']->value->isEmpty === false) {?>
     <div>
         <div class="block__popup_cart">

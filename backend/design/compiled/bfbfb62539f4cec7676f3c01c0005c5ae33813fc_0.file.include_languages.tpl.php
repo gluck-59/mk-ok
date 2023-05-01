@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2023-04-30 09:26:14
+/* Smarty version 3.1.40, created on 2023-05-01 20:45:16
   from '/Users/gluck/Sites/motokofr.ok/backend/design/html/include_languages.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_644dede654b487_97731262',
+  'unifunc' => 'content_644fde8cea25a2_29171729',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_644dede654b487_97731262 (Smarty_Internal_Template $_smarty_tpl) {
+function content_644fde8cea25a2_29171729 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['languages']->value) {?>
     <?php
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['languages']->value, 'lang');
@@ -35,15 +35,15 @@ $_smarty_tpl->tpl_vars['lang']->do_else = false;
 ">
             <?php ob_start();
 echo htmlspecialchars($_smarty_tpl->tpl_vars['config']->value->lang_images_dir, ENT_QUOTES, 'UTF-8', true);
-$_prefixVariable10=ob_get_clean();
+$_prefixVariable11=ob_get_clean();
 ob_start();
 echo htmlspecialchars($_smarty_tpl->tpl_vars['lang']->value->label, ENT_QUOTES, 'UTF-8', true);
-$_prefixVariable11=ob_get_clean();
-if (is_file($_prefixVariable10.$_prefixVariable11.".png")) {?>
+$_prefixVariable12=ob_get_clean();
+if (is_file($_prefixVariable11.$_prefixVariable12.".png")) {?>
                 <img src="<?php ob_start();
 echo htmlspecialchars($_smarty_tpl->tpl_vars['lang']->value->label, ENT_QUOTES, 'UTF-8', true);
-$_prefixVariable12=ob_get_clean();
-echo call_user_func_array($_smarty_tpl->registered_plugins[ 'modifier' ][ 'resize' ][ 0 ], array( ($_prefixVariable12.".png"),32,32,false,$_smarty_tpl->tpl_vars['config']->value->lang_resized_dir ));?>
+$_prefixVariable13=ob_get_clean();
+echo call_user_func_array($_smarty_tpl->registered_plugins[ 'modifier' ][ 'resize' ][ 0 ], array( ($_prefixVariable13.".png"),32,32,false,$_smarty_tpl->tpl_vars['config']->value->lang_resized_dir ));?>
 " width="32px;" height="32px;">
             <?php }?>
         </a>

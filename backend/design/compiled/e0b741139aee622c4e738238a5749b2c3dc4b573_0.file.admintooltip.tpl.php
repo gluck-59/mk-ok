@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2023-04-30 09:26:14
+/* Smarty version 3.1.40, created on 2023-05-01 20:45:17
   from '/Users/gluck/Sites/motokofr.ok/backend/design/html/admintooltip.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_644dede6d0fdc5_38376622',
+  'unifunc' => 'content_644fde8d83b7a1_84572397',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_644dede6d0fdc5_38376622 (Smarty_Internal_Template $_smarty_tpl) {
+function content_644fde8d83b7a1_84572397 (Smarty_Internal_Template $_smarty_tpl) {
 ?><link href="backend/design/js/admintooltip/styles/admin.css" type="text/css" rel="stylesheet">
 
 <div class="admTools">

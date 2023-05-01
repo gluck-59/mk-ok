@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.40, created on 2023-04-30 09:24:48
+/* Smarty version 3.1.40, created on 2023-05-01 22:02:09
   from '/Users/gluck/Sites/motokofr.ok/design/okay_shop/html/main.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_644ded90050181_61766567',
+  'unifunc' => 'content_644ff091ed8ab9_99296687',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     '63ea21c41cd92c101b3477c3483fb9dc852ef9a0' => 
     array (
       0 => '/Users/gluck/Sites/motokofr.ok/design/okay_shop/html/main.tpl',
-      1 => 1682807752,
+      1 => 1682960342,
       2 => 'file',
     ),
   ),
@@ -23,7 +23,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:post_list.tpl' => 1,
   ),
 ),false)) {
-function content_644ded90050181_61766567 (Smarty_Internal_Template $_smarty_tpl) {
+function content_644ff091ed8ab9_99296687 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- The main page template -->
 
 <?php echo call_user_func_array( $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['get_featured_products'][0], array( array('var'=>'featured_products','limit'=>5),$_smarty_tpl ) );?>

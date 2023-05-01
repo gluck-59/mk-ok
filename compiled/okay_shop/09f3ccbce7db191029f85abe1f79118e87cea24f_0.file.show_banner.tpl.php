@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2023-04-30 09:24:47
+/* Smarty version 3.1.40, created on 2023-05-01 20:47:33
   from '/Users/gluck/Sites/motokofr.ok/Okay/Modules/OkayCMS/Banners/design/html/show_banner.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_644ded8ff361c3_70492930',
+  'unifunc' => 'content_644fdf15256c65_64551295',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_644ded8ff361c3_70492930 (Smarty_Internal_Template $_smarty_tpl) {
+function content_644fdf15256c65_64551295 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['banner_data']->value->group_name == 'advantage') {?>
     <div class="block block--boxed block--border">
         <div class="banner_advantages f_row">

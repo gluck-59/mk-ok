@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2023-04-30 09:24:49
+/* Smarty version 3.1.40, created on 2023-05-01 20:47:22
   from '/Users/gluck/Sites/motokofr.ok/design/okay_shop/html/common_js.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_644ded9124d879_32719164',
+  'unifunc' => 'content_644fdf0abefdc7_05422611',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_644ded9124d879_32719164 (Smarty_Internal_Template $_smarty_tpl) {
+function content_644fdf0abefdc7_05422611 (Smarty_Internal_Template $_smarty_tpl) {
 echo '<script'; ?>
 >
         

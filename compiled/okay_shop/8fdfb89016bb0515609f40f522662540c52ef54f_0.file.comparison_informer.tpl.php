@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2023-04-30 09:24:48
+/* Smarty version 3.1.40, created on 2023-05-01 20:45:17
   from '/Users/gluck/Sites/motokofr.ok/design/okay_shop/html/comparison_informer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_644ded907c7aa6_16356245',
+  'unifunc' => 'content_644fde8dbbe7d8_59848562',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_644ded907c7aa6_16356245 (Smarty_Internal_Template $_smarty_tpl) {
+function content_644fde8dbbe7d8_59848562 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- Сomparison informer (given by Ajax) -->
 <?php if (count($_smarty_tpl->tpl_vars['comparison']->value->products) > 0) {?>
     <a class="header_informers__link d-flex align-items-center"  href="<?php echo call_user_func_array( $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['url_generator'][0], array( array('route'=>"comparison"),$_smarty_tpl ) );?>

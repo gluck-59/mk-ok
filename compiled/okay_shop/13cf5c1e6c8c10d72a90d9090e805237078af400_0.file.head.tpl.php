@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2023-04-30 09:24:48
+/* Smarty version 3.1.40, created on 2023-05-01 20:45:17
   from '/Users/gluck/Sites/motokofr.ok/design/okay_shop/html/head.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_644ded9076c8a3_81287901',
+  'unifunc' => 'content_644fde8db5fdf0_50509066',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_644ded9076c8a3_81287901 (Smarty_Internal_Template $_smarty_tpl) {
+function content_644fde8db5fdf0_50509066 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <base href="<?php echo $_smarty_tpl->tpl_vars['base']->value;?>
 /">
@@ -157,13 +157,13 @@ if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['social']->value)
 $_smarty_tpl->tpl_vars['social']->do_else = false;
 $_smarty_tpl->tpl_vars['social']->iteration++;
 $_smarty_tpl->tpl_vars['social']->last = $_smarty_tpl->tpl_vars['social']->iteration === $_smarty_tpl->tpl_vars['social']->total;
-$__foreach_social_17_saved = $_smarty_tpl->tpl_vars['social'];
+$__foreach_social_8_saved = $_smarty_tpl->tpl_vars['social'];
 ?>
             "<?php if (!preg_match('~^https?://.*$~',$_smarty_tpl->tpl_vars['social']->value['url'])) {?>https://<?php }
 echo htmlspecialchars($_smarty_tpl->tpl_vars['social']->value['url'], ENT_QUOTES, 'UTF-8', true);?>
 "<?php if (!$_smarty_tpl->tpl_vars['social']->last) {?>,<?php }?>
         <?php
-$_smarty_tpl->tpl_vars['social'] = $__foreach_social_17_saved;
+$_smarty_tpl->tpl_vars['social'] = $__foreach_social_8_saved;
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         ]

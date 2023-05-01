@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2023-04-30 09:31:21
+/* Smarty version 3.1.40, created on 2023-05-01 20:58:07
   from '/Users/gluck/Sites/motokofr.ok/backend/design/html/pagination.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_644def19268a88_89288825',
+  'unifunc' => 'content_644fe18f8c8f14_99013889',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_644def19268a88_89288825 (Smarty_Internal_Template $_smarty_tpl) {
+function content_644fe18f8c8f14_99013889 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['pages_count']->value > 1) {?>
 <!-- Листалка страниц -->
 <ul class="pagination fn_pagination">

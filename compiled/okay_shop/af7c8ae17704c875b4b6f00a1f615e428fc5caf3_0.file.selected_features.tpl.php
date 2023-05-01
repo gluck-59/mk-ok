@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2023-04-30 17:20:23
+/* Smarty version 3.1.40, created on 2023-05-01 20:47:41
   from '/Users/gluck/Sites/motokofr.ok/design/okay_shop/html/selected_features.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_644e5d07143221_49125735',
+  'unifunc' => 'content_644fdf1d510ca2_21332684',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:svg.tpl' => 4,
   ),
 ),false)) {
-function content_644e5d07143221_49125735 (Smarty_Internal_Template $_smarty_tpl) {
+function content_644fdf1d510ca2_21332684 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- selected filters -->
 <?php if ($_smarty_tpl->tpl_vars['is_filter_page']->value) {?>
     <div class="sidebar__boxed">

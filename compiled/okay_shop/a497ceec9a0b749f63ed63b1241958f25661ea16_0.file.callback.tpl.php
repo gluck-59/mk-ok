@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2023-04-30 09:24:48
+/* Smarty version 3.1.40, created on 2023-05-01 20:45:17
   from '/Users/gluck/Sites/motokofr.ok/design/okay_shop/html/callback.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_644ded908f5fa6_28427283',
+  'unifunc' => 'content_644fde8dcd16d9_97655119',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:svg.tpl' => 2,
   ),
 ),false)) {
-function content_644ded908f5fa6_28427283 (Smarty_Internal_Template $_smarty_tpl) {
+function content_644fde8dcd16d9_97655119 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- Callback form -->
 <div class="hidden">
     <form id="fn_callback" class="form form--boxed popup popup_animated fn_validate_callback" method="post">

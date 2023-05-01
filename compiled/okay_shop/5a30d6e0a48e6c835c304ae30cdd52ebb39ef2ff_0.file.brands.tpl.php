@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2023-04-30 17:20:23
+/* Smarty version 3.1.40, created on 2023-05-01 20:52:17
   from '/Users/gluck/Sites/motokofr.ok/design/okay_shop/html/brands.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_644e5d070f10f6_36784474',
+  'unifunc' => 'content_644fe031ecb952_84424497',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -26,7 +26,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:chpu_pagination.tpl' => 1,
   ),
 ),false)) {
-function content_644e5d070f10f6_36784474 (Smarty_Internal_Template $_smarty_tpl) {
+function content_644fe031ecb952_84424497 (Smarty_Internal_Template $_smarty_tpl) {
 ?>
 <div class="block">
 		<div class="block__header block__header--boxed block__header--border">

@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2023-04-30 09:26:14
+/* Smarty version 3.1.40, created on 2023-05-01 20:45:16
   from '/Users/gluck/Sites/motokofr.ok/backend/design/html/video_help.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_644dede6530d20_92556378',
+  'unifunc' => 'content_644fde8ce85e21_36873160',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:svg_icon.tpl' => 27,
   ),
 ),false)) {
-function content_644dede6530d20_92556378 (Smarty_Internal_Template $_smarty_tpl) {
+function content_644fde8ce85e21_36873160 (Smarty_Internal_Template $_smarty_tpl) {
 ?><div class="box_adswitch">
 
         <?php if ($_GET['controller'] == 'ImportAdmin') {?>
