@@ -4,7 +4,7 @@
     $(function(){
         tinyMCE.init({literal}{{/literal}
             selector: "textarea.editor_large, textarea.editor_small, textarea#format-custom",
-            height: 600,
+            height: 300,
             relative_urls : false,
             plugins: [
                 "advlist autolink quickbars lists link image preview anchor responsivefilemanager emoticons",

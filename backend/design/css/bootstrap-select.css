@@ -363,7 +363,7 @@ select.selectpicker {
   padding: 0;
   background-color: #fff;
   margin: 10px 0 0;
-  border: 1px solid #eee;
+  border: 2px solid #ccc;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
@@ -381,11 +381,12 @@ select.selectpicker {
 
 .dropdown-menu > li > a {
   padding: 8px 16px;
-  color: #6f6f6f;
+  /*color: #6f6f6f;*/
+  color: black;
   text-decoration: none;
   display: block;
   clear: both;
-  font-weight: 300;
+  /*font-weight: 300;*/
   line-height: 18px;
   white-space: nowrap;
 }
