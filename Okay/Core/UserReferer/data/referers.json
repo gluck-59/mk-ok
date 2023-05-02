@@ -3980,7 +3980,11 @@
                 "linkedin.com", 
                 "lnkd.in"
             ]
-        }, 
+        },"Reformal": {
+            "domains": [
+                "motokofr.reformal.ru"
+            ]
+        },
         "Foursquare": {
             "domains": [
                 "foursquare.com"

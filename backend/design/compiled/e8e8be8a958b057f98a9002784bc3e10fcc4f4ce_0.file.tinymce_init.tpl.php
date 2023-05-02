@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.40, created on 2023-05-01 20:56:26
+/* Smarty version 3.1.40, created on 2023-05-02 15:56:55
   from '/Users/gluck/Sites/motokofr.ok/backend/design/html/tinymce_init.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_644fe12a028409_62880621',
+  'unifunc' => 'content_6450ec77d52857_42698453',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'e8e8be8a958b057f98a9002784bc3e10fcc4f4ce' => 
     array (
       0 => '/Users/gluck/Sites/motokofr.ok/backend/design/html/tinymce_init.tpl',
-      1 => 1682807751,
+      1 => 1683025010,
       2 => 'file',
     ),
   ),
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_644fe12a028409_62880621 (Smarty_Internal_Template $_smarty_tpl) {
+function content_6450ec77d52857_42698453 (Smarty_Internal_Template $_smarty_tpl) {
 echo '<script'; ?>
  type="text/javascript" src="design/js/tinymce_jq/tinymce.min.js"><?php echo '</script'; ?>
 >
@@ -30,7 +30,7 @@ echo '<script'; ?>
     $(function(){
         tinyMCE.init({
             selector: "textarea.editor_large, textarea.editor_small, textarea#format-custom",
-            height: 600,
+            height: 300,
             relative_urls : false,
             plugins: [
                 "advlist autolink quickbars lists link image preview anchor responsivefilemanager emoticons",

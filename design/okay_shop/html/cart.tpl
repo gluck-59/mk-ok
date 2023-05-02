@@ -249,7 +249,7 @@
                     <span>© {$smarty.now|date_format:"%Y"}</span>
                     <span data-language="index_copyright">{$lang->index_copyright}</span>
                 </div>
-                <a href="https://okay-cms.com" rel="noreferrer" target="_blank" title="OkayCms">{include file="svg.tpl" svgId="okaycms"}</a>
+                <a href="https://okay-cms.com" rel="noreferrer" target="_blank" title="OkayCms">{include file="svg.tpl" svgId="motokofr"}</a>
             </div>
         </div>
     </div>
