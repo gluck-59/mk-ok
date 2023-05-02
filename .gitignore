@@ -2,3 +2,7 @@
 /config/config.local.php
 /cache/
 /files/resized/
+/backend/design/compiled/
+/.idea/
+/compiled/
+/.github/
