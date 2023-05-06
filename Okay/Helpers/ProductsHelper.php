@@ -259,7 +259,7 @@ class ProductsHelper implements GetListInterface
         foreach ($featuresValuesEntity->getProductValuesIds($productsIds) as $productValueId) {
             $productsValuesIds[$productValueId->value_id][] = $productValueId->product_id;
         }
-        
+
         foreach ($features as $feature) {
             if (isset($featuresValues[$feature->id])) {
                 foreach ($featuresValues[$feature->id] as $featureValue) {
@@ -282,7 +282,6 @@ class ProductsHelper implements GetListInterface
                     foreach ($feature->values as $featureValue) {
                         $values[] = $featureValue->value;
                     }
-
                     $feature->stingify_values = implode(',', $values);
                 }
             }

@@ -105,6 +105,42 @@
                                 {/if}
                             </div>
                         </div>
+
+                        {* Product mark *}
+                        {if !empty($product->features.117)}
+                            {if !empty($product->features.117->values[0])}
+                                <div class="details_boxed__mark clearfix">
+                                    {* это нужно чисто для урла *}
+                                    {foreach $product->features as $f}
+                                        {foreach $f->values as $value}
+                                            {if $category && $f->url_in_product && $f->in_filter && $value->to_index}
+                                                <a href="{url_generator route="category" url=$category->url}{if !$settings->category_routes_template_slash_end}/{/if}{$f->url}-{$value->translit}">
+                                            {else}
+{*                                                {$value->value|escape}{if !$value@last},{/if}*}
+                                            {/if}
+                                        {/foreach}
+                                    {/foreach}
+                                    {**}
+
+                                        <img class="1brand_img" src="design/okay_shop/images/mark-{$product->features.117->values[0]->id}.jpg" height="65">
+                                        <span class="hidden" itemprop="brand" itemtype="https://schema.org/Brand" itemscope>
+                                            <meta itemprop="name" content="{$brand->name|escape}" />
+                                        </span>
+                                    </a>
+                                </div>
+                            {else}
+                                <div class="details_boxed__no_brand clearfix">
+                                    <span class="details_boxed__title" data-language="product_brand_name">{$lang->product_brand_name}</span>
+                                    <a class="theme_link--color" href="{url_generator route="brand" url=$brand->url}">
+                                        <span>{$brand->name|escape}</span>
+                                        <span class="hidden" itemprop="brand" itemtype="https://schema.org/Brand" itemscope>
+                                            <meta itemprop="name" content="{$brand->name|escape}" />
+                                        </span>
+                                    </a>
+                                </div>
+                            {/if}
+                        {/if}
+
                         {* Product brand *}
                         {if !empty($brand)}
                             {if !empty($brand->image)}
@@ -310,7 +346,7 @@
             </div>
         </div>
     </div>
-    
+
     <div id="fn_products_tab" class="product-page__tabs">
         <div class="block--border tabs">
             <div class="tabs__navigation hidden-sm-down">

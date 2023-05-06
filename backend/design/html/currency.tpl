@@ -22,7 +22,7 @@
         <div class="alert alert--icon alert--error">
             <div class="alert__content">
                 <div class="alert__title">{$btr->alert_error|escape}</div>
-                <p>{$btr->coupon_alert_text|escape}</p>
+                <p><b>Доллар должен быть основной валютой 1 = 1. На этом строится автопересчет цен при изменении курса.</b><br>{$btr->coupon_alert_text|escape}</p>
             </div>
         </div>
     </div>
@@ -245,6 +245,17 @@
                     </div>
                 </div>
             </form>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="alert alert--icon alert-info">
+            <div class="alert__content">
+                <div class="alert__title">Автозагрузка курсов валют в cron</div>
+                <p>Добавить описание и поля с математикой</p>
+            </div>
         </div>
     </div>
 </div>

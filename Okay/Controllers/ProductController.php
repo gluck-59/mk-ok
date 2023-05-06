@@ -93,7 +93,7 @@ class ProductController extends AbstractController
         if (!empty($brand) && $brand->visible) {
             $this->design->assign('brand', $brand);
         }
-        
+
         $category = $categoriesEntity->get((int)$product->main_category_id);
         $this->design->assign('category', $category);
 

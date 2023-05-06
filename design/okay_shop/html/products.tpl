@@ -57,9 +57,15 @@
     <div class="products_container d-flex flex-column">
         <div class="products_container__boxed">
             <h1 class="h1"{if $category} data-category="{$category->id}"{/if}{if $brand} data-brand="{$brand->id}"{/if}>{$h1|escape}</h1>
-
-            {if !empty($annotation)}
-                <div class="boxed boxed--big">
+            {if $current_page_num == 1}
+                {if $category->image}
+                    <div>
+                        <img class="category_img_main" src="{$category->image|resize:870:400:false:$config->resized_categories_dir}" alt="{$category->name|escape}" />
+                    </div>
+                {/if}
+            {/if}
+            {if !empty($annotation) AND $current_page_num == 1}
+                <div class="boxed boxed--big" style="margin-top: 0;">
                     <div class="">
                         <div class="fn_readmore">
                             <div class="block__description">

@@ -668,11 +668,15 @@ blockquote cite:before {
   align-items: center;
 }
 .boxed--big {
-  padding: 15px 15px;
-  margin: 0 0 20px;
+  /*padding: 15px 15px;*/
+  /*margin: 0 0 20px;*/
   font-weight: 400;
   font-size: 14px;
   line-height: 1.6;
+
+  font-weight: bold;
+  text-transform: uppercase;
+  color: #999;
 }
 .boxed--middle {
   padding: 10px;
@@ -2431,6 +2435,12 @@ select {
 .fn_categories {
   position: relative;
 }
+.category_img_main {
+  -webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(.6, transparent), to(rgba(0,0,0,0.1)));
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+}
 .fn_ajax_wait {
   position: absolute;
   top: 100px;
@@ -2703,6 +2713,7 @@ select {
 .swiper-container-vertical.swiper-container-css-mode > .swiper-wrapper {
   scroll-snap-type: y mandatory;
 }
+
 .swiper-button-prev,
 .swiper-button-next {
   z-index: 10;

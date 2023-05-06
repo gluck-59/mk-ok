@@ -2952,6 +2952,13 @@ a.filter__catalog_link svg {
   font-weight: 500;
   opacity: 0.8;
 }
+.details_boxed__mark {
+  min-width: 80px;
+  position: absolute;
+  top: 15px;
+  right: 120px;
+  text-align: right;
+}
 .details_boxed__brand {
   min-width: 80px;
   position: absolute;

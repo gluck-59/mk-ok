@@ -202,8 +202,8 @@
                             {foreach $settings->site_phones as $phone}
                                 <div class="footer__contact_item">
                                     <a class="d-flex align-items-start phone" href="tel:{preg_replace('~[^0-9\+]~', '', $phone)}">
-                                        {include file="svg.tpl" svgId="phone_icon"}
-                                        <span>{$phone|escape}</span>
+                                        {include file="svg.tpl" svgId="comment_icon"}
+                                        <span>Telegram</span>
                                     </a>
                                 </div>
                             {/foreach}
@@ -332,7 +332,7 @@
                     {* Copyright *}
                     <div class="f_col-md flex-md-first d-flex align-items-center copyright">
                         <div class="d-flex align-items-center">
-                            <span>© {$smarty.now|date_format:"%Y"}</span>
+                            <span>© 2010 — {$smarty.now|date_format:"%Y"}</span>
                             <span data-language="index_copyright">{$lang->index_copyright}</span>
                         </div>
                         <a href="/" rel="noreferrer" title="Motokofr">{include file="svg.tpl" svgId="motokofr"}</a>
