@@ -41,3 +41,12 @@ if (!function_exists('dd')) {
         exit(1);
     }
 }
+
+
+function printr($input = null, $die = false, $var_dump = false) {
+    if ($var_dump) echo '<pre>'.var_dump($input).'</pre>';
+    else echo '<pre>'.print_r($input).'</pre>';
+
+    if ($die) die;
+}
+

@@ -58,6 +58,17 @@
 {/if}
 
 {*Главная форма страницы*}
+<div class="row">
+    <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="alert alert--icon alert-info">
+            <div class="alert__content">
+                <div class="alert__title">Автообновление курсов валют</div>
+                <p>Курсы валют обновляются раз в сутки в cron. Можно вызвать из браузера по урлу /cbr.php и все получится</p>
+            </div>
+        </div>
+    </div>
+</div>
+
 <div class="boxed fn_toggle_wrap">
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12">
@@ -245,17 +256,6 @@
                     </div>
                 </div>
             </form>
-        </div>
-    </div>
-</div>
-
-<div class="row">
-    <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="alert alert--icon alert-info">
-            <div class="alert__content">
-                <div class="alert__title">Автозагрузка курсов валют в cron</div>
-                <p>Добавить описание и поля с математикой</p>
-            </div>
         </div>
     </div>
 </div>
