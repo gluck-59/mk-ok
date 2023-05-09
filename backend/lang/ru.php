@@ -887,6 +887,7 @@ $lang['import_field_name'] = 'Название товара';
 $lang['import_field_variant'] = 'Название варианта';
 $lang['import_field_sku'] = 'Артикул';
 $lang['import_field_price'] = 'Цена';
+$lang['import_field_incoming_price'] = 'Вх. цена';
 $lang['import_field_compare_price'] = 'Старая цена';
 $lang['import_field_currency'] = 'ID валюты';
 $lang['import_field_weight'] = 'Вес';

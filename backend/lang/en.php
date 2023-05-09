@@ -885,6 +885,7 @@ $lang['import_field_name'] = 'Product name';
 $lang['import_field_variant'] = 'Variant name';
 $lang['import_field_sku'] = 'SKU';
 $lang['import_field_price'] = 'Price';
+$lang['import_field_incoming_price'] = 'Incoming price';
 $lang['import_field_compare_price'] = 'Old price';
 $lang['import_field_currency'] = 'Currency ID';
 $lang['import_field_weight'] = 'Weight';

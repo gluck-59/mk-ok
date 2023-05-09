@@ -80,6 +80,7 @@ class BackendExportHelper
             'variant'          => 'Variant',
             'sku'              => 'SKU',
             'price'            => 'Price',
+            'incoming_price'   => 'Incoming price',
             'compare_price'    => 'Old price',
             'currency'         => 'Currency ID',
             'weight'           => 'Weight',
@@ -247,6 +248,7 @@ class BackendExportHelper
         $v                    = [];
         $v['variant']         = $variant->name;
         $v['price']           = $variant->price;
+$v['incoming_price']           = $variant->incoming_price;
         $v['compare_price']   = $variant->compare_price;
         $v['sku']             = $variant->sku;
         $v['stock']           = $variant->stock;

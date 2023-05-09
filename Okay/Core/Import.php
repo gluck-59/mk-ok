@@ -15,6 +15,7 @@ class Import
         'variant'=>          ['variant', 'вариант'],
         'sku'=>              ['sku', 'артикул'],
         'price'=>            ['price', 'цена'],
+        'incoming_price'=>   ['incoming_price', 'вход цена'],
         'compare_price'=>    ['compare price', 'old price', 'старая цена'],
         'currency'=>         ['currency_id', 'currency', 'currency id', 'ID валюты'],
         'weight'=>           ['weight', 'вес варианта'],

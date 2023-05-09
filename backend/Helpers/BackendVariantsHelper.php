@@ -26,6 +26,9 @@ class BackendVariantsHelper
             if (!empty($variant->price)) {
                 $variant->price = $variant->price > 0 ? str_replace(',', '.', $variant->price) : 0;
             }
+if (!empty($variant->incoming_price)) {
+    $variant->incoming_price = $variant->incoming_price > 0 ? str_replace(',', '.', $variant->incoming_price) : 0;
+}
             if (!empty($variant->compare_price)) {
                 $variant->compare_price = $variant->compare_price > 0 ? str_replace(',', '.', $variant->compare_price) : 0;
             }

@@ -271,6 +271,12 @@ class BackendImportHelper
                 $variant['price'] = $price;
             }
         }
+if (isset($itemFromCsv['incoming_price'])) {
+    $incoming_price = str_replace(',', '.', str_replace(' ', '', trim($itemFromCsv['incoming_price'])));
+    if (!empty($incoming_price) || $incoming_price === '0.00' || $incoming_price === '0.0' || $incoming_price === '0') {
+        $variant['incoming_price'] = $incoming_price;
+    }
+}
 
         if (isset($itemFromCsv['compare_price'])) {
             $comparePrice = str_replace(',', '.', str_replace(' ', '', trim($itemFromCsv['compare_price'])));

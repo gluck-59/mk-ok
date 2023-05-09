@@ -151,6 +151,7 @@ class ProductMetadataHelper extends CommonMetadataHelper
             '{$brand}'         => ($this->brand ? $this->brand->name : ''),
             '{$product}'       => ($this->product ? $this->product->name : ''),
             '{$price}'         => ($this->product->variant->price != null ? $this->money->convert($this->product->variant->price, $currency->id, false) . ' ' . $currency->sign : ''),
+    '{$incoming_price}'        => ($this->product->variant->incoming_price != null ? $this->money->convert($this->product->variant->incoming_price, $currency->id, false) . ' ' . $currency->sign : ''),
             '{$compare_price}' => ($this->product->variant->compare_price != null ? $this->money->convert($this->product->variant->compare_price, $currency->id, false) . ' ' . $currency->sign : ''),
             '{$sku}'           => ($this->product->variant->sku != null ? $this->product->variant->sku : ''),
             '{$sitename}'      => ($this->settings->get('site_name') ? $this->settings->get('site_name') : '')

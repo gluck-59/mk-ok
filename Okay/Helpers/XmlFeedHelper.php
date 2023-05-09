@@ -299,6 +299,7 @@ class XmlFeedHelper
     {
 
         $price = round($product->price, 2);
+    $incoming_price = round($product->incoming_price, 2);
         $comparePrice = null;
         if (isset($this->allCurrencies[$product->currency_id])) {
             // Переводим в основную валюту сайта
@@ -315,6 +316,7 @@ class XmlFeedHelper
             '{$brand}'         => $product->brand_name,
             '{$product}'       => $product->product_name,
             '{$price}'         => $price . ' ' . $this->mainCurrency->sign,
+    '{$incoming_price}'         => $incoming_price . ' ' . $this->mainCurrency->sign,
             '{$compare_price}' => ($comparePrice != null ? $comparePrice . ' ' . $this->mainCurrency->sign : ''),
             '{$sku}'           => $product->sku,
             '{$sitename}'      => $this->siteName,

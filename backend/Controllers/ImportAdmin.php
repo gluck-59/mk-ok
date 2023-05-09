@@ -108,7 +108,6 @@ class ImportAdmin extends IndexAdmin
             $file->size = filesize($importCore->getImportFilesDir() . $importCore->getImportFile());
         }
         $this->design->assign('file', $file);
-        
         $this->response->setContent($this->design->fetch('import.tpl'));
     }
     
