@@ -193,7 +193,7 @@ class ImportAdmin extends IndexAdmin
         } else {
             $selected = $fields;
         }
-        
+
         foreach ($source_columns as &$column) {
             $c = new \stdClass();
             $c->name = $column;

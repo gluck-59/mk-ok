@@ -71,26 +71,28 @@ class BackendImportHelper
         $product = $this->parseProductData($item);
         
         // Если задан бренд
-        if (!empty($item['brand'])) {
-            $item['brand'] = trim($item['brand']);
-            // Найдем его по имени
-            $brandId = $this->searchBrand($item['brand']);
-
-            if (!$product['brand_id'] = $brandId) {
-
-                /** @var BrandsEntity $brandsEntity */
-                $brandsEntity = $this->entityFactory->get(BrandsEntity::class);
-                
-                // Создадим, если не найден
-                $brand = $this->prepareAddBrand([
-                    'name'             => $item['brand'],
-                    'meta_title'       => $item['brand'],
-                    'meta_keywords'    => $item['brand'],
-                    'meta_description' => $item['brand'],
-                ]);
-                $product['brand_id'] = $brandsEntity->add($brand);
-            }
-        }
+        // в оригинале бренд искался по имени и в случае отсутствия добавлялся
+        // перенес сохранения бренда в виде ID Brand ниже
+        //        if (!empty($item['brand'])) {
+        //            $item['brand'] = trim($item['brand']);
+        //            // Найдем его по имени
+        //            $brandId = $this->searchBrand($item['brand']);
+        //
+        //            if (!$product['brand_id'] = $brandId) {
+        //
+        //                /** @var BrandsEntity $brandsEntity */
+        //                $brandsEntity = $this->entityFactory->get(BrandsEntity::class);
+        //
+        //                // Создадим, если не найден
+        //                $brand = $this->prepareAddBrand([
+        //                    'name'             => $item['brand'],
+        //                    'meta_title'       => $item['brand'],
+        //                    'meta_keywords'    => $item['brand'],
+        //                    'meta_description' => $item['brand'],
+        //                ]);
+        //                $product['brand_id'] = $brandsEntity->add($brand);
+        //            }
+        //        }
 
         // Если задана категория
         $categoryId = null;
@@ -220,6 +222,12 @@ class BackendImportHelper
             if (!empty($categoryId)) {
                 $mainInfo['main_category_id'] = $categoryId;
             }
+
+// Если задан бренд, запишем поле brand из файла как brand_id в ok_products
+if (!empty($item['brand']))
+{
+    $mainInfo['brand_id'] = (int) $item['brand'];
+}
 
             if (!empty($mainInfo)) {
                 $productsEntity->update($productId, $mainInfo);
