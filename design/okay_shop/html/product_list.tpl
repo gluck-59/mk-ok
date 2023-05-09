@@ -67,9 +67,9 @@
                 {* Product name *}
                 <a class="product_preview__name_link" data-product="{$product->id}" href="{url_generator route="product" url=$product->url}">
                     {$product->name|escape}
-                    <div class="product_preview__sku {if !$product->variant->sku} hidden{/if}">
+                    <div class="product_preview__sku {if !$product->id} hidden{/if}">
                         <span data-language="product_sku">{$lang->product_sku}:</span>
-                        <span class="fn_sku sku__nubmer">{$product->variant->sku|escape}</span>
+                        <span class="fn_sku sku__nubmer">{$product->id|escape}</span>
                     </div>
                 </a>
             </div>

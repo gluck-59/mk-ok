@@ -6,10 +6,10 @@
         <h1 class="block__heading">
             <span data-product="{$product->id}" itemprop="name">{$h1|escape}</span>
         </h1>
-        <!--div class="block__header_promo product-page__sku{if !$product->variant->sku} hidden{/if}">
+        <div class="block__header_promo product-page__sku{if !$product->id} hidden{/if}">
             <span data-language="product_sku">{$lang->product_sku}:</span>
-            <span class="fn_sku sku_nubmer" {if $product->variant->sku}itemprop = "sku"{/if}>{$product->variant->sku|escape}</span>
-        </div-->
+            <span class="fn_sku sku_nubmer" {if $product->id}itemprop = "sku"{/if}>{$product->id|escape}</span>
+        </div>
     </div>
 
     <div class="fn_transfer f_row flex-column flex-lg-row align-items-lg-stretch">
