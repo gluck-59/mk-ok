@@ -94,14 +94,14 @@ $kovalut = false;
 	$message .= '"><strong>$ ' .$usd.'</strong></span>';
 
 	$message .= '<p style="margin: 0"><span style="font-size:16pt; padding: 2px 5px;';
-	if ($eur < round($eur_old->rate_from * $rur_old->rate_from, 4)) $message .= 'background:#dfd';
-	if ($eur > round($eur_old->rate_from * $rur_old->rate_from, 4)) $message .= 'background:#fdd';
+	if ($eur < round($rur_old->rate_from / $eur_old->rate_from, 1)) $message .= 'background:#dfd';
+	if ($eur > round($rur_old->rate_from / $eur_old->rate_from, 1)) $message .= 'background:#fdd';
 	$message .= '"><strong>€ ' .$eur.'</strong></span></p>';
 
 $message .='</p><p>Старые курсы:<br>$ ';
 $message .= round($rur_old->rate_from, 1);
 $message .='<br>€ ';
-$message .= round($rur_old->rate_from * $eur_old->rate_from, 1);
+$message .= round($rur_old->rate_from / $eur_old->rate_from, 1);
 $message .='</p>';
 
 /* блок записи в базу -- ДЛЯ ОТЛАДКИ ОТКЛЮЧАТЬ ЗДЕСЬ */
