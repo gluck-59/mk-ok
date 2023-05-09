@@ -3077,9 +3077,9 @@ label.switch_label i{
     min-height: 80px;
 }
 .okay_list .okay_list_close.remove_variant{
-   position: absolute;
-    right: 0;
-    top: 0;
+   /*position: absolute;*/
+   /* right: 0;*/
+   /* top: 46%;*/
     padding: 5px;
     border-radius: 50%;
     width: 35px;
@@ -3089,7 +3089,8 @@ label.switch_label i{
     border: none;
     outline: none;
     cursor: pointer;
-    position: relative;
+    /*position: relative;*/
+position: absolute;
     color: red;
 }
 .okay_list .okay_list_close.remove_variant .btn_close svg{

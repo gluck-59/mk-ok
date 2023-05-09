@@ -70,9 +70,10 @@
                             {if $settings->site_phones}
                                 {foreach $settings->site_phones as $phone}
                                     <div class="header-contact__item header-contact--phone{if $phone@first} header-contact__item--visible{/if}">
-                                        <a class="d-flex align-items-center header-contact__section" href="tel:{preg_replace('~[^0-9\+]~', '', $phone)}">
-                                            {include file="svg.tpl" svgId="phone_icon"}
-                                            <span>{$phone|escape}</span>
+                                        <a class="d-flex align-items-center header-contact__section" href="https://telegram.me/{$phone}" target="_blank">
+{*                                            {include file="svg.tpl" svgId="phone_icon"}*}
+{*                                            <img id="telegram" style="width: 20px; height: 20px;" src="/files/images/telegram_logo.png">*}
+                                            <span>Telegram</span>
                                         </a>
                                     </div>
                                 {/foreach}
@@ -80,11 +81,12 @@
                             {if $settings->site_email}
                                 <div class="header-contact__item header-contact--email {if !$settings->site_phones} header-contact__item--visible{/if}">
                                     <a class="d-flex align-items-center header-contact__section" href="mailto:{$settings->site_email|escape}" >
-                                        <span>{$settings->site_email|escape}</span>
+{*                                        <span>{$settings->site_email|escape}</span>*}
+                                        <span>Email</span>
                                     </a>
                                 </div>
                             {/if}
-                            {if $settings->site_working_hours}
+                            {if 1==2 AND $settings->site_working_hours}
                                 <div class="header-contact__item header-contact--time {if !$settings->site_phones && !$settings->site_email} header-contact__item--visible{/if}">
                                     <div class="d-flex align-items-center header-contact__section">
                                         <div class="header-contact__title-s">{$settings->site_working_hours}</div>
