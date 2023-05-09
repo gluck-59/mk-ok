@@ -64,6 +64,7 @@ class BackendProductsRequest
             if (empty($variant->name)         &&
                 empty($variant->sku)          &&
                 trim($variant->price)         === "" &&
+                trim($variant->incoming_price)         === "" &&
                 trim($variant->compare_price) === ""
             ) {
                 unset($productVariants[$key]);
@@ -74,6 +75,7 @@ class BackendProductsRequest
             $mockVariant = new \stdClass();
             $mockVariant->name  = '';
             $mockVariant->price = 0;
+            $mockVariant->incoming_price = 0;
             $mockVariant->sku   = '';
 
             $productVariants[] = $mockVariant;

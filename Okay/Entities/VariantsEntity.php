@@ -16,6 +16,7 @@ class VariantsEntity extends Entity
         'sku',
         'weight',
         'price',
+        'incoming_price',
         'compare_price',
         'stock',
         'position',

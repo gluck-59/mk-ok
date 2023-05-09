@@ -153,40 +153,6 @@
         </div>
     </div>
 
-    {*Дополнительные настройки*}
-    <div class="row">
-        <div class="col-lg-12 col-md-12">
-            <div class="boxed fn_toggle_wrap ">
-                <div class="heading_box">
-                    {$btr->general_additional_settings|escape}
-                    <div class="toggle_arrow_wrap fn_toggle_card text-primary">
-                        <a class="btn-minimize" href="javascript:;" ><i class="fa fn_icon_arrow fa-angle-down"></i></a>
-                    </div>
-                </div>
-                <div class="toggle_body_wrap on fn_card">
-                    <div class="activity_of_switch activity_of_switch--box_settings">
-                        <div class="fn_step-4 activity_of_switch_item">
-                            <div class="okay_switch clearfix">
-                                <label class="switch_label">
-                                    {$btr->general_bestseller|escape}
-                                    <i class="fn_tooltips" title="{$btr->tooltip_general_bestseller|escape}">
-                                        {include file='svg_icon.tpl' svgId='icon_tooltips'}
-                                    </i>
-                                </label>
-                                <label class="switch switch-default">
-                                    <input class="switch-input" name="featured" value="1" type="checkbox" id="featured_checkbox" {if $product->featured}checked=""{/if}/>
-                                    <span class="switch-label"></span>
-                                    <span class="switch-handle"></span>
-                                </label>
-                            </div>
-                        </div>
-                        {get_design_block block="product_switch_checkboxes"}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
     {*Изображения товара*}
     <div class="row">
         <div class="col-lg-8 col-md-12 pr-0 ">
@@ -334,6 +300,10 @@
                                             <input class="variant_input" name="variants[name][]" type="text" value="{$variant->name|escape}" />
                                         </div>
                                         <div class="okay_list_boding variants_item_price">
+                                            <div class="heading_label">{$btr->incoming_price|escape}</div>
+                                            <input class="variant_input" name="variants[incoming_price][]" type="text" value="{$variant->incoming_price|escape}"/>
+                                        </div>
+                                        <div class="okay_list_boding variants_item_price">
                                             <div class="heading_label">{$btr->general_price|escape}</div>
                                             <input class="variant_input" name="variants[price][]" type="text" value="{$variant->price|escape}"/>
                                         </div>
@@ -372,6 +342,10 @@
                                                 {include file='svg_icon.tpl' svgId='delete'}
                                             </button>
                                         </div>
+                                            {else}
+                                            <div class="okay_list_boding okay_list_close remove_variant">
+                                                <div style="width: 10px"></div>
+                                            </div>
                                         {/if}
                                     </div>
 
@@ -687,6 +661,40 @@
                     </div>
                 </div>
                 {get_design_block block="product_meta_data"}
+            </div>
+        </div>
+    </div>
+
+    {*Дополнительные настройки*}
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="boxed fn_toggle_wrap ">
+                <div class="heading_box">
+                    {$btr->general_additional_settings|escape}
+                    <div class="toggle_arrow_wrap fn_toggle_card text-primary">
+                        <a class="btn-minimize" href="javascript:;" ><i class="fa fn_icon_arrow fa-angle-down"></i></a>
+                    </div>
+                </div>
+                <div class="toggle_body_wrap on fn_card">
+                    <div class="activity_of_switch activity_of_switch--box_settings">
+                        <div class="fn_step-4 activity_of_switch_item">
+                            <div class="okay_switch clearfix">
+                                <label class="switch_label">
+                                    {$btr->general_bestseller|escape}
+                                    <i class="fn_tooltips" title="{$btr->tooltip_general_bestseller|escape}">
+                                        {include file='svg_icon.tpl' svgId='icon_tooltips'}
+                                    </i>
+                                </label>
+                                <label class="switch switch-default">
+                                    <input class="switch-input" name="featured" value="1" type="checkbox" id="featured_checkbox" {if $product->featured}checked=""{/if}/>
+                                    <span class="switch-label"></span>
+                                    <span class="switch-handle"></span>
+                                </label>
+                            </div>
+                        </div>
+                        {get_design_block block="product_switch_checkboxes"}
+                    </div>
+                </div>
             </div>
         </div>
     </div>
