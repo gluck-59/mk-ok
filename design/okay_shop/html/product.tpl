@@ -179,10 +179,10 @@
                     </div>
 
                     {* Product available *}
-                    <div class="details_boxed__available">
-                        <div class="available__no_stock d-flex align-items-center icon icon-highlight-off fn_not_stock{if $product->variant->stock > 0} hidden-xs-up{/if}" data-language="product_out_of_stock">{$lang->product_out_of_stock}</div>
-                        <div class="available__in_stock d-flex align-items-center icon icon-check-circle-outline fn_in_stock{if $product->variant->stock < 1} hidden-xs-up{/if}" data-language="product_in_stock">{$lang->product_in_stock}</div>
-                    </div>
+{*                    <div class="details_boxed__available">*}
+{*                        <div class="available__no_stock d-flex align-items-center icon icon-highlight-off fn_not_stock{if $product->variant->stock > 0} hidden-xs-up{/if}" data-language="product_out_of_stock">{$lang->product_out_of_stock}</div>*}
+{*                        <div class="available__in_stock d-flex align-items-center icon icon-check-circle-outline fn_in_stock{if $product->variant->stock < 1} hidden-xs-up{/if}" data-language="product_in_stock">{$lang->product_in_stock}</div>*}
+{*                    </div>*}
                 </div>
 
                 <div class="details_boxed__item">

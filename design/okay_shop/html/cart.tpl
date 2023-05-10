@@ -17,8 +17,8 @@
                 {if $settings->site_phones}
                     {foreach $settings->site_phones as $phone}
                         {if $phone@first}
-                        <a class="cart_header__phone" href="tel:{preg_replace('~[^0-9\+]~', '', $phone)}">
-                            <span>{$phone|escape}</span>
+                        <a class="cart_header__phone" href="https://telegram.me/motokofr">
+                            <span>Telegram</span>
                         </a>
                         {/if}
                     {/foreach}

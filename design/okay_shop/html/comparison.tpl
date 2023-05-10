@@ -27,10 +27,14 @@
                     </div>
                     {* Feature name *}
                     {if $comparison->features}
+                    {assign var="availFeaturesId" value=""} {* массив идшников какие можно вывводить ниже (отстроиться от отключенных свойств в админке) *}
                         {foreach $comparison->features as $id=>$cf}
-                            <div class="cprs_feature_{$id} cell{if $cf->not_unique} not_unique{/if}" data-use="cprs_feature_{$id}">
-                                <span data-feature="{$cf->id}">{$cf->name}</span>
-                            </div>
+                            {if $cf->show_in_product == 1}
+                            {append var="availFeaturesId" value="$id"}
+                                <div class="cprs_feature_{$id} cell{if $cf->not_unique} not_unique{/if}" data-use="cprs_feature_{$id}">
+                                    <span data-feature="{$cf->id}">{$cf->name}</span>
+                                </div>
+                            {/if}
                         {/foreach}
                     {/if}
                 </div>
@@ -53,9 +57,11 @@
                                 {* Feature value *}
                                 {if $product->features}
                                     {foreach $product->features as $id=>$value}
-                                        <div class="cprs_feature_{$id} cell{if $comparison->features.{$id}->not_unique} not_unique{/if}">
-                                            {$value|default:"&mdash;"}
-                                        </div>
+                                        {if in_array($id, $availFeaturesId)}
+                                            <div class="cprs_feature_{$id} cell{if $comparison->features.{$id}->not_unique} not_unique{/if}">
+                                                {$value|default:"&mdash;"}
+                                            </div>
+                                        {/if}
                                     {/foreach}
                                 {/if}
 
