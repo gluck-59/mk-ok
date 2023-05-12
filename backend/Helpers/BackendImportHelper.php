@@ -94,12 +94,19 @@ class BackendImportHelper
         //            }
         //        }
 
+
         // Если задана категория
+        // если такго ID категории в системе если нет — срубаемся и ничего не пишем
         $categoryId = null;
         $categoriesIds = [];
         if (!empty($item['category'])) {
             foreach (explode($this->import->getCategoryDelimiter(), $item['category']) as $c) {
-                $categoriesIds[] = $this->importCategory($c);
+//                $categoriesIds[] = $this->importCategory($c); // оригинал
+                if (!$categoriesEntity->findOne(['id' => $item['category']])) {
+                    die('Неправильная категория '.$item['category'].' у "'.$item['name'].'". Ничего не импортировано.');
+                } else {
+                    $categoriesIds[] = (int) $item['category'];
+                }
             }
             $categoryId = reset($categoriesIds);
         }
@@ -219,9 +226,10 @@ class BackendImportHelper
                 $mainInfo['main_image_id'] = $mainImage;
             }
 
-            if (!empty($categoryId)) {
-                $mainInfo['main_category_id'] = $categoryId;
-            }
+// Если задана категория, запишем поле Category из файла как main_category_id в ok_products
+if (!empty($item['category'])) {
+    $mainInfo['main_category_id'] = (int) $item['category'];
+}
 
 // Если задан бренд, запишем поле brand из файла как brand_id в ok_products
 if (!empty($item['brand']))
@@ -229,6 +237,8 @@ if (!empty($item['brand']))
     $mainInfo['brand_id'] = (int) $item['brand'];
 }
 
+
+            // update
             if (!empty($mainInfo)) {
                 $productsEntity->update($productId, $mainInfo);
             }

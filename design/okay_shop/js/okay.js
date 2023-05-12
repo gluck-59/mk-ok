@@ -92,7 +92,7 @@ $(document).on("change", ".fn_variant", function () {
   }
   /* Артикул */
   if (typeof selected.data("sku") != "undefined") {
-    sku.text(selected.data("sku"));
+    // sku.text(selected.data("sku")); // меняет Арт.№ на фронте и подставляет наш номер лота
     sku.parent().removeClass("hidden-xs-up");
   } else {
     sku.text("");
