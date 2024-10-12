@@ -1,0 +1,384 @@
+<?php
+/* Smarty version 3.1.40, created on 2024-10-11 23:26:48
+  from '/Users/gluck/Sites/motokofr.ok/Okay/Modules/OkayCMS/Feeds/Backend/design/html/presets/facebook/settings.tpl' */
+
+/* @var Smarty_Internal_Template $_smarty_tpl */
+if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
+  'version' => '3.1.40',
+  'unifunc' => 'content_67096de86c61a6_12344710',
+  'has_nocache_code' => false,
+  'file_dependency' => 
+  array (
+    '9cf2145f7f62e0f6e6d1ef1635a1af0068f0e966' => 
+    array (
+      0 => '/Users/gluck/Sites/motokofr.ok/Okay/Modules/OkayCMS/Feeds/Backend/design/html/presets/facebook/settings.tpl',
+      1 => 1728664430,
+      2 => 'file',
+    ),
+  ),
+  'includes' => 
+  array (
+  ),
+),false)) {
+function content_67096de86c61a6_12344710 (Smarty_Internal_Template $_smarty_tpl) {
+?>
+<div class="boxed">
+    <div class="heading_box">
+        <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__title1, ENT_QUOTES, 'UTF-8', true);?>
+
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="heading_label">
+                <span><?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__facebook__company;?>
+</span>
+            </div>
+            <div class="mb-1">
+                <input class="form-control" type="text" name="settings[company]" value="<?php echo $_smarty_tpl->tpl_vars['feed']->value->settings['company'];?>
+" />
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="activity_of_switch activity_of_switch--box_settings">
+                <div class="activity_of_switch_item">
+                    <div class="okay_switch clearfix">
+                        <label class="switch_label">
+                           <span><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__facebook__adult, ENT_QUOTES, 'UTF-8', true);?>
+</span>
+                        </label>
+                        <label class="switch switch-default">
+                            <input class="switch-input" name="settings[adult]" value='1' type="checkbox" <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['adult']) {?>checked=""<?php }?>/>
+                            <span class="switch-label"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="boxed">
+    <div class="heading_box">
+        <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__title2, ENT_QUOTES, 'UTF-8', true);?>
+
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="heading_label">
+                <span><?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__facebook__color;?>
+</span> <span>(<?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__facebook__color_notify;?>
+)</span>
+            </div>
+            <div class="mb-1">
+                <select name="settings[color]" class="selectpicker form-control">
+                    <option <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['color'] == 0) {?>selected=""<?php }?> value=""></option>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['features']->value, 'feature');
+$_smarty_tpl->tpl_vars['feature']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['feature']->value) {
+$_smarty_tpl->tpl_vars['feature']->do_else = false;
+?>
+                        <option <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['color'] == $_smarty_tpl->tpl_vars['feature']->value->id) {?>selected=""<?php }?> value="<?php echo $_smarty_tpl->tpl_vars['feature']->value->id;?>
+"><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['feature']->value->name, ENT_QUOTES, 'UTF-8', true);?>
+</option>
+                    <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="heading_label">
+                <span><?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__facebook__gtin;?>
+</span>
+            </div>
+            <div class="mb-1">
+                <select name="settings[gtin]" class="selectpicker form-control">
+                    <option <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['gtin'] == 0) {?>selected=""<?php }?> value=""></option>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['features']->value, 'feature');
+$_smarty_tpl->tpl_vars['feature']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['feature']->value) {
+$_smarty_tpl->tpl_vars['feature']->do_else = false;
+?>
+                        <option <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['gtin'] == $_smarty_tpl->tpl_vars['feature']->value->id) {?>selected=""<?php }?> value="<?php echo $_smarty_tpl->tpl_vars['feature']->value->id;?>
+"><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['feature']->value->name, ENT_QUOTES, 'UTF-8', true);?>
+</option>
+                    <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="heading_label">
+                <span><?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__facebook__gender;?>
+</span>
+            </div>
+            <div class="mb-1">
+                <select name="settings[gender]" class="selectpicker form-control">
+                    <option <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['gender'] == 0) {?>selected=""<?php }?> value=""></option>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['features']->value, 'feature');
+$_smarty_tpl->tpl_vars['feature']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['feature']->value) {
+$_smarty_tpl->tpl_vars['feature']->do_else = false;
+?>
+                        <option <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['gender'] == $_smarty_tpl->tpl_vars['feature']->value->id) {?>selected=""<?php }?> value="<?php echo $_smarty_tpl->tpl_vars['feature']->value->id;?>
+"><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['feature']->value->name, ENT_QUOTES, 'UTF-8', true);?>
+</option>
+                    <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+                </select>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="heading_label">
+                <span><?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__facebook__material;?>
+</span>
+            </div>
+            <div class="mb-1">
+                <select name="settings[material]" class="selectpicker form-control">
+                    <option <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['material'] == 0) {?>selected=""<?php }?> value=""></option>
+                    <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['features']->value, 'feature');
+$_smarty_tpl->tpl_vars['feature']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['feature']->value) {
+$_smarty_tpl->tpl_vars['feature']->do_else = false;
+?>
+                        <option <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['material'] == $_smarty_tpl->tpl_vars['feature']->value->id) {?>selected=""<?php }?> value="<?php echo $_smarty_tpl->tpl_vars['feature']->value->id;?>
+"><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['feature']->value->name, ENT_QUOTES, 'UTF-8', true);?>
+</option>
+                    <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+                </select>
+            </div>
+        </div>
+        <?php
+$_smarty_tpl->tpl_vars['i'] = new Smarty_Variable(null, $_smarty_tpl->isRenderingCache);
+$_smarty_tpl->tpl_vars['i']->value = 0;
+if ($_smarty_tpl->tpl_vars['i']->value <= 4) {
+for ($_foo=true;$_smarty_tpl->tpl_vars['i']->value <= 4; $_smarty_tpl->tpl_vars['i']->value++) {
+?>
+            <div class="col-md-6">
+                <div class="heading_label">
+                    <span>custom_label_<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+</span>
+                </div>
+                <div class="mb-1">
+                    <select name="settings[custom_labels][<?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+]" class="selectpicker form-control">
+                        <option <?php if (!$_smarty_tpl->tpl_vars['feed']->value->settings['custom_labels'][$_smarty_tpl->tpl_vars['i']->value]) {?>selected=""<?php }?> value=""></option>
+                        <?php
+$_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['features']->value, 'feature');
+$_smarty_tpl->tpl_vars['feature']->do_else = true;
+if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['feature']->value) {
+$_smarty_tpl->tpl_vars['feature']->do_else = false;
+?>
+                            <option <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['custom_labels'][$_smarty_tpl->tpl_vars['i']->value] == $_smarty_tpl->tpl_vars['feature']->value->id) {?>selected=""<?php }?> value="<?php echo $_smarty_tpl->tpl_vars['feature']->value->id;?>
+"><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['feature']->value->name, ENT_QUOTES, 'UTF-8', true);?>
+</option>
+                        <?php
+}
+$_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
+                    </select>
+                </div>
+            </div>
+        <?php }
+}
+?>
+    </div>
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="activity_of_switch activity_of_switch--box_settings">
+                <div class="activity_of_switch_item">
+                    <div class="okay_switch clearfix">
+                        <label class="switch_label">
+                           <span><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__facebook__upload_without_images, ENT_QUOTES, 'UTF-8', true);?>
+</span>
+                        </label>
+                        <label class="switch switch-default">
+                            <input class="switch-input" name="settings[upload_without_images]" value='1' type="checkbox" <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['upload_without_images']) {?>checked=""<?php }?>/>
+                            <span class="switch-label"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="activity_of_switch_item">
+                    <div class="okay_switch clearfix">
+                        <label class="switch_label">
+                           <span><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__facebook__upload_only_in_stock_products, ENT_QUOTES, 'UTF-8', true);?>
+</span>
+                        </label>
+                        <label class="switch switch-default">
+                            <input class="switch-input" name="settings[upload_only_products_in_stock]" value='1' type="checkbox" <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['upload_only_products_in_stock']) {?>checked=""<?php }?>/>
+                            <span class="switch-label"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="activity_of_switch_item">
+                    <div class="okay_switch clearfix">
+                        <label class="switch_label">
+                           <span><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__facebook__use_full_description, ENT_QUOTES, 'UTF-8', true);?>
+</span>
+                        </label>
+                        <label class="switch switch-default">
+                            <input class="switch-input" name="settings[use_full_description]" value='1' type="checkbox" <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['use_full_description']) {?>checked=""<?php }?>/>
+                            <span class="switch-label"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="activity_of_switch_item">
+                    <div class="okay_switch clearfix">
+                        <label class="switch_label">
+                            <span><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__facebook__description_in_html, ENT_QUOTES, 'UTF-8', true);?>
+</span>
+                            <i class="fn_tooltips" title="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__facebook__description_in_html_info, ENT_QUOTES, 'UTF-8', true);?>
+">
+                                <svg width="20px" height="20px" viewBox="0 0 438.533 438.533" ><path fill="currentColor" d="M409.133,109.203c-19.608-33.592-46.205-60.189-79.798-79.796C295.736,9.801,259.058,0,219.273,0c-39.781,0-76.47,9.801-110.063,29.407c-33.595,19.604-60.192,46.201-79.8,79.796C9.801,142.8,0,179.489,0,219.267c0,39.78,9.804,76.463,29.407,110.062c19.607,33.592,46.204,60.189,79.799,79.798c33.597,19.605,70.283,29.407,110.063,29.407s76.47-9.802,110.065-29.407c33.593-19.602,60.189-46.206,79.795-79.798c19.603-33.596,29.403-70.284,29.403-110.062C438.533,179.485,428.732,142.795,409.133,109.203z M255.82,356.309c0,2.662-0.862,4.853-2.573,6.563c-1.704,1.711-3.895,2.567-6.557,2.567h-54.823c-2.664,0-4.854-0.856-6.567-2.567c-1.714-1.711-2.57-3.901-2.57-6.563v-54.823c0-2.662,0.855-4.853,2.57-6.563c1.713-1.708,3.903-2.563,6.567-2.563h54.823c2.662,0,4.853,0.855,6.557,2.563c1.711,1.711,2.573,3.901,2.573,6.563V356.309z M325.338,187.574c-2.382,7.043-5.044,12.804-7.994,17.275c-2.949,4.473-7.187,9.042-12.709,13.703c-5.51,4.663-9.891,7.996-13.135,9.998c-3.23,1.995-7.898,4.713-13.982,8.135c-6.283,3.613-11.465,8.326-15.555,14.134c-4.093,5.804-6.139,10.513-6.139,14.126c0,2.67-0.862,4.859-2.574,6.571c-1.707,1.711-3.897,2.566-6.56,2.566h-54.82c-2.664,0-4.854-0.855-6.567-2.566c-1.715-1.712-2.568-3.901-2.568-6.571v-10.279c0-12.752,4.993-24.701,14.987-35.832c9.994-11.136,20.986-19.368,32.979-24.698c9.13-4.186,15.604-8.47,19.41-12.847c3.812-4.377,5.715-10.188,5.715-17.417c0-6.283-3.572-11.897-10.711-16.849c-7.139-4.947-15.27-7.421-24.409-7.421c-9.9,0-18.082,2.285-24.555,6.855c-6.283,4.565-14.465,13.322-24.554,26.263c-1.713,2.286-4.093,3.431-7.139,3.431c-2.284,0-4.093-0.57-5.424-1.709L121.35,145.89c-4.377-3.427-5.138-7.422-2.286-11.991c24.366-40.542,59.672-60.813,105.922-60.813c16.563,0,32.744,3.903,48.541,11.708c15.796,7.801,28.979,18.842,39.546,33.119c10.554,14.272,15.845,29.787,15.845,46.537C328.904,172.824,327.71,180.529,325.338,187.574z"/></svg>
+                            </i>
+                        </label>
+                        <label class="switch switch-default">
+                            <input class="switch-input" name="settings[description_in_html]" value='1' type="checkbox" <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['description_in_html']) {?>checked=""<?php }?>/>
+                            <span class="switch-label"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="activity_of_switch_item">
+                    <div class="okay_switch clearfix">
+                        <label class="switch_label">
+                           <span><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__facebook__no_export_without_price, ENT_QUOTES, 'UTF-8', true);?>
+</span>
+                        </label>
+                        <label class="switch switch-default">
+                            <input class="switch-input" name="settings[no_export_without_price]" value='1' type="checkbox" <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['no_export_without_price']) {?>checked=""<?php }?>/>
+                            <span class="switch-label"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </div>
+                <div class="activity_of_switch_item">
+                    <div class="okay_switch clearfix">
+                        <label class="switch_label">
+                           <span><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__facebook__use_variant_name_like_size, ENT_QUOTES, 'UTF-8', true);?>
+</span>
+                        </label>
+                        <label class="switch switch-default">
+                            <input class="switch-input" name="settings[use_variant_name_like_size]" value='1' type="checkbox" <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['use_variant_name_like_size']) {?>checked=""<?php }?>/>
+                            <span class="switch-label"></span>
+                            <span class="switch-handle"></span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="boxed">
+    <div class="heading_box mb-2">
+        <?php echo htmlspecialchars($_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__title3, ENT_QUOTES, 'UTF-8', true);?>
+
+        <i class="fn_tooltips" title="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__title3_tooltip, ENT_QUOTES, 'UTF-8', true);?>
+">
+            <svg width="20px" height="20px" viewBox="0 0 438.533 438.533"><path fill="currentColor" d="M409.133,109.203c-19.608-33.592-46.205-60.189-79.798-79.796C295.736,9.801,259.058,0,219.273,0c-39.781,0-76.47,9.801-110.063,29.407c-33.595,19.604-60.192,46.201-79.8,79.796C9.801,142.8,0,179.489,0,219.267c0,39.78,9.804,76.463,29.407,110.062c19.607,33.592,46.204,60.189,79.799,79.798c33.597,19.605,70.283,29.407,110.063,29.407s76.47-9.802,110.065-29.407c33.593-19.602,60.189-46.206,79.795-79.798c19.603-33.596,29.403-70.284,29.403-110.062C438.533,179.485,428.732,142.795,409.133,109.203z M255.82,356.309c0,2.662-0.862,4.853-2.573,6.563c-1.704,1.711-3.895,2.567-6.557,2.567h-54.823c-2.664,0-4.854-0.856-6.567-2.567c-1.714-1.711-2.57-3.901-2.57-6.563v-54.823c0-2.662,0.855-4.853,2.57-6.563c1.713-1.708,3.903-2.563,6.567-2.563h54.823c2.662,0,4.853,0.855,6.557,2.563c1.711,1.711,2.573,3.901,2.573,6.563V356.309z M325.338,187.574c-2.382,7.043-5.044,12.804-7.994,17.275c-2.949,4.473-7.187,9.042-12.709,13.703c-5.51,4.663-9.891,7.996-13.135,9.998c-3.23,1.995-7.898,4.713-13.982,8.135c-6.283,3.613-11.465,8.326-15.555,14.134c-4.093,5.804-6.139,10.513-6.139,14.126c0,2.67-0.862,4.859-2.574,6.571c-1.707,1.711-3.897,2.566-6.56,2.566h-54.82c-2.664,0-4.854-0.855-6.567-2.566c-1.715-1.712-2.568-3.901-2.568-6.571v-10.279c0-12.752,4.993-24.701,14.987-35.832c9.994-11.136,20.986-19.368,32.979-24.698c9.13-4.186,15.604-8.47,19.41-12.847c3.812-4.377,5.715-10.188,5.715-17.417c0-6.283-3.572-11.897-10.711-16.849c-7.139-4.947-15.27-7.421-24.409-7.421c-9.9,0-18.082,2.285-24.555,6.855c-6.283,4.565-14.465,13.322-24.554,26.263c-1.713,2.286-4.093,3.431-7.139,3.431c-2.284,0-4.093-0.57-5.424-1.709L121.35,145.89c-4.377-3.427-5.138-7.422-2.286-11.991c24.366-40.542,59.672-60.813,105.922-60.813c16.563,0,32.744,3.903,48.541,11.708c15.796,7.801,28.979,18.842,39.546,33.119c10.554,14.272,15.845,29.787,15.845,46.537C328.904,172.824,327.71,180.529,325.338,187.574z"></path></svg>                    
+        </i>
+    </div>
+        <div class="row">
+        <div class="col-md-12 mb-q">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-xs-6 col-md-5 col-lg-4 pr-0 pr-0--feed">
+                            <select class="selectpicker form-control mb-1" name="settings[filter_price][operator]">
+                                <option value="<" <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['filter_price']['operator'] === '<') {?> selected <?php }?>><?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__common__filter_price_price;?>
+ <?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__common__equality_less;?>
+</option>
+                                <option value=">" <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['filter_price']['operator'] === '>') {?> selected <?php }?>><?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__common__filter_price_price;?>
+ <?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__common__equality_large;?>
+</option>
+                                <option value="=" <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['filter_price']['operator'] === '=') {?> selected <?php }?>><?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__common__filter_price_price;?>
+ <?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__common__equality_equally1;?>
+</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="input-group">
+                                <input class="form-control" type="text" name="settings[filter_price][value]" value="<?php echo $_smarty_tpl->tpl_vars['feed']->value->settings['filter_price']['value'];?>
+" placeholder="<?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__common__equality_place_price;?>
+">
+                                <span class="input-group-addon"><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['currency']->value->code, ENT_QUOTES, 'UTF-8', true);?>
+</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="row">
+                        <div class="col-xs-6 col-md-5 col-lg-4 pr-0 pr-0--feed">
+                            <select class="selectpicker form-control mb-1" name="settings[filter_stock][operator]">
+                                <option value="<" <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['filter_stock']['operator'] === '<') {?> selected <?php }?>><?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__common__filter_stock_stock;?>
+ <?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__common__equality_less;?>
+</option>
+                                <option value=">" <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['filter_stock']['operator'] === '>') {?> selected <?php }?>><?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__common__filter_stock_stock;?>
+ <?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__common__equality_large;?>
+</option>
+                                <option value="=" <?php if ($_smarty_tpl->tpl_vars['feed']->value->settings['filter_stock']['operator'] === '=') {?> selected <?php }?>><?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__common__filter_stock_stock;?>
+ <?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__common__equality_equally2;?>
+</option>
+                            </select>
+                        </div>
+                        <div class="col-xs-6 col-md-4 col-lg-3 col-xl-3">
+                            <div class="input-group">
+                                <input class="form-control" type="text" name="settings[filter_stock][value]" value="<?php echo $_smarty_tpl->tpl_vars['feed']->value->settings['filter_stock']['value'];?>
+" placeholder="<?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__common__equality_place_count;?>
+">
+                                <span class="input-group-addon"><?php echo htmlspecialchars($_smarty_tpl->tpl_vars['btr']->value->orders_unit, ENT_QUOTES, 'UTF-8', true);?>
+</span>
+                            </div>
+                         </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-5 col-lg-4 pr-0 pr-0--feed">
+            <div class="heading_label">
+                <span><?php echo $_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__common__price_change;?>
+</span>
+                <i class="fn_tooltips" title="<?php echo htmlspecialchars($_smarty_tpl->tpl_vars['btr']->value->okay_cms__feeds__feed__settings__common__price_change_tooltip, ENT_QUOTES, 'UTF-8', true);?>
+">
+                    <svg width="20px" height="20px" viewBox="0 0 438.533 438.533" >
+                        <path fill="currentColor" d="M409.133,109.203c-19.608-33.592-46.205-60.189-79.798-79.796C295.736,9.801,259.058,0,219.273,0c-39.781,0-76.47,9.801-110.063,29.407c-33.595,19.604-60.192,46.201-79.8,79.796C9.801,142.8,0,179.489,0,219.267c0,39.78,9.804,76.463,29.407,110.062c19.607,33.592,46.204,60.189,79.799,79.798c33.597,19.605,70.283,29.407,110.063,29.407s76.47-9.802,110.065-29.407c33.593-19.602,60.189-46.206,79.795-79.798c19.603-33.596,29.403-70.284,29.403-110.062C438.533,179.485,428.732,142.795,409.133,109.203z M255.82,356.309c0,2.662-0.862,4.853-2.573,6.563c-1.704,1.711-3.895,2.567-6.557,2.567h-54.823c-2.664,0-4.854-0.856-6.567-2.567c-1.714-1.711-2.57-3.901-2.57-6.563v-54.823c0-2.662,0.855-4.853,2.57-6.563c1.713-1.708,3.903-2.563,6.567-2.563h54.823c2.662,0,4.853,0.855,6.557,2.563c1.711,1.711,2.573,3.901,2.573,6.563V356.309z M325.338,187.574c-2.382,7.043-5.044,12.804-7.994,17.275c-2.949,4.473-7.187,9.042-12.709,13.703c-5.51,4.663-9.891,7.996-13.135,9.998c-3.23,1.995-7.898,4.713-13.982,8.135c-6.283,3.613-11.465,8.326-15.555,14.134c-4.093,5.804-6.139,10.513-6.139,14.126c0,2.67-0.862,4.859-2.574,6.571c-1.707,1.711-3.897,2.566-6.56,2.566h-54.82c-2.664,0-4.854-0.855-6.567-2.566c-1.715-1.712-2.568-3.901-2.568-6.571v-10.279c0-12.752,4.993-24.701,14.987-35.832c9.994-11.136,20.986-19.368,32.979-24.698c9.13-4.186,15.604-8.47,19.41-12.847c3.812-4.377,5.715-10.188,5.715-17.417c0-6.283-3.572-11.897-10.711-16.849c-7.139-4.947-15.27-7.421-24.409-7.421c-9.9,0-18.082,2.285-24.555,6.855c-6.283,4.565-14.465,13.322-24.554,26.263c-1.713,2.286-4.093,3.431-7.139,3.431c-2.284,0-4.093-0.57-5.424-1.709L121.35,145.89c-4.377-3.427-5.138-7.422-2.286-11.991c24.366-40.542,59.672-60.813,105.922-60.813c16.563,0,32.744,3.903,48.541,11.708c15.796,7.801,28.979,18.842,39.546,33.119c10.554,14.272,15.845,29.787,15.845,46.537C328.904,172.824,327.71,180.529,325.338,187.574z"/>
+                    </svg>
+                </i>
+            </div>
+            <div class="mb-1">
+                <input class="form-control" type="number" name="settings[price_change]" value="<?php echo $_smarty_tpl->tpl_vars['feed']->value->settings['price_change'];?>
+" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php ob_start();
+echo call_user_func_array( $_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['get_design_block'][0], array( array('block'=>"okay_cms__feeds__feed__settings__facebook__custom_block"),$_smarty_tpl ) );
+$_prefixVariable5 = ob_get_clean();
+$_smarty_tpl->_assignInScope('block', $_prefixVariable5);
+if (!empty($_smarty_tpl->tpl_vars['block']->value)) {?>
+    <div class="boxed">
+        <div class="row custom_block">
+            <?php echo $_smarty_tpl->tpl_vars['block']->value;?>
+
+        </div>
+    </div>
+<?php }
+}
+}

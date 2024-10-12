@@ -1,0 +1,5 @@
+/config/*
+.htaccess
+
+.gitignore
+.github
