@@ -5,7 +5,7 @@
     <META HTTP-EQUIV="Pragma" CONTENT="no-cache"/>
     <META HTTP-EQUIV="Expires" CONTENT="-1"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
-    <title>{$meta_title|escape} | OkayCMS v.{$config->version|escape}</title>
+    <title>{$meta_title|escape} | {$settings->site_name|escape}</title>
 
     {literal}
     <script>
@@ -75,20 +75,20 @@
 
     {if $settings->gather_enabled}
     {literal}
-        <!-- Google Tag Manager -->
+        <!-- Google Tag Manager>
         <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
                     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
                 j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
                 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
             })(window,document,'script','dataLayer','GTM-P6T2LJP');
         </script>
-        <!-- End Google Tag Manager -->
+        < End Google Tag Manager -->
     {/literal}
     {/if}
 </head>
 <body class="navbar-fixed {if $manager->menu_status && $is_mobile === false && $is_tablet === false}menu-pin{/if}">
 <!-- Google Tag Manager (noscript) -->
-{if $settings->gather_enabled}
+{if 0 && $settings->gather_enabled}
     <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P6T2LJP" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 {/if}
 <!-- End Google Tag Manager (noscript) -->

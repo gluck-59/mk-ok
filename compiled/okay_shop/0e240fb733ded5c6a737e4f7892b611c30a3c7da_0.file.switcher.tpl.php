@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2024-10-11 23:24:30
+/* Smarty version 3.1.40, created on 2024-10-15 12:23:16
   from '/Users/gluck/Sites/motokofr.ok/design/okay_shop/html/switcher.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_67096d5e0ddee1_64833747',
+  'unifunc' => 'content_670e18644f15c4_68003092',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67096d5e0ddee1_64833747 (Smarty_Internal_Template $_smarty_tpl) {
+function content_670e18644f15c4_68003092 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- Languages -->
 <?php if (count($_smarty_tpl->tpl_vars['languages']->value) > 1) {?>
 	<?php $_smarty_tpl->_assignInScope('cnt', 0);?>

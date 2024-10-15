@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2024-10-11 23:33:42
+/* Smarty version 3.1.40, created on 2024-10-15 12:28:39
   from '/Users/gluck/Sites/motokofr.ok/backend/design/html/blog_categories.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_67096f868b0e91_06132202',
+  'unifunc' => 'content_670e19a7b1de74_80139109',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -22,7 +22,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:blog_categories_ajax.tpl' => 1,
   ),
 ),false)) {
-function content_67096f868b0e91_06132202 (Smarty_Internal_Template $_smarty_tpl) {
+function content_670e19a7b1de74_80139109 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_assignInScope('meta_title', $_smarty_tpl->tpl_vars['btr']->value->general_categories ,false ,32);?>
 
 <div class="row">

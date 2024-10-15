@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2024-10-11 23:31:48
+/* Smarty version 3.1.40, created on 2024-10-15 12:45:39
   from '/Users/gluck/Sites/motokofr.ok/backend/design/html/tinymce_init.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_67096f149d24e6_47465961',
+  'unifunc' => 'content_670e1da31df091_33239910',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67096f149d24e6_47465961 (Smarty_Internal_Template $_smarty_tpl) {
+function content_670e1da31df091_33239910 (Smarty_Internal_Template $_smarty_tpl) {
 echo '<script'; ?>
  type="text/javascript" src="design/js/tinymce_jq/tinymce.min.js"><?php echo '</script'; ?>
 >

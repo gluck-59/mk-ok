@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2024-10-11 23:33:22
+/* Smarty version 3.1.40, created on 2024-10-15 12:58:07
   from '/Users/gluck/Sites/motokofr.ok/design/okay_shop/html/blog_sidebar.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_67096f72d78da7_95831264',
+  'unifunc' => 'content_670e208f399ea6_43840067',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,13 +21,13 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:svg.tpl' => 7,
   ),
 ),false)) {
-function content_67096f72d78da7_95831264 (Smarty_Internal_Template $_smarty_tpl) {
+function content_670e208f399ea6_43840067 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->smarty->ext->_tplFunction->registerTplFunctions($_smarty_tpl, array (
   'categories_article' => 
   array (
     'compiled_filepath' => '/Users/gluck/Sites/motokofr.ok/compiled/okay_shop/317222b9ca32600ab40f8fa28cc262603745e432_0.file.blog_sidebar.tpl.php',
     'uid' => '317222b9ca32600ab40f8fa28cc262603745e432',
-    'call_name' => 'smarty_template_function_categories_article_147561323267096f72cf99a1_97415437',
+    'call_name' => 'smarty_template_function_categories_article_1906290941670e208f31e758_75713613',
   ),
 ));
 ?><!-- Blog sidebar page -->
@@ -150,9 +150,9 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     <?php }
 }
 }
-/* smarty_template_function_categories_article_147561323267096f72cf99a1_97415437 */
-if (!function_exists('smarty_template_function_categories_article_147561323267096f72cf99a1_97415437')) {
-function smarty_template_function_categories_article_147561323267096f72cf99a1_97415437(Smarty_Internal_Template $_smarty_tpl,$params) {
+/* smarty_template_function_categories_article_1906290941670e208f31e758_75713613 */
+if (!function_exists('smarty_template_function_categories_article_1906290941670e208f31e758_75713613')) {
+function smarty_template_function_categories_article_1906290941670e208f31e758_75713613(Smarty_Internal_Template $_smarty_tpl,$params) {
 foreach ($params as $key => $value) {
 $_smarty_tpl->tpl_vars[$key] = new Smarty_Variable($value, $_smarty_tpl->isRenderingCache);
 }
@@ -243,5 +243,5 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
             <?php }?>
         <?php
 }}
-/*/ smarty_template_function_categories_article_147561323267096f72cf99a1_97415437 */
+/*/ smarty_template_function_categories_article_1906290941670e208f31e758_75713613 */
 }

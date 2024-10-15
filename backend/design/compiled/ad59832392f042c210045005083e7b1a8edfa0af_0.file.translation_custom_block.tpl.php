@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2024-10-11 23:36:38
+/* Smarty version 3.1.40, created on 2024-10-15 12:58:05
   from '/Users/gluck/Sites/motokofr.ok/Okay/Modules/OkayCMS/AutoDeploy/Backend/design/html/translation_custom_block.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_670970367d5289_01779832',
+  'unifunc' => 'content_670e208d88c1c9_04139933',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_670970367d5289_01779832 (Smarty_Internal_Template $_smarty_tpl) {
+function content_670e208d88c1c9_04139933 (Smarty_Internal_Template $_smarty_tpl) {
 if ((!$_smarty_tpl->tpl_vars['translation']->value || !$_smarty_tpl->tpl_vars['translation']->value->id) && $_smarty_tpl->tpl_vars['settings']->value->deploy_build_channel && $_smarty_tpl->tpl_vars['settings']->value->deploy_build_channel != 'local') {?>
     <div class="row">
         <div class="col-lg-12 col-md-12 col-sm-12">

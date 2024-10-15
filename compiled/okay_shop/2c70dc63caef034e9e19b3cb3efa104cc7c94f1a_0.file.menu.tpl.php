@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2024-10-11 23:24:29
+/* Smarty version 3.1.40, created on 2024-10-15 12:23:15
   from '/Users/gluck/Sites/motokofr.ok/design/okay_shop/html/menu.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_67096d5dce7610_56016266',
+  'unifunc' => 'content_670e1863e287b1_06152307',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,13 +20,13 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67096d5dce7610_56016266 (Smarty_Internal_Template $_smarty_tpl) {
+function content_670e1863e287b1_06152307 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->smarty->ext->_tplFunction->registerTplFunctions($_smarty_tpl, array (
   'menu_items_tree' => 
   array (
     'compiled_filepath' => '/Users/gluck/Sites/motokofr.ok/compiled/okay_shop/2c70dc63caef034e9e19b3cb3efa104cc7c94f1a_0.file.menu.tpl.php',
     'uid' => '2c70dc63caef034e9e19b3cb3efa104cc7c94f1a',
-    'call_name' => 'smarty_template_function_menu_items_tree_146498169867096d5dcba9d3_93370186',
+    'call_name' => 'smarty_template_function_menu_items_tree_226291249670e1863dfea32_84827867',
   ),
 ));
 if ($_smarty_tpl->tpl_vars['menu_items']->value) {?>
@@ -35,9 +35,9 @@ if ($_smarty_tpl->tpl_vars['menu_items']->value) {?>
 
 <?php }
 }
-/* smarty_template_function_menu_items_tree_146498169867096d5dcba9d3_93370186 */
-if (!function_exists('smarty_template_function_menu_items_tree_146498169867096d5dcba9d3_93370186')) {
-function smarty_template_function_menu_items_tree_146498169867096d5dcba9d3_93370186(Smarty_Internal_Template $_smarty_tpl,$params) {
+/* smarty_template_function_menu_items_tree_226291249670e1863dfea32_84827867 */
+if (!function_exists('smarty_template_function_menu_items_tree_226291249670e1863dfea32_84827867')) {
+function smarty_template_function_menu_items_tree_226291249670e1863dfea32_84827867(Smarty_Internal_Template $_smarty_tpl,$params) {
 foreach ($params as $key => $value) {
 $_smarty_tpl->tpl_vars[$key] = new Smarty_Variable($value, $_smarty_tpl->isRenderingCache);
 }
@@ -78,5 +78,5 @@ $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     <?php }?>
     <?php
 }}
-/*/ smarty_template_function_menu_items_tree_146498169867096d5dcba9d3_93370186 */
+/*/ smarty_template_function_menu_items_tree_226291249670e1863dfea32_84827867 */
 }

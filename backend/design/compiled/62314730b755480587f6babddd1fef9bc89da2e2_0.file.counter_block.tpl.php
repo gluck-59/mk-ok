@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2024-10-11 23:24:29
+/* Smarty version 3.1.40, created on 2024-10-15 12:22:41
   from '/Users/gluck/Sites/motokofr.ok/Okay/Modules/OkayCMS/NovaposhtaCost/Backend/design/html/counter_block.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_67096d5d04b5c5_56956864',
+  'unifunc' => 'content_670e1841b6d439_10076807',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:svg_icon.tpl' => 1,
   ),
 ),false)) {
-function content_67096d5d04b5c5_56956864 (Smarty_Internal_Template $_smarty_tpl) {
+function content_670e1841b6d439_10076807 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['settings']->value->np_api_key_error || $_smarty_tpl->tpl_vars['uahCurrencyError']->value) {?>
     <div class="notif_item">
         <a href="index.php?controller=OkayCMS.NovaposhtaCost.NovaposhtaCostAdmin" class="l_notif">

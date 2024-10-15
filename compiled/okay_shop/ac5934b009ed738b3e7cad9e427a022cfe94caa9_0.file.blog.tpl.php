@@ -1,18 +1,18 @@
 <?php
-/* Smarty version 3.1.40, created on 2024-10-11 23:33:22
+/* Smarty version 3.1.40, created on 2024-10-15 12:58:07
   from '/Users/gluck/Sites/motokofr.ok/design/okay_shop/html/blog.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_67096f72cf48a1_00112554',
+  'unifunc' => 'content_670e208f317a07_67829141',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
     'ac5934b009ed738b3e7cad9e427a022cfe94caa9' => 
     array (
       0 => '/Users/gluck/Sites/motokofr.ok/design/okay_shop/html/blog.tpl',
-      1 => 1728664429,
+      1 => 1728978231,
       2 => 'file',
     ),
   ),
@@ -24,7 +24,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:pagination.tpl' => 1,
   ),
 ),false)) {
-function content_67096f72cf48a1_00112554 (Smarty_Internal_Template $_smarty_tpl) {
+function content_670e208f317a07_67829141 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- Blog page -->
 
 <div class="d-lg-flex align-items-lg-start justify-content-lg-between flex-lg-row-reverse clearfix">

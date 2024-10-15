@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2024-10-11 23:24:28
+/* Smarty version 3.1.40, created on 2024-10-15 12:22:41
   from '/Users/gluck/Sites/motokofr.ok/backend/design/html/module_list.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_67096d5cda1f91_56499335',
+  'unifunc' => 'content_670e18418f2d54_66579932',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:svg_icon.tpl' => 5,
   ),
 ),false)) {
-function content_67096d5cda1f91_56499335 (Smarty_Internal_Template $_smarty_tpl) {
+function content_670e18418f2d54_66579932 (Smarty_Internal_Template $_smarty_tpl) {
 $_from = $_smarty_tpl->smarty->ext->_foreach->init($_smarty_tpl, $_smarty_tpl->tpl_vars['modules']->value, 'module');
 $_smarty_tpl->tpl_vars['module']->do_else = true;
 if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['module']->value) {

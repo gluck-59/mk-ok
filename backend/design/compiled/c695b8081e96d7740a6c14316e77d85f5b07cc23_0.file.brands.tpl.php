@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2024-10-11 23:27:58
+/* Smarty version 3.1.40, created on 2024-10-15 13:31:45
   from '/Users/gluck/Sites/motokofr.ok/backend/design/html/brands.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_67096e2eb80836_98858940',
+  'unifunc' => 'content_670e2871a9fb63_11697302',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -23,7 +23,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:learning_hints.tpl' => 1,
   ),
 ),false)) {
-function content_67096e2eb80836_98858940 (Smarty_Internal_Template $_smarty_tpl) {
+function content_670e2871a9fb63_11697302 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_assignInScope('meta_title', $_smarty_tpl->tpl_vars['btr']->value->brands_brands ,false ,32);?>
 
 <div class="main_header">

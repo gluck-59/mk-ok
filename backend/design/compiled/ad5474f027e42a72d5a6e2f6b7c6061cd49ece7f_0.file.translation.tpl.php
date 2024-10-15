@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2024-10-11 23:36:38
+/* Smarty version 3.1.40, created on 2024-10-15 12:58:05
   from '/Users/gluck/Sites/motokofr.ok/backend/design/html/translation.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_670970367bf443_73352826',
+  'unifunc' => 'content_670e208d8777b2_16643046',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:svg_icon.tpl' => 2,
   ),
 ),false)) {
-function content_670970367bf443_73352826 (Smarty_Internal_Template $_smarty_tpl) {
+function content_670e208d8777b2_16643046 (Smarty_Internal_Template $_smarty_tpl) {
 if ($_smarty_tpl->tpl_vars['translation']->value->id) {?>
     <?php $_smarty_tpl->_assignInScope('meta_title', $_smarty_tpl->tpl_vars['translation']->value->label ,false ,32);
 } else { ?>

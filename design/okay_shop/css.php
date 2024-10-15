@@ -15,6 +15,7 @@ return [
     (new Css('grid.css')),
     (new Css('okay.css')),
     (new Css('theme.css')),
+    (new Css('main.css')),
     (new Css('select2.min.css')),
     //(new Css('jquery.fancybox.min.css')),
     (new Css('media.css')),

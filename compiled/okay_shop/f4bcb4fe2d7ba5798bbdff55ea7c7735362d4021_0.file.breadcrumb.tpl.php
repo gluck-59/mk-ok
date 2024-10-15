@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2024-10-11 23:33:22
+/* Smarty version 3.1.40, created on 2024-10-15 12:58:07
   from '/Users/gluck/Sites/motokofr.ok/design/okay_shop/html/breadcrumb.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_67096f72ec0780_49221778',
+  'unifunc' => 'content_670e208f502ac3_70224709',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67096f72ec0780_49221778 (Smarty_Internal_Template $_smarty_tpl) {
+function content_670e208f502ac3_70224709 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- Breadcrumb navigation -->
 
 <?php $_smarty_tpl->_assignInScope('level', 1);
@@ -48,7 +48,7 @@ if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['cat']->value) {
 $_smarty_tpl->tpl_vars['cat']->do_else = false;
 $_smarty_tpl->tpl_vars['cat']->iteration++;
 $_smarty_tpl->tpl_vars['cat']->last = $_smarty_tpl->tpl_vars['cat']->iteration === $_smarty_tpl->tpl_vars['cat']->total;
-$__foreach_cat_3_saved = $_smarty_tpl->tpl_vars['cat'];
+$__foreach_cat_4_saved = $_smarty_tpl->tpl_vars['cat'];
 ?>
                     <?php if (!$_smarty_tpl->tpl_vars['cat']->last || $_smarty_tpl->tpl_vars['keyword']->value) {?>
                         <?php if ($_smarty_tpl->tpl_vars['cat']->value->visible) {?>
@@ -73,7 +73,7 @@ $__foreach_cat_3_saved = $_smarty_tpl->tpl_vars['cat'];
                         </li>
                     <?php }?>
                 <?php
-$_smarty_tpl->tpl_vars['cat'] = $__foreach_cat_3_saved;
+$_smarty_tpl->tpl_vars['cat'] = $__foreach_cat_4_saved;
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
             <?php }?>
@@ -147,7 +147,7 @@ if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['cat']->value) {
 $_smarty_tpl->tpl_vars['cat']->do_else = false;
 $_smarty_tpl->tpl_vars['cat']->iteration++;
 $_smarty_tpl->tpl_vars['cat']->last = $_smarty_tpl->tpl_vars['cat']->iteration === $_smarty_tpl->tpl_vars['cat']->total;
-$__foreach_cat_4_saved = $_smarty_tpl->tpl_vars['cat'];
+$__foreach_cat_5_saved = $_smarty_tpl->tpl_vars['cat'];
 ?>
                 <?php if ($_smarty_tpl->tpl_vars['cat']->value->visible) {?>
                     <li itemprop="itemListElement" itemscope
@@ -162,7 +162,7 @@ $__foreach_cat_4_saved = $_smarty_tpl->tpl_vars['cat'];
                     </li>
                 <?php }?>
             <?php
-$_smarty_tpl->tpl_vars['cat'] = $__foreach_cat_4_saved;
+$_smarty_tpl->tpl_vars['cat'] = $__foreach_cat_5_saved;
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
             <li itemprop="itemListElement" itemscope
@@ -274,7 +274,7 @@ if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['cat']->value) {
 $_smarty_tpl->tpl_vars['cat']->do_else = false;
 $_smarty_tpl->tpl_vars['cat']->iteration++;
 $_smarty_tpl->tpl_vars['cat']->last = $_smarty_tpl->tpl_vars['cat']->iteration === $_smarty_tpl->tpl_vars['cat']->total;
-$__foreach_cat_5_saved = $_smarty_tpl->tpl_vars['cat'];
+$__foreach_cat_6_saved = $_smarty_tpl->tpl_vars['cat'];
 ?>
                     <?php if (!$_smarty_tpl->tpl_vars['cat']->last || !empty($_smarty_tpl->tpl_vars['post']->value)) {?>
                         <?php if ($_smarty_tpl->tpl_vars['cat']->value->visible) {?>
@@ -299,7 +299,7 @@ $__foreach_cat_5_saved = $_smarty_tpl->tpl_vars['cat'];
                         </li>
                     <?php }?>
                 <?php
-$_smarty_tpl->tpl_vars['cat'] = $__foreach_cat_5_saved;
+$_smarty_tpl->tpl_vars['cat'] = $__foreach_cat_6_saved;
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
 
@@ -374,7 +374,7 @@ if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['url']->value => 
 $_smarty_tpl->tpl_vars['name']->do_else = false;
 $_smarty_tpl->tpl_vars['name']->iteration++;
 $_smarty_tpl->tpl_vars['name']->last = $_smarty_tpl->tpl_vars['name']->iteration === $_smarty_tpl->tpl_vars['name']->total;
-$__foreach_name_6_saved = $_smarty_tpl->tpl_vars['name'];
+$__foreach_name_7_saved = $_smarty_tpl->tpl_vars['name'];
 ?>
                 <?php if (!$_smarty_tpl->tpl_vars['name']->last) {?>
                     <li itemprop="itemListElement" itemscope
@@ -397,7 +397,7 @@ $__foreach_name_6_saved = $_smarty_tpl->tpl_vars['name'];
                     </li>
                 <?php }?>
             <?php
-$_smarty_tpl->tpl_vars['name'] = $__foreach_name_6_saved;
+$_smarty_tpl->tpl_vars['name'] = $__foreach_name_7_saved;
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
         <?php }?>

@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2024-10-11 23:24:29
+/* Smarty version 3.1.40, created on 2024-10-15 12:23:16
   from '/Users/gluck/Sites/motokofr.ok/design/okay_shop/html/index.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_67096d5deaf894_49871630',
+  'unifunc' => 'content_670e1864387593_26144469',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -32,7 +32,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:pop_up_cart.tpl' => 1,
   ),
 ),false)) {
-function content_67096d5deaf894_49871630 (Smarty_Internal_Template $_smarty_tpl) {
+function content_670e1864387593_26144469 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'/Users/gluck/Sites/motokofr.ok/vendor/smarty/smarty/libs/plugins/modifier.date_format.php','function'=>'smarty_modifier_date_format',),));
 ?>
 <!DOCTYPE html>
@@ -139,7 +139,7 @@ if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['phone']->value) 
 $_smarty_tpl->tpl_vars['phone']->do_else = false;
 $_smarty_tpl->tpl_vars['phone']->index++;
 $_smarty_tpl->tpl_vars['phone']->first = !$_smarty_tpl->tpl_vars['phone']->index;
-$__foreach_phone_2_saved = $_smarty_tpl->tpl_vars['phone'];
+$__foreach_phone_12_saved = $_smarty_tpl->tpl_vars['phone'];
 ?>
                                     <div class="header-contact__item header-contact--phone<?php if ($_smarty_tpl->tpl_vars['phone']->first) {?> header-contact__item--visible<?php }?>">
                                         <a class="d-flex align-items-center header-contact__section" href="tel:<?php echo preg_replace('~[^0-9\+]~','',$_smarty_tpl->tpl_vars['phone']->value);?>
@@ -151,7 +151,7 @@ $__foreach_phone_2_saved = $_smarty_tpl->tpl_vars['phone'];
                                         </a>
                                     </div>
                                 <?php
-$_smarty_tpl->tpl_vars['phone'] = $__foreach_phone_2_saved;
+$_smarty_tpl->tpl_vars['phone'] = $__foreach_phone_12_saved;
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                             <?php }?>
@@ -292,7 +292,7 @@ if ($_from !== null) foreach ($_from as $_smarty_tpl->tpl_vars['phone']->value) 
 $_smarty_tpl->tpl_vars['phone']->do_else = false;
 $_smarty_tpl->tpl_vars['phone']->index++;
 $_smarty_tpl->tpl_vars['phone']->first = !$_smarty_tpl->tpl_vars['phone']->index;
-$__foreach_phone_3_saved = $_smarty_tpl->tpl_vars['phone'];
+$__foreach_phone_13_saved = $_smarty_tpl->tpl_vars['phone'];
 ?>
                                 <div class="footer__contact_item">
                                     <a class="d-flex align-items-start phone" href="tel:<?php echo preg_replace('~[^0-9\+]~','',$_smarty_tpl->tpl_vars['phone']->value);?>
@@ -304,7 +304,7 @@ $__foreach_phone_3_saved = $_smarty_tpl->tpl_vars['phone'];
                                     </a>
                                 </div>
                             <?php
-$_smarty_tpl->tpl_vars['phone'] = $__foreach_phone_3_saved;
+$_smarty_tpl->tpl_vars['phone'] = $__foreach_phone_13_saved;
 }
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
                         <?php }?>

@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2024-10-11 23:26:14
+/* Smarty version 3.1.40, created on 2024-10-15 12:23:16
   from '/Users/gluck/Sites/motokofr.ok/design/okay_shop/html/product_list.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_67096dc6849c39_12229066',
+  'unifunc' => 'content_670e18641c3941_19078880',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -21,7 +21,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'file:svg.tpl' => 1,
   ),
 ),false)) {
-function content_67096dc6849c39_12229066 (Smarty_Internal_Template $_smarty_tpl) {
+function content_670e18641c3941_19078880 (Smarty_Internal_Template $_smarty_tpl) {
 ?><!-- Product preview -->
 <div class="product_preview fn_product">
     <div class="fn_transfer clearfix">

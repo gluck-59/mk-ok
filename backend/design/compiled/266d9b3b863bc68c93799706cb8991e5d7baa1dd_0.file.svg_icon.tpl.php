@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 3.1.40, created on 2024-10-11 23:24:28
+/* Smarty version 3.1.40, created on 2024-10-15 12:22:41
   from '/Users/gluck/Sites/motokofr.ok/backend/design/html/svg_icon.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '3.1.40',
-  'unifunc' => 'content_67096d5ccace78_10937924',
+  'unifunc' => 'content_670e1841812055_11266968',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_67096d5ccace78_10937924 (Smarty_Internal_Template $_smarty_tpl) {
+function content_670e1841812055_11266968 (Smarty_Internal_Template $_smarty_tpl) {
 if (!$_smarty_tpl->tpl_vars['width']->value) {
 $_smarty_tpl->_assignInScope('width', "40");
 }
