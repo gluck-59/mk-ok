@@ -18,10 +18,12 @@
     }
     #fix_logo:before {
         content: "";
-        width: 30px;
+        width: 80px;
         height: 42px;
         display: inline-block;
-        background: url(../images/logo_img.png) no-repeat center center;
+        /*background: url(../images/logo_img.png) no-repeat center center;*/
+        /*background: url(/files/images/logo.png) no-repeat center center;*/
+        background: url(/files/images/favicon.svg) no-repeat center center;
         background-size: cover;
         z-index: 1200;
         background-color: #272b35;

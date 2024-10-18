@@ -106,7 +106,7 @@
     {/literal}
     
     {* Title *}
-    <title>{$meta_title|escape}</title>
+    <title>{$meta_title|escape} | {$settings->site_name|escape}</title>
 
     {* Meta tags *}
     {if !empty($meta_keywords)}

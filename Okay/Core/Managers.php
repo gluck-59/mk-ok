@@ -113,6 +113,7 @@ class Managers
         'SystemAdmin'           => 'settings',
         'SettingsOpenAiAdmin'   => 'settings',
         'CurrencyAdmin'         => 'currency',
+'CurrrencyRatesAdmin'         => 'currency',
         'DeliveriesAdmin'       => 'delivery',
         'DeliveryAdmin'         => 'delivery',
         'PaymentMethodAdmin'    => 'payment',

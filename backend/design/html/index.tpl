@@ -1,3 +1,7 @@
+{*<pre>*}
+{*{$settings|print_r}*}
+{*</pre>*}
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -66,7 +70,9 @@
 
     {$ok_head}
 
-    <link rel="icon" href="design/images/favicon.png" type="image/x-icon" />
+{*    <link rel="icon" href="design/images/favicon.png" type="image/x-icon" />*}
+    <link href="{$rootUrl}/{$config->design_images|escape}{$settings->site_favicon|escape}?v={$settings->site_favicon_version|escape}" type="image/x-icon" rel="icon">
+    <link href="{$rootUrl}/{$config->design_images|escape}{$settings->site_favicon|escape}?v={$settings->site_favicon_version|escape}" type="image/x-icon" rel="shortcut icon">
 
     {if in_array($smarty.get.controller, array("OrdersAdmin", "PostAdmin", "ReportStatsAdmin", "CouponsAdmin", "CategoryStatsAdmin"))}
         {js file="jquery/datepicker/jquery.ui.datepicker-{$manager->lang|escape}.js" admin=true}
@@ -295,7 +301,7 @@
         <a href="javascript:;" id="fix_logo" class="hidden-lg-down"></a>
 
         <a href="index.php?controller={$manager_main_controller}" class="logo_box">
-            <img src="design/images/logo_title.png" alt="OkayCMS"/>
+{*            <img src="design/images/logo_title.png" alt="OkayCMS"/>*}
         </a>
         {if $is_mobile === false && $is_tablet === false}
             <span class="fn_switch_menu menu_switch fn_ajax_action {if $manager->menu_status}fn_active_class{/if} hint-left-middle-t-white-s-small-mobile  hint-anim" data-controller="managers" data-action="menu_status" data-id="{$manager->id}" data-hint="{$btr->catalog_fixation}">

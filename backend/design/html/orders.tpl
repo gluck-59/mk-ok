@@ -210,6 +210,9 @@
     </div>
 
     {*Главная форма страницы*}
+{*    <pre>*}
+{*        {$orders_status|print_r}*}
+{*    </pre>*}
     {if $orders}
         <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -234,7 +237,14 @@
                         {*Параметры элемента*}
                         <div class="okay_list_body">
                             {foreach $orders as $order}
-                            <div class="fn_step-1 fn_row okay_list_body_item " style="border-left: 5px solid #{$order->status_color|escape};">
+{*    <pre style="text-align: left">*}
+{*        {$order->status_id}*}
+{*        {$orders_status|print_r}*}
+{*        {$orders_status[$order->status_id]->name|print_r}*}
+{*    </pre>*}
+
+{*                            <div class="fn_step-1 fn_row okay_list_body_item " style="border-left: 5px solid #{$order->status_color|escape};">*}
+                            <div class="fn_step-1 fn_row okay_list_body_item " style="background-color: #{$order->status_color|escape};">
                                 <div class="okay_list_row">
                                     <div class="okay_list_boding okay_list_check">
                                         <input class="hidden_check" type="checkbox" id="id_{$order->id}" name="check[]" value="{$order->id}"/>
@@ -242,7 +252,8 @@
                                     </div>
 
                                     <div class="okay_list_boding okay_list_order_number">
-                                        <a class="text_600 mb-h" href="{url controller=OrderAdmin id=$order->id return=$smarty.server.REQUEST_URI}">{$btr->orders_order|escape} #{$order->id}</a>
+                                        <a class="text_600 mb-h" href="{url controller=OrderAdmin id=$order->id return=$smarty.server.REQUEST_URI}">{$order->id} <small>{$orders_status[$order->status_id]->name|lower}</small></a>
+
                                         {if $order->last_update}
                                             <span class="tag tag-update fn_history_toggle">{$btr->order_history_changed} {$order->last_update->date|date} {$order->last_update->date|time} <i class="fn_icon_arrow fa fa-angle-down fa-lg m-t-2 "></i></span>
                                         {else}

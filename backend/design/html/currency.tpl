@@ -23,6 +23,7 @@
             <div class="alert__content">
                 <div class="alert__title">{$btr->alert_error|escape}</div>
                 <p>{$btr->coupon_alert_text|escape}</p>
+                <p><strong>НЕ МЕНЯТЬ КОДЫ, ПОРЯДОК, ОБОЗНАЧЕНИЯ ВАЛЮТ</strong></p>
             </div>
         </div>
     </div>
@@ -56,6 +57,7 @@
         {$block}
     </div>
 {/if}
+
 
 {*Главная форма страницы*}
 <div class="boxed fn_toggle_wrap">

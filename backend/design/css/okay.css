@@ -252,7 +252,7 @@ body:not(.top-nav) header.navbar {
 .m-h {margin: 0.5rem 0.5rem !important;}
 .mt-h {margin-top: 0.5rem !important;}
 .mr-h {margin-right: 0.5rem !important;}
-.mb-h {margin-bottom: 0.5rem !important;}
+/*.mb-h {margin-bottom: 0.5rem !important;}*/
 .ml-h {margin-left: 0.5rem !important;}
 .mx-h {margin-right: 0.5rem !important;margin-left: 0.5rem !important;}
 .my-h {margin-top: 0.5rem !important;margin-bottom: 0.5rem !important;}
