@@ -6,7 +6,7 @@ if (in_array($_SERVER['SERVER_ADDR'], ['127.0.0.1', '::1', '0.0.0.0', 'localhost
 }
 
 
-//echo '<pre>';
+echo '<pre>';
 //print_r($ini_array);
 //die();
 
@@ -21,7 +21,7 @@ if (in_array($_SERVER['SERVER_ADDR'], ['127.0.0.1', '::1', '0.0.0.0', 'localhost
         }
     }
 //print_r($currency);
-
+//die();
 
 try {
     $conn = new PDO('mysql:dbname='.$ini_array['db_name'].';host=localhost', $ini_array['db_user'],$ini_array['db_password']);
@@ -38,4 +38,5 @@ catch (PDOException $e) {
 $sql = 'UPDATE ok_currencies SET rate_to = CASE code WHEN "usd" THEN '.$currency["usd"].' WHEN "eur" THEN '.$currency["eur"].' WHEN "rub" THEN 1 END';
 $res = $conn->exec($sql);
 var_dump($res);
+
 
