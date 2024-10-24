@@ -10,19 +10,21 @@ although [PDO](http://php.net/PDO) in general is recommended.
 
 This library requires PHP 5.3.9 or later; we recommend using the latest available version of PHP as a matter of principle. It has no userland dependencies.
 
+> CI ( From year 2022 ) is only testing from 5.4 onwards.
+> Because of the dependency on yoast/phpunit-polyfills which require php >=5.4.
+
 It is installable and autoloadable via Composer as [aura/sqlquery](https://packagist.org/packages/aura/sqlquery).
 
 Alternatively, [download a release](https://github.com/auraphp/Aura.SqlQuery/releases) or clone this repository, then require or include its _autoload.php_ file.
 
 ### Quality
 
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/auraphp/Aura.SqlQuery/badges/quality-score.png?b=2.x)](https://scrutinizer-ci.com/g/auraphp/Aura.SqlQuery/?branch=2.x)
-[![Code Coverage](https://scrutinizer-ci.com/g/auraphp/Aura.SqlQuery/badges/coverage.png?b=2.x)](https://scrutinizer-ci.com/g/auraphp/Aura.SqlQuery/?branch=2.x)
-[![Build Status](https://travis-ci.org/auraphp/Aura.SqlQuery.png?branch=2.x)](https://travis-ci.org/auraphp/Aura.SqlQuery)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/auraphp/Aura.SqlQuery/badges/quality-score.png?b=2.x)](https://scrutinizer-ci.com/g/auraphp/Aura.SqlQuery/)
+[![codecov](https://codecov.io/gh/auraphp/Aura.SqlQuery/branch/2.x/graph/badge.svg?token=UASDouLxyc)](https://codecov.io/gh/auraphp/Aura.SqlQuery)
+[![Continuous Integration](https://github.com/auraphp/Aura.SqlQuery/actions/workflows/continuous-integration.yml/badge.svg?branch=2.x)](https://github.com/auraphp/Aura.SqlQuery/actions/workflows/continuous-integration.yml)
 
-To run the unit tests at the command line, issue `phpunit` at the package root. (This requires [PHPUnit][] to be available as `phpunit`.)
+To run the [PHPUnit](http://phpunit.de/manual/) unit tests at the command line, issue `composer install` and then `vendor/bin/phpunit` at the package root. (This requires [Composer](http://getcomposer.org/) to be available as `composer`.)
 
-[PHPUnit]: http://phpunit.de/manual/
 
 This library attempts to comply with [PSR-1][], [PSR-2][], and [PSR-4][]. If
 you notice compliance oversights, please send a patch via pull request.
@@ -131,44 +133,45 @@ be called in any particular order, and may be called multiple times.
 $select = $query_factory->newSelect();
 
 $select
-    ->distinct()                    // SELECT DISTINCT
-    ->cols(array(                   // select these columns
-        'id',                       // column name
-        'name AS namecol',          // one way of aliasing
-        'col_name' => 'col_alias',  // another way of aliasing
-        'COUNT(foo) AS foo_count'   // embed calculations directly
+    ->distinct()                         // SELECT DISTINCT
+    ->cols(array(                        // select these columns
+        'id',                            // column name
+        'name AS namecol',               // one way of aliasing
+        'col_name' => 'col_alias',       // another way of aliasing
+        'COUNT(foo) AS foo_count'        // embed calculations directly
     ))
-    ->from('foo AS f')              // FROM these tables
-    ->fromSubSelect(                // FROM sub-select AS my_sub
+    ->from('foo AS f')                   // FROM these tables
+    ->fromSubSelect(                     // FROM sub-select AS my_sub
         'SELECT ...',
         'my_sub'
     )
-    ->join(                         // JOIN ...
-        'LEFT',                     // left/inner/natural/etc
-        'doom AS d',                // this table name
-        'foo.id = d.foo_id'         // ON these conditions
+    ->join(                              // JOIN ...
+        'LEFT',                          // left/inner/natural/etc
+        'doom AS d',                     // this table name
+        'foo.id = d.foo_id'              // ON these conditions
     )
-    ->joinSubSelect(                // JOIN to a sub-select
-        'INNER',                    // left/inner/natural/etc
-        'SELECT ...',               // the subselect to join on
-        'subjoin',                  // AS this name
-        'sub.id = foo.id'           // ON these conditions
+    ->joinSubSelect(                     // JOIN to a sub-select
+        'INNER',                         // left/inner/natural/etc
+        'SELECT ...',                    // the subselect to join on
+        'subjoin',                       // AS this name
+        'sub.id = foo.id'                // ON these conditions
     )
-    ->where('bar > :bar')           // AND WHERE these conditions
-    ->where('zim = ?', 'zim_val')   // bind 'zim_val' to the ? placeholder
-    ->orWhere('baz < :baz')         // OR WHERE these conditions
-    ->groupBy(array('dib'))         // GROUP BY these columns
-    ->having('foo = :foo')          // AND HAVING these conditions
-    ->having('bar > ?', 'bar_val')  // bind 'bar_val' to the ? placeholder
-    ->orHaving('baz < :baz')        // OR HAVING these conditions
-    ->orderBy(array('baz'))         // ORDER BY these columns
-    ->limit(10)                     // LIMIT 10
-    ->offset(40)                    // OFFSET 40
-    ->forUpdate()                   // FOR UPDATE
-    ->union()                       // UNION with a followup SELECT
-    ->unionAll()                    // UNION ALL with a followup SELECT
-    ->bindValue('foo', 'foo_val')   // bind one value to a placeholder
-    ->bindValues(array(             // bind these values to named placeholders
+    ->where('bar > :bar')                // AND WHERE these conditions
+    ->where('zim = ?', 'zim_val')        // bind 'zim_val' to the ? placeholder
+    ->where('id IN (?, ?, ?)', 1, 2, 3)  // WHERE id IN(1, 2, 3)
+    ->orWhere('baz < :baz')              // OR WHERE these conditions
+    ->groupBy(array('dib'))              // GROUP BY these columns
+    ->having('foo = :foo')               // AND HAVING these conditions
+    ->having('bar > ?', 'bar_val')       // bind 'bar_val' to the ? placeholder
+    ->orHaving('baz < :baz')             // OR HAVING these conditions
+    ->orderBy(array('baz'))              // ORDER BY these columns
+    ->limit(10)                          // LIMIT 10
+    ->offset(40)                         // OFFSET 40
+    ->forUpdate()                        // FOR UPDATE
+    ->union()                            // UNION with a followup SELECT
+    ->unionAll()                         // UNION ALL with a followup SELECT
+    ->bindValue('foo', 'foo_val')        // bind one value to a placeholder
+    ->bindValues(array(                  // bind these values to named placeholders
         'bar' => 'bar_val',
         'baz' => 'baz_val',
     ));

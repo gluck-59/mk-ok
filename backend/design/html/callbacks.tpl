@@ -124,8 +124,8 @@
                                                 </button>
                                              </div>
                                             <div class="mb-q fn_ajax_block admin_note" data-id="{$callback->id}" data-controller="callback">
-                                                <span class="text_dark text_bold">{$btr->callbacks_admin_notes|escape}</span>
-                                                <span class="fn_an_text">{$callback->admin_notes|escape|nl2br}</span>
+                                                <span class="text_grey text_bold">{$btr->callbacks_admin_notes|escape}</span>
+                                                <span class="fn_an_text text-danger">{$callback->admin_notes|escape|nl2br}</span>
                                                 <div>
                                                     <a href="javascript:;" class="fn_an_edit">{$btr->callbacks_edit|escape}</a>
                                                 </div>

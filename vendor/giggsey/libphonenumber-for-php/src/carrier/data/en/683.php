@@ -10,6 +10,8 @@
  * Do not modify this file directly!
  */
 
-return array (
-  6838 => 'Telecom Niue',
-);
+return  [
+    6835 => 'Telecom Niue',
+    6836 => 'Telecom Niue',
+    6838 => 'Telecom Niue',
+];

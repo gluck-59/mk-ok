@@ -37,6 +37,14 @@
             "Aura\\SqlQuery\\": "src/"
         }
     },
+    "require-dev": {
+        "yoast/phpunit-polyfills": "~1.0"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Aura\\SqlQuery\\": "tests/"
+        }
+    },
     "extra": {
         "aura": {
             "type": "library"

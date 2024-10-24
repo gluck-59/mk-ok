@@ -11,7 +11,7 @@ use Okay\Core\Modules\Modules;
 use Okay\Core\OkayContainer\OkayContainer;
 use Psr\Log\LoggerInterface;
 
-ini_set('display_errors', 'off');
+ini_set('display_errors', 'on');
 
 require_once('vendor/autoload.php');
 

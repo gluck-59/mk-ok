@@ -1,13 +1,13 @@
 {
-    "name": "Motokofr",
+    "name": "vendor-name/project-name",
     "description": "Motokofr.com",
     "homepage": "https://motokofr.com",
     "license": "LGPL-3.0-or-later",
     "type": "project",
     "authors": [
         {
-            "name": "",
-            "email": ""
+            "name": "vendor name",
+            "email": "e@eee.org"
         }
     ],
     "require": {

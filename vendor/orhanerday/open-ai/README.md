@@ -46,10 +46,10 @@ repository useful! <br /><br /> Orhan*
 
 # Comparison With Other Packages
 
-| Project Name           | Required PHP Version | Description                                                                                                                                                | Type (Official / Community) | Support                                                                                                                                |
-|------------------------|----------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------|
-| **orhanerday/open-ai** | **PHP 7.4+**         | **Most downloaded, forked, contributed, huge community supported, and used PHP SDK for OpenAI GPT-3 and DALL-E. It also supports chatGPT-like streaming.** | Community                   | Available, ([Community driven Discord Server](https://discord.gg/xpGUD528XJ) or personal mail [orhann@duck.com](mailto:orhann@duck.com)) |
-| openai-** */c****t      | PHP 8.1+             | OpenAI PHP API client.                                                                                                                                     | Community                   | -                                                                                                                                      |
+| Project Name           | Required PHP Version (Lower is better) | Description                                                                                                                                                | Type (Official / Community) | Support                                                                                                                                  |
+|------------------------|----------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------|
+| **orhanerday/open-ai** | **PHP 7.4+**                           | **Most downloaded, forked, contributed, huge community supported, and used PHP SDK for OpenAI GPT-3 and DALL-E. It also supports chatGPT-like streaming.** | Community                   | Available, ([Community driven Discord Server](https://discord.gg/xpGUD528XJ) or personal mail [orhann@duck.com](mailto:orhann@duck.com)) |
+| openai-** */c****t     | PHP 8.1+                               | OpenAI PHP API client.                                                                                                                                     | Community                   | -                                                                                                                                        |
 
 
 <br />
@@ -91,9 +91,6 @@ appreciate a donation of any amount. You can make a donation through;
 
 * [Buy me a coffee](https://www.buymeacoffee.com/orhane)
 * [Patreon](https://patreon.com/orhann)
-* [Click here for the Coinbase QR](#btc) **Bitcoin** > 34w2DftWGkDqDbYMixkmdWWMLmaP9uTRz7
-* [Click here for the Coinbase QR](#doge) **Dogecoin** > DHiqcZox9M8kYDn7BkesnN6Z2kJ7dYG9Lc
-* [Click here for the Coinbase QR](#eth) **Ethereum** > 0x135E2D5d7AC40c6850f844BA589D68e91a268Ceb
 
 Thank you for considering a donation to Orhanerday/OpenAI PHP SDK. Your support is greatly appreciated and helps to
 ensure that the project can continue to grow and improve.
@@ -123,6 +120,7 @@ Please visit https://orhanerday.gitbook.io/openai-php-api-1/
 - Embeddings
     - [x] [Create embeddings](https://beta.openai.com/docs/api-reference/embeddings/create)
 - Audio
+    - [x] [Text to Speech (TTS)](https://platform.openai.com/docs/guides/text-to-speech)
     - [x] [Create transcription](https://platform.openai.com/docs/api-reference/audio/create)
     - [x] [Create translation](https://platform.openai.com/docs/api-reference/audio/create)
 - Files
@@ -265,6 +263,41 @@ _Run the server with the following command_
 ```shell
 php -S localhost:8000 -t .
 ```
+
+## NVIDIA NIM INTEGRATION
+
+orhanerday/open-ai supports Nvidia NIM. The below example is MixtralAI. Check https://build.nvidia.com/explore/discover for more examples.
+
+```php
+<?php
+
+require __DIR__ . '/vendor/autoload.php'; // remove this line if you use a PHP Framework.
+
+use Orhanerday\OpenAi\OpenAi;
+
+$nvidia_ai_key = getenv('NVIDIA_AI_API_KEY');
+error_log($open_ai_key);
+$open_ai = new OpenAi($nvidia_ai_key);
+$open_ai->setBaseURL("https://integrate.api.nvidia.com");
+$chat = $open_ai->chat([
+    'model' => 'mistralai/mixtral-8x7b-instruct-v0.1',
+    'messages' => [["role" => "user", "content" => "Write a limmerick about the wonders of GPU computing."]],
+    'temperature' => 0.5,
+    'max_tokens' => 1024,
+    'top_p' => 1,
+]);
+
+var_dump($chat);
+echo "<br>";
+echo "<br>";
+echo "<br>";
+// decode response
+$d = json_decode($chat);
+// Get Content
+echo ($d->choices[0]->message->content);
+
+```
+
 
 ## Usage
 
@@ -659,6 +692,20 @@ $engines = $open_ai->engines();
 ```
 
 ## Audio
+
+### Text To Speech (TTS)
+
+```php
+
+$result = $open_ai->tts([
+    "model" => "tts-1", // tts-1-hd
+    "input" => "I'm going to use the stones again. Hey, we'd be going in short-handed, you know",
+    "voice" => "alloy", // echo, fable, onyx, nova, and shimmer
+]);
+
+// Save audio file
+file_put_contents('tts-result.mp3', $result);
+```
 
 ### Create Transcription
 
@@ -1252,18 +1299,6 @@ The MIT License (MIT). Please see [License File](LICENSE.md) for more informatio
 ## Donation
 
 <a href="https://www.buymeacoffee.com/orhane" target="_blank"><img src="https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png" alt="Buy Me A Coffee" style="height: 41px !important;width: 174px !important;box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;-webkit-box-shadow: 0px 3px 2px 0px rgba(190, 190, 190, 0.5) !important;" ></a>
-
-#### btc
-
-![image](https://user-images.githubusercontent.com/22305274/209946578-fc7db433-699c-491f-9f8b-1c962f0b9ea2.png)
-
-#### eth
-
-![image](https://user-images.githubusercontent.com/22305274/209946539-24f247d9-68a1-4f46-a18b-62790d943c99.png)
-
-#### doge
-
-![image](https://user-images.githubusercontent.com/22305274/209946556-164798d0-e404-4b6c-8669-d63e78f24228.png)
 
 ## Star History
 

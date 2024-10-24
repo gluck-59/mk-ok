@@ -137,10 +137,10 @@ class MongoDbStore implements PersistingStoreInterface
      */
     private function skimUri(string $uri): string
     {
-        if (false === $parsedUrl = parse_url($uri)) {
+        if (false === $params = parse_url($uri)) {
             throw new InvalidArgumentException(sprintf('The given MongoDB Connection URI "%s" is invalid.', $uri));
         }
-        $pathDb = ltrim($parsedUrl['path'] ?? '', '/') ?: null;
+        $pathDb = ltrim($params['path'] ?? '', '/') ?: null;
         if (null !== $pathDb) {
             $this->options['database'] = $pathDb;
         }
@@ -351,9 +351,7 @@ class MongoDbStore implements PersistingStoreInterface
     /**
      * Retrieves an unique token for the given key namespaced to this store.
      *
-     * @param Key lock state container
-     *
-     * @return string token
+     * @param Key $key lock state container
      */
     private function getUniqueToken(Key $key): string
     {
