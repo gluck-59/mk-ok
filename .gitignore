@@ -27,7 +27,7 @@ files/thumbs/*
 cache/
 
 /Okay/log/*.log
-config/config.local.php
+config/*
 design/*/lang/local.*.php
 
 !*.keep_folder
