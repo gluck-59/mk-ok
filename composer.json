@@ -8,7 +8,7 @@
         {
             "name": "motokofr motokofr",
             "email": "support@motokofr.com"
-        },
+        }
     ],
     "require": {
         "php": "^7.4 || ^8.0",
