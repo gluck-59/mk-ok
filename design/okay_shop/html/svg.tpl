@@ -623,7 +623,7 @@
     c7.046-7.046,10.571-15.604,10.571-25.693C542.179,300.739,538.658,292.078,531.612,284.655z"/>
 </svg>
 {/if}
-{if $svgId == "okaycms"}
+{if $svgId == "okaycms_OLD"}
 <svg width="18.450455mm" height="25.698715mm" viewBox="0 0 18.450455 25.698715">
     <g transform="translate(-117.77477,-106.50183)">
     <path
@@ -632,6 +632,11 @@
     transform="matrix(0.26458333,0,0,0.26458333,117.77477,106.50183)"/>
     </g>
 </svg>
+{/if}
+{if $svgId == "okaycms"}
+    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18" height="24" viewBox="0 0 18 24">
+        <image x="1" y="7" width="18" height="20" xlink:href="data:img/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAICAYAAADwdn+XAAABjElEQVQokU2Qz2sTURDHP/Pey6bbZCHRtgnNrVhQBAlWEA/SW0Gh557rqZd6ao8F0ZP+AV4EPffmpYLgHyD2IFYJpTkUStuU+oPUZGt2s/te2TWHfIeBme/Ml/ky0t5cZgxFYB1YAV4D74AqsAU8AF4AH8YFZqx+DDwHFkb9W2AVqAPzI24H2AaeAfsZoRCaCO9HwwWtFFk4mwse5mIHKgFxOZe5+2IcrwRmjB3YHVEyqyYUntL86oak5ZgpP2DYz0+gS45+VeN3LIXEIZrgtKg3g8RVjAttMTqL8eoeX/+c8PFzm+UnDe488jnfFWyi8GdSDuZ8olBR/xaxNzQcBAVWOpel7AeG2NE7+senVpvzbogA3jVL5Z7l8riQW3cI/YZhVyl+7AtFIdvTSpXVd1MxOOfyvD1Xo2Frg/7Jf/sZ4t/C1N4wnuymJErwUkfzb0w5tS39dPHmtqmaC1vgVm06CJfuz7+ctP5671CGdiA3oo7uDE7VRulnunX9OKnqyDWaZ3Hrbi9eQ+TNFVM2j+zejaQdAAAAAElFTkSuQmCC"/>
+    </svg>
 {/if}
 {if $svgId == "user_orders_icon"}
 <svg viewBox="0 0 512 512" width="30px" height="30px">
