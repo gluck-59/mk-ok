@@ -765,6 +765,7 @@ $lang['email_order_info'] = 'Подробнее';
 $lang['email_order_payment_method'] = 'Способ оплаты';
 $lang['left_catalog'] = 'Каталог';
 $lang['left_products_title'] = 'Товары';
+$lang['left_ebay_title'] = 'Ebay Parser';
 $lang['left_categories_title'] = 'Категории';
 $lang['left_brands_title'] = 'Бренды';
 $lang['left_features_title'] = 'Свойства';

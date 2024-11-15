@@ -136,6 +136,8 @@ class ProductsAdmin extends IndexAdmin
             $this->design->assign('keyword',    $filter['keyword']);
         }
 
+        $this->design->assign('request',         $_POST);
+
         $this->response->setContent($this->design->fetch('products.tpl'));
     }
 

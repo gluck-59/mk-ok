@@ -16,11 +16,6 @@ use Okay\Core\Entity\Entity;
 use Okay\Core\Languages;
 use Okay\Admin\Helpers\BackendModulesHelper;
 
-ini_set('display_errors', 'off');
-
-//ini_set('display_errors', 'on');
-//error_reporting(E_ALL);
-
 chdir('..');
 
 require_once('vendor/autoload.php');
@@ -33,6 +28,11 @@ $DI = include 'Okay/Core/config/container.php';
  * @var Config $config
  */
 $config = $DI->get(Config::class);
+
+//error_reporting(false);
+//ini_set('display_errors', 'off');
+error_reporting(($config->get('env') == 'local' ? E_ERROR : 0));
+ini_set('display_errors', ($config->get('env') == 'local' ? 'on' : 'off'));
 
 // Засекаем время
 $time_start = microtime(true);
@@ -238,3 +238,23 @@ if (!$request->checkSession()) {
 }
 
 $response->sendContent();
+
+
+function prettyDump($data = null, $die = false, $showStack = false) {
+//	if (in_array($_SERVER['SERVER_ADDR'], ['127.0.0.1', '::1', '0.0.0.0', 'localhost']))
+    {
+        $stack = debug_backtrace(DEBUG_BACKTRACE_IGNORE_ARGS);
+        echo "<pre style='text-align: left;font-size: 14px;font-family: Courier, monospace; background-color: #f4f4f4; width: fit-content; opacity: .9; z-index: 999;position: relative;margin: 0 0 0 300px;'>";
+        if ($showStack) print_r($stack);
+        if ($stack[0]['function'] == 'prettyDump') {
+            echo __FUNCTION__.'() из '.$stack[0]['file'].' line '.$stack[0]['line'].'<br>';
+        } else {
+//			print_r($stack);
+            echo __FUNCTION__.'() из '.($stack[1]['args'][0] ? $stack[1]['args'][0] : $stack[2]['file']).' строка '.$stack[0]['line'].':<br>';
+        }
+        if (is_bool($data) || is_null($data) || empty($data)) var_dump($data);
+        else print_r($data);
+        echo "</pre>";
+        if ($die) die;
+    }
+}

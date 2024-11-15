@@ -13,6 +13,7 @@ class Managers
     /*Список параметров доступа для менеджера сайта*/
     private $permissionsList = [
         'products',
+//        'ebay',
         'categories',
         'brands',
         'features',
@@ -68,6 +69,8 @@ class Managers
     private $controllersPermissions = [
         'ProductsAdmin'       => 'products',
         'ProductAdmin'        => 'products',
+'EbayAdmin'        => 'products',
+//'EbayParserAdmin'        => 'ebayparser',
         'CategoriesAdmin'     => 'categories',
         'CategoryAdmin'       => 'categories',
         'BrandsAdmin'         => 'brands',

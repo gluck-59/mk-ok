@@ -29,6 +29,7 @@ class ManagerMenu
     private $leftMenu = [
         'left_catalog' => [
             'left_products_title'        => ['ProductsAdmin', 'ProductAdmin'],
+//'left_ebay_title'        => ['EbaysAdmin', 'ebayparser'],
             'left_categories_title'      => ['CategoriesAdmin', 'CategoryAdmin'],
             'left_brands_title'          => ['BrandsAdmin', 'BrandAdmin'],
             'left_features_title'        => ['FeaturesAdmin', 'FeatureAdmin'],

@@ -23,6 +23,8 @@
             <div class="alert__content">
                 <div class="alert__title">{$btr->alert_error|escape}</div>
                 <p>{$btr->coupon_alert_text|escape}</p>
+                <p><strong>Валюты обновляются по крону.
+                        <br>Не менять порядок и сами валюты.</strong></p>
             </div>
         </div>
     </div>

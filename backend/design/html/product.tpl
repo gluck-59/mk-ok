@@ -4,6 +4,13 @@
     {$meta_title = $btr->product_new scope=global}
 {/if}
 
+{if $ebayRequest}
+    {assign var='ebayKeyword' value="{$ebayRequest['keyword']}"}
+{/if}
+
+{$ebayRequest|var_dump}
+{$parsedLot|var_dump}
+{$manufacturers|print_r}
 {*Название страницы*}
 <div class="row">
     <div class="col-lg-12 col-md-12">
@@ -26,6 +33,51 @@
         </div>
     </div>
 </div>
+<pre>
+{$product|print_r}
+</pre>
+{*форма ebay parser*}
+{if !$product->id}
+{*    $ebayRequest*}
+
+
+{*    {$parsedLot|var_dump}*}
+    <div class="boxed fn_toggle_wrap">
+        <form method="post" action="index.php?controller=EbayAdmin" name="ebayParser">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="1input-group">
+                        <input name="keyword" id="keyword" class="form-control" value="{$ebayKeyword}" placeholder="Поиск на Ebay">
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    {assign var ='first_category' value=$ebayRequest['category']}
+                    <select class="selectpicker form-control  mb-1 fn_product_category fn_meta_categories" name="category" data-live-search="true">
+                        <option value="0" selected="" disabled="" data-category_name="">В какую категорию парсить</option>
+                        {function name=category_select level=0}
+                            {foreach $categories as $category}
+                                <option value="{$category->id}" {if $category->id == $first_category}selected{/if} data-category_name="{$category->name|escape}">{section sp $level}- {/section}{$category->name|escape}</option>
+                                {category_select categories=$category->subcategories level=$level+1}
+                            {/foreach}
+                        {/function}
+                        {category_select categories=$categories}
+                    </select>
+                </div>
+            </div>
+            <div class="clearfix">&nbsp;</div>
+            <div class="row">
+                <div class="col-md-4">
+                    <span class="input-group-btn">
+                        <button type="submit" class="btn btn_small btn_blue">Найти</button>
+                    </span>
+                </div>
+            </div>
+            <input name="action" id="action" value="ebayParser" placeholder="ebayParser">
+        </form>
+    </div>
+{* /форма ebay parser*}
+{/if}
 
 {*Вывод успешных сообщений*}
 {if $message_success}
@@ -262,7 +314,7 @@
                     </div>
                     <div id="product_cats" class="clearfix">
                         {assign var ='first_category' value=reset($product_categories)}
-                        <select class="selectpicker form-control  mb-1 fn_product_category fn_meta_categories" data-live-search="true">
+                        <select class="selectpicker form-control  1mb-1 fn_product_category fn_meta_categories" data-live-search="true">
                             <option value="0" selected="" disabled="" data-category_name="">{$btr->product_select_category}</option>
                             {function name=category_select level=0}
                                 {foreach $categories as $category}
@@ -287,6 +339,34 @@
                             <input id="" type="checkbox" value="" name="categories[]" data-cat_name="">
                         </div>
                     </div>
+                    <hr>
+<div id="ebayDetails" class="row 1clearfix">
+    <div class="col-md-6">
+        <input name="ebayItemNo" class="variant_input" placeholder="номер лота">
+    </div>
+    <div class="col-md-6">
+        <input name="supplier" class="variant_input" placeholder="поставщик">
+    </div>
+    <div class="col-md-6">
+        <input name="partNumber" class="variant_input" placeholder="партномер">
+    </div>
+
+    <div class="col-md-6">
+
+{assign var ='first_manufacturer' value=$ebayRequest['category']}
+<select class="selectpicker form-control  1mb-1 fn_product_category fn_meta_categories" name="manufacturer_id" data-live-search="true">
+    <option value="0" selected="" disabled="" data-category_name="">Производитель</option>
+    {function name=manufacturer_select level=0}
+        {foreach $manufacturers as $manufacturer}
+            <option value="{$manufacturer->id}" {if $manufacturer->id == $first_manufacturer}selected{/if} data-manufacturer_name="{$manufacturer->name|escape}">{section sp $level}- {/section}{$manufacturer->name|escape}</option>
+            {manufacturer_select manufacturers=$manufacturer->submanufacturers level=$level+1}
+        {/foreach}
+    {/function}
+    {manufacturer_select manufacturers=$manufacturers}
+</select>
+    <input name="manufacturer_id" placeholder="производитель ID">
+    </div>
+</div>
                 </div>
                 {get_design_block block="product_relations"}
             </div>
