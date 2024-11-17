@@ -24,12 +24,14 @@ class EntityFactory
 
     public function get($class)
     {
+//prettyDump($class);
         if (!class_exists($class)) {
-            throw new \Exception("Class \"{$class}\" is not exists");
+            throw new \Exception("Class \"{$class}\" чото не найден");
+//prettyDump($class. " is not exists111");
         }
 
         if (!is_subclass_of($class, Entity::class)) {
-            throw new \Exception("Class \"{$class}\" must be subclass of \"Okay\Core\Entity\Entity\" class");
+            throw new \Exception("Class \"{$class}\" дрлжен быть subclass of \"Okay\Core\Entity\Entity\" class");
         }
 
         if (empty(self::$objects[$class])) {

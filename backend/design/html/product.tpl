@@ -8,9 +8,12 @@
     {assign var='ebayKeyword' value="{$ebayRequest['keyword']}"}
 {/if}
 
-{$ebayRequest|var_dump}
-{$parsedLot|var_dump}
-{$manufacturers|print_r}
+<pre>
+{*{$ebayRequest|print_r}*}
+$parsedLot
+{$parsedLot|print_r}
+{*{$manufacturers|print_r}*}
+</pre>
 {*Название страницы*}
 <div class="row">
     <div class="col-lg-12 col-md-12">
@@ -33,9 +36,8 @@
         </div>
     </div>
 </div>
-<pre>
-{$product|print_r}
-</pre>
+
+
 {*форма ebay parser*}
 {if !$product->id}
 {*    $ebayRequest*}
@@ -53,7 +55,7 @@
 
                 <div class="col-md-4">
                     {assign var ='first_category' value=$ebayRequest['category']}
-                    <select class="selectpicker form-control  mb-1 fn_product_category fn_meta_categories" name="category" data-live-search="true">
+                    <select multiple class="selectpicker form-control  mb-1 fn_product_category fn_meta_categories" name="categories[]" data-live-search="true">
                         <option value="0" selected="" disabled="" data-category_name="">В какую категорию парсить</option>
                         {function name=category_select level=0}
                             {foreach $categories as $category}
@@ -77,6 +79,12 @@
         </form>
     </div>
 {* /форма ebay parser*}
+{/if}
+
+{if $parsedLot->error}
+    <div class="error_box mb-1">
+        {$parsedLot->error|escape}
+    </div>
 {/if}
 
 {*Вывод успешных сообщений*}
@@ -342,29 +350,29 @@
                     <hr>
 <div id="ebayDetails" class="row 1clearfix">
     <div class="col-md-6">
-        <input name="ebayItemNo" class="variant_input" placeholder="номер лота">
+        <input name="ebayItemNo" class="variant_input" value="{$product->ebayItemNo}" placeholder="номер лота">
     </div>
     <div class="col-md-6">
-        <input name="supplier" class="variant_input" placeholder="поставщик">
+        <input name="supplier" class="variant_input" value="{$product->supplier}" placeholder="поставщик">
     </div>
     <div class="col-md-6">
-        <input name="partNumber" class="variant_input" placeholder="партномер">
+        <input name="partNumber" class="variant_input" value="{$product->partNumber}" placeholder="партномер">
     </div>
 
     <div class="col-md-6">
-
-{assign var ='first_manufacturer' value=$ebayRequest['category']}
-<select class="selectpicker form-control  1mb-1 fn_product_category fn_meta_categories" name="manufacturer_id" data-live-search="true">
-    <option value="0" selected="" disabled="" data-category_name="">Производитель</option>
-    {function name=manufacturer_select level=0}
-        {foreach $manufacturers as $manufacturer}
-            <option value="{$manufacturer->id}" {if $manufacturer->id == $first_manufacturer}selected{/if} data-manufacturer_name="{$manufacturer->name|escape}">{section sp $level}- {/section}{$manufacturer->name|escape}</option>
-            {manufacturer_select manufacturers=$manufacturer->submanufacturers level=$level+1}
-        {/foreach}
-    {/function}
-    {manufacturer_select manufacturers=$manufacturers}
-</select>
-    <input name="manufacturer_id" placeholder="производитель ID">
+        производителя пока пишем в описание товара
+        {*{assign var ='first_manufacturer' value=$manufacturers}*}
+        {*<select class="selectpicker form-control  1mb-1 fn_product_category fn_meta_categories" name="manufacturer_id" data-live-search="true">*}
+        {*    <option value="0" selected="" disabled="" data-category_name="">Производитель</option>*}
+        {*    {function name=manufacturer_select level=0}*}
+        {*        {foreach $manufacturers as $manufacturer}*}
+        {*            <option value="{$manufacturer->id}" {if $manufacturer->id == $first_manufacturer}selected{/if} data-manufacturer_name="{$manufacturer->name|escape}">{section sp $level}- {/section}{$manufacturer->name|escape}</option>*}
+        {*            {manufacturer_select manufacturers=$manufacturer->submanufacturers level=$level+1}*}
+        {*        {/foreach}*}
+        {*    {/function}*}
+        {*    {manufacturer_select manufacturers=$manufacturers}*}
+        {*</select>*}
+        {*<input name="manufacturer_id" placeholder="производитель ID">*}
     </div>
 </div>
                 </div>

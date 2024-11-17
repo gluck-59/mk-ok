@@ -8,6 +8,7 @@ use Okay\Entities\AuthorsEntity;
 use Okay\Entities\BlogCategoriesEntity;
 use Okay\Entities\BlogEntity;
 use Okay\Entities\BrandsEntity;
+use Okay\Entities\ManufacturersEntity;
 use Okay\Entities\CommentsEntity;
 use Okay\Entities\FeaturesAliasesEntity;
 use Okay\Entities\FeaturesValuesAliasesValuesEntity;
@@ -109,6 +110,17 @@ class DataCleaner
 
         return ExtenderFacade::execute(__METHOD__, null, func_get_args());
     }
+
+public function clearManufacturersData()
+{
+    $sql = $this->queryFactory->newSqlQuery()->setStatement("UPDATE ".ProductsEntity::getTable()." SET `manufacturer_id`=0");
+    $this->db->query($sql);
+
+    $this->truncateTable(ManufacturersEntity::getTable());
+    $this->truncateTable(ManufacturersEntity::getLangTable());
+
+    return ExtenderFacade::execute(__METHOD__, null, func_get_args());
+}
 
     public function clearProductVariantData()
     {
@@ -214,6 +226,17 @@ class DataCleaner
 
         return ExtenderFacade::execute(__METHOD__, null, func_get_args());
     }
+
+/**
+ * Удаляем картинки производителей
+ */
+public function clearManufacturerImages()
+{
+    $this->clearFilesDirs($this->config->get('original_manufacturers_dir'));
+    $this->clearFilesDirs($this->config->get('resized_manufacturers_dir'));
+
+    return ExtenderFacade::execute(__METHOD__, null, func_get_args());
+}
 
     /**
      * Удаляем картинки связанные с блогом

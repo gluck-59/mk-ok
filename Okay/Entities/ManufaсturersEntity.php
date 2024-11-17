@@ -9,7 +9,7 @@ use Okay\Core\Modules\Extender\ExtenderFacade;
 use Okay\Core\Translit;
 use Okay\Core\Image;
 
-class ManufaсturersEntity extends Entity
+class ManufacturersEntity extends Entity
 {
     
     protected static $fields = [
@@ -75,10 +75,10 @@ class ManufaсturersEntity extends Entity
             ->bindValue('categories_ids', (array)$categoryId);
     }
     
-    protected function filter__selected_brands($brandsIds)
+    protected function filter__selected_manufacturers($manufacturersIds)
     {
-        $this->select->orWhere('m.id IN (:selected_manufaсturers)')
-            ->bindValue('selected_brands', (array)$brandsIds);
+        $this->select->orWhere('m.id IN (:selected_manufacturers)')
+            ->bindValue('selected_manufacturers', (array)$manufacturersIds);
     }
 
     protected function filter__other_filter($filters)
@@ -115,13 +115,13 @@ class ManufaсturersEntity extends Entity
         $productsSelect
             ->resetCols()
             ->resetOrderBy()
-            ->cols([ProductsEntity::getTableAlias().'.brand_id']);
+            ->cols([ProductsEntity::getTableAlias().'.manufacturer_id']);
 
         $this->select->joinSubSelect(
             'INNER',
             $productsSelect,
             __FUNCTION__.'__'.ProductsEntity::getTableAlias(),
-            __FUNCTION__.'__'.ProductsEntity::getTableAlias().'.brand_id = b.id');
+            __FUNCTION__.'__'.ProductsEntity::getTableAlias().'.manufacturers_id = m.id');
     }
     
     protected function filter__features($features, $filter)
@@ -164,28 +164,28 @@ class ManufaсturersEntity extends Entity
         $this->select->where('p.id IN (?)', $subQuery);
     }
 
-    public function add($brand)
+    public function add($manufacturer)
     {
         /** @var Translit $translit */
         $translit = $this->serviceLocator->getService(Translit::class);
         
-        $brand = (object)$brand;
-        if (empty($brand->url)) {
-            $brand->url = $translit->translit($brand->name);
-            $brand->url = str_replace('.', '', $brand->url);
+        $manufacturer = (object)$manufacturer;
+        if (empty($manufacturer->url)) {
+            $manufacturer->url = $translit->translit($manufacturer->name);
+            $manufacturer->url = str_replace('.', '', $manufacturer->url);
         }
 
-        $brand->url = preg_replace("/[\s]+/ui", '', $brand->url);
+        $manufacturer->url = preg_replace("/[\s]+/ui", '', $manufacturer->url);
 
-        while ($this->get((string)$brand->url)) {
-            if(preg_match('/(.+)([0-9]+)$/', $brand->url, $parts)) {
-                $brand->url = $parts[1].''.($parts[2]+1);
+        while ($this->get((string)$manufacturer->url)) {
+            if(preg_match('/(.+)([0-9]+)$/', $manufacturer->url, $parts)) {
+                $manufacturer->url = $parts[1].''.($parts[2]+1);
             } else {
-                $brand->url = $brand->url.'2';
+                $manufacturer->url = $manufacturer->url.'2';
             }
         }
 
-        return parent::add($brand);
+        return parent::add($manufacturer);
     }
 
     public function delete($ids)
@@ -202,67 +202,67 @@ class ManufaсturersEntity extends Entity
                 $id,
                 'image',
                 self::class,
-                $this->config->original_brands_dir,
-                $this->config->resized_brands_dir
+                $this->config->original_manufacturers_dir,
+                $this->config->resized_manufacturers_dir
             );
         }
 
         $update = $this->queryFactory->newUpdate();
         $update->table(ProductsEntity::getTable())
-            ->set('brand_id', 0)
-            ->where('brand_id IN (:brands_ids)')
-            ->bindValue('brands_ids', $ids);
+            ->set('manufacturer_id', 0)
+            ->where('manufacturer_id IN (:manufacturers_ids)')
+            ->bindValue('manufacturers_ids', $ids);
         $this->db->query($update);
 
         parent::delete($ids);
     }
 
-    public function duplicate($brandId)
+    public function duplicate($manufacturerId)
     {
-        $brand = $this->findOne(['id' => $brandId]);
+        $manufacturer = $this->findOne(['id' => $manufacturerId]);
 
         //Запоминаем текущую позицию, на нее станет новая запись
-        $position = $brand->position;
+        $position = $manufacturer->position;
 
-        $newBrand = new \stdClass();
+        $newManufacturer = new \stdClass();
 
         $fields = array_merge($this->getFields(), $this->getLangFields());
 
         foreach ($fields as $field) {
-            if (property_exists($brand, $field)) {
-                $newBrand->$field = $brand->$field;
+            if (property_exists($manufacturer, $field)) {
+                $newManufacturer->$field = $manufacturer->$field;
             }
         }
 
-        $newBrand->id = null;
-        $newBrand->url = '';
+        $newManufacturer->id = null;
+        $newManufacturer->url = '';
 
         //Добавляем новую запись в бд
-        $newBrandId = $this->add($newBrand);
+        $newManufacturerId = $this->add($newManufacturer);
 
         // Сдвигаем страницы вперед и вставляем копию на соседнюю позицию
         $update = $this->queryFactory->newUpdate();
-        $update->table('__brands')
+        $update->table('manufacturers')
             ->set('position', 'position+1')
             ->where('position>=:position')
-            ->bindValue('position', $brand->position);
+            ->bindValue('position', $manufacturer->position);
         $this->db->query($update);
 
         $update = $this->queryFactory->newUpdate();
-        $update->table('__brands')
+        $update->table('manufacturer')
             ->set('position', ':position')
             ->where('id=:id')
             ->bindValues([
                 'position' => $position,
-                'id' => $newBrandId,
+                'id' => $newManufacturerId,
             ]);
         $this->db->query($update);
 
-        $this->multiDuplicateBrand($brandId, $newBrandId);
-        return $newBrandId;
+        $this->multiDuplicateManufacturer($manufacturerId, $newManufacturerId);
+        return $newManufacturerId;
     }
 
-    private function multiDuplicateBrand($brandId, $newBrandId) {
+    private function multiDuplicateManufacturer($manufacturerId, $newManufacturerId) {
         $langId = $this->lang->getLangId();
         if (!empty($langId)) {
 
@@ -270,19 +270,19 @@ class ManufaсturersEntity extends Entity
             $langEntity = $this->entity->get(LanguagesEntity::class);
 
             $languages = $langEntity->find();
-            $brandLangFields = $this->getLangFields();
+            $manufacturerLangFields = $this->getLangFields();
 
             foreach ($languages as $language) {
                 if ($language->id != $langId) {
                     $this->lang->setLangId($language->id);
 
-                    if (!empty($brandLangFields)) {
-                        $sourceBrand = $this->findOne(['id' => $brandId]);
-                        $destinationBrand = new \stdClass();
-                        foreach($brandLangFields as $field) {
-                            $destinationBrand->{$field} = $sourceBrand->{$field};
+                    if (!empty($manufacturerLangFields)) {
+                        $sourceManufacturer = $this->findOne(['id' => $manufacturerId]);
+                        $destinationManufacturer = new \stdClass();
+                        foreach($manufacturerLangFields as $field) {
+                            $destinationManufacturer->{$field} = $sourceManufacturer->{$field};
                         }
-                        $this->update($newBrandId, $destinationBrand);
+                        $this->update($newManufacturerId, $destinationManufacturer);
                     }
 
                     $this->lang->setLangId($langId);
@@ -301,12 +301,12 @@ class ManufaсturersEntity extends Entity
         $productsSelect
             ->resetCols()
             ->resetOrderBy()
-            ->cols([ProductsEntity::getTableAlias().'.brand_id']);
+            ->cols([ProductsEntity::getTableAlias().'.manufacturer_id']);
 
         $this->select->joinSubSelect(
             'INNER',
             $productsSelect,
             __FUNCTION__.'__'.ProductsEntity::getTableAlias(),
-            __FUNCTION__.'__'.ProductsEntity::getTableAlias().'.brand_id = b.id');
+            __FUNCTION__.'__'.ProductsEntity::getTableAlias().'.manufacturer_id = b.id');
     }
 }

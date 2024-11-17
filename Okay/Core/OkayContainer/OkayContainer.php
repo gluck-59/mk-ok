@@ -61,7 +61,7 @@ class OkayContainer implements ContainerInterface
      */
     public function get(string $id)
     {
-        
+
         if (!$this->has($id)) {
             throw new ServiceNotFoundException('Service not found: '.$id);
         }
@@ -145,7 +145,10 @@ class OkayContainer implements ContainerInterface
     private function createService($name)
     {
         $entry = &$this->services[$name];
-
+if (stripos($name, 'manufacturer')) {
+    prettyDump($name);
+    prettyDump($entry);
+}
         if (!is_array($entry) || !isset($entry['class'])) {
             throw new ContainerException($name.' service entry must be an array containing a \'class\' key');
         } elseif (!class_exists($entry['class'])) {

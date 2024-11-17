@@ -8,6 +8,7 @@ use Okay\Core\EntityFactory;
 use Okay\Core\Routes\ProductRoute;
 use Okay\Core\Settings;
 use Okay\Entities\BrandsEntity;
+//use Okay\Entities\ManufacturersEntity;
 use Okay\Entities\CategoriesEntity;
 use Okay\Entities\ProductsEntity;
 use Okay\Entities\VariantsEntity;

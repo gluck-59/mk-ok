@@ -39,6 +39,7 @@ use Okay\Admin\Helpers\BackendProductsHelper;
 use Okay\Admin\Helpers\BackendVariantsHelper;
 use Okay\Admin\Helpers\BackendFeaturesHelper;
 use Okay\Admin\Helpers\BackendBrandsHelper;
+use Okay\Admin\Helpers\BackendManufacturersHelper;
 use Okay\Admin\Helpers\BackendCategoriesHelper;
 use Okay\Admin\Helpers\BackendSpecialImagesHelper;
 use Okay\Admin\Helpers\BackendCurrenciesHelper;
@@ -47,6 +48,7 @@ use Okay\Core\TemplateConfig\FrontTemplateConfig;
 use Okay\Helpers\AuthorsHelper;
 use Okay\Helpers\BlogHelper;
 use Okay\Helpers\BrandsHelper;
+use Okay\Helpers\ManufacturersHelper;
 use Okay\Helpers\CanonicalHelper;
 use Okay\Helpers\CartHelper;
 use Okay\Helpers\CategoriesHelper;
@@ -213,6 +215,17 @@ return [
             new SR(Request::class),
         ]
     ],
+BackendManufacturersHelper::class => [
+    'class' => BackendManufacturersHelper::class,
+    'arguments' => [
+        new SR(EntityFactory::class),
+        new SR(Config::class),
+        new SR(Image::class),
+        new SR(QueryFactory::class),
+        new SR(Database::class),
+        new SR(Request::class),
+    ]
+],
     BackendCategoryStatsHelper::class => [
         'class' => BackendCategoryStatsHelper::class,
         'arguments' => [
@@ -562,6 +575,16 @@ return [
             new SR(Design::class),
         ]
     ],
+ManufacturersHelper::class => [
+    'class' => ManufacturersHelper::class,
+    'arguments' => [
+        new SR(EntityFactory::class),
+        new SR(CatalogHelper::class),
+        new SR(Settings::class),
+        new SR(FilterHelper::class),
+        new SR(Design::class),
+    ]
+],
     ResizeHelper::class => [
         'class' => ResizeHelper::class,
         'arguments' => [

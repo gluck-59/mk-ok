@@ -354,6 +354,9 @@
                                             </span>
                                     {/if}
                                 </a>
+{*<pre>*}
+{*    {$items|print_r}*}
+{*</pre>*}
                                 {if $items|count > 1}
                                     <ul class="fn_submenu_toggle submenu fn_sort_menu_item">
                                         {foreach $items as $title=>$item}

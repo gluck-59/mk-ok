@@ -32,6 +32,7 @@ class ManagerMenu
 //'left_ebay_title'        => ['EbaysAdmin', 'ebayparser'],
             'left_categories_title'      => ['CategoriesAdmin', 'CategoryAdmin'],
             'left_brands_title'          => ['BrandsAdmin', 'BrandAdmin'],
+'left_manufacturers_title'          => ['ManufacturersAdmin', 'ManufacturerAdmin'],
             'left_features_title'        => ['FeaturesAdmin', 'FeatureAdmin'],
             'left_import_title'          => ['ImportAdmin'],
             'left_export_title'          => ['ExportAdmin'],

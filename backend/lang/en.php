@@ -768,6 +768,7 @@ $lang['left_catalog'] = 'Catalog';
 $lang['left_products_title'] = 'Products';
 $lang['left_categories_title'] = 'Categories';
 $lang['left_brands_title'] = 'Brands';
+$lang['left_manufacturers_title'] = 'Manufacturers';
 $lang['left_features_title'] = 'Features';;
 $lang['left_orders'] = 'Orders';
 $lang['left_orders_title'] = 'Orders';
