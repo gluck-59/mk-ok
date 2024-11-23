@@ -203,6 +203,7 @@ class BackendImportHelper
 
 echo PHP_EOL.'$productId: ';
 print_r($productId);
+print_r($productsEntity->findOne(['id' => $productId]));
 echo PHP_EOL.PHP_EOL;
 
         if(!empty($variantId) && !empty($productId)) {

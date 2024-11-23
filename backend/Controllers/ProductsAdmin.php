@@ -112,6 +112,7 @@ class ProductsAdmin extends IndexAdmin
         }
 
         $products   = $backendProductsHelper->findProductsForProductsAdmin($filter, $backendProductsHelper->getProductsSortName());
+prettyDump($products);
         $currencies = $backendCurrenciesHelper->findAllCurrencies();
 
         $this->design->assign('category_id',    $categoryId);
