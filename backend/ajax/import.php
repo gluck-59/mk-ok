@@ -87,7 +87,7 @@ file_put_contents(__DIR__.'/../../imp.log', print_r($line, 1).PHP_EOL, FILE_APPE
     }
 }
 
-file_put_contents(__DIR__.'/../../imp.log', print_r($importedItem, 1).PHP_EOL.PHP_EOL.PHP_EOL, FILE_APPEND);
+file_put_contents(__DIR__.'/../../imp.log', print_r($importedItems, 1).PHP_EOL.PHP_EOL.PHP_EOL, FILE_APPEND);
 
 // Запоминаем на каком месте закончили импорт
 $from = ftell($f);
