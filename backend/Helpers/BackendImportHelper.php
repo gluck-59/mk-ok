@@ -185,6 +185,10 @@ class BackendImportHelper
             }
         }
 
+
+var_dump(!empty($variantId));
+var_dump(!empty($product));
+die();
         if(!empty($variantId) && !empty($productId)) {
             // Нужно вернуть обновленный товар
             $importedItem->variant = $variantsEntity->findOne(['id' => $variantId]);
@@ -243,7 +247,7 @@ class BackendImportHelper
         }
         
         return ExtenderFacade::execute(__METHOD__, false, func_get_args());
-    }
+    } // /importItem
 
     /**
      * Метод нужен чтобы модули могли вносить свои изменения после импорта

@@ -107,10 +107,8 @@ for($k=0; !feof($f) && $k < $productsCount; $k++) {
 
     // Импортируем этот товар
     if($importedItem = $importHelper->importItem($product)) {
-echo PHP_EOL.__LINE__.PHP_EOL;
         $importedItems[] = $importedItem;
     }
-echo PHP_EOL.__LINE__.PHP_EOL;
 }
 
 file_put_contents(__DIR__.'/../../imp.log', print_r($importedItems, 1).PHP_EOL.PHP_EOL.PHP_EOL, FILE_APPEND);
