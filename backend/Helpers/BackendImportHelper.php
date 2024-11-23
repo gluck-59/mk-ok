@@ -185,14 +185,18 @@ class BackendImportHelper
             }
         }
 
-
-var_dump(!empty($variantId));
-var_dump(!empty($product));
-die();
+// везде оба true
+//var_dump(!empty($variantId));
+//var_dump(!empty($product));
+//die();
         if(!empty($variantId) && !empty($productId)) {
             // Нужно вернуть обновленный товар
             $importedItem->variant = $variantsEntity->findOne(['id' => $variantId]);
             $importedItem->product = $productsEntity->findOne(['id' => $productId]);
+
+echo PHP_EOL.'$importedItem->product: ';
+print_r($importedItem->product);
+echo PHP_EOL.PHP_EOL;
 
             // Добавляем категории к товару
             $select = $this->queryFactory->newSelect();
