@@ -68,7 +68,7 @@ for($k=0; !feof($f) && $k < $productsCount; $k++) {
     // Читаем строку
     $line = fgetcsv($f, 0, $import->getColumnDelimiter());
 
-file_put_contents(__DIR__.'/../../imp.log', print_r($line, 1).PHP_EOL, FILE_APPEND);
+file_put_contents(__DIR__.'/../../imp.log', __LINE__.': '.print_r($line, 1).PHP_EOL, FILE_APPEND);
 
     $product = null;
     if(is_array($line) && !empty($line)) {
@@ -77,6 +77,19 @@ file_put_contents(__DIR__.'/../../imp.log', print_r($line, 1).PHP_EOL, FILE_APPE
         foreach ($fields as $csv=>$inner) {
             // Создаем массив item[название_колонки]=значение
             if (isset($line[$i]) && !empty($inner)) {
+//echo '$product:'.PHP_EOL;
+//print_r($product);
+
+echo PHP_EOL.'$inner:'.PHP_EOL;
+print_r($inner);
+
+echo PHP_EOL.'$line[i]:'.PHP_EOL;
+print_r($line[$i]);
+
+echo PHP_EOL.'====================='.PHP_EOL;
+
+//file_put_contents(__DIR__.'/../../imp.log', __LINE__.': '.print_r($product, 1).PHP_EOL, FILE_APPEND);
+//file_put_contents(__DIR__.'/../../imp.log', __LINE__.': '.print_r($inner, 1).PHP_EOL, FILE_APPEND);
                 $product[$inner] = $line[$i];
             }
             $i++;
