@@ -104,9 +104,11 @@ class BackendImportHelper
 
         // Подготовим вариант товара
         $variant = $this->parseVariantData($item);
-echo PHP_EOL.'$variant: '.PHP_EOL;
-print_r($variant);
-echo PHP_EOL.PHP_EOL;
+
+// это есть везде
+//echo PHP_EOL.'$variant: '.PHP_EOL;
+//print_r($variant);
+//echo PHP_EOL.PHP_EOL;
 
 
         // Сразу позволим модулям определить товар по своей логике
@@ -115,9 +117,10 @@ echo PHP_EOL.PHP_EOL;
         // Если же товар не был найден модулями, ищем по стандартной логике. Так же этот метод можно расширить экстендером
         $importItemData = $this->searchImportProductData($product, $variant, $importItemData);
 
-echo PHP_EOL.'$importItemData: '.PHP_EOL;
-print_r($importItemData);
-echo PHP_EOL.PHP_EOL;
+// это есть везде
+//echo PHP_EOL.'$importItemData: '.PHP_EOL;
+//print_r($importItemData);
+//echo PHP_EOL.PHP_EOL;
 
         if (!empty($importItemData['productId'])) {
             $productId = (int)$importItemData['productId'];
@@ -203,8 +206,8 @@ echo PHP_EOL.PHP_EOL;
             $importedItem->product = $productsEntity->findOne(['id' => $productId]);
 // здесь $importedItem->product пустой
 
-echo PHP_EOL.'$importedItem->product: ';
-print_r($importedItem->product);
+echo PHP_EOL.'$importedItem: ';
+print_r($importedItem);
 echo PHP_EOL.PHP_EOL;
 //
             // Добавляем категории к товару
