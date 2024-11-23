@@ -464,7 +464,7 @@ class BackendImportHelper
                         $imageFilename = $this->imageCore->correctFilename($imageFilename);
                         $image = rawurlencode($image);
                     }
-file_put_contents(__DIR__.'/../../imp.log', print_r($image, 1).PHP_EOL, FILE_APPEND);
+//file_put_contents(__DIR__.'/../../imp.log', print_r($image, 1).PHP_EOL, FILE_APPEND);
                     // Добавляем изображение только если такого еще нет в этом товаре
                     $select = $this->queryFactory->newSelect();
                     $result = $select->cols(['id', 'filename'])

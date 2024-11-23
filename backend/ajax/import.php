@@ -66,6 +66,8 @@ for($k=0; !feof($f) && $k < $productsCount; $k++) {
     // Читаем строку
     $line = fgetcsv($f, 0, $import->getColumnDelimiter());
 
+file_put_contents(__DIR__.'/../../imp.log', print_r($line, 1).PHP_EOL, FILE_APPEND);
+
     $product = null;
     if(is_array($line) && !empty($line)) {
         $i = 0;
@@ -84,6 +86,8 @@ for($k=0; !feof($f) && $k < $productsCount; $k++) {
         $importedItems[] = $importedItem;
     }
 }
+
+file_put_contents(__DIR__.'/../../imp.log', print_r($importedItem, 1).PHP_EOL.PHP_EOL.PHP_EOL, FILE_APPEND);
 
 // Запоминаем на каком месте закончили импорт
 $from = ftell($f);

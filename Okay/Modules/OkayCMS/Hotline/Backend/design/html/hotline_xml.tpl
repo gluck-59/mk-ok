@@ -317,7 +317,7 @@
                                                         </div>
                                                     </div>
 
-                                                    {* Бренды для выгрузки *}
+                                                    {* Марки для выгрузки *}
                                                     <div class="col-lg-6 col-md-6">
                                                         <div class="boxed match fn_toggle_wrap">
                                                             <div class="heading_box">

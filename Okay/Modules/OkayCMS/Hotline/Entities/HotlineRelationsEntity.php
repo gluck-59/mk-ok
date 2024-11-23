@@ -52,7 +52,7 @@ class HotlineRelationsEntity extends Entity
     }
 
     /**
-     * Удаляем все бренды
+     * Удаляем все Марки
      */
     public function removeAllBrands()
     {
@@ -66,7 +66,7 @@ class HotlineRelationsEntity extends Entity
 
     /**
      * @param string|integer $feedId
-     * Удаляем все бренды закреплённые за определенным фидом
+     * Удаляем все Марки закреплённые за определенным фидом
      */
     public function removeAllBrandsByFeedId($feedId)
     {

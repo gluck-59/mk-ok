@@ -121,7 +121,7 @@
             {include file='svg_icon.tpl' svgId='video_icon'}
         </a>
 
-    {*Бренды*}
+    {*Марки*}
     {elseif $smarty.get.controller == 'BrandsAdmin' || $smarty.get.controller == 'BrandsAdmin'}
         <a class="btn_admin btn_vid_help hint-bottom-middle-t-info-s-small-mobile  hint-anim" data-hint="{$btr->video_help}" target="_blank" href="https://youtu.be/-vxM0bR8yHg">
             {include file='svg_icon.tpl' svgId='video_icon'}

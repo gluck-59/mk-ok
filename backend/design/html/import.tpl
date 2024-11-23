@@ -343,7 +343,8 @@
                         }
                     },
                     error: function(xhr, status, errorThrown) {
-                        alert(errorThrown+'\n'+xhr.responseText);
+                        alert('ошибка в консоли');
+                        console.error(errorThrown+'\n'+xhr.responseText);
                     }
             });
 

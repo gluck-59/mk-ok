@@ -169,7 +169,7 @@ class BackendHotlineHelper
 
     /**
      * @param string|integer $feedId
-     * Закрепяем все бренды за фидом
+     * Закрепяем все Марки за фидом
      */
     public function addAllBrands($feedId)
     {
