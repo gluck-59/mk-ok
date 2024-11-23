@@ -901,6 +901,7 @@ $lang['import_field_annotation'] = 'Annotation';
 $lang['import_field_description'] = 'Description';
 $lang['import_field_images'] = 'Product images';
 $lang['import_field_url'] = 'URL';
+$lang['import_field_ebayItemNo'] = 'Ebay Item №';
 $lang['import_duplicated'] = 'Exclude duplicate columns from the CSV file';
 $lang['import_duplicated_pairs'] = 'The CSV file must contain only one column from each list below';
 $lang['import_skip_all'] = 'Skip all';

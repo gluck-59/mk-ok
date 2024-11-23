@@ -6,11 +6,13 @@ use DiDom\Document;
 use libphonenumber\ValidationResult;
 use Okay\Admin\Helpers\BackendCategoriesHelper;
 use Okay\Admin\Helpers\BackendFeaturesHelper;
+use Okay\Admin\Helpers\BackendImportHelper;
 use Okay\Admin\Helpers\BackendProductsHelper;
 use Okay\Admin\Helpers\BackendSpecialImagesHelper;
 use Okay\Admin\Helpers\BackendValidateHelper;
 use Okay\Admin\Helpers\BackendVariantsHelper;
 use Okay\Admin\Requests\BackendProductsRequest;
+use Okay\Core\Import;
 use Okay\Entities\BrandsEntity;
 //use Okay\Entities\ManufacturersEntity;
 use Okay\Entities\CurrenciesEntity;
@@ -19,6 +21,7 @@ use Okay\Entities\RouterCacheEntity;
 
 class EbayAdmin extends IndexAdmin
 {
+    private $userAgent;
     private $parsedLot;
     private $banlist = array();
     private $sellerMinPositive = 97;
@@ -59,19 +62,28 @@ class EbayAdmin extends IndexAdmin
 
 //        Document                    $document
     ) {
+//$str = 'Cobra / Swept ? Front. Floorboard, ;Kits: 06-4160" 08-3644 BLV64160 Chrome  Black';
+//prettyDump($str);
+//echo '<br>';
+//prettyDump(preg_replace('/[ .,;:!?\/\'\"\`]/', '-', $str));
+//
+//die();
+
         if ($this->request->method('post')) {
             $this->parsedLot = self::parse($_POST);
-
             $this->design->assign('ebayRequest', $_POST); // $this->request->post('ПОЛЕ') может брать только с ПОЛЕ
-            $this->design->assign('parsedLot', $this->parsedLot);
+            $this->design->assign('product', $this->parsedLot);
         }
 
+        $this->design->assign('ebayMotorListUrl', self::EBAY_MOTOR_LIST_URL);
         $this->design->assign('categories', $backendCategoriesHelper->getCategoriesTree());
         $this->response->setContent('product.tpl');
     }
 
 
     function parse($request, $findpair = 0) {
+//prettyDump('$request');
+//prettyDump($request);
         if (!$request['keyword']) {
             $this->parsedLot->error = 'В запросе для Ebay нет keyword';
             return $this->parsedLot;
@@ -83,11 +95,11 @@ class EbayAdmin extends IndexAdmin
         require_once __DIR__.'/../../thirdParty/DiDom/Node.php';
         require_once __DIR__.'/../../thirdParty/DiDom/Element.php';
 
+        $this->userAgent = self::getRandomUseragent();
         $curl = self::request($request, 1);
         if (!empty($this->debug['errors'])) {
             return $curl;
         }
-//prettyDump($request);
 //prettyDump($curl, 1);
         $document = new Document($curl['response']);
         // https://github.com/Imangazaliev/DiDOM/blob/master/README-RU.md
@@ -131,10 +143,13 @@ class EbayAdmin extends IndexAdmin
 
 
 
-        if ($_POST['export']) {
-            self::export($this->parsedLot, $_POST['export']);
+        if (1 || $_POST['export']) {
+            self::export($this->parsedLot, 'csv');
             return;
-        } else return ['parsedLot' => $this->parsedLot, 'debug' => $this->debug];
+        } else {
+            return $this->parsedLot;
+//            return ['parsedLot' => $this->parsedLot, 'debug' => $this->debug];
+        }
     } // parse
 
 
@@ -161,43 +176,60 @@ class EbayAdmin extends IndexAdmin
         $document = new Document($itemDetails['response']);
 
         /** сборка массива с данными о лоте */
+        $lot['ebayItemNo'] = $itemNo;
         // селлер
-        $lot['sellerName'] = $document->first('.x-sellercard-atf__info__about-seller span.ux-textspans--BOLD')->text();;
+        $lot['storeName'] = $document->first('.x-sellercard-atf__info__about-seller span.ux-textspans--BOLD')->text(); // sellerName
         $storeUrl = parse_url($document->first('div.x-sellercard-atf a.ux-action')->attr('href'));
         parse_str($storeUrl['query'], $store);
-        $lot['storeName'] = $store['store_name'];
+//        $lot['storeName'] = $store['store_name'];
+        $lot['supplier'] = $store['_ssn'];
         $lot['positive'] = floatval($document->first('a[href*=#STORE_INFORMATION]')->text());
         $lot['feedback'] = preg_replace('/[()]/', '', $document->first('.x-sellercard-atf__about-seller .ux-textspans--SECONDARY')->text());
 
         // товар
-        $lot['title'] = preg_replace('/[|"\'`]/', '', $document->first('.x-item-title__mainTitle span')->text());
-        $images = explode('|', self::getEbayImages($document));
-//        $lot['image'] = '';
-//        $lot['cover'] = $images[0];
-        if (sizeof($images) > 1) {
-            $lot['image'] = implode('|', $images);
+        $lot['name'] = preg_replace('/[|"\'`]/', '', $document->first('.x-item-title__mainTitle span')->text());
+        $lot['url'] = preg_replace('/[ .,;:|!?\/\'\"\`]/', '-', strtolower($lot['name']));
+        $images = explode(',', self::getEbayImages($document));
+        if (sizeof($images) > 0) {
+            $lot['image'] = implode(',', $images);
         }
-//        $lot['categories'] = self::getCategories();
         $lot['categories'] = $_POST['categories'];
+//        $lot['url'] =
 
         // цены
+        // здесь непонятно почему не работает NumberFormatter, извращаемся
         $price = $document->first('.x-price-primary .ux-textspans')->text();
-        $price = preg_replace('/[A-Z ]/', '', $price);
-        $price = $numberFormat->parseCurrency($price, $currency);
-        $shipping = preg_replace('/[A-Z ]/', '', $document->first('.ux-labels-values--shipping .ux-textspans--BOLD')->text());
-        $shipping = $numberFormat->parseCurrency($shipping, $currency);
+        preg_match('/US|EUR/', $price, $currency);
+        $price = preg_replace('/[A-Z$€ ]/', '', $price);
+        $price = (double) str_replace(',', '.', $price);
+
+        $shipping = $document->first('.ux-labels-values--shipping .ux-textspans--BOLD')->text();
+        $shipping = preg_replace('/[A-Z$€ ]/', '', $shipping);
+        $shipping = (double) str_replace(',', '.', $shipping);
+
+        $dutiesWrapper = $document->first('//*[@id="mainContent"]/div[1]/div[9]/div/div/div/div[3]/div/div/div/div[2]/div/div/span[1]', \DiDom\Query::TYPE_XPATH);
+        if ($dutiesWrapper) {
+            $duties = preg_replace('/[A-Z$€ ]/', '', $dutiesWrapper->text());
+        }
+
         // обработаем пока только USD
-        if ($currency == 'USD' && $shipping) {
+        if ($currency[0] == 'US' && is_double($price) && is_double($shipping)) {
             $lot['price'] = $price;
             $lot['shipping'] = $shipping;
-            $lot['ebayPrice'] = $lot['price'] + $lot['shipping']; // просто сумма price + shipping
+            $lot['duties'] = $duties;
+            $lot['ebayPrice'] = $lot['price'] + $lot['shipping'] + $lot['duties']; // просто сумма всего
 
+            $lot['compatibility'] = '';
             // похоже epid, производителя и партномер никак не взять кроме как через xPath
             if ($manufacturerWrapper = $document->first('//*[@id="viTabs_0_is"]/div/div[2]/div/div[1]/div[2]/dl/dd/div/div/span', \DiDom\Query::TYPE_XPATH)) {
                 $lot['manufacturer'] = $manufacturerWrapper->text();
             }
-            if ($partNumberWrapper = $document->first('//*[@id="viTabs_0_is"]/div/div[2]/div/div[2]/div[2]/dl/dd/div/div/span', \DiDom\Query::TYPE_XPATH)) {
-                $lot['ean13'] = $lot['manufacturer'] . ' ' . $partNumberWrapper->text();
+
+//$pn = $document->first('.ux-labels-values--manufacturerPartNumber .ux-labels-values__values-content span')->text();
+
+//            if ($partNumberWrapper = $document->first('//*[@id="viTabs_0_is"]/div/div[2]/div/div[2]/div[2]/dl/dd/div/div/span', \DiDom\Query::TYPE_XPATH))
+            {
+                $lot['partNumber'] = $lot['manufacturer'] . ' ' . $document->first('.ux-labels-values--manufacturerPartNumber .ux-labels-values__values-content span')->text();
             }
             if ($epidWrapper = $document->first('//*[@id="s0-1-26-7-17-1-93[1]-2-3-tabpanel-0"]/div/div/div/div[4]/div/div[2]/div[2]/div[2]/div[1]/div/div[2]/div/div/span', \DiDom\Query::TYPE_XPATH)) {
                 $lot['epid'] = $epidWrapper->text();
@@ -207,7 +239,7 @@ class EbayAdmin extends IndexAdmin
             if ($table) {
                 $tr = $table->find('th');
                 $td = $table->find('td');
-                $lot['compatibility'] = 'Подходит для:<br>';
+                $lot['compatibility'] .= '<br><br>Подходит для:<br>';
                 for ($i = 0; $i < sizeof($td); $i++) {
                     if ($i == 0 || ($i % sizeof($tr) == 0)) $lot['compatibility'] .= '<br>' . $td[$i]->text() . ' ';
                     else $lot['compatibility'] .= $td[$i]->text() . ' ';
@@ -215,26 +247,24 @@ class EbayAdmin extends IndexAdmin
             }
             $lot['outPrice'] = self::calculateProfit($lot['ebayPrice']);
         } else {
-            $lot['price'] = ($currency == 'USD' ? $price : '---- цена в ' . (!empty($currency) ? $currency : 'неизвестной валюте'));
-            // если валюта кривая покажем ее и закончим формирование лота
+            // если валюта кривая или вместо доставки херня, то покажем все это и закончим формирование лота
+            $lot['price'] = ($currency[0] == 'USD' ? $price : '---- цена в ' . (!empty($currency) ? $currency[0] : 'неизвестной валюте') . ' shpping '.$shipping);
         }
 
-//prettyDump($_POST);
-        return $lot;
+//prettyDump((object) $lot);
+        return (object) $lot;
     } //getItemDetails
 
 
     /**
      * обрабатывает картинки в переданном объекте $document
-     * отбрасывает первую картинку (она уже есть в cover), возвращает пути для остальных
      *
      * @param $document
      * @return string
      */
-    private function getEbayImages($document)
-    {
+    private function getEbayImages($document) {
         $imagesPath = [];
-        $imgElem = $document->find('.ux-image-grid-container.filmstrip img');
+        $imgElem = $document->find('.filmstrip img');
         if (sizeof($imgElem) > 0) {
             for ($i = 0; $i <= sizeof($imgElem); $i++) {
                 if (!is_null($imgElem[$i])) {
@@ -245,7 +275,7 @@ class EbayAdmin extends IndexAdmin
                 }
             }
         }
-        return implode('|', $imagesPath);
+        return implode(',', $imagesPath);
     }
 
 
@@ -272,8 +302,6 @@ class EbayAdmin extends IndexAdmin
 
 
 
-
-
     /**
      * ходит на ебей курлом
      * принимает запрос: а) массив б) инт
@@ -285,18 +313,36 @@ class EbayAdmin extends IndexAdmin
     private function request($request, $type)
     {
         switch ($type) {
-            case 1:
+            case 1: // запрос списка лотов
                 $url = self::EBAY_MOTOR_LIST_URL . str_ireplace(' ', '+', $request['keyword']);
-                break;  // запрос списка лотов
-            case 2:
+                $setCookie = true;
+                break;
+            case 2: // запрос одного лота
                 $url = self::EBAY_ITEM_URL . $request['request'];
-                break;                                              // запрос одного лота
+                $setCookie = false;
+                break;
         }
 
         if ($type == 1 && $_POST['minprice']) $url = $url . '&_udlo=' . $_POST['minprice'];
         if ($type == 1 && $_POST['maxprice']) $url = $url . '&_udhi=' . $_POST['maxprice'];
 
         $curl = curl_init();
+        // если это первый запрос то надо установить страну доставки &shipToCountryCode=ESP&shippingZipCode=03560
+        if ($setCookie) {
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://www.ebay.com/itemmodules/196433866393?module_groups=GET_RATES_MODAL&co=0&isGetRates=1&rt=nc&quantity=&shipToCountryCode=ESP&shippingZipCode=03560',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_NOBODY => true, // сама страница, для отладки
+                CURLOPT_FAILONERROR => true,
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_USERAGENT => $this->userAgent,
+                CURLOPT_HTTPHEADER, 'Accept-Language: en-US;q=0.6,en;q=0.4',
+                CURLOPT_VERBOSE => true
+            ));
+            curl_exec($curl); // здесь ответ не нужен
+        }
+
+
         curl_setopt_array($curl, array(
 //            CURLOPT_URL => 'https://motokofr.com', // дебаг
             CURLOPT_URL => $url,
@@ -305,7 +351,7 @@ class EbayAdmin extends IndexAdmin
             CURLOPT_NOBODY => false, // сама страница, для отладки
             CURLOPT_FAILONERROR => true,
             CURLOPT_MAXREDIRS => 10,
-            CURLOPT_USERAGENT => self::getRandomUseragent(),
+            CURLOPT_USERAGENT => $this->userAgent,
             CURLOPT_HTTPHEADER, 'Accept-Language: en-US;q=0.6,en;q=0.4',
             CURLOPT_VERBOSE => true
         ));
@@ -349,6 +395,81 @@ class EbayAdmin extends IndexAdmin
         return $categories;
     }
 
+
+
+    private function export($lot, $format) {
+//prettyDump($lot, 1);
+        $cur = new CurrenciesEntity();
+        $currency = $cur->findOne(['code' => 'USD', 'enabled' => 1]);
+        $import = new Import();
+
+        // заголовки таблицы
+        $tableHeaders = ['Category','Brand','Product','Variant','SKU','Price','Old price','Currency ID','Weight','Stock','Units','Visible','Featured','Meta title','Meta keywords','Meta description','Annotation','Description','Images','ebayItemNo','supplier','partNumber','epid', 'duties'];
+        // содержимое таблицы
+        $list = array (
+            $tableHeaders,
+            [
+                implode($import->getCategoryDelimiter(), $_POST['categories']),                                 // Category
+                $lot->manufacturer,                                                                             // Brand
+                $lot->name,                                                                                     // Product
+                ' ',                                                                                            // Variant
+                ' ',                                                                                            // SKU
+                $lot->outPrice,                                                                                 // Price
+                '',                                                                                             // Old price
+                $currency->id,                                                                                  // Currency ID
+                2,                                                                                              // Weight
+                2,                                                                                              // Stock
+                '',                                                                                             // Units
+                1,                                                                                              // Visible
+                0,                                                                                              // Featured
+                $lot->name,                                                                                     // Meta title
+                $lot->name.' '.$lot->partNumber. ' '.implode(', ', $_POST['categories']),              // Meta keywords
+                $lot->name,                                                                                     // Meta description
+                '',                                                                                             // Annotation
+                ($lot->manufacturer ? 'Производство: '.$lot->manufacturer.'<br>' : '').$lot->compatibility,     // Description
+                $lot->image,                                                                                     // Images
+                $lot->ebayItemNo,
+                $lot->supplier,
+                $lot->partNumber,
+                $lot->epid,
+                $lot->duties,
+            ]
+        );
+
+        // xlsx
+//        if ($format == 'xlsx') {
+//            // https://github.com/shuchkin/simplexlsxgen
+//            $xlsx = \Shuchkin\SimpleXLSXGen::fromArray($list);
+//            $xlsx->downloadAs('export.xlsx'); // or downloadAs('books.xlsx') or $xlsx_content = (string) $xlsx
+//        }
+
+        // csv
+        if ($format == 'csv') {
+            $file = __DIR__.'/../files/export/export'.date('d-m_G-i', time()).'.csv';
+            $fp = fopen($file, 'w');
+            foreach ($list as $fields) {
+                fputcsv($fp, $fields, ';');
+            }
+            fclose($fp);
+
+            if (file_exists($file)) {
+                ob_end_clean();
+                header('Content-Description: File Transfer');
+                header('Content-Type: application/octet-stream');
+                header('Content-Disposition: attachment; filename="'.basename($file).'"');
+                header('Expires: 0');
+                header('Cache-Control: must-revalidate');
+                header('Pragma: public');
+                header('Content-Length: ' . filesize($file));
+
+                readfile($file);
+                unlink($file);
+            } else {
+                echo '<br>нет файла на диске<br>';
+                var_dump($file);
+            }
+        }
+    }
 
 
 }

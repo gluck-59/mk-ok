@@ -156,6 +156,7 @@ if ($this->request->post('action') == 'ebayParser') {
 //        $this->design->assign('manufacturers',$manufacturers);
         $this->design->assign('categories', $categoriesTree);
         $this->design->assign('currencies', $currenciesEntity->find());
+        $this->design->assign('ebayMotorListUrl', EbayAdmin::EBAY_MOTOR_LIST_URL);
 
         $this->response->setContent($this->design->fetch('product.tpl'));
     }

@@ -29,7 +29,8 @@ class ProductsEntity extends Entity implements RelatedProductsInterface
         'supplier',
         'partNumber',
         'ebayItemNo',
-        'manufacturer_id'
+        'manufacturer_id',
+        'epid'
     ];
     
     protected static $langFields = [

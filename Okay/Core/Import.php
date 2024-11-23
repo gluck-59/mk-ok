@@ -28,7 +28,11 @@ class Import
         'annotation'=>       ['annotation', 'аннотация', 'краткое описание'],
         'description'=>      ['description', 'описание'],
         'images'=>           ['images', 'изображения'],
-        'url'=>              ['url', 'адрес']
+        'url'=>              ['url', 'адрес'],
+        'ebayItemNo'=>       ['ebayItemNo', 'ebay Item №'],
+        'supplier'=>         ['supplier', 'Производитель'],
+        'partNumber'=>       ['partNumber', 'партномер'],
+        'epid'=>             ['epid', 'Ebay EPID'],
 
     ];
 

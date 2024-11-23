@@ -95,7 +95,7 @@
                                                    data-column_name="{$column->name|escape}"
                                                    data-is_exist="{if $column->is_exist}1{else}0{/if}">
                                                     {if in_array($column->value, $columns_names)}
-                                                         {$btr->getTranslation('import_field_'|cat:$column->value)} 
+                                                         {$btr->getTranslation('import_field_'|cat:$column->value)}
                                                     {elseif empty($column->value)}
                                                         {$btr->import_skip}
                                                     {elseif $column->is_nf_selected}

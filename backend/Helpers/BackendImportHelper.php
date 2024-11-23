@@ -344,6 +344,20 @@ class BackendImportHelper
             $product['url'] = trim($itemFromCsv['url']);
         }
 
+        // ebay секция
+        if (!empty($itemFromCsv['ebayItemNo'])) {
+            $product['ebayItemNo'] = trim($itemFromCsv['ebayItemNo']);
+        }
+        if (!empty($itemFromCsv['supplier'])) {
+            $product['supplier'] = trim($itemFromCsv['supplier']);
+        }
+        if (!empty($itemFromCsv['partNumber'])) {
+            $product['partNumber'] = trim($itemFromCsv['partNumber']);
+        }
+        if (!empty($itemFromCsv['epid'])) {
+            $product['epid'] = trim($itemFromCsv['epid']);
+        }
+
         return ExtenderFacade::execute(__METHOD__, $product, func_get_args());
     }
     
@@ -450,7 +464,7 @@ class BackendImportHelper
                         $imageFilename = $this->imageCore->correctFilename($imageFilename);
                         $image = rawurlencode($image);
                     }
-
+file_put_contents(__DIR__.'/../../imp.log', print_r($image, 1).PHP_EOL, FILE_APPEND);
                     // Добавляем изображение только если такого еще нет в этом товаре
                     $select = $this->queryFactory->newSelect();
                     $result = $select->cols(['id', 'filename'])
