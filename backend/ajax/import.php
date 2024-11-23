@@ -52,8 +52,10 @@ $sql->execute();
 
 // Переходим на заданную позицию, если импортируем не сначала
 if($from = $request->get('from')) {
+file_put_contents(__DIR__.'/../../imp.log', 'импортируем не с начала'.PHP_EOL, FILE_APPEND);
     fseek($f, $from);
 } else {
+file_put_contents(__DIR__.'/../../imp.log', 'импортируем с начала'.PHP_EOL, FILE_APPEND);
     $sql = $queryBuilder->newSqlQuery()->setStatement("TRUNCATE __import_log")->execute();
 }
 
