@@ -168,7 +168,7 @@ class BackendImportHelper
                     $productsEntity->update($productId, $preparedProduct);
                 }
             }
-            
+
             if (empty($variantId) && !empty($productId)) {
                 $select = $this->queryFactory->newSelect();
                 $pos = $select->cols(['MAX(v.position) as pos'])
@@ -200,12 +200,19 @@ class BackendImportHelper
 //var_dump(!empty($variantId));
 //var_dump(!empty($product));
 //die();
+
+echo PHP_EOL.'$productId: ';
+print_r($productId);
+echo PHP_EOL.PHP_EOL;
+
         if(!empty($variantId) && !empty($productId)) {
             // Нужно вернуть обновленный товар
             $importedItem->variant = $variantsEntity->findOne(['id' => $variantId]);
             $importedItem->product = $productsEntity->findOne(['id' => $productId]);
-// здесь $importedItem->product пустой
 
+
+// на бою $importedItem->product пустой
+// локально есть
 echo PHP_EOL.'$importedItem: ';
 print_r($importedItem);
 echo PHP_EOL.PHP_EOL;
