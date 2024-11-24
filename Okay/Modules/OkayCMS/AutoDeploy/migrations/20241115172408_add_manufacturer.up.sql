@@ -24,4 +24,4 @@ ADD ebayItemNo BIGINT(12) NULL COMMENT 'номер лота' after `name`,
 ADD supplier TEXT NULL COMMENT 'ebay store или имя поставщика' after `ebayItemNo`,
 ADD partNumber TEXT NULL COMMENT 'парт-номер запчасти' after `supplier`,
 ADD manufacturer_id INT(3) NULL COMMENT 'id производителя из таблицы manufacturers' after `partNumber`;
-ADD epid TEXT NULL COMMENT 'EPID' after `manufacturer_id`;
+ADD epid INT(9) NULL COMMENT 'EPID' after `manufacturer_id`;
