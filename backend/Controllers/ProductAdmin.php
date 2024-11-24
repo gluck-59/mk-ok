@@ -43,11 +43,10 @@ class ProductAdmin extends IndexAdmin
                 $this->design->assign('message_error', $error);
             } else {
 
-
-if ($this->request->post('action') == 'ebayParser') {
-    $this->design->assign('parsedLot', ['lot' => 123, 'jopa' => 'JOPA']);
-    prettyDump($this->request->post('action'));
-}
+//if ($this->request->post('action') == 'ebayParser') {
+//    $this->design->assign('parsedLot', ['lot' => 123, 'jopa' => 'JOPA']);
+//    prettyDump($this->request->post('action'));
+//}
 
                 // Товар
                 if (empty($product->id)) {

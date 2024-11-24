@@ -63,16 +63,16 @@
                 </div>
 
                 <div class="col-md-4">
-                    {assign var ='first_category' value=$ebayRequest['category']}
-                    <select multiple class="selectpicker form-control  mb-1 fn_product_category fn_meta_categories" name="categories[]" data-live-search="true" data-title="В какую категорию парсить">
-{*                        <option value="0" selected="" disabled="" data-category_name="">В какую категорию парсить</option>*}
-                        {function name=category_select level=0}
+                    {assign var ='ebay_first_category' value=$ebayRequest['category']}
+                    <select multiple class="selectpicker form-control  mb-1 1fn_product_category 1fn_meta_categories" name="parseToCategories[]" data-live-search="true" data-title="В какую категорию парсить">
+                        <option value="0" selected="" disabled="">В какую категорию парсить</option>
+                        {function name=ebay_category_select level=0}
                             {foreach $categories as $category}
-                                <option value="{$category->name|escape}" {if $category->id == $first_category}selected{/if} data-category_name="{$category->name|escape}">{section sp $level}- {/section}{$category->name|escape}</option>
-                                {category_select categories=$category->subcategories level=$level+1}
+                                <option value="{$category->id}" {if $category->id == $ebay_first_category}selected{/if} data-category_name="{$category->name|escape}">{section sp $level}- {/section}{$category->name|escape}</option>
+                                {ebay_category_select categories=$category->subcategories level=$level+1}
                             {/foreach}
                         {/function}
-                        {category_select categories=$categories}
+                        {ebay_category_select categories=$categories}
                     </select>
                 </div>
             </div>

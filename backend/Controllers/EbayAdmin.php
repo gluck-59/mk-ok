@@ -193,7 +193,7 @@ class EbayAdmin extends IndexAdmin
         if (sizeof($images) > 0) {
             $lot['image'] = implode(',', $images);
         }
-        $lot['categories'] = $_POST['categories'];
+        $lot['categories'] = $_POST['parseToCategories'];
 //        $lot['url'] =
 
         // цены
@@ -389,7 +389,7 @@ class EbayAdmin extends IndexAdmin
     private static function getCategories()
     {
         $categories = '';
-        foreach ($_POST['categories'] as $category) {
+        foreach ($_POST['parseToCategories'] as $category) {
             /*@TODO посмотреть как в системе разбираются с select multiple */
         }
         return $categories;
@@ -409,7 +409,7 @@ class EbayAdmin extends IndexAdmin
         $list = array (
             $tableHeaders,
             [
-                implode($import->getCategoryDelimiter(), $_POST['categories']),                                 // Category
+                implode($import->getCategoryDelimiter(), $_POST['parseToCategories']),                                 // Category
                 $lot->manufacturer,                                                                             // Brand
                 $lot->name,                                                                                     // Product
                 ' ',                                                                                            // Variant
@@ -423,7 +423,7 @@ class EbayAdmin extends IndexAdmin
                 1,                                                                                              // Visible
                 0,                                                                                              // Featured
                 $lot->name,                                                                                     // Meta title
-                $lot->name.' '.$lot->partNumber. ' '.implode(', ', $_POST['categories']),              // Meta keywords
+                $lot->name.' '.$lot->partNumber. ' '.implode(', ', $_POST['parseToCategories']),              // Meta keywords
                 $lot->name,                                                                                     // Meta description
                 '',                                                                                             // Annotation
                 ($lot->manufacturer ? 'Производство: '.$lot->manufacturer.'<br>' : '').$lot->compatibility,     // Description
