@@ -31,10 +31,10 @@
                     </div>
                     <div class="d-flex align-items-center f_col justify-content-end">
                         {* Callback *}
-                        <a class="fn_callback callback d-inline-flex align-items-center" href="#fn_callback" data-language="index_back_call">
-                            {include file="svg.tpl" svgId="support_icon"}
-                            <span>{$lang->index_back_call}</span>
-                        </a>
+{*                        <a class="fn_callback callback d-inline-flex align-items-center" href="#fn_callback" data-language="index_back_call">*}
+{*                            {include file="svg.tpl" svgId="support_icon"}*}
+{*                            <span>{$lang->index_back_call}</span>*}
+{*                        </a>*}
                         {* Language & Currency *}
                         <div class="switcher d-flex align-items-center">
                             {include file="switcher.tpl"}
@@ -70,8 +70,9 @@
                             {if $settings->site_phones}
                                 {foreach $settings->site_phones as $phone}
                                     <div class="header-contact__item header-contact--phone{if $phone@first} header-contact__item--visible{/if}">
-                                        <a class="d-flex align-items-center header-contact__section" href="tel:{preg_replace('~[^0-9\+]~', '', $phone)}">
-                                            {include file="svg.tpl" svgId="phone_icon"}
+{*                                        <a class="d-flex align-items-center header-contact__section" href="tel:{preg_replace('~[^0-9\+]~', '', $phone)}">*}
+                                        <a class="d-flex align-items-center header-contact__section" href="https://t.me/{$phone}" target="_blank">
+                                            {include file="svg.tpl" svgId="telegram_icon"}
                                             <span>{$phone|escape}</span>
                                         </a>
                                     </div>
@@ -201,9 +202,10 @@
                         {if $settings->site_phones}
                             {foreach $settings->site_phones as $phone}
                                 <div class="footer__contact_item">
-                                    <a class="d-flex align-items-start phone" href="tel:{preg_replace('~[^0-9\+]~', '', $phone)}">
-                                        {include file="svg.tpl" svgId="phone_icon"}
-                                        <span>{$phone|escape}</span>
+{*                                    <a class="d-flex align-items-start phone" href="tel:{preg_replace('~[^0-9\+]~', '', $phone)}">*}
+                                    <a class="d-flex align-items-start phone" href="https://t.me/{$phone}" target="_blank">
+                                        {include file="svg.tpl" svgId="telegram_icon"}
+                                        <span>@{$phone|escape}</span>
                                     </a>
                                 </div>
                             {/foreach}
@@ -224,12 +226,12 @@
                                 </div>
                             </div>
                         {/if}
-                        <div class="footer__contact_item">
-                            <a class="fn_callback callback d-inline-flex align-items-center" href="#fn_callback" data-language="index_back_call">
-                                {include file="svg.tpl" svgId="support_icon"}
-                                <span>{$lang->index_back_call}</span>
-                            </a>
-                        </div>
+{*                        <div class="footer__contact_item">*}
+{*                            <a class="fn_callback callback d-inline-flex align-items-center" href="#fn_callback" data-language="index_back_call">*}
+{*                                {include file="svg.tpl" svgId="support_icon"}*}
+{*                                <span>{$lang->index_back_call}</span>*}
+{*                            </a>*}
+{*                        </div>*}
                     </div>
                 </div>
                 {* Main menu *}
@@ -335,7 +337,7 @@
                             <span>© {$smarty.now|date_format:"%Y"}</span>
                             <span data-language="index_copyright">{$lang->index_copyright}</span>
                         </div>
-                        <a href="https://okay-cms.com" rel="noreferrer" target="_blank" title="OkayCms">{include file="svg.tpl" svgId="okaycms"}</a>
+                        <a href="https://motokofr.com" rel="noreferrer" target="_blank" title="motokofr">{*include file="svg.tpl" svgId="okaycms"*}Motokofr</a>
                     </div>
                 </div>
             </div>

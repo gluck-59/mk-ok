@@ -10,9 +10,9 @@
             <company>{$feed->settings['company']|escape}</company>
         {/if}
 
-        <agency>OkayCMS</agency>
+        <agency>Motokofr</agency>
 
-        <email>info@okay-cms.com</email>
+        <email>support@motokofr.com</email>
 
         <url>{$rootUrl}</url>
 

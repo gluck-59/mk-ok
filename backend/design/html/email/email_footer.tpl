@@ -14,7 +14,7 @@
                                 <td align="center">
                                     <p>
                                         <span>{$btr->email_details|escape}</span><br>
-                                        <a target="_blank" href="https://okay-cms.com">okay-cms.com</a>
+                                        <a target="_blank" href="https://motokofr.com">Motokofr.com</a>
                                     </p>
                                 </td>
                             </tr>
