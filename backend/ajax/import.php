@@ -77,33 +77,11 @@ for($k=0; !feof($f) && $k < $productsCount; $k++) {
         foreach ($fields as $csv=>$inner) {
             // Создаем массив item[название_колонки]=значение
             if (isset($line[$i]) && !empty($inner)) {
-//echo '$product:'.PHP_EOL;
-//print_r($product);
-
-//echo PHP_EOL.'$inner:'.PHP_EOL;
-//print_r($inner);
-//
-//echo PHP_EOL.'$line[i]:'.PHP_EOL;
-//print_r($line[$i]);
-//
-//echo PHP_EOL.'====================='.PHP_EOL;
-
-
-
-//file_put_contents(__DIR__.'/../../imp.log', __LINE__.': '.print_r($product, 1).PHP_EOL, FILE_APPEND);
-//file_put_contents(__DIR__.'/../../imp.log', __LINE__.': '.print_r($inner, 1).PHP_EOL, FILE_APPEND);
                 $product[$inner] = $line[$i];
-
             }
             $i++;
         }
     }
-
-
-//echo PHP_EOL.'массив $product:'.PHP_EOL;
-//print_r($product);
-//echo PHP_EOL.'====================='.PHP_EOL;
-
 
     // Импортируем этот товар
     if($importedItem = $importHelper->importItem($product)) {
@@ -111,7 +89,7 @@ for($k=0; !feof($f) && $k < $productsCount; $k++) {
     }
 }
 
-file_put_contents(__DIR__.'/../../imp.log', print_r($importedItems, 1).PHP_EOL.PHP_EOL.PHP_EOL, FILE_APPEND);
+//file_put_contents(__DIR__.'/../../imp.log', print_r($importedItems, 1).PHP_EOL.PHP_EOL.PHP_EOL, FILE_APPEND);
 
 // Запоминаем на каком месте закончили импорт
 $from = ftell($f);

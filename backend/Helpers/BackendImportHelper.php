@@ -105,22 +105,11 @@ class BackendImportHelper
         // Подготовим вариант товара
         $variant = $this->parseVariantData($item);
 
-// это есть везде
-//echo PHP_EOL.'$variant: '.PHP_EOL;
-//print_r($variant);
-//echo PHP_EOL.PHP_EOL;
-
-
         // Сразу позволим модулям определить товар по своей логике
         $importItemData = $this->preSearchImportProductData($product, $variant);
         
         // Если же товар не был найден модулями, ищем по стандартной логике. Так же этот метод можно расширить экстендером
         $importItemData = $this->searchImportProductData($product, $variant, $importItemData);
-
-// это есть везде
-//echo PHP_EOL.'$importItemData: '.PHP_EOL;
-//print_r($importItemData);
-//echo PHP_EOL.PHP_EOL;
 
         if (!empty($importItemData['productId'])) {
             $productId = (int)$importItemData['productId'];
@@ -196,28 +185,11 @@ class BackendImportHelper
             }
         }
 
-// везде оба true
-//var_dump(!empty($variantId));
-//var_dump(!empty($product));
-//die();
-
-echo PHP_EOL.'$productId: ';
-print_r($productId);
-print_r($productsEntity->findOne(['id' => $productId]));
-echo PHP_EOL.PHP_EOL;
-
         if(!empty($variantId) && !empty($productId)) {
             // Нужно вернуть обновленный товар
             $importedItem->variant = $variantsEntity->findOne(['id' => $variantId]);
             $importedItem->product = $productsEntity->findOne(['id' => $productId]);
 
-
-// на бою $importedItem->product пустой
-// локально есть
-echo PHP_EOL.'$importedItem: ';
-print_r($importedItem);
-echo PHP_EOL.PHP_EOL;
-//
             // Добавляем категории к товару
             $select = $this->queryFactory->newSelect();
             $pos = $select->cols(['MAX(position) as pos'])
