@@ -13,7 +13,7 @@
 {*{$manufacturers|print_r}*}
 
 {*$product*}
-{$product|print_r}
+{*{$product|print_r}*}
 </pre>
 
 {*Название страницы*}
@@ -46,10 +46,7 @@
 {*    {$parsedLot|var_dump}*}
     <div class="boxed fn_toggle_wrap">
 <div class="heading_box">
-    Поиск на
-    <i class="1fn_tooltips">
-        {include file='svg_icon.tpl' svgId='icon_ebay'}
-    </i>
+    Поиск на<i class="1fn_tooltips">{include file='svg_icon.tpl' svgId='icon_ebay'}</i> <small>(вернет csv файл для импорта)</small>
     <div class="toggle_arrow_wrap fn_toggle_card text-primary">
         <a class="btn-minimize" href="javascript:;" ><i class="fa fn_icon_arrow fa-angle-down"></i></a>
     </div>
@@ -68,7 +65,7 @@
                         <option value="0" selected="" disabled="">В какую категорию парсить</option>
                         {function name=ebay_category_select level=0}
                             {foreach $categories as $category}
-                                <option value="{$category->id}" {if $category->id == $ebay_first_category}selected{/if} data-category_name="{$category->name|escape}">{section sp $level}- {/section}{$category->name|escape}</option>
+                                <option value="{$category->name}" {if $category->id == $ebay_first_category}selected{/if} data-category_name="{$category->name|escape}">{section sp $level}- {/section}{$category->name|escape}</option>
                                 {ebay_category_select categories=$category->subcategories level=$level+1}
                             {/foreach}
                         {/function}
@@ -356,7 +353,7 @@
                             <input id="" type="checkbox" value="" name="categories[]" data-cat_name="">
                         </div>
                     </div>
-                    <div class="heading_label">Ebay секция (производителя пока пишем в описании)</div>
+<div class="heading_label">Ebay секция (производителя пока пишем в описании)</div>
 <div id="ebayDetails" class="1clearfix">
     <div class="row mb-1">
         <div class="col-md-6">
@@ -401,8 +398,8 @@
             {*    {manufacturer_select manufacturers=$manufacturers}*}
             {*</select>*}
             {*<input name="manufacturer_id" placeholder="производитель ID">*}
-        </div-->
-    </div>
+        </div>
+    </div-->
 </div>
                 </div>
                 {get_design_block block="product_relations"}
