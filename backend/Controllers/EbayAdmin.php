@@ -26,10 +26,9 @@ class EbayAdmin extends IndexAdmin
     private $banlist = array();
     private $sellerMinPositive = 97;
     private $sellerMinFeedback = 1000;
-    private $misha_prib = 100;
     private $min_prib = 10;
-    private $max_prib = 10000;
-    private $nacenka_percent = 15;
+    private $max_prib = 100000;
+    private $nacenka_percent = 100; // в процентах %% — учитываются миша, армяне и я
     public $debug;
 
     /**
@@ -377,7 +376,7 @@ class EbayAdmin extends IndexAdmin
      */
     public function calculateProfit($ebayPrice) {
         $nacenka_percent = ($_POST['nacenka_percent'] ? (float) $_POST['nacenka_percent'] : $this->nacenka_percent);
-        $nacenka = (ceil($ebayPrice) / 100 * $nacenka_percent + $this->misha_prib);
+        $nacenka = ceil($ebayPrice * ($nacenka_percent / 100));
         if ($nacenka < $this->min_prib) $nacenka = $this->min_prib;
         if ($nacenka > $this->max_prib) $nacenka = $this->max_prib;
         return ceil($ebayPrice + $nacenka /*- $weight_price*/);
@@ -445,7 +444,7 @@ class EbayAdmin extends IndexAdmin
 
         // csv
         if ($format == 'csv') {
-            $file = __DIR__.'/../files/export/export'.date('d-m_G-i', time()).'.csv';
+            $file = __DIR__.'/../files/export/_export_'.date('d-m_G-i', time()).'.csv';
             $fp = fopen($file, 'w');
             foreach ($list as $fields) {
                 fputcsv($fp, $fields, ';');

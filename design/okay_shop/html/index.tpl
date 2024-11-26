@@ -73,7 +73,7 @@
 {*                                        <a class="d-flex align-items-center header-contact__section" href="tel:{preg_replace('~[^0-9\+]~', '', $phone)}">*}
                                         <a class="d-flex align-items-center header-contact__section" href="https://t.me/{$phone}" target="_blank">
                                             {include file="svg.tpl" svgId="telegram_icon"}
-                                            <span>{$phone|escape}</span>
+                                            <span>Telegram</span>
                                         </a>
                                     </div>
                                 {/foreach}
@@ -81,7 +81,7 @@
                             {if $settings->site_email}
                                 <div class="header-contact__item header-contact--email {if !$settings->site_phones} header-contact__item--visible{/if}">
                                     <a class="d-flex align-items-center header-contact__section" href="mailto:{$settings->site_email|escape}" >
-                                        <span>{$settings->site_email|escape}</span>
+                                        <span>Email</span>
                                     </a>
                                 </div>
                             {/if}
@@ -205,7 +205,7 @@
 {*                                    <a class="d-flex align-items-start phone" href="tel:{preg_replace('~[^0-9\+]~', '', $phone)}">*}
                                     <a class="d-flex align-items-start phone" href="https://t.me/{$phone}" target="_blank">
                                         {include file="svg.tpl" svgId="telegram_icon"}
-                                        <span>@{$phone|escape}</span>
+                                        <span>Telegram</span>
                                     </a>
                                 </div>
                             {/foreach}
@@ -214,7 +214,8 @@
                             <div class="footer__contact_item">
                                 <a class="d-flex align-items-start email " href="mailto:{$settings->site_email|escape}">
                                     {include file="svg.tpl" svgId="email_icon"}
-                                    <span>{$settings->site_email|escape}</span>
+{*                                    <span>{$settings->site_email|escape}</span>*}
+                                    <span>Email</span>
                                 </a>
                             </div>
                         {/if}
