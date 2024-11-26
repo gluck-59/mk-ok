@@ -42,8 +42,6 @@
 
 {*форма ebay parser*}
 {if !$product->id}
-{*    $ebayRequest*}
-{*    {$parsedLot|var_dump}*}
     <div class="boxed fn_toggle_wrap">
 <div class="heading_box">
     Поиск на<i class="1fn_tooltips">{include file='svg_icon.tpl' svgId='icon_ebay'}</i> <small>(вернет csv файл для импорта)</small>
@@ -53,13 +51,23 @@
 </div>
         <form method="post" action="index.php?controller=EbayAdmin" name="ebayParser">
             <div class="row">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <div class="1input-group">
                         <input name="keyword" id="keyword" class="form-control" value="{$ebayKeyword}" placeholder="Поиск на Ebay">
                     </div>
                 </div>
+                <div class="col-md-3">
+                    <div class="1input-group">
+<select name="forBrand" class="selectpicker form-control mb-1{if !$brands} hidden{/if} fn_meta_brand" data-live-search="true">
+    <option value="0" {if !$product->brand_id}selected=""{/if} data-brand_name="">Марка</option>
+    {foreach $brands as $brand}
+        <option value="{$brand->name}" {if $product->brand_id == $brand->id}selected=""{/if} data-brand_name="{$brand->name|escape}">{$brand->name|escape}</option>
+    {/foreach}
+</select>
+                    </div>
+                </div>
 
-                <div class="col-md-4">
+                <div class="col-md-3">
                     {assign var ='ebay_first_category' value=$ebayRequest['category']}
                     <select multiple class="selectpicker form-control  mb-1 1fn_product_category 1fn_meta_categories" name="parseToCategories[]" data-live-search="true" data-title="В какую категорию парсить">
                         <option value="0" selected="" disabled="">В какую категорию парсить</option>

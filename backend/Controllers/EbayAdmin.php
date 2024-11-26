@@ -4,6 +4,7 @@ namespace Okay\Admin\Controllers;
 
 use DiDom\Document;
 use libphonenumber\ValidationResult;
+use Okay\Admin\Helpers\BackendBrandsHelper;
 use Okay\Admin\Helpers\BackendCategoriesHelper;
 use Okay\Admin\Helpers\BackendFeaturesHelper;
 use Okay\Admin\Helpers\BackendImportHelper;
@@ -56,22 +57,21 @@ class EbayAdmin extends IndexAdmin
         BackendVariantsHelper      $backendVariantsHelper,
         BackendFeaturesHelper      $backendFeaturesHelper,
         BackendSpecialImagesHelper $backendSpecialImagesHelper,
+//BackendBrandsHelper         $backendBrandsHelper,
         BackendValidateHelper      $backendValidateHelper,
         RouterCacheEntity          $routerCacheEntity
 
 //        Document                    $document
     ) {
-//$str = 'Cobra / Swept ? Front. Floorboard, ;Kits: 06-4160" 08-3644 BLV64160 Chrome  Black';
-//prettyDump($str);
-//echo '<br>';
-//prettyDump(preg_replace('/[ .,;:!?\/\'\"\`]/', '-', $str));
-//
-//die();
+
+//$ebayBrands = $backendBrandsHelper->findAllBrands();
+//prettyDump($ebayBrands, 1);
 
         if ($this->request->method('post')) {
             $this->parsedLot = self::parse($_POST);
             $this->design->assign('ebayRequest', $_POST); // $this->request->post('ПОЛЕ') может брать только с ПОЛЕ
             $this->design->assign('product', $this->parsedLot);
+//$this->design->assign('ebayBrand', $this->parsedLot);
         }
 
         $this->design->assign('ebayMotorListUrl', self::EBAY_MOTOR_LIST_URL);
@@ -81,8 +81,6 @@ class EbayAdmin extends IndexAdmin
 
 
     function parse($request, $findpair = 0) {
-//prettyDump('$request');
-//prettyDump($request);
         if (!$request['keyword']) {
             $this->parsedLot->error = 'В запросе для Ebay нет keyword';
             return $this->parsedLot;
@@ -202,11 +200,11 @@ class EbayAdmin extends IndexAdmin
         $price = preg_replace('/[A-Z$€ ]/', '', $price);
         $price = (double) str_replace(',', '.', $price);
 
-        $shipping = $document->first('.ux-labels-values--shipping .ux-textspans--BOLD')->text();
-        $shipping = preg_replace('/[A-Z$€ ]/', '', $shipping);
+        $shippingWrapper = $document->first('.ux-labels-values--shipping .ux-textspans--BOLD');
+        $shipping = preg_replace('/[A-Z$€ ]/', '', $shippingWrapper->text());
         $shipping = (double) str_replace(',', '.', $shipping);
 
-        $dutiesWrapper = $document->first('//*[@id="mainContent"]/div[1]/div[9]/div/div/div/div[3]/div/div/div/div[2]/div/div/span[1]', \DiDom\Query::TYPE_XPATH);
+        $dutiesWrapper = $document->first('.ux-labels-values--importCharges .ux-textspans--BOLD');
         if ($dutiesWrapper) {
             $duties = preg_replace('/[A-Z$€ ]/', '', $dutiesWrapper->text());
         }
@@ -219,12 +217,12 @@ class EbayAdmin extends IndexAdmin
             $lot['ebayPrice'] = $lot['price'] + $lot['shipping'] + $lot['duties']; // просто сумма всего
 
             $lot['compatibility'] = '';
-            // похоже epid, производителя и партномер никак не взять кроме как через xPath
-            if ($manufacturerWrapper = $document->first('//*[@id="viTabs_0_is"]/div/div[2]/div/div[1]/div[2]/dl/dd/div/div/span', \DiDom\Query::TYPE_XPATH)) {
+
+            // manufacturer пока не используем для импорта
+            $manufacturerWrapper = $document->first('.ux-labels-values.ux-labels-values--brand .ux-labels-values__values-content span');
+            if ($manufacturerWrapper) {
                 $lot['manufacturer'] = $manufacturerWrapper->text();
             }
-
-//$pn = $document->first('.ux-labels-values--manufacturerPartNumber .ux-labels-values__values-content span')->text();
 
 //            if ($partNumberWrapper = $document->first('//*[@id="viTabs_0_is"]/div/div[2]/div/div[2]/div[2]/dl/dd/div/div/span', \DiDom\Query::TYPE_XPATH))
             {
@@ -244,7 +242,7 @@ class EbayAdmin extends IndexAdmin
                     else $lot['compatibility'] .= $td[$i]->text() . ' ';
                 }
             }
-            $lot['outPrice'] = self::calculateProfit($lot['ebayPrice']);
+            $lot['outPrice'] = self::calculateProfit($lot);
         } else {
             // если валюта кривая или вместо доставки херня, то покажем все это и закончим формирование лота
             $lot['price'] = ($currency[0] == 'USD' ? $price : '---- цена в ' . (!empty($currency) ? $currency[0] : 'неизвестной валюте') . ' shpping '.$shipping);
@@ -374,12 +372,11 @@ class EbayAdmin extends IndexAdmin
      * @param float $ebayPrice
      * @return int
      */
-    public function calculateProfit($ebayPrice) {
+    public function calculateProfit($lot) {
         $nacenka_percent = ($_POST['nacenka_percent'] ? (float) $_POST['nacenka_percent'] : $this->nacenka_percent);
-        $nacenka = ceil($ebayPrice * ($nacenka_percent / 100));
-        if ($nacenka < $this->min_prib) $nacenka = $this->min_prib;
-        if ($nacenka > $this->max_prib) $nacenka = $this->max_prib;
-        return ceil($ebayPrice + $nacenka /*- $weight_price*/);
+//        $nacenka = $ebayPrice * (1 + $nacenka_percent / 100);
+        $ebayPrice = (double) $lot['price'] + (double) $lot['shipping'] + (double) $lot['duties'];
+        return ceil($ebayPrice * (1 + $nacenka_percent / 100));
     }
 
 
@@ -403,13 +400,13 @@ class EbayAdmin extends IndexAdmin
         $import = new Import();
 
         // заголовки таблицы
-        $tableHeaders = ['Category','Brand','Product','Variant','SKU','Price','Old price','Currency ID','Weight','Stock','Units','Visible','Featured','Meta title','Meta keywords','Meta description','Annotation','Description','Images','ebayItemNo','supplier','partNumber','epid', 'duties'];
+        $tableHeaders = ['Category','Brand','Product','Variant','SKU','Price','Old price','Currency ID','Weight','Stock','Units','Visible','Featured','Meta title','Meta keywords','Meta description','Annotation','Description','Images','ebayItemNo','supplier','partNumber','epid', 'lotPrice', 'lotShipping', 'duties'];
         // содержимое таблицы
         $list = array (
             $tableHeaders,
             [
-                implode($import->getCategoryDelimiter(), $_POST['parseToCategories']),                                 // Category
-                $lot->manufacturer,                                                                             // Brand
+                implode($import->getCategoryDelimiter(), $_POST['parseToCategories']),                          // Category
+                $_POST['forBrand'], //$lot->manufacturer,                                                       // Brand
                 $lot->name,                                                                                     // Product
                 ' ',                                                                                            // Variant
                 ' ',                                                                                            // SKU
@@ -431,7 +428,9 @@ class EbayAdmin extends IndexAdmin
                 $lot->supplier,
                 $lot->partNumber,
                 $lot->epid,
-                $lot->duties,
+        $lot->price,
+        $lot->shipping,
+        $lot->duties,
             ]
         );
 
@@ -472,10 +471,3 @@ class EbayAdmin extends IndexAdmin
 
 
 }
-
-
-////////////////////////////////
-///
-///
-
-
