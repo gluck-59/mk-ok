@@ -142,15 +142,15 @@
                                 <progress id="progressbar" class="progress progress-xs progress-info mt-1" style="display: none" value="0" max="100"></progress>
                             </div>
                         {/if}
-                        <div class="toggle_body_wrap on fn_card">
-                            <div class="boxed boxed_attention">
-                                <div class="text_box mt-0">
-                                    <div>{$btr->import_info}</div>
+                        {if $filename}
+                            <div class="toggle_body_wrap on fn_card">
+                                <div class="boxed boxed_attention">
+                                    <div class="text_box mt-0">
+                                        <div>{$btr->import_info}</div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-
-
+                        {/if}
                     </div>
                 </div>
             </div>
