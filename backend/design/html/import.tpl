@@ -57,18 +57,10 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <div class="boxed fn_toggle_wrap ">
-                        <div class="heading_box boxes_inline">
+                        <div class="heading_box boxes_inline mb-1">
                             {$btr->import_file|escape} {$file->name|escape} ({($file->size/1024)|round:'2'} {$btr->general_kb|escape})
                         </div>
                         {if $filename}
-                            <div class="toggle_body_wrap on fn_card">
-                                <div class="boxed boxed_attention">
-                                    <div class="text_box mt-0">
-                                        <div>{$btr->import_info}</div>
-                                    </div>
-                                </div>
-                            </div>
-
                             <div class="okay_list">
                                 <div class="okay_list_head">
                                     <div class="col-lg-6 col-md-6">{$btr->import_csv_columns}</div>
@@ -150,6 +142,15 @@
                                 <progress id="progressbar" class="progress progress-xs progress-info mt-1" style="display: none" value="0" max="100"></progress>
                             </div>
                         {/if}
+                        <div class="toggle_body_wrap on fn_card">
+                            <div class="boxed boxed_attention">
+                                <div class="text_box mt-0">
+                                    <div>{$btr->import_info}</div>
+                                </div>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </div>

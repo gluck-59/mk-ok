@@ -400,7 +400,7 @@ class EbayAdmin extends IndexAdmin
         $import = new Import();
 
         // заголовки таблицы
-        $tableHeaders = ['Category','Brand','Product','Variant','SKU','Price','Old price','Currency ID','Weight','Stock','Units','Visible','Featured','Meta title','Meta keywords','Meta description','Annotation','Description','Images','ebayItemNo','supplier','partNumber','epid', 'lotPrice', 'lotShipping', 'duties'];
+        $tableHeaders = ['Category','Brand','Product','Variant','SKU','Price','Old price','Currency ID','Weight','Stock','Units','Visible','Featured','Meta title','Meta keywords','Meta description','Annotation','Description','Images','ebayItemNo','supplier','partNumber','epid'/*, 'lotPrice', 'lotShipping', 'duties'*/];
         // содержимое таблицы
         $list = array (
             $tableHeaders,
@@ -428,9 +428,9 @@ class EbayAdmin extends IndexAdmin
                 $lot->supplier,
                 $lot->partNumber,
                 $lot->epid,
-        $lot->price,
-        $lot->shipping,
-        $lot->duties,
+//                $lot->price,
+//                $lot->shipping,
+//                $lot->duties,
             ]
         );
 
