@@ -5,7 +5,7 @@ const USD_COEFF = 1.049;
 const EUR_COEFF = 1.017;
 
 
-if (in_array($_SERVER['SERVER_ADDR'], ['127.0.0.1', '::1', '0.0.0.0', 'localhost'])) {
+if (1 /*in_array($_SERVER['SERVER_ADDR'], ['127.0.0.1', '::1', '0.0.0.0', 'localhost'])*/) {
     $ini_array = parse_ini_file("config/config.local.php");
 } else {
     $ini_array = parse_ini_file("config/config.php");
@@ -20,19 +20,13 @@ if (in_array($_SERVER['SERVER_ADDR'], ['127.0.0.1', '::1', '0.0.0.0', 'localhost
             $currency['eur'] = $usd = round($item->Value * GENERAL_COEFF * EUR_COEFF, 2);
         }
     }
-echo '<pre>';
-//print_r($ini_array);
-print_r($currency, true);
-
-
-
-
+//print_r($currency);
 try {
     $conn = new PDO('mysql:dbname='.$ini_array['db_name'].';host=localhost', $ini_array['db_user'],$ini_array['db_password']);
     $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::ERRMODE_EXCEPTION);
 }
 catch (PDOException $e) {
-    echo "Database error: " . $e->getMessage();
+    echo PHP_EOL.date('d.m.Y', time())." Database error: " . $e->getMessage().PHP_EOL;
 }
 
 //$sql = "select * from ok_currencies";
@@ -42,5 +36,6 @@ catch (PDOException $e) {
 $sql = 'UPDATE ok_currencies SET rate_to = CASE code WHEN "usd" THEN '.$currency["usd"].' WHEN "eur" THEN '.$currency["eur"].' WHEN "rub" THEN 1 END';
 $res = $conn->exec($sql);
 //var_dump($res);
-echo date(time()).' обновлено строк в базе: '.$res.PHP_EOL;
+
+echo date('d.m.Y', time()).': USD = '.$currency['usd'].', EUR = '.$currency['eur'].', обновлено строк в базе: '.$res.PHP_EOL;
 
