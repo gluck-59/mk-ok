@@ -57,7 +57,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12">
                     <div class="boxed fn_toggle_wrap ">
-                        <div class="heading_box boxes_inline mb-1">
+                        <div class="heading_box boxes_inline">
                             {$btr->import_file|escape} {$file->name|escape} ({($file->size/1024)|round:'2'} {$btr->general_kb|escape})
                         </div>
                         {if $filename}

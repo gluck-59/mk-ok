@@ -70,7 +70,7 @@
                 <div class="col-md-3">
                     {assign var ='ebay_first_category' value=$ebayRequest['category']}
                     <select multiple class="selectpicker form-control  mb-1 1fn_product_category 1fn_meta_categories" name="parseToCategories[]" data-live-search="true" data-title="В какую категорию парсить">
-                        <option value="0" selected="" disabled="">В какую категорию парсить</option>
+{*                        <option value="0" selected="" disabled="">В какую категорию парсить</option>*}
                         {function name=ebay_category_select level=0}
                             {foreach $categories as $category}
                                 <option value="{$category->name}" {if $category->id == $ebay_first_category}selected{/if} data-category_name="{$category->name|escape}">{section sp $level}- {/section}{$category->name|escape}</option>

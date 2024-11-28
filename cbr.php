@@ -22,7 +22,7 @@ if (in_array($_SERVER['SERVER_ADDR'], ['127.0.0.1', '::1', '0.0.0.0', 'localhost
     }
 echo '<pre>';
 //print_r($ini_array);
-print_r($currency);
+print_r($currency, true);
 
 
 
@@ -41,6 +41,6 @@ catch (PDOException $e) {
 
 $sql = 'UPDATE ok_currencies SET rate_to = CASE code WHEN "usd" THEN '.$currency["usd"].' WHEN "eur" THEN '.$currency["eur"].' WHEN "rub" THEN 1 END';
 $res = $conn->exec($sql);
-var_dump($res);
-
+//var_dump($res);
+echo date(time()).' обновлено строк в базе: '.$res.PHP_EOL;
 

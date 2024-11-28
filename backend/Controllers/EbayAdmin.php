@@ -200,9 +200,10 @@ class EbayAdmin extends IndexAdmin
         $price = preg_replace('/[A-Z$€ ]/', '', $price);
         $price = (double) str_replace(',', '.', $price);
 
-        $shippingWrapper = $document->first('.ux-labels-values--shipping .ux-textspans--BOLD');
-        $shipping = preg_replace('/[A-Z$€ ]/', '', $shippingWrapper->text());
-        $shipping = (double) str_replace(',', '.', $shipping);
+        if ($shippingWrapper = $document->first('.ux-labels-values--shipping .ux-textspans--BOLD')) {
+            $shipping = preg_replace('/[A-Z$€ ]/', '', $shippingWrapper->text());
+            $shipping = (double)str_replace(',', '.', $shipping);
+        }
 
         $dutiesWrapper = $document->first('.ux-labels-values--importCharges .ux-textspans--BOLD');
         if ($dutiesWrapper) {
@@ -225,8 +226,8 @@ class EbayAdmin extends IndexAdmin
             }
 
 //            if ($partNumberWrapper = $document->first('//*[@id="viTabs_0_is"]/div/div[2]/div/div[2]/div[2]/dl/dd/div/div/span', \DiDom\Query::TYPE_XPATH))
-            {
-                $lot['partNumber'] = $lot['manufacturer'] . ' ' . $document->first('.ux-labels-values--manufacturerPartNumber .ux-labels-values__values-content span')->text();
+            if ($partNumberWrapper = $document->first('.ux-labels-values--manufacturerPartNumber .ux-labels-values__values-content span')) {
+                $lot['partNumber'] = $lot['manufacturer'] . ' ' . $partNumberWrapper->text();
             }
             if ($epidWrapper = $document->first('//*[@id="s0-1-26-7-17-1-93[1]-2-3-tabpanel-0"]/div/div/div/div[4]/div/div[2]/div[2]/div[2]/div[1]/div/div[2]/div/div/span', \DiDom\Query::TYPE_XPATH)) {
                 $lot['epid'] = $epidWrapper->text();
@@ -426,7 +427,7 @@ class EbayAdmin extends IndexAdmin
                 $lot->image,                                                                                     // Images
                 $lot->ebayItemNo,
                 $lot->supplier,
-                $lot->partNumber,
+                $_POST['keyword'],// $lot->partNumber,
                 $lot->epid,
 //                $lot->price,
 //                $lot->shipping,
@@ -467,6 +468,11 @@ class EbayAdmin extends IndexAdmin
                 var_dump($file);
             }
         }
+    }
+
+
+    public function test() {
+        return 'test';
     }
 
 
