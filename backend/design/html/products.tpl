@@ -210,7 +210,7 @@
                                             <label class="okay_ckeckbox" for="id_{$product->id}"></label>
                                         </div>
                                         <div class="okay_list_boding okay_list_photo">
-                                            {if $product->image}
+                                            {if $product->image AND $smarty.server.SERVER_ADDR!='::1'}
                                                 <a href="{url controller=ProductAdmin id=$product->id return=$smarty.server.REQUEST_URI}">
                                                     <img src="{$product->image->filename|escape|resize:55:55}"/>
                                                 </a>
