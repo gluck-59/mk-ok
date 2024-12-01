@@ -11,7 +11,7 @@
             {foreach $browsed_products as $browsed_product}
                 <div class="browsed__item f_col-4">
                     <a class="d-flex align-items-center justify-content-center browsed__link" href="{url_generator route='product' url=$browsed_product->url}">
-                        {if $browsed_product->image->filename}
+                        {if $browsed_product->image->filename AND $smarty.server.SERVER_ADDR!='::1'}
                             <picture>
                                 {if $settings->support_webp}
                                     <source type="image/webp" data-srcset="{$browsed_product->image->filename|resize:70:70|webp}">

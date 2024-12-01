@@ -15,7 +15,7 @@
     <div class="fn_transfer f_row flex-column flex-lg-row align-items-lg-stretch">
         <div class="block product-page__gallery f_col f_col-lg-7 f_col-xl-7">
             <div class="block--boxed block--border boxed--stretch d-md-flex justify-content-between">
-                {if $product->images}
+                {if $product->images  AND $smarty.server.SERVER_ADDR!='::1'}
                     {* Main product image *}
                     <div class="gallery_image product-page__image {if $product->images|count == 1} product-page__image--full {/if} f_row justify-content-center">
                         <div class="product-page__img swiper-container gallery-top">
