@@ -33,7 +33,7 @@ catch (PDOException $e) {
 //$a = $conn->query($sql)->fetchAll();
 //print_r($a);
 
-$sql = 'UPDATE ok_currencies SET rate_to = CASE code WHEN "usd" THEN '.$currency["usd"].' WHEN "eur" THEN '.$currency["eur"].' WHEN "rub" THEN 1 END';
+$sql = 'UPDATE ok_currencies SET rate_to = CASE code WHEN "USD" THEN '.$currency["usd"].' WHEN "EUR" THEN '.$currency["eur"].' WHEN "RUB" THEN 1 END';
 $res = $conn->exec($sql);
 //var_dump($res);
 

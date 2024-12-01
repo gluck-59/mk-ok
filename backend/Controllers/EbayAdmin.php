@@ -180,8 +180,13 @@ class EbayAdmin extends IndexAdmin
         parse_str($storeUrl['query'], $store);
 //        $lot['storeName'] = $store['store_name'];
         $lot['supplier'] = $store['_ssn'];
-        $lot['positive'] = floatval($document->first('a[href*=#STORE_INFORMATION]')->text());
-        $lot['feedback'] = preg_replace('/[()]/', '', $document->first('.x-sellercard-atf__about-seller .ux-textspans--SECONDARY')->text());
+
+        if ($positive = $document->first('a[href*=#STORE_INFORMATION]')) {
+            $lot['positive'] = floatval($positive->text());
+        }
+        if ($feedback = $document->first('.x-sellercard-atf__about-seller .ux-textspans--SECONDARY')) {
+            $lot['feedback'] = preg_replace('/[()]/', '', $feedback->text());
+        }
 
         // товар
         $lot['name'] = preg_replace('/[|"\'`]/', '', $document->first('.x-item-title__mainTitle span')->text());
@@ -191,7 +196,6 @@ class EbayAdmin extends IndexAdmin
             $lot['image'] = implode(',', $images);
         }
         $lot['categories'] = $_POST['parseToCategories'];
-//        $lot['url'] =
 
         // цены
         // здесь непонятно почему не работает NumberFormatter, извращаемся
@@ -216,8 +220,6 @@ class EbayAdmin extends IndexAdmin
             $lot['shipping'] = $shipping;
             $lot['duties'] = $duties;
             $lot['ebayPrice'] = $lot['price'] + $lot['shipping'] + $lot['duties']; // просто сумма всего
-
-            $lot['compatibility'] = '';
 
             // manufacturer пока не используем для импорта
             $manufacturerWrapper = $document->first('.ux-labels-values.ux-labels-values--brand .ux-labels-values__values-content span');
@@ -246,10 +248,9 @@ class EbayAdmin extends IndexAdmin
             $lot['outPrice'] = self::calculateProfit($lot);
         } else {
             // если валюта кривая или вместо доставки херня, то покажем все это и закончим формирование лота
-            $lot['price'] = ($currency[0] == 'USD' ? $price : '---- цена в ' . (!empty($currency) ? $currency[0] : 'неизвестной валюте') . ' shpping '.$shipping);
+            $lot = [];
+            echo ($currency[0] == 'US' ? 'price = '.$price : '---- цена в ' . (!empty($currency) ? $currency[0] : 'неизвестной валюте') . ' shpping = '.$shipping);
         }
-
-//prettyDump((object) $lot);
         return (object) $lot;
     } //getItemDetails
 
