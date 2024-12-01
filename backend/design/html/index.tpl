@@ -354,9 +354,6 @@
                                             </span>
                                     {/if}
                                 </a>
-{*<pre>*}
-{*    {$items|print_r}*}
-{*</pre>*}
                                 {if $items|count > 1}
                                     <ul class="fn_submenu_toggle submenu fn_sort_menu_item">
                                         {foreach $items as $title=>$item}
@@ -1153,9 +1150,12 @@
                 cur_tabs = $(this).find('.tab_container'),
                 cur_tab;
 
-            {if $smarty.get.active_tab}
-            cur_nav.children().removeClass('selected');
-            cur_nav.children('[href="#{$smarty.get.active_tab|escape}"]').addClass('selected');
+            {if $smarty.get.controller == 'ProductAdmin'}
+                cur_nav.children().removeClass('selected');
+                cur_nav.children('[href="#tab2"]').addClass('selected');
+            {elseif $smarty.get.active_tab}
+                cur_nav.children().removeClass('selected');
+                cur_nav.children('[href="#{$smarty.get.active_tab|escape}"]').addClass('selected');
             {/if}
 
             if (cur_nav.children('.selected').size() > 0) {
