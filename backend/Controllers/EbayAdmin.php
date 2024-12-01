@@ -239,7 +239,7 @@ class EbayAdmin extends IndexAdmin
             if ($table) {
                 $tr = $table->find('th');
                 $td = $table->find('td');
-                $lot['compatibility'] .= '<br><br>Подходит для:<br>';
+                $lot['compatibility'] .= 'Подходит для:';
                 for ($i = 0; $i < sizeof($td); $i++) {
                     if ($i == 0 || ($i % sizeof($tr) == 0)) $lot['compatibility'] .= '<br>' . $td[$i]->text() . ' ';
                     else $lot['compatibility'] .= $td[$i]->text() . ' ';
@@ -423,7 +423,7 @@ class EbayAdmin extends IndexAdmin
                 $lot->name,                                                                                     // Meta title
                 $lot->name.' '.$lot->partNumber. ' '.implode(', ', $_POST['parseToCategories']),              // Meta keywords
                 $lot->name,                                                                                     // Meta description
-                '',                                                                                             // Annotation
+                'Производство: '.$lot->manufacturer,                                                                                             // Annotation
                 ($lot->manufacturer ? 'Производство: '.$lot->manufacturer.'<br>' : '').$lot->compatibility,     // Description
                 $lot->image,                                                                                     // Images
                 $lot->ebayItemNo,

@@ -1109,7 +1109,9 @@
     function generate_url() {
         url = $('input[name="name"]').val();
         url = translit(url);
-        url = url + ' ' + $('[name=partNumber]').val()
+        if ($('[name=partNumber]').val() !== undefined) {
+            url = url + ' ' + $('[name=partNumber]').val()
+        }
         if (is_translit_alpha.size() > 0) {
             url = url.replace(/[^0-9a-z]+/gi, '').toLowerCase();
         } else {

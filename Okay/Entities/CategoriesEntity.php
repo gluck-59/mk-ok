@@ -53,6 +53,7 @@ class CategoriesEntity extends Entity
     protected static $searchFields = [];
 
     protected static $defaultOrderFields = [
+'name', // экспериментально
         'parent_id',
         'position',
     ];
