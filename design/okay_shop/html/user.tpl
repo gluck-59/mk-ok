@@ -137,6 +137,20 @@
                                                             <span class="form__placeholder">{$lang->form_phone}</span>
                                                         </div>
                                                     </div>
+
+                                                    {* User's address *}
+                                                    <div class="f_col-md-9 f_col-lg-9 f_col-xl-9">
+                                                        <div class="form__group">
+                                                            <input class="form__input form__placeholder--focus" value="{$user->address|escape}" name="address" id="address" type="text" data-language="form_address" />
+                                                            <span class="form__placeholder">{$lang->form_street}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="f_col-md-3 f_col-lg-3 f_col-xl-3">
+                                                        <div class="form__group">
+                                                            <input class="form__input form__placeholder--focus" value="{$user->postal_index|escape}" name="postal_index" id="postal_index" type="text" data-language="form_address" />
+                                                            <span class="form__placeholder">{$lang->form_postal_index}</span>
+                                                        </div>
+                                                    </div>
                                                     <div class="f_col-md-12">
                                                         {* User's password *}
                                                         <div class="form__group">
@@ -442,3 +456,12 @@
         </div>
     </div>
 </div>
+<script>
+    $("#address").suggestions({
+        token: "0a4626882bbbd48b65b3d11beb6e1332aa0a366c",
+        type: "ADDRESS",
+        onSelect: function(suggestion) {
+        $("#postal_index").val(suggestion.data.postal_code);
+        }
+    });
+</script>

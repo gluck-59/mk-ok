@@ -9,10 +9,9 @@
  */
 
 use Okay\Core\TemplateConfig\Js;
-
-return [
+$scripts = [
     //(new Js('jquery-3.4.1.min.js')),
-    (new Js('swiper-bundle.min.js')),
+(new Js('swiper-bundle.min.js')),
     (new Js('nouislider.min.js'))->setPosition('footer'),
     (new Js('select2.min.js'))->setPosition('footer'),
     (new Js('okay.js'))->setPosition('footer'),
@@ -21,6 +20,11 @@ return [
     (new Js('readmore.min.js'))->setPosition('footer'),
     (new Js('mobile_menu.js'))->setPosition('footer'),
     (new Js('sticky.min.js'))->setPosition('footer'),
+    (new Js('jquery.suggestions.min.js'))->setPosition('head')->setIndividual(true),
     //(new Js('jquery.autocomplete-min.js'))->setPosition('footer'),
     //(new Js('jquery.validate.min.js'))->setPosition('footer'),
+
+//(new Js('bootstrap-select.js'))->setPosition('footer'), // не работает на морде, только в админке
 ];
+
+return $scripts;

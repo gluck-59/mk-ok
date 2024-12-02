@@ -9,11 +9,8 @@
 {/if}
 
 <pre>
-{*{$ebayRequest|print_r}*}
-{*{$manufacturers|print_r}*}
-
 {*$product*}
-{*{$product|print_r}*}
+{*{$brands|print_r}*}
 </pre>
 
 {*Название страницы*}

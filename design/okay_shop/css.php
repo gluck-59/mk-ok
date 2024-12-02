@@ -18,6 +18,8 @@ return [
     (new Css('select2.min.css')),
     //(new Css('jquery.fancybox.min.css')),
     (new Css('media.css')),
-    (new Css('mobile_menu.css'))
+    (new Css('mobile_menu.css')),
+    (new Css('suggestions.min.css')),
+//(new Css('bootstrap-select.css')), // не работает на морде, только в админке
 ];
 

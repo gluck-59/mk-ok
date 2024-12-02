@@ -30,7 +30,9 @@ class BackendUsersRequest
         $user->email = $this->request->post('email');
         $user->phone = Phone::toSave($this->request->post('phone'));
         $user->group_id = $this->request->post('group_id');
-    
+$user->postal_index = $this->request->post('postal_index');
+$user->address = $this->request->post('address');
+
         return ExtenderFacade::execute(__METHOD__, $user, func_get_args());
     }
     

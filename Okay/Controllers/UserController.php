@@ -100,6 +100,9 @@ class UserController extends AbstractController
             case 'user_browsed':
                 $activeTab = 'browsed';
                 break;
+            case 'user_address':
+                $activeTab = 'address';
+                break;
             default:
                 $activeTab = $userHelper->defaultActiveTab(Router::getCurrentRouteName());
                 break;
@@ -107,10 +110,9 @@ class UserController extends AbstractController
         
         $this->design->assign('active_tab', $activeTab);
         $this->design->assign('meta_title', $this->user->name);
-        
         $this->design->assign('noindex_follow', true);
         $this->design->assign('canonical', Router::generateUrl('user', [], true));
-        
+
         $this->response->setContent('user.tpl');
     }
     
