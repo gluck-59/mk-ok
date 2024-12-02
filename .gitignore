@@ -7,8 +7,7 @@ backend/files/*/*.*
 
 #files/**/*.*
 #!files/**/
-
-files/thumbs/*
+/files/*
 
 #!files/**/*.phtml
 #!files/**/*.php*
@@ -37,3 +36,4 @@ design/*/lang/local.*.php
 !*.keep_folder
 !*.htaccess
 robots.txt
+
