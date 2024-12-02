@@ -2168,7 +2168,7 @@ a.filter__catalog_link svg {
   text-decoration: none;
   width: 26px;
   height: 26px;
-  color: var(--okay-button-color);
+  color: var(--okay-basic-company);
   opacity: 0.7;
 }
 .product_preview__center .wishlist_button::before {
