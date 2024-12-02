@@ -389,7 +389,7 @@ blockquote cite:before {
   padding: 2px 8px;
   background: transparent;
   border: 1px solid;
-  border-color: var(--okay-button-color);
+  border-color: var(--okay-basic-company);
   border-radius: 3px;
   color: var(--okay-button-color);
   font-size: 12px;
@@ -418,7 +418,7 @@ blockquote cite:before {
   padding: 0;
 }
 .block__more {
-  color: var(--okay-button-color);
+  color: var(--okay-basic-company);
   font-size: 12px;
   font-weight: 500;
   text-decoration: none;
