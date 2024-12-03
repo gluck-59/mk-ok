@@ -336,7 +336,7 @@
                     <div class="f_col-md flex-md-first d-flex align-items-center copyright">
                         <div class="d-flex align-items-center">
                             <span>© {$smarty.now|date_format:"%Y"}</span>
-                            <span data-language="index_copyright">{$lang->index_copyright}</span>
+{*                            <span data-language="index_copyright">{$lang->index_copyright}</span>*}
                         </div>
                         <a href="https://motokofr.com" rel="noreferrer" target="_blank" title="motokofr">{*include file="svg.tpl" svgId="okaycms"*}Motokofr</a>
                     </div>

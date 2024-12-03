@@ -16,7 +16,7 @@
                 {/if}
                 {if $settings->site_phones}
                     {foreach $settings->site_phones as $phone}
-                        {if $phone@first}
+                        {if 0 AND $phone@first}
                         <a class="cart_header__phone" href="tel:{preg_replace('~[^0-9\+]~', '', $phone)}">
                             <span>{$phone|escape}</span>
                         </a>
@@ -239,9 +239,9 @@
             <div class="cart_footer__copyright f_col-md flex-md-first d-flex align-items-center">
                 <div>
                     <span>© {$smarty.now|date_format:"%Y"}</span>
-                    <span data-language="index_copyright">{$lang->index_copyright}</span>
+{*                    <span data-language="index_copyright">{$lang->index_copyright}</span>*}
                 </div>
-                <a href="https://motokofr.com" rel="noreferrer" target="_blank" title="motokofr">{*include file="svg.tpl" svgId="okaycms"*}Motokofr</a>
+                <a href="https://motokofr.com" rel="noreferrer" target="_blank" title="motokofr">{*include file="svg.tpl" svgId="okaycms"*}&nbsp;Motokofr</a>
             </div>
         </div>
     </div>
