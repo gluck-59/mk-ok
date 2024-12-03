@@ -37,7 +37,8 @@ class BrandsEntity extends Entity
     ];
 
     protected static $defaultOrderFields = [
-        'position',
+//        'position',
+        'name',
     ];
 
     protected static $table = '__brands';

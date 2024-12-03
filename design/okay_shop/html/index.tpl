@@ -330,6 +330,18 @@
                                     </picture>
                                 </li>
                             {/foreach}
+                            {foreach $shipping_methods as $shipping_method}
+                                {if !$shipping_method->image}{continue}{/if}
+                                <li class="d-flex justify-content-center align-items-center payments__item" title="{$shipping_method->name|escape}">
+                                    <picture>
+                                        {if $settings->support_webp}
+                                            <source type="image/webp" data-srcset="{$shipping_method->image|resize:80:30:false:$config->resized_deliveries_dir|webp}">
+                                        {/if}
+                                        <source data-srcset="{$shipping_method->image|resize:80:30:false:$config->resized_deliveries_dir}">
+                                        <img class="lazy" data-src="{$shipping_method->image|resize:80:30:false:$config->resized_deliveries_dir}" src="{$rootUrl}/design/{get_theme}/images/xloading.gif" alt="{$shipping_method->name|escape}" title="{$shipping_method->name|escape}"/>
+                                    </picture>
+                                </li>
+                            {/foreach}
                         </ul>
                     </div>
                     {* Copyright *}

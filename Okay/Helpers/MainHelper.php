@@ -32,6 +32,7 @@ use Okay\Entities\MenuEntity;
 use Okay\Entities\MenuItemsEntity;
 use Okay\Entities\PagesEntity;
 use Okay\Entities\PaymentsEntity;
+use Okay\Entities\DeliveriesEntity;
 use Okay\Entities\UserGroupsEntity;
 use Okay\Entities\UsersEntity;
 use Okay\Helpers\MetadataHelpers\CommonMetadataHelper;
@@ -249,6 +250,7 @@ class MainHelper
         $design->assign('group',      $this->getCurrentUserGroup());
 
         $design->assign('payment_methods', $this->getPaymentMethods());
+        $design->assign('shipping_methods', $this->getShippingMethods());
         $design->assign('phone_example', $phone->getPhoneExample());
 
         $design->assign('keyword', $filterHelper->getKeyword());
@@ -508,6 +510,16 @@ class MainHelper
 
         /** @var PaymentsEntity $paymentsEntity */
         $paymentsEntity = $entityFactory->get(PaymentsEntity::class);
+        $paymentMethodImages = $paymentsEntity->find(['enabled' => 1]);
+        return ExtenderFacade::execute(__METHOD__, $paymentMethodImages, func_get_args());
+    }
+
+    public function getShippingMethods()
+    {
+        $entityFactory  = $this->SL->getService(EntityFactory::class);
+
+        /** @var PaymentsEntity $paymentsEntity */
+        $paymentsEntity = $entityFactory->get(DeliveriesEntity::class);
         $paymentMethodImages = $paymentsEntity->find(['enabled' => 1]);
         return ExtenderFacade::execute(__METHOD__, $paymentMethodImages, func_get_args());
     }
