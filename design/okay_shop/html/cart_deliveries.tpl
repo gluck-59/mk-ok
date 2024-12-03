@@ -81,9 +81,9 @@
 									<path class="checkbox__mark" fill="none" d="M4 10 l5 4 8-8.5"></path>
 								</svg>
 								<span class="delivery__name">
-	
-									{$payment_method->name|escape}{$lang->cart_deliveries_to_pay}
-									<span class="delivery__name_price">(<span class="fn_payment_price">{$active_delivery->total_price_with_delivery|convert:$payment_method->currency_id}</span> {$all_currencies[$payment_method->currency_id]->sign|escape})</span>
+									{$payment_method->name|escape}
+{*									{$lang->cart_deliveries_to_pay}*}
+{*									<span class="delivery__name_price">(<span class="fn_payment_price">{$active_delivery->total_price_with_delivery|convert:$payment_method->currency_id}</span> {$all_currencies[$payment_method->currency_id]->sign|escape})</span>*}
 								</span>
 								{if $payment_method->image}
 									<span class="delivery__image">
@@ -97,7 +97,14 @@
 									</span>
 								{/if}
 							</label>
-
+							<div class="row">
+								<div class="col-md-12">
+									<center>
+										<img class="lazy" data-src="../../../backend/files/qr_payment/qr_payment.png" src="{$rootUrl}/design/{get_theme}/images/xloading.gif" alt="{$payment_method->name|escape}" title="{$payment_method->name|escape}"/>
+										<h1 class="block__heading"><strong>{$active_delivery->total_price_with_delivery|convert:$payment_method->currency_id} {$all_currencies[$payment_method->currency_id]->sign|escape}</strong></h1>
+									</center>
+								</div>
+							</div>
 							{$block = {get_design_block block='front_cart_payment' vars=['payment_method' => $payment_method]}}
 							{if $payment_method->description || $block}
 								<div class="delivery__description">

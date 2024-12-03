@@ -4174,8 +4174,8 @@ footer {
   right: 4px;
   top: 4px;
   border: none;
-  background: var(--okay-second-company);
-  color: var(--okay-second-company-text);
+  background: var(--okay-button-color);
+  color: var(--okay-button-text);
   opacity: 0.8;
   transition: all 0.2s;
   line-height: 32px;
