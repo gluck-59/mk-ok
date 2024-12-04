@@ -75,7 +75,7 @@
 									<path class="checkbox__mark" fill="none" d="M4 10 l5 4 8-8.5"></path>
 								</svg>
 								<span class="delivery__name">
-									{$payment_method->name|escape}{$lang->cart_deliveries_to_pay}
+									{$payment_method->name|escape}{*$lang->cart_deliveries_to_pay*}
 								</span>
 								{if $payment_method->image}
 									<span class="delivery__image">

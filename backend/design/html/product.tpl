@@ -273,13 +273,13 @@
                 </div>
 
                 <div class="toggle_body_wrap fn_card on ">
-                    <ul class="fn_droplist_wrap product_images_list clearfix sortable" data-image="product">
+                    <ul class="fn_droplist_wrap product_images_list clearfix sortable" data-image="product" style="height: 287px;">
                         <li class="fn_dropzone dropzone_block">
                             <i class="fa fa-plus font-5xl" aria-hidden="true"></i>
                             <input type="file" name="" data-name="dropped_images[]" multiple class="dropinput fn_template">
                         </li>
                         {foreach $product_images as $image}
-                            <li class="product_image_item {if $image@first}first_image{/if} {if $image@iteration > 4}fn_toggle_hidden hidden{/if} fn_sort_item">
+                            <li class="product_image_item {if $image@first}first_image{/if} {if $image@iteration > 8}fn_toggle_hidden hidden{/if} fn_sort_item">
                                 <button type="button" class="fn_remove_image remove_image"></button>
                                 <i class="move_zone">
                                     {if $image}
@@ -602,7 +602,7 @@
                         </li>
                         {if $special_images|count > 0}
                             {foreach $special_images as $special}
-                                <li class="product_image_item {if $special@iteration > 4}fn_toggle_hidden hidden{/if} fn_sort_item {if $product->special == $special->filename}product_special{/if}">
+                                <li class="product_image_item {if $special@iteration > 8}fn_toggle_hidden hidden{/if} fn_sort_item {if $product->special == $special->filename}product_special{/if}">
                                     <button type="button" class=" fn_remove_image remove_image"></button>
                                     <i class="move_zone">
                                         <img class="product_icon" title="{$special->name|escape}" src="../{$config->special_images_dir|escape}{$special->filename|escape}" alt="{$special->filename|escape}" />

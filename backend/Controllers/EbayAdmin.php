@@ -199,10 +199,12 @@ class EbayAdmin extends IndexAdmin
 
         // цены
         // здесь непонятно почему не работает NumberFormatter, извращаемся
-        $price = $document->first('.x-price-primary .ux-textspans')->text();
-        preg_match('/US|EUR/', $price, $currency);
-        $price = preg_replace('/[A-Z$€ ]/', '', $price);
-        $price = (double) str_replace(',', '.', $price);
+        if ($priceWrapper = $document->first('.x-price-primary .ux-textspans')){
+            $price = $priceWrapper->text();
+            preg_match('/US|EUR/', $price, $currency);
+            $price = preg_replace('/[A-Z$€ ]/', '', $price);
+            $price = (double) str_replace(',', '.', $price);
+        }
 
         if ($shippingWrapper = $document->first('.ux-labels-values--shipping .ux-textspans--BOLD')) {
             $shipping = preg_replace('/[A-Z$€ ]/', '', $shippingWrapper->text());
