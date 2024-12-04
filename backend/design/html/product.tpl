@@ -273,13 +273,13 @@
                 </div>
 
                 <div class="toggle_body_wrap fn_card on ">
-                    <ul class="fn_droplist_wrap product_images_list clearfix sortable" data-image="product" style="height: 287px;">
+                    <ul class="fn_droplist_wrap product_images_list clearfix sortable" data-image="product">
                         <li class="fn_dropzone dropzone_block">
                             <i class="fa fa-plus font-5xl" aria-hidden="true"></i>
                             <input type="file" name="" data-name="dropped_images[]" multiple class="dropinput fn_template">
                         </li>
                         {foreach $product_images as $image}
-                            <li class="product_image_item {if $image@first}first_image{/if} {if $image@iteration > 8}fn_toggle_hidden hidden{/if} fn_sort_item">
+                            <li class="product_image_item {if $image@first}first_image{/if} {*if $image@iteration > 8}fn_toggle_hidden hidden{/if*} fn_sort_item">
                                 <button type="button" class="fn_remove_image remove_image"></button>
                                 <i class="move_zone">
                                     {if $image}
@@ -384,10 +384,10 @@
         <div class="col-md-6 mb-1">
             <input name="epid" class="variant_input" value="{$product->epid}" placeholder="epid">
         </div>
-        <div class="col-md-12">
+        <!--div class="col-md-12">
             ПРОВЕРИТЬ СТОИМОСТЬ:
             <br>shipping (alicante 03560) и Import Duties
-        </div>
+        </div-->
     </div>
     <!--div class="row">
         <div class="col-md-12">
