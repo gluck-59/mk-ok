@@ -475,12 +475,12 @@ $(function () {
       $(this).addClass("scroll");
     }
   });
-  $(".fn_category_scroll.scroll").append(
-    '<li class="hover_scroll hover_scroll_up"></li>'
-  );
-  $(".fn_category_scroll.scroll").append(
-    '<li class="hover_scroll hover_scroll_down"></li>'
-  );
+// $(".fn_category_scroll.scroll").append(
+//   '<li class="hover_scroll hover_scroll_up"></li>'
+// );
+// $(".fn_category_scroll.scroll").append(
+//   '<li class="hover_scroll hover_scroll_down"></li>'
+// );
   $(".hover_scroll_up").hide();
   var scrolling = false;
   $(".hover_scroll_up")

@@ -14,7 +14,7 @@
 
     <url>{$rootUrl}</url>
 
-    <platform>OkayCMS</platform>
+    <platform>Motokofr</platform>
 
     <version>{$config->version|escape}</version>
 

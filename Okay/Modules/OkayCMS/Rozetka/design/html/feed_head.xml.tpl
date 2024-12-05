@@ -9,7 +9,7 @@
             <company>{$settings->site_name|escape}</company>
         {/if}
         <url>{$rootUrl}</url>
-        <platform>OkayCMS</platform>
+        <platform>Motokofr</platform>
         <version>{$config->version|escape} {$config->version_type|escape}</version>
         <currencies>
             {foreach $currencies as $c}

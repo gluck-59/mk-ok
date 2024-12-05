@@ -111,12 +111,12 @@ class EbayAdmin extends IndexAdmin
             if (!$itemNo) continue;
 
             // если селлер не соответсвует нашим критериям — пропускаем
-            $sellerBlock = $item->first('.s-item__seller-info-text');
-            $sellerArray = explode(' ', $sellerBlock->text());
-            if (intval($sellerArray[2]) < $this->sellerMinPositive) continue;
-            if (preg_replace('/\D/', '', $sellerArray[1]) < $this->sellerMinFeedback) continue;
-            if (!empty($this->banlist) && in_array($sellerArray[0], $this->banlist)) continue;
-
+            if ($sellerBlock = $item->first('.s-item__seller-info-text')) {
+                $sellerArray = explode(' ', $sellerBlock->text());
+                if (intval($sellerArray[2]) < $this->sellerMinPositive) continue;
+                if (preg_replace('/\D/', '', $sellerArray[1]) < $this->sellerMinFeedback) continue;
+                if (!empty($this->banlist) && in_array($sellerArray[0], $this->banlist)) continue;
+            } else continue;
             // на выходе будет массив номеров лотов, который мы обработаем позже
             $lot['itemNo'] = $itemNo[0];
             $lots[] = $lot;
