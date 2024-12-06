@@ -104,6 +104,8 @@ class EbayAdmin extends IndexAdmin
 
         $lots = [];
         foreach ($arr as $item) {
+//prettyDump($item->children(), 1);
+
             // парсер выдает пару пустых итемов, пропустим их
             $link = $item->first('.s-item__link');
             $itm = parse_url($link->getAttribute('href'), PHP_URL_PATH);
@@ -117,10 +119,19 @@ class EbayAdmin extends IndexAdmin
                 if (preg_replace('/\D/', '', $sellerArray[1]) < $this->sellerMinFeedback) continue;
                 if (!empty($this->banlist) && in_array($sellerArray[0], $this->banlist)) continue;
             } else continue;
+
+            // если валюта не бакс-евро — пропускаем
+//            if ($priceBlock = $item->first(' .s-item__price')) {
+//                preg_match('/\$|EUR/', $priceBlock->text(), $currency);
+//                if (empty($currency)) continue;
+//                $lot['currency'] = $currency;
+//            }
+
             // на выходе будет массив номеров лотов, который мы обработаем позже
             $lot['itemNo'] = $itemNo[0];
             $lots[] = $lot;
-        }
+        } // foreach
+
 
         // в выдаче Ebay много мусора и сортировать по цене нельзя
         //        usort($lots, function($a,$b){
@@ -162,14 +173,13 @@ class EbayAdmin extends IndexAdmin
      */
     public function getitemDetails($itemNo) {
         $itemDetails = self::request(['request' => $itemNo], 2);
-        //$itemDetails = self::request(['request' => 204619231974], 2);
 
         // лот протух или ebay вернул хуйню
         if($itemDetails['debug']['errors']) {
             return $itemDetails['debug'];
         }
 
-        $numberFormat = new \NumberFormatter('en_US', \NumberFormatter::CURRENCY);
+//        $numberFormat = new \NumberFormatter('en_US', \NumberFormatter::CURRENCY);
         $document = new Document($itemDetails['response']);
 
         /** сборка массива с данными о лоте */
@@ -197,7 +207,7 @@ class EbayAdmin extends IndexAdmin
         }
         $lot['categories'] = $_POST['parseToCategories'];
 
-        // цены
+        // валюта и цены
         // здесь непонятно почему не работает NumberFormatter, извращаемся
         if ($priceWrapper = $document->first('.x-price-primary .ux-textspans')){
             $price = $priceWrapper->text();
@@ -216,8 +226,8 @@ class EbayAdmin extends IndexAdmin
             $duties = preg_replace('/[A-Z$€ ]/', '', $dutiesWrapper->text());
         }
 
-        // обработаем пока только USD
-        if ($currency[0] == 'US' && is_double($price) && is_double($shipping)) {
+        if (in_array($currency[0], ['US', 'EUR']) && is_double($price) && is_double($shipping)) {
+            $lot['currency'] = $currency[0];
             $lot['price'] = $price;
             $lot['shipping'] = $shipping;
             $lot['duties'] = $duties;
@@ -400,7 +410,13 @@ class EbayAdmin extends IndexAdmin
     private function export($lot, $format) {
 //prettyDump($lot, 1);
         $cur = new CurrenciesEntity();
-        $currency = $cur->findOne(['code' => 'USD', 'enabled' => 1]);
+
+        switch ($lot->currency) {
+            case 'US': $currentCurrency = 'USD'; break;
+            case 'EUR': $currentCurrency = 'EUR'; break;
+            default: $currentCurrency = 'EUR';
+        }
+        $currency = $cur->findOne(['code' => $currentCurrency, 'enabled' => 1]);
         $import = new Import();
 
         // заголовки таблицы
