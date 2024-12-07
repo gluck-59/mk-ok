@@ -30,8 +30,8 @@ class UserRequest
             $user->last_name    = $this->request->post('last_name');
             $user->email        = $this->request->post('email');
             $user->phone        = Phone::toSave($this->request->post('phone'));
-$user->postal_index = $this->request->post('postal_index');
-$user->address = $this->request->post('address');
+//$user->postal_index = $this->request->post('postal_index');
+//$user->address = $this->request->post('address');
             $user->password     = $this->request->post('password');
         }
 
