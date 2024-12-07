@@ -74,6 +74,10 @@ class EbayAdmin extends IndexAdmin
 //$this->design->assign('ebayBrand', $this->parsedLot);
         }
 
+        $brandsCount = $brandsEntity->count();
+        $brands = $brandsEntity->find(['limit' => $brandsCount]);
+        $this->design->assign('brands',     $brands);
+
         $this->design->assign('ebayMotorListUrl', self::EBAY_MOTOR_LIST_URL);
         $this->design->assign('categories', $backendCategoriesHelper->getCategoriesTree());
         $this->response->setContent('product.tpl');
@@ -97,15 +101,12 @@ class EbayAdmin extends IndexAdmin
         if (!empty($this->debug['errors'])) {
             return $curl;
         }
-//prettyDump($curl, 1);
+
         $document = new Document($curl['response']);
         // https://github.com/Imangazaliev/DiDOM/blob/master/README-RU.md
         $arr = $document->find('.s-item__wrapper'); //s-item__link
-
         $lots = [];
         foreach ($arr as $item) {
-//prettyDump($item->children(), 1);
-
             // парсер выдает пару пустых итемов, пропустим их
             $link = $item->first('.s-item__link');
             $itm = parse_url($link->getAttribute('href'), PHP_URL_PATH);
@@ -121,17 +122,24 @@ class EbayAdmin extends IndexAdmin
             } else continue;
 
             // если валюта не бакс-евро — пропускаем
-//            if ($priceBlock = $item->first(' .s-item__price')) {
-//                preg_match('/\$|EUR/', $priceBlock->text(), $currency);
-//                if (empty($currency)) continue;
-//                $lot['currency'] = $currency;
-//            }
+            if ($priceBlock = $item->first('.s-item__price')) {
+                preg_match('/\$|EUR/', $priceBlock->text(), $currency);
+                $lot['currency'] = $currency;
+                $lot['price'] = $priceBlock->text();
+                if (empty($currency)) continue;
+            }
+
+            // если shipping не определен — пропускаем
+            if ($shippingBlock = $item->first('.s-item__shipping.s-item__logisticsCost')) {
+                $shipping = preg_replace('/[a-zA-Z\$\s+]/', '', $shippingBlock->text());
+                $lot['shipping'] = $shipping;
+                if (empty($shipping)) continue;
+            }
 
             // на выходе будет массив номеров лотов, который мы обработаем позже
             $lot['itemNo'] = $itemNo[0];
             $lots[] = $lot;
         } // foreach
-
 
         // в выдаче Ebay много мусора и сортировать по цене нельзя
         //        usort($lots, function($a,$b){
@@ -145,11 +153,10 @@ class EbayAdmin extends IndexAdmin
         } elseif (sizeof($lots) == 1) {
             $this->parsedLot = self::getitemDetails($lots[0]['itemNo']);
         } else {
-            $this->parsedLot->error = 'массив $lots пуст, Ebay ничего не нашел';
+            echo 'массив $lots пуст';
+            prettyDump($lots, 1);
             return $this->parsedLot;
         }
-
-
 
         if (1 || $_POST['export']) {
             self::export($this->parsedLot, 'csv');
@@ -420,7 +427,20 @@ class EbayAdmin extends IndexAdmin
         $import = new Import();
 
         // заголовки таблицы
-        $tableHeaders = ['Category','Brand','Product','Variant','SKU','Price','Old price','Currency ID','Weight','Stock','Units','Visible','Featured','Meta title','Meta keywords','Meta description','Annotation','Description','Images','ebayItemNo','supplier','partNumber','epid'/*, 'lotPrice', 'lotShipping', 'duties'*/];
+        $tableHeaders = ['Category',
+            'Brand',
+            'Product',
+            'Variant',
+//            'SKU',
+            'Price',
+//            'Old price',
+            'Currency ID',
+            'Weight',
+            'Stock',
+//            'Units',
+            'Visible',
+//            'Featured',
+            'Meta title','Meta keywords','Meta description','Annotation','Description','Images','ebayItemNo','supplier','partNumber','epid'/*, 'lotPrice', 'lotShipping', 'duties'*/];
         // содержимое таблицы
         $list = array (
             $tableHeaders,
@@ -429,15 +449,15 @@ class EbayAdmin extends IndexAdmin
                 $_POST['forBrand'], //$lot->manufacturer,                                                       // Brand
                 $lot->name,                                                                                     // Product
                 ' ',                                                                                            // Variant
-                ' ',                                                                                            // SKU
+//                ' ',                                                                                            // SKU
                 $lot->outPrice,                                                                                 // Price
-                '',                                                                                             // Old price
+//                '',                                                                                             // Old price
                 $currency->id,                                                                                  // Currency ID
                 2,                                                                                              // Weight
                 2,                                                                                              // Stock
-                '',                                                                                             // Units
+//                '',                                                                                             // Units
                 1,                                                                                              // Visible
-                0,                                                                                              // Featured
+//                0,                                                                                              // Featured
                 $lot->name,                                                                                     // Meta title
                 $lot->name.' '.$lot->partNumber. ' '.implode(', ', $_POST['parseToCategories']),              // Meta keywords
                 $lot->name,                                                                                     // Meta description
