@@ -75,7 +75,7 @@
 
             // Error and info messages:
             messages: {
-                unknownError: 'Unknown error'
+                unknownError: 'Unknown filemanager error'
             },
 
             // Function returning the current number of files,

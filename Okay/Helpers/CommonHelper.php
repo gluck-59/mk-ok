@@ -55,7 +55,7 @@ class CommonHelper
                 // Отправляем email
                 $this->notify->emailCallbackAdmin($callbackId);
             } else {
-                $this->design->assign('call_error', 'unknown error', true);
+                $this->design->assign('call_error', 'error #'.__LINE__, true);
             }
         }
 

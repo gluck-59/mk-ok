@@ -42,7 +42,7 @@ class UserController extends AbstractController
                 $this->design->assign('user', $this->user);
                 $this->design->assign('user_updated', true, true);
             } else {
-                $this->design->assign('error', 'unknown error');
+                $this->design->assign('error', 'error #'.__LINE__);
             }
 
             if ($password = $this->request->post('password')) {
@@ -129,7 +129,7 @@ class UserController extends AbstractController
             } elseif ($userId = $userHelper->register($user)) {
                 $this->response->redirectTo(Router::generateUrl('user', [], true));
             } else {
-                $this->design->assign('error', 'unknown error');
+                $this->design->assign('error', 'error #'.__LINE__);
             }
         }
 
@@ -155,7 +155,7 @@ class UserController extends AbstractController
             } elseif ($userId = $userHelper->login($email, $password)) {
                 $this->response->redirectTo(Router::generateUrl('user', [], true));
             } else {
-                $this->design->assign('error', 'unknown error');
+                $this->design->assign('error', 'error #'.__LINE__);
             }
         }
 
