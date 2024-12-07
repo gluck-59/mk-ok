@@ -128,9 +128,9 @@
     $(products).each(function(idx,product){
         let impression = new Object();
         impression.id = $(product).find('.product_preview__name_link').data('product');
-        impression.name = $(product).find('.product_preview__no_image').attr('title');
+        impression.name = $(product).find('#productName').val();
         impression.price = $(product).find('.fn_price').text().replaceAll(' ', '');
-        impression.brand = JSON.parse(brands)[$(product).find('#brand_id')[0].value].name;
+        impression.brand = JSON.parse(brands)[$(product).find('#brandId')[0].value].name;
         impression.category = $('.products_container__boxed h1').text();
         impression.position = idx;
         impressions.push(impression)
