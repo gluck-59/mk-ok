@@ -1,5 +1,7 @@
 <!-- Product preview -->
+{*<pre>{$product|print_r}</pre>*}
 `<div class="product_preview fn_product">
+    <input hidden id="brand_id" value="{$product->brand_id}">
     <div class="fn_transfer clearfix">
         <div class="product_preview__center">
             <div class="d-flex product_preview__image">

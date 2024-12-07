@@ -226,6 +226,9 @@ class CategoryController extends AbstractController
             $metaArray,
             $productsFilter['keyword'] ?? null
         );
+
+        $this->design->assign('brands', $catalogBrands);
+
         $this->setMetadataHelper($categoryMetadataHelper);
 
         $this->response->setContent('products.tpl');

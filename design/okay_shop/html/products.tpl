@@ -1,5 +1,5 @@
 <!-- The Categories page -->
-
+{*<pre>{$brands|print_r}</pre>*}
 <div class="clearfix">
     {* Sidebar with filters *}
     <div class="fn_mobile_toogle sidebar d-lg-flex flex-lg-column">
@@ -119,3 +119,26 @@
         </div>
     </div>
 </div>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    let products = $('.product_preview');
+    let brands = '{if $brands}{$brands|json_encode:true}{/if}';
+    let impressions = [];
+
+    $(products).each(function(idx,product){
+        let impression = new Object();
+        impression.id = $(product).find('.product_preview__name_link').data('product');
+        impression.name = $(product).find('.product_preview__no_image').attr('title');
+        impression.price = $(product).find('.fn_price').text().replaceAll(' ', '');
+        impression.brand = JSON.parse(brands)[$(product).find('#brand_id')[0].value].name;
+        impression.category = $('.products_container__boxed h1').text();
+        impression.position = idx;
+        impressions.push(impression)
+    })
+    window.dataLayer.push({
+        "ecommerce": {
+            "currencyCode": "RUB",
+            "impressions": impressions
+        }
+    });
+</script>
