@@ -18,8 +18,8 @@ Disallow: /*?utm
 Disallow: /*&utm
 Disallow: /cart
 
-Disallow: /product.php*
-Disallow: /modules/*
+Disallow: /product.php?
+Disallow: /modules/
 
 User-agent: Yandex
 Allow: *.css
