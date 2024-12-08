@@ -103,6 +103,24 @@
                                             </div>
                                         </div>
                                     </div>
+                                    {assign var="priceEuro" value={$active_delivery->total_price_with_delivery / $currencyEuro->rate_to}}
+                                    {assign var="fee" value={({$active_delivery->total_price_with_delivery / $currencyEuro->rate_to - {$config->fee_treshold}})*{$config->fee_rate}}}
+
+                                    {if $priceEuro > $config->fee_treshold}
+                                        <div class="clearfix">&nbsp;</div>
+                                        <div id="fees" class="block--cart_purchases block--boxed block--border">
+                                            <div class="block__inner">
+                                                <div class="h6" data-language="cart_purchase_title">{$lang->cart_customs_title}</div>
+                                                <div class="purchase__name_link">
+                                                        Ориентировочная стоимость* посылки — <b>{$priceEuro|ceil} евро</b>. Скорее всего она подпадет под пошлину в РФ.
+                                                        <br><br>Примерная сумма* пошлины — <b>{$fee|ceil} {$currency->sign}</b>. Её будет нужно заплатить при получении посылки.
+                                                        <br><br><div class="text-small text-muted">* потому что у таможни свои законы, курсы и калькуляторы. И даже Солнце в их вселенной встает не на востоке, а по приказу начальника поста :)</div>
+                                                </div>
+
+
+                                            </div>
+                                        </div>
+                                    {/if}
 
                                 </div>
                                 <div class="position_sticky f_col f_col-lg-6 f_col-xl-7 flex-lg-first">
@@ -169,6 +187,19 @@
                                                             <div class="form__group">
                                                                 <input class="form__input form__placeholder--focus" name="email" type="text" value="{$request_data.email|escape}" data-language="form_email" >
                                                                 <span class="form__placeholder">{$lang->form_email}*</span>
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="f_col-md-9 f_col-lg-9 f_col-xl-9">
+                                                            <div class="form__group">
+                                                                <input class="form__input form__placeholder--focus" value="{$user->address|escape}" name="address" id="address" type="text" data-language="form_address" />
+                                                                <span class="form__placeholder">{$lang->form_street}</span>
+                                                            </div>
+                                                        </div>
+                                                        <div class="f_col-md-3 f_col-lg-3 f_col-xl-3">
+                                                            <div class="form__group">
+                                                                <input class="form__input form__placeholder--focus" value="{$user->postal_index|escape}" name="postal_index" id="postal_index" type="text" data-language="form_address" />
+                                                                <span class="form__placeholder">{$lang->form_postal_index}</span>
                                                             </div>
                                                         </div>
 

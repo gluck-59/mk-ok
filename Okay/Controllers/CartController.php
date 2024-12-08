@@ -143,6 +143,7 @@ class CartController extends AbstractController
         $activePayment  = $paymentsHelper->getActivePaymentMethod($paymentMethods, $activeDelivery, $this->user);
 
         $this->design->assign('all_currencies', $currenciesEntity->mappedBy('id')->find());
+        $this->design->assign('currencyEuro', $currenciesEntity->findOne(['code' => 'EUR'])); // для расчета пошлин
         $this->design->assign('deliveries', $deliveries);
         $this->design->assign('payment_methods', $paymentMethods);
         $this->design->assign('active_delivery', $activeDelivery);

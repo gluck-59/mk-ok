@@ -35,8 +35,8 @@
                 </div>
                 <div class="purchase_detail__column_value">
                     <div class="purchase_detail__price">
-                        <i>{$discount->percentDiscount|string_format:"%.2f"} %</i>
-                        &minus; {$discount->absoluteDiscount|convert} <span class="currency">{$currency->sign|escape}</span>
+                        <i>{$discount->percentDiscount|string_format:"%.0f"} %</i>
+                        <span style="color: gray"> &minus; {$discount->absoluteDiscount|convert} <span class="currency">{$currency->sign|escape}</span></span>
                     </div>
                 </div>
             </div>

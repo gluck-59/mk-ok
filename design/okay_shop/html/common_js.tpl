@@ -80,6 +80,8 @@
         } else {
             $('#fn_total_separate_delivery').hide();
         }
+
+        $('#fees').hide();
     };
 
     /*Метод ворматирования цены в js*/

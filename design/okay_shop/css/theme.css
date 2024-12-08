@@ -4742,3 +4742,9 @@ table.order_details {
 .discount_tooltip:hover {
   color: #b10707;
 }
+.text-muted {
+  opacity: 0.6;
+}
+.text-small {
+  font-size: smaller;
+}

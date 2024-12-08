@@ -68,7 +68,7 @@
                         <a href="{url_generator route="register"}" class="form__button button--blick" data-language="login_registration">{$lang->login_registration}</a>
                     </div>
                 </div>
-             </div>
+            </div>
         </div>
     </div>
 </div>
