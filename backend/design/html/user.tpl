@@ -79,7 +79,7 @@
                 {*Параметры элемента*}
                 <div class="toggle_body_wrap on fn_card">
                     <div class="row">
-                        <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="col-md-4 col-sm-12">
                             <div class="mb-1">
                                 <div class="heading_label">{$btr->index_name|escape}</div>
                                 <div class="">
@@ -110,7 +110,7 @@
                             {get_design_block block="user_fields_1"}
                         </div>
 
-                        <div class="col-lg-6 col-md-6 col-sm-12">
+                        <div class="col-md-4 col-sm-12">
                             <div class="mb-1">
                                 <div class="heading_label">{$btr->general_group|escape}</div>
                                 <div class="">
@@ -128,12 +128,28 @@
                                     <input name="email" class="form-control" type="text" value="{$user->email|escape}" />
                                 </div>
                             </div>
-                             <div class="mb-1">
+
+                            <div class="row mb-1">
+                                <div class="col-md-9 col-sm-12">
+                                    <div class="heading_label">{$btr->user_street|escape}</div>
+                                    <div class="">
+                                        <input name="address" class="form-control" type="text" value="{$user->address|escape}" />
+                                    </div>
+                                </div>
+                                <div class="col-md-3 col-sm-12">
+                                    <div class="heading_label">{$btr->user_postal_index|escape}</div>
+                                    <div class="">
+                                        <input name="postal_index" class="form-control" type="text" value="{$user->postal_index|escape}" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-1">
                                 <div class="heading_label">{$btr->user_last_ip|escape}</div>
                                 <div class="">
                                     <input name="" class="form-control" type="text" disabled value="{$user->last_ip|escape}" />
                                 </div>
                             </div>
+
                             {get_design_block block="user_fields_2"}
                         </div>
                     </div>
