@@ -11,7 +11,6 @@
             <span class="fn_sku sku_nubmer" {if $product->variant->sku}itemprop = "sku"{/if}>{$product->variant->sku|escape}</span>
         </div>
     </div>
-
     <div class="fn_transfer f_row flex-column flex-lg-row align-items-lg-stretch">
         <div class="block product-page__gallery f_col f_col-lg-7 f_col-xl-7">
             <div class="block--boxed block--border boxed--stretch d-md-flex justify-content-between">
@@ -580,6 +579,30 @@
         </div>
     </div>
 {/if}
+<script>
+    $(window).on('load', function (){
+        window.dataLayer = window.dataLayer || [];
+        dataLayer.push({
+            "ecommerce": {
+                "currencyCode": "RUB",
+                "detail": {
+                    "products": [
+                        {
+                            "id": "{$product->id}",
+                            "name" : "{$product->name}",
+                            "price": {$product->variant->price|convert:null:false},
+                            "brand": "{$brand->name}",
+                            "category": "{$category->name}",
+                            "variant" : "{$product->variant->sku}",
+                            "list": "Результаты поиска",
+                            "position": 1
+                        }
+                    ]
+                }
+            }
+        });
+    })
+</script>
 
 {*микроразметка по схеме JSON-LD*}
 {*
