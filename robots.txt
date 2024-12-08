@@ -18,9 +18,6 @@ Disallow: /*?utm
 Disallow: /*&utm
 Disallow: /cart
 
-Disallow: /product.php?
-Disallow: /modules/
-
 User-agent: Yandex
 Allow: *.css
 Allow: *.js
@@ -40,6 +37,8 @@ Disallow: /*?keyword
 Disallow: /*?utm
 Disallow: /*&utm
 Disallow: /cart
+Disallow: /product.php?
+Disallow: /modules/
 
 User-agent: Googlebot
 Allow: *.css
