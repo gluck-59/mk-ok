@@ -154,10 +154,9 @@ class EbayAdmin extends IndexAdmin
             $this->parsedLot = self::getitemDetails($lots[0]['itemNo']);
         } else {
             echo 'массив $lots пуст';
-            prettyDump($lots, 1);
             return $this->parsedLot;
         }
-
+//prettyDump($this->parsedLot, 1);
         if (1 || $_POST['export']) {
             self::export($this->parsedLot, 'csv');
             return;
@@ -191,11 +190,11 @@ class EbayAdmin extends IndexAdmin
 
         /** сборка массива с данными о лоте */
         $lot['ebayItemNo'] = $itemNo;
+
         // селлер
         $lot['storeName'] = $document->first('.x-sellercard-atf__info__about-seller span.ux-textspans--BOLD')->text(); // sellerName
         $storeUrl = parse_url($document->first('div.x-sellercard-atf a.ux-action')->attr('href'));
         parse_str($storeUrl['query'], $store);
-//        $lot['storeName'] = $store['store_name'];
         $lot['supplier'] = $store['_ssn'];
 
         if ($positive = $document->first('a[href*=#STORE_INFORMATION]')) {
@@ -223,7 +222,7 @@ class EbayAdmin extends IndexAdmin
             $price = (double) str_replace(',', '.', $price);
         }
 
-        if ($shippingWrapper = $document->first('.ux-labels-values--shipping .ux-textspans--BOLD')) {
+        if ($shippingWrapper = $document->first('.ux-labels-values--shipping .ux-labels-values__values-content .ux-textspans--BOLD')) {
             $shipping = preg_replace('/[A-Z$€ ]/', '', $shippingWrapper->text());
             $shipping = (double)str_replace(',', '.', $shipping);
         }
