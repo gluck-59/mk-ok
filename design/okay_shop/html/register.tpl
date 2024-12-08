@@ -55,6 +55,22 @@
                             <input class="form__input form__placeholder--focus" type="text" name="last_name" value="{$request_data.name|escape}" data-language="form_last_name" />
                             <span class="form__placeholder">{$lang->form_last_name}</span>
                         </div>
+                        <div class="row">
+                            <div class="col-md-9">
+                                {* User's  address *}
+                                <div class="form__group">
+                                    <input class="form__input form__placeholder--focus" type="text" name="address" id="address" value="" data-language="form_address" />
+                                    <span class="form__placeholder">{$lang->form_street}*</span>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                {* User's  postal index *}
+                                <div class="form__group">
+                                    <input class="form__input form__placeholder--focus" type="text" name="postal_index" id="postal_index" value="" data-language="form_address" />
+                                    <span class="form__placeholder">{$lang->form_postal_index}*</span>
+                                </div>
+                            </div>
+                        </div>
 
                         {* User's  email *}
                         <div class="form__group">
@@ -110,3 +126,12 @@
         </div>
     </div>
 </div>
+<script>
+    $("#address").suggestions({
+        token: "0a4626882bbbd48b65b3d11beb6e1332aa0a366c",
+        type: "ADDRESS",
+        onSelect: function(suggestion) {
+            $("#postal_index").val(suggestion.data.postal_code);
+        }
+    });
+</script>
