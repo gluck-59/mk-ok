@@ -306,6 +306,16 @@
                         <div class="fn_share jssocials share__icons"></div>
                     </div>
                 </div>
+
+                <noindex>
+                    <div class="details_boxed__item details_boxed__share">
+                        <div class="share">
+                            <div class="share__text">
+                                <span data-language="product_share">Мы не продаем китайское непонятно что. Все представленные бренды достойны твоего комфорта и безопасности.</span>
+                            </div>
+                        </div>
+                    </div>
+                </noindex>
             </div>
         </div>
     </div>
