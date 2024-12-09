@@ -112,15 +112,21 @@
                                             <div class="block__inner">
                                                 <div class="h6" data-language="cart_purchase_title">{$lang->cart_customs_title}</div>
                                                 <div class="purchase__name_link">
-                                                        Ориентировочная стоимость* посылки — <b>{$priceEuro|ceil} евро</b>. Скорее всего она подпадет под пошлину в РФ.
-                                                        <br><br>Примерная сумма* пошлины — <b>{$fee|ceil} {$currency->sign}</b>. Её будет нужно заплатить при получении посылки.
+                                                        Ориентировочная* стоимость посылки — <b>{$priceEuro|ceil} евро</b>. Скорее всего она подпадет под пошлину в РФ.
+                                                        <br><br>Примерная* сумма пошлины — <b>{$fee|ceil} {$currency->sign}</b>. Её будет нужно заплатить при получении посылки.
                                                         <br><br><div class="text-small text-muted">* потому что у таможни свои законы, курсы и калькуляторы. И даже Солнце в их вселенной встает не на востоке, а по приказу начальника поста :)</div>
                                                 </div>
-
-
                                             </div>
                                         </div>
                                     {/if}
+
+                                    <div id="recalculate" class="hidden block--cart_purchases block--boxed block--border">
+                                        <div class="block__inner">
+                                            <div class="purchase__name_link">
+                                                Обнови страницу для расчета пошлин.
+                                            </div>
+                                        </div>
+                                    </div>
 
                                 </div>
                                 <div class="position_sticky f_col f_col-lg-6 f_col-xl-7 flex-lg-first">
