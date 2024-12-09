@@ -145,10 +145,8 @@ class OkayContainer implements ContainerInterface
     private function createService($name)
     {
         $entry = &$this->services[$name];
-if (stripos($name, 'manufacturer')) {
-    prettyDump($name);
-    prettyDump($entry);
-}
+//prettyDump($entry);
+
         if (!is_array($entry) || !isset($entry['class'])) {
             throw new ContainerException($name.' service entry must be an array containing a \'class\' key');
         } elseif (!class_exists($entry['class'])) {
@@ -156,14 +154,23 @@ if (stripos($name, 'manufacturer')) {
         } elseif (isset($entry['lock'])) {
             throw new ContainerException($name.' contains circular reference');
         }
-
         $entry['lock'] = true;
 
         $arguments = isset($entry['arguments']) ? $this->resolveArguments($entry['arguments']) : [];
 
         $reflector = new \ReflectionClass($entry['class']);
-        $service = $reflector->newInstanceArgs($arguments);
+//if (stripos($name, 'manufacturer')) {
+//    prettyDump($arguments);
+//}
+
+//        if (!stripos($name, 'manufacturer'))
+        {
+            $service = $reflector->newInstanceArgs($arguments);
+//            prettyDump($service);
+        }
+
         unset($reflector);
+
 
         return $service;
     }

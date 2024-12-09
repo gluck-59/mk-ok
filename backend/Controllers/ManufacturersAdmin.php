@@ -12,7 +12,7 @@ class ManufacturersAdmin extends IndexAdmin
     
     public function fetch(
         BackendManufacturersHelper  $backendManufacturersHelper,
-        BackendManufacturersRequest $manufacturersRequest
+        BackendManufacturersRequest $backendManufacturersRequest
     ){
         $filter = $backendManufacturersHelper->buildFilter();
         $this->design->assign('current_limit', $filter['limit']);
@@ -20,7 +20,7 @@ class ManufacturersAdmin extends IndexAdmin
         // Обработка действий
         if ($this->request->method('post')) {
             // Сортировка
-            $positions = $manufacturersRequest->postPositions();
+            $positions = $backendManufacturersRequest->postPositions();
             $backendManufacturersHelper->sortPositions($positions);
 
             if ($this->request->post('alphabet_sort_manufacturers')) {
@@ -28,8 +28,8 @@ class ManufacturersAdmin extends IndexAdmin
             }
 
             // Действия с выбранными
-            $ids = $manufacturersRequest->postCheck();
-            switch ($manufacturersRequest->postAction()) {
+            $ids = $backendManufacturersRequest->postCheck();
+            switch ($backendManufacturersRequest->postAction()) {
                 case 'enable': {
                     $backendManufacturersHelper->enable($ids);
                     break;

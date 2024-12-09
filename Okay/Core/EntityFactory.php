@@ -24,8 +24,8 @@ class EntityFactory
 
     public function get($class)
     {
-//prettyDump($class);
         if (!class_exists($class)) {
+//prettyDump($class);
             throw new \Exception("Class \"{$class}\" чото не найден");
 //prettyDump($class. " is not exists111");
         }

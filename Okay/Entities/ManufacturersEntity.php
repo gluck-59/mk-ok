@@ -11,12 +11,14 @@ use Okay\Core\Image;
 
 class ManufacturersEntity extends Entity
 {
-    
+
     protected static $fields = [
         'id',
-        'name',
-        'description',
+        'url',
         'image',
+        'last_modify',
+        'visible',
+        'position',
     ];
 
     protected static $langFields = [
@@ -35,25 +37,26 @@ class ManufacturersEntity extends Entity
     ];
 
     protected static $defaultOrderFields = [
+//        'position',
         'name',
     ];
 
-    protected static $table = 'manufaсturers';
-    protected static $langObject = 'manufaсturer';
-    protected static $langTable = 'manufaсturers';
+    protected static $table = '__manufacturers';
+    protected static $langObject = 'manufacturer';
+    protected static $langTable = 'manufacturers';
     protected static $tableAlias = 'm';
-    protected static $alternativeIdField = 'name';
-    
+    protected static $alternativeIdField = 'url';
+
     public function find(array $filter = [])
     {
         $this->select->distinct(true);
-        $this->select->join('left', '__products AS p', 'p.manufaсturer_id=m.id');
+        $this->select->join('left', '__products AS p', 'p.manufacturer_id = m.id');
         return parent::find($filter);
     }
-    
+
     public function count(array $filter = [])
     {
-        $this->select->join('left', '__products AS p', 'p.manufaсturer_id=m.id');
+        $this->select->join('left', '__products AS p', 'p.manufacturer_id=m.id');
         return parent::count($filter);
     }
 
@@ -61,20 +64,20 @@ class ManufacturersEntity extends Entity
     {
         $this->select->where('p.visible = ' . (int)$productVisible);
     }
-    
+
     protected function filter__product_id($productsIds)
     {
         $this->select->where('p.id IN (:products_ids)');
         $this->select->bindValue('products_ids', (array)$productsIds);
     }
-    
+
     protected function filter__category_id($categoryId)
     {
         $this->select->join('LEFT', '__products_categories pc', 'p.id = pc.product_id');
         $this->select->where('pc.category_id IN (:categories_ids)')
             ->bindValue('categories_ids', (array)$categoryId);
     }
-    
+
     protected function filter__selected_manufacturers($manufacturersIds)
     {
         $this->select->orWhere('m.id IN (:selected_manufacturers)')
@@ -105,7 +108,7 @@ class ManufacturersEntity extends Entity
 
         return ExtenderFacade::execute([static::class, __FUNCTION__], $otherFilter, func_get_args());
     }
-    
+
     protected function filter__price(array $price)
     {
         $productsEntity = $this->entity->get(ProductsEntity::class);
@@ -121,15 +124,15 @@ class ManufacturersEntity extends Entity
             'INNER',
             $productsSelect,
             __FUNCTION__.'__'.ProductsEntity::getTableAlias(),
-            __FUNCTION__.'__'.ProductsEntity::getTableAlias().'.manufacturers_id = m.id');
+            __FUNCTION__.'__'.ProductsEntity::getTableAlias().'.manufacturer_id = m.id');
     }
-    
+
     protected function filter__features($features, $filter)
     {
         $subQuery = $this->queryFactory->newSelect();
         // Алиас для таблицы без языков
         $optionsPx = 'fv';
-        
+
         if (!empty($this->lang->getLangId())) {
             $subQuery->where('lfv.lang_id=' . (int)$this->lang->getLangId())
                 ->join('LEFT', '__lang_features_values AS lfv', 'pf.value_id=lfv.feature_value_id');
@@ -160,7 +163,7 @@ class ManufacturersEntity extends Entity
             ->join('LEFT', '__features_values AS fv', 'fv.id=pf.value_id')
             ->groupBy(['pf.product_id'])
             ->having('COUNT(*) >=' . count($features));
-        
+
         $this->select->where('p.id IN (?)', $subQuery);
     }
 
@@ -168,7 +171,7 @@ class ManufacturersEntity extends Entity
     {
         /** @var Translit $translit */
         $translit = $this->serviceLocator->getService(Translit::class);
-        
+
         $manufacturer = (object)$manufacturer;
         if (empty($manufacturer->url)) {
             $manufacturer->url = $translit->translit($manufacturer->name);
@@ -242,14 +245,14 @@ class ManufacturersEntity extends Entity
 
         // Сдвигаем страницы вперед и вставляем копию на соседнюю позицию
         $update = $this->queryFactory->newUpdate();
-        $update->table('manufacturers')
+        $update->table('__manufacturers')
             ->set('position', 'position+1')
             ->where('position>=:position')
             ->bindValue('position', $manufacturer->position);
         $this->db->query($update);
 
         $update = $this->queryFactory->newUpdate();
-        $update->table('manufacturer')
+        $update->table('__manufacturers')
             ->set('position', ':position')
             ->where('id=:id')
             ->bindValues([
@@ -307,6 +310,6 @@ class ManufacturersEntity extends Entity
             'INNER',
             $productsSelect,
             __FUNCTION__.'__'.ProductsEntity::getTableAlias(),
-            __FUNCTION__.'__'.ProductsEntity::getTableAlias().'.manufacturer_id = b.id');
+            __FUNCTION__.'__'.ProductsEntity::getTableAlias().'.manufacturer_id = m.id');
     }
 }

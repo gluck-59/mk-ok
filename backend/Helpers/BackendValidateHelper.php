@@ -123,6 +123,24 @@ class BackendValidateHelper
         return ExtenderFacade::execute(__METHOD__, $error, func_get_args());
     }
 
+public function getManufacturersValidateError($brand)
+{
+    $brandsEntity = $this->entityFactory->get(BrandsEntity::class);
+
+    $error = '';
+    if (($b = $brandsEntity->get($brand->url)) && $b->id!=$brand->id) {
+        $error = 'url_exists';
+    } elseif ($this->settings->get('global_unique_url') && !$this->urlUniqueValidator->validateGlobal($brand->url, BrandsEntity::class, $brand->id)) {
+        $error = 'global_url_exists';
+    } elseif(empty($brand->name)) {
+        $error = 'empty_name';
+    } elseif(empty($brand->url)) {
+        $error = 'empty_url';
+    }
+
+    return ExtenderFacade::execute(__METHOD__, $error, func_get_args());
+}
+
     public function getBlogCategoryValidateError($category)
     {
         $categoriesEntity = $this->entityFactory->get(BlogCategoriesEntity::class);

@@ -7,6 +7,7 @@ use Okay\Admin\Requests\BackendAuthorsRequest;
 use Okay\Admin\Requests\BackendBlogCategoriesRequest;
 use Okay\Admin\Requests\BackendBlogRequest;
 use Okay\Admin\Requests\BackendBrandsRequest;
+use Okay\Admin\Requests\BackendManufacturersRequest;
 use Okay\Admin\Requests\BackendCallbacksRequest;
 use Okay\Admin\Requests\BackendCouponsRequest;
 use Okay\Admin\Requests\BackendCurrenciesRequest;
@@ -73,6 +74,13 @@ return [
     ],
     BackendBrandsRequest::class => [
         'class' => BackendBrandsRequest::class,
+        'arguments' => [
+            new SR(Request::class),
+            new SR(Translit::class),
+        ]
+    ],
+    BackendManufacturersRequest::class => [
+        'class' => BackendManufacturersRequest::class,
         'arguments' => [
             new SR(Request::class),
             new SR(Translit::class),

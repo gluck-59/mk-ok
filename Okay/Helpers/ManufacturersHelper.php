@@ -34,7 +34,7 @@ class ManufacturersHelper implements GetListInterface
     private $categoriesEntity;
 
     /** @var ManufacturersEntity */
-    private $ManufacturersEntity;
+    private $manufacturersEntity;
 
     /** @var PagesEntity */
     private $pagesEntity;

@@ -47,7 +47,7 @@ class BrandAdmin extends IndexAdmin
 
                 //  сохранить и выход в список
                 $buttonRedirectToList = $this->request->post('apply_and_quit', 'integer', 0);
-                if (($buttonRedirectToList == 1) && !empty($urlRedirectToList = $this->request->getRootUrl() . '/backend/index.php?controller=BrandsAdmin')) {
+                if (($buttonRedirectToList == 1) && !empty($urlRedirectToList = $this->request->getRootUrl() . '/backend/index.php?controller=ManufacturersAdmin')) {
                     $this->postRedirectGet->redirect($urlRedirectToList);
                 }
 
@@ -59,7 +59,7 @@ class BrandAdmin extends IndexAdmin
         }
 
         $this->design->assign('brand', $brand);
-        $this->response->setContent($this->design->fetch('brand.tpl'));
+        $this->response->setContent($this->design->fetch('manufacturer.tpl'));
     }
     
 }

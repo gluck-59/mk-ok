@@ -20,7 +20,7 @@ class BackendManufacturersHelper
      * @var ManufacturersEntity
      */
     private $manufacturersEntity;
-    
+
     /**
      * @var CategoriesEntity
      */
