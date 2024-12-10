@@ -219,12 +219,12 @@ class EbayAdmin extends IndexAdmin
             $price = $priceWrapper->text();
             preg_match('/US|EUR/', $price, $currency);
             $price = preg_replace('/[A-Z$€ ]/', '', $price);
-            $price = (double) str_replace(',', '.', $price);
+            $price = (double) str_replace(',', '', $price);
         }
 
         if ($shippingWrapper = $document->first('.ux-labels-values--shipping .ux-labels-values__values-content .ux-textspans--BOLD')) {
             $shipping = preg_replace('/[A-Z$€ ]/', '', $shippingWrapper->text());
-            $shipping = (double)str_replace(',', '.', $shipping);
+            $shipping = (double)str_replace(',', '', $shipping);
         }
 
         $dutiesWrapper = $document->first('.ux-labels-values--importCharges .ux-textspans--BOLD');
@@ -237,7 +237,7 @@ class EbayAdmin extends IndexAdmin
             $lot['price'] = $price;
             $lot['shipping'] = $shipping;
             $lot['duties'] = $duties;
-            $lot['ebayPrice'] = $lot['price'] + $lot['shipping'] + $lot['duties']; // просто сумма всего
+            $lot['ebayPrice'] = $price + $shipping + $duties; // просто сумма всего
 
             // manufacturer пока не используем для импорта
             $manufacturerWrapper = $document->first('.ux-labels-values.ux-labels-values--brand .ux-labels-values__values-content span');
