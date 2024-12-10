@@ -56,7 +56,7 @@
 
     <div class="products_container d-flex flex-column">
         <div class="products_container__boxed">
-            <h1 class="h1"{if $category} data-category="{$category->id}"{/if}{if $brand} data-brand="{$brand->id}"{/if}>{$h1|escape}</h1>
+            <h1 class="h1"{if $category} data-category="{$category->id}"{/if}{if $brand} data-brand="{$brand->id}"{/if}>{if $brand}Ништяки для {/if}{$h1|escape}</h1>
 
             {if !empty($annotation)}
                 <div class="boxed boxed--big">
