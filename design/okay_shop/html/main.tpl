@@ -31,9 +31,8 @@
 
 {* Top categories *}
 {include "top_categories.tpl"}
-
 {* New products *}
-{get_new_products var=new_products limit=5}
+{get_new_products var=new_products limit=10}
 {if $new_products}
     <div class="main-products main-products__new container">
         <div class="block block--boxed block--border">
@@ -49,6 +48,7 @@
                             <div class="product_item swiper-slide no_hover">{include "product_list.tpl"}</div>
                         {/foreach}
                     </div>
+                    <div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div>
                     <div class="swiper-pagination"></div>
                 </div>
             </div>
