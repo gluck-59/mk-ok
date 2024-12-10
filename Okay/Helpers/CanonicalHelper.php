@@ -75,6 +75,10 @@ class CanonicalHelper
             $result['brand'] = null;
             $filterDepth++;
         }
+        if (!empty($manufacturersFilter)) {
+            $result['manufacturers'] = null;
+            $filterDepth++;
+        }
         
         if ($filterDepth > $this->maxFilterDepth) {
             if (!empty($page)) {
@@ -121,6 +125,9 @@ class CanonicalHelper
                 if (!empty($brandsFilter)) {
                     $result['brand'] = null;
                 }
+                if (!empty($manufacturersFilter)) {
+                    $result['manufacturer'] = null;
+                }
             } else {
                 foreach ($featuresFilter as $values) {
                     if (count($values) > $this->maxFeaturesValuesFilterDepth) {
@@ -129,6 +136,9 @@ class CanonicalHelper
                         );
                         if (!empty($brandsFilter)) {
                             $result['brand'] = null;
+                        }
+                        if (!empty($manufacturersFilter)) {
+                            $result['manufacturer'] = null;
                         }
                         break;
                     }
@@ -140,6 +150,13 @@ class CanonicalHelper
         if (!empty($brandsFilter)) {
             if (count($brandsFilter) > $this->maxBrandFilterDepth) {
                 $result['brand'] = null;
+            }
+        }
+
+        // Не превысили ли максимальное кол-во manufacturer
+        if (!empty($manufacturersFilter)) {
+            if (count($manufacturersFilter) > $this->maxManufacturerFilterDepth) {
+                $result['manufacturer'] = null;
             }
         }
         
@@ -162,6 +179,7 @@ class CanonicalHelper
                         );
                     }
                     $result['brand'] = null;
+$result['manufacturer'] = null;
                     break;
                 case CANONICAL_FIRST_PAGE:
                     $result['page'] = null;
@@ -203,7 +221,19 @@ class CanonicalHelper
                     return false; // no ExtenderFacade
             }
         }
-        
+
+        if (!empty($manufacturersFilter)) {
+            switch ($this->catalogManufacturer) {
+                case CANONICAL_WITHOUT_FILTER:
+                    $result['manufacturer'] = null;
+                    break;
+                case CANONICAL_WITH_FILTER:
+                    break;
+                case CANONICAL_ABSENT:
+                    return false; // no ExtenderFacade
+            }
+        }
+
         return $result; // no ExtenderFacade
     }
 

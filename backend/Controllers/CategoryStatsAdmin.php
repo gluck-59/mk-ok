@@ -7,6 +7,7 @@ namespace Okay\Admin\Controllers;
 use Okay\Admin\Helpers\BackendBrandsHelper;
 use Okay\Admin\Helpers\BackendCategoriesHelper;
 use Okay\Admin\Helpers\BackendCategoryStatsHelper;
+use Okay\Admin\Helpers\BackendManufacturersHelper;
 use Okay\Entities\CategoriesEntity;
 
 class CategoryStatsAdmin extends IndexAdmin
@@ -19,12 +20,17 @@ class CategoryStatsAdmin extends IndexAdmin
         CategoriesEntity           $categoriesEntity,
         BackendCategoryStatsHelper $backendCategoryStatsHelper,
         BackendBrandsHelper        $backendBrandsHelper,
+        BackendManufacturersHelper $backendManufacturersHelper,
         BackendCategoriesHelper    $backendCategoriesHelper
     ) {
         if ($brandId = $this->request->get('brand','integer')) {
             $brand   = $backendBrandsHelper->getBrand((int) $brandId);
             $this->design->assign('brand', $brand);
         }
+if ($manufacturerId = $this->request->get('manufacturer','integer')) {
+    $manufacturer   = $backendManufacturersHelper->getManufacturer((int) $manufacturerId);
+    $this->design->assign('manufacturer', $manufacturer);
+}
 
         if ($categoryId = $this->request->get('category','integer')) {
             $category   = $backendCategoriesHelper->getCategory((int) $categoryId);

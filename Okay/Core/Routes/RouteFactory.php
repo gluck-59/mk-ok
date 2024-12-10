@@ -28,6 +28,14 @@ class RouteFactory
             return new AllBrandsRoute($params);
         }
 
+        if ($routeName === 'manufacturer') {
+            return new ManufacturerRoute($params);
+        }
+
+        if ($routeName === 'manufacturers') {
+            return new AllManufacturersRoute($params);
+        }
+
         if ($routeName === 'blog_category') {
             return new BlogCategoryRoute($params);
         }

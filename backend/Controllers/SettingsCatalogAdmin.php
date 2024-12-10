@@ -41,6 +41,9 @@ class SettingsCatalogAdmin extends IndexAdmin
                     } elseif ($settingsCatalogRequest->postTruncateTableConfirmEntity() === "brand") {
                         $backendSettingsCatalogHelper->clearBrands();
 
+                    } elseif ($settingsCatalogRequest->postTruncateTableConfirmEntity() === "manufacturer") {
+                        $backendSettingsCatalogHelper->clearManufacturers();
+
                     } elseif ($settingsCatalogRequest->postTruncateTableConfirmEntity() === "feature") {
                         $backendSettingsCatalogHelper->clearFeatures();
 

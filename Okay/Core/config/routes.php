@@ -33,19 +33,23 @@
 use Okay\Core\Routes\ProductRoute;
 use Okay\Core\Routes\CategoryRoute;
 use Okay\Core\Routes\BrandRoute;
+use Okay\Core\Routes\ManufacturerRoute;
 use Okay\Core\Routes\BlogCategoryRoute;
 use Okay\Core\Routes\AllBlogRoute;
 use Okay\Core\Routes\AllBrandsRoute;
+use Okay\Core\Routes\AllManufacturersRoute;
 use Okay\Core\Routes\PageRoute;
 use Okay\Core\Routes\PostRoute;
 
 $productRouteParams   = (new ProductRoute())->generateRouteParams();
 $categoryRouteParams  = (new CategoryRoute())->generateRouteParams();
 $brandRouteParams     = (new BrandRoute())->generateRouteParams();
+$manufacturerRouteParams     = (new ManufacturerRoute())->generateRouteParams();
 $blogCategoryRouteParams = (new BlogCategoryRoute())->generateRouteParams();
 $postRouteParams      = (new PostRoute())->generateRouteParams();
 $allBlogRouteParams   = (new AllBlogRoute())->generateRouteParams();
 $allBrandsRouteParams = (new AllBrandsRoute())->generateRouteParams();
+$allManufacturersRouteParams = (new AllManufacturersRoute())->generateRouteParams();
 $pageRouteParams      = (new PageRoute())->generateRouteParams();
 
 return [
@@ -382,6 +386,47 @@ return [
         ],
         'defaults' => $allBrandsRouteParams->getDefaults(),
     ],
+
+
+'manufacturer_features' => [
+    'slug' => '/manufacturer_features' . $manufacturerRouteParams->getSlug(),
+    'patterns' => $manufacturerRouteParams->getPatterns(),
+    'params' => [
+        'controller' => 'ManufacturerController',
+        'method' => 'getFilter',
+    ],
+    'defaults' => $manufacturerRouteParams->getDefaults()
+],
+'manufacturer' => [
+    'slug' => $manufacturerRouteParams->getSlug(),
+    'patterns' => $manufacturerRouteParams->getPatterns(),
+    'params' => [
+        'controller' => 'ManufacturerController',
+        'method' => 'render',
+    ],
+    'defaults' => $manufacturerRouteParams->getDefaults()
+],
+'manufacturers_features' => [
+    'slug' => '/manufacturers_features' . $allManufacturersRouteParams->getSlug(),
+    'patterns' => $allManufacturersRouteParams->getPatterns(),
+    'params' => [
+        'controller' => 'ManufacturersController',
+        'method' => 'getFilter',
+    ],
+    'defaults' => $allManufacturersRouteParams->getDefaults()
+],
+'manufacturers' => [
+    'slug' => $allManufacturersRouteParams->getSlug(),
+    'patterns' => $allManufacturersRouteParams->getPatterns(),
+    'params' => [
+        'controller' => 'ManufacturersController',
+        'method' => 'render',
+    ],
+    'defaults' => $allManufacturersRouteParams->getDefaults(),
+],
+
+
+
     'author' => [
         'slug' => 'authors/{$url}',
         'params' => [

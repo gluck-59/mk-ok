@@ -49,6 +49,11 @@ switch ($object) {
             $entity = $entityFactory->get(\Okay\Entities\BrandsEntity::class);
         }
         break;
+    case 'manufacturers':
+        if ($managers->access('manufacturers', $manager)) {
+            $entity = $entityFactory->get(\Okay\Entities\ManufacturersEntity::class);
+        }
+        break;
     case 'feature':
         if ($managers->access('features', $manager)) {
             $entity = $entityFactory->get(\Okay\Entities\FeaturesEntity::class);

@@ -17,6 +17,7 @@ use Okay\Entities\CurrenciesEntity;
 use Okay\Entities\FeaturesEntity;
 use Okay\Entities\FeaturesValuesEntity;
 use Okay\Entities\ImagesEntity;
+use Okay\Entities\ManufacturersEntity;
 use Okay\Entities\ProductsEntity;
 use Okay\Entities\VariantsEntity;
 
@@ -91,6 +92,28 @@ class BackendImportHelper
                 $product['brand_id'] = $brandsEntity->add($brand);
             }
         }
+
+// Если задан manufacturer
+if (!empty($item['manufacturer'])) {
+    $item['manufacturer'] = trim($item['manufacturer']);
+    // Найдем его по имени
+    $brandId = $this->searchManufacturer($item['manufacturer']);
+
+    if (!$product['manufacturer'] = $manufacturerId) {
+
+        /** @var ManufacturersEntity $manufacturersEntity */
+        $manufacturersEntity = $this->entityFactory->get(ManufacturersEntity::class);
+
+        // Создадим, если не найден
+        $manufacturer = $this->prepareAddBrand([
+            'name'             => $item['manufacturer'],
+            'meta_title'       => $item['manufacturer'],
+            'meta_keywords'    => $item['manufacturer'],
+            'meta_description' => $item['manufacturer'],
+        ]);
+        $product['manufacturer_id'] = $brandsEntity->add($manufacturer);
+    }
+}
 
         // Если задана категория
         $categoryId = null;

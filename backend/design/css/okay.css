@@ -5992,13 +5992,13 @@ body.menu-pin .menu_switch .menu_hamburger::after {
 
 /************************************************************************* Brand.tpl  */
 
-.brand_images_list{
+.brand_images_list, .manufacturer_images_list{
     list-style: none;
     padding: 0;
     margin: 0 -1% -10px;
     overflow: hidden;
 }
-.brand_images_list li{
+.brand_images_list li, .manufacturer_images_list li {
     min-height: 100px;
     overflow: hidden;
     margin-left: 1%;
@@ -6017,7 +6017,7 @@ body.menu-pin .menu_switch .menu_hamburger::after {
     transition: 0.1s all;
     box-sizing: border-box;
 }
-.brand_image_item{
+.brand_image_item, .manufacturer_images_item {
     border: 1px solid #ddd;
     padding: 0;
     float: left;
@@ -6027,7 +6027,7 @@ body.menu-pin .menu_switch .menu_hamburger::after {
     cursor: grab;
 }
 .banner_image:hover .remove_image,
-.brand_image_item:hover .remove_image {
+.brand_image_item:hover, .manufacturer_image_item:hover .remove_image {
     position: absolute;
     top: 0;
     right: 0;

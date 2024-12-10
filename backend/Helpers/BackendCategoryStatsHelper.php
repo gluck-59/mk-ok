@@ -64,6 +64,11 @@ class BackendCategoryStatsHelper
             $filter['brand_id'] = $brandId;
         }
 
+$manufacturerId = $this->request->get('manufacturer', 'integer');
+if (!empty($manufacturerId)) {
+    $filter['manufacturer_id'] = $manufacturerId;
+}
+
         return ExtenderFacade::execute(__METHOD__, $filter, func_get_args());
     }
 

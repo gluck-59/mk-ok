@@ -159,6 +159,19 @@ class ManagerMenu
                 'translation' => 'admintooltip_add_brand',
             ],
         ],
+'manufacturer' => [
+    [
+        'controller' => 'ManufacturerAdmin',
+        'translation' => 'admintooltip_edit_manufacturer',
+        'params' => [
+            'id' => 'id',
+        ],
+    ],
+    [
+        'controller' => 'ManufacturerAdmin',
+        'translation' => 'admintooltip_add_manufacturer',
+    ],
+],
         'page' => [
             [
                 'controller' => 'PageAdmin',

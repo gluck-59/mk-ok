@@ -76,6 +76,7 @@ class BackendExportHelper
         $columnsNames = [
             'category'         => 'Category',
             'brand'            => 'Brand',
+            'manufacturer'      => 'Manufacturer',
             'name'             => 'Product',
             'variant'          => 'Variant',
             'sku'              => 'SKU',
@@ -275,6 +276,9 @@ class BackendExportHelper
         foreach($products as &$product) {
             if ($product['brand_id'] && isset($allBrands[$product['brand_id']])) {
                 $product['brand'] = $allBrands[$product['brand_id']]->name;
+            }
+            if ($product['manufacturer_id'] && isset($allManufacturers[$product['manufacturer']])) {
+                $product['manufacturer'] = $allManufacturers[$product['manufacturer']]->name;
             }
         }
 

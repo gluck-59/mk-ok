@@ -13,6 +13,7 @@ use Okay\Core\Settings;
 use Okay\Entities\BlogEntity;
 use Okay\Entities\BrandsEntity;
 use Okay\Entities\CategoriesEntity;
+use Okay\Entities\ManufacturersEntity;
 use Okay\Entities\PagesEntity;
 use Okay\Entities\ProductsEntity;
 
@@ -213,6 +214,35 @@ class SiteMapHelper
             $this->write($brand, true);
         }
     }
+
+public function writeManufacturersProcedure()
+{
+    /** @var ManufacturersEntity $manufacturersEntity */
+    $manufacturersEntity = $this->entityFactory->get(ManufacturersEntity::class);
+
+    /** @var ProductsEntity $productsEntity */
+    $productsEntity = $this->entityFactory->get(ProductsEntity::class);
+
+    $manufacturersCount = $manufacturersEntity->count(['visible'=>1]);
+    foreach ($manufacturersEntity->find(['visible'=>1, 'limit'=>$manufacturersCount]) as $b) {
+        $url = Router::generateUrl('manufacturer', ['url' => $b->url], true);
+        $lastModify = $productsEntity->cols(['last_modify'])->order('last_modify_desc')->find([
+            'manufacturer_id' => $b->id,
+            'limit'=>1,
+        ]);
+        $lastModify[] = $b->last_modify;
+        $lastModify = substr(max($lastModify), 0, 10);
+        $manufacturer = [
+            'url' => $url,
+            'lastmod' => $lastModify,
+            'changefreq' => 'daily',
+            'priority' => '1.0',
+        ];
+
+        $manufacturer = ExtenderFacade::execute(__METHOD__, $manufacturer, func_get_args());
+        $this->write($manufacturer, true);
+    }
+}
 
     public function writeProductsProcedure()
     {
