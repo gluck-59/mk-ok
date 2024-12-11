@@ -96,67 +96,89 @@ class EbayAdmin extends IndexAdmin
         require_once __DIR__.'/../../thirdParty/DiDom/Node.php';
         require_once __DIR__.'/../../thirdParty/DiDom/Element.php';
 
-        $this->userAgent = self::getRandomUseragent();
-        $curl = self::request($request, 1);
-        if (!empty($this->debug['errors'])) {
-            return $curl;
-        }
-
-        $document = new Document($curl['response']);
-        // https://github.com/Imangazaliev/DiDOM/blob/master/README-RU.md
-        $arr = $document->find('.s-item__wrapper'); //s-item__link
-        $lots = [];
-        foreach ($arr as $item) {
-            // парсер выдает пару пустых итемов, пропустим их
-            $link = $item->first('.s-item__link');
-            $itm = parse_url($link->getAttribute('href'), PHP_URL_PATH);
-            preg_match('/\d{12}/', $itm, $itemNo);
-            if (!$itemNo) continue;
-
-            // если селлер не соответсвует нашим критериям — пропускаем
-            if ($sellerBlock = $item->first('.s-item__seller-info-text')) {
-                $sellerArray = explode(' ', $sellerBlock->text());
-                if (intval($sellerArray[2]) < $this->sellerMinPositive) continue;
-                if (preg_replace('/\D/', '', $sellerArray[1]) < $this->sellerMinFeedback) continue;
-                if (!empty($this->banlist) && in_array($sellerArray[0], $this->banlist)) continue;
-            } else continue;
-
-            // если валюта не бакс-евро — пропускаем
-            if ($priceBlock = $item->first('.s-item__price')) {
-                preg_match('/\$|EUR/', $priceBlock->text(), $currency);
-                $lot['currency'] = $currency;
-                $lot['price'] = $priceBlock->text();
-                if (empty($currency)) continue;
-            }
-
-            // если shipping не определен — пропускаем
-            if ($shippingBlock = $item->first('.s-item__shipping.s-item__logisticsCost')) {
-                $shipping = preg_replace('/[a-zA-Z\$\s+]/', '', $shippingBlock->text());
-                $lot['shipping'] = $shipping;
-                if (empty($shipping)) continue;
-            }
-
-            // на выходе будет массив номеров лотов, который мы обработаем позже
-            $lot['itemNo'] = $itemNo[0];
-            $lots[] = $lot;
-        } // foreach
-
-        // в выдаче Ebay много мусора и сортировать по цене нельзя
-        //        usort($lots, function($a,$b){
-        //            return ($a['ebayPrice']-$b['ebayPrice']);
-        //        });
-
-        // берем второй элемент из массива $lots[1] и обрабатываем его
-        // второй элемент — чтобы случайно не попал левый лот с другим товаром, который будет самым дешевым
-        if (sizeof($lots) > 1) {
-            $this->parsedLot = self::getitemDetails($lots[1]['itemNo']);
-        } elseif (sizeof($lots) == 1) {
-            $this->parsedLot = self::getitemDetails($lots[0]['itemNo']);
+        // если на входе номер лота — сразу идем за ним
+        if (strlen($request['keyword']) == 12 && is_numeric($request['keyword'])) {
+            $this->parsedLot = self::getitemDetails($request['keyword']);
         } else {
-            echo 'массив $lots пуст';
-            return $this->parsedLot;
-        }
+            $this->userAgent = self::getRandomUseragent();
+            $curl = self::request($request, 1);
+            if (!empty($this->debug['errors'])) {
+                return $curl;
+            }
+
+            $document = new Document($curl['response']);
+            // https://github.com/Imangazaliev/DiDOM/blob/master/README-RU.md
+            $arr = $document->find('.s-item__wrapper'); //s-item__link
+
+            $lots = [];
+            foreach ($arr as $item) {
+                // парсер выдает пару пустых итемов, пропустим их
+                $link = $item->first('.s-item__link');
+                $itm = parse_url($link->getAttribute('href'), PHP_URL_PATH);
+                preg_match('/\d{12}/', $itm, $itemNo);
+                if (!$itemNo) {
+//                prettyDump('пропускаем левый итем в строке '.__LINE__);
+                    continue;
+                }
+                // если селлер не соответсвует нашим критериям — пропускаем
+                if ($sellerBlock = $item->first('.s-item__seller-info-text')) {
+                    $sellerArray = explode(' ', $sellerBlock->text());
+                    if (intval($sellerArray[2]) < $this->sellerMinPositive) continue;
+                    if (preg_replace('/\D/', '', $sellerArray[1]) < $this->sellerMinFeedback) continue;
+                    if (!empty($this->banlist) && in_array($sellerArray[0], $this->banlist)) continue;
+                } else {
+//                prettyDump('пропускаем '.$itemNo[0].' в строке '.__LINE__);
+                    continue;
+                }
+                // если валюта не бакс-евро — пропускаем
+                if ($priceBlock = $item->first('.s-item__price')) {
+                    preg_match('/\$|EUR/', $priceBlock->text(), $currency);
+                    $lot['currency'] = $currency;
+                    $lot['price'] = $priceBlock->text();
+                    if (empty($currency)) {
+//                    prettyDump('пропускаем '.$itemNo[0].' в строке '.__LINE__);
+                        continue;
+                    }
+                }
+                // если shipping не определен — пропускаем
+                if ($shippingBlock = $item->first('.s-item__shipping.s-item__logisticsCost')) {
+                    $shipping = preg_replace('/[a-zA-Z\$\s+]/', '', $shippingBlock->text());
+                    $lot['shipping'] = $shipping;
+                    if (empty($shipping)) {
+//                    prettyDump('пропускаем '.$itemNo[0].' в строке '.__LINE__);
+                        continue;
+                    }
+                }
+                // item name для отладки
+                if ($nameBlock = $item->first('.s-item__info .s-item__title span')) {
+                    $lot['name'] = $nameBlock->text();
+                }
+
+
+                // на выходе будет массив номеров лотов, который мы обработаем позже
+                $lot['itemNo'] = $itemNo[0];
+                $lots[] = $lot;
+            } // foreach
+//prettyDump($lots, 1);
+
+            // в выдаче Ebay много мусора и сортировать по цене нельзя
+            //        usort($lots, function($a,$b){
+            //            return ($a['ebayPrice']-$b['ebayPrice']);
+            //        });
+
+            // берем второй элемент из массива $lots[1] и обрабатываем его
+            // второй элемент — чтобы случайно не попал левый лот с другим товаром, который будет самым дешевым
+            if (sizeof($lots) > 1) {
+                $this->parsedLot = self::getitemDetails($lots[1]['itemNo']);
+            } elseif (sizeof($lots) == 1) {
+                $this->parsedLot = self::getitemDetails($lots[0]['itemNo']);
+            } else {
+                echo 'массив $lots пуст';
+                return $this->parsedLot;
+            }
 //prettyDump($this->parsedLot, 1);
+        }
+
         if (1 || $_POST['export']) {
             self::export($this->parsedLot, 'csv');
             return;
@@ -281,9 +303,9 @@ class EbayAdmin extends IndexAdmin
      */
     private function getEbayImages($document) {
         $imagesPath = [];
-        $imgElem = $document->find('.filmstrip img');
+        $imgElem = $document->find('.ux-image-grid img');
         if (sizeof($imgElem) > 0) {
-            for ($i = 0; $i <= sizeof($imgElem); $i++) {
+            for ($i = 0; $i < sizeof($imgElem); $i++) {
                 if (!is_null($imgElem[$i])) {
                     $imgPath = pathinfo($imgElem[$i]->getAttribute('src'));
                     if ($imgPath['basename']) {

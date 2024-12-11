@@ -106,7 +106,11 @@
     {/literal}
     
     {* Title *}
-    <title>{$meta_title|escape}</title>
+    <title>
+        {if $controller == 'BrandController'}Ништяки для{/if}
+        {$meta_title|escape}
+        {if $controller == 'ProductController' OR $controller == 'BrandController' OR $controller == 'CategoryController'}купить в Motokofr.com{/if}
+    </title>
 
     {* Meta tags *}
     {if !empty($meta_keywords)}
