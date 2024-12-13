@@ -303,13 +303,17 @@ class EbayAdmin extends IndexAdmin
      */
     private function getEbayImages($document) {
         $imagesPath = [];
-        $imgElem = $document->find('.ux-image-grid img');
+        $imgElem = $document->find('.filmstrip img');
         if (sizeof($imgElem) > 0) {
             for ($i = 0; $i < sizeof($imgElem); $i++) {
                 if (!is_null($imgElem[$i])) {
                     $imgPath = pathinfo($imgElem[$i]->getAttribute('src'));
                     if ($imgPath['basename']) {
-                        $imagesPath[] = $imgPath['dirname'] . '/s-l1600.' . $imgPath['extension'];
+                        if (empty($imagesPath && strpos($imgPath['dirname'], 'thumbs'))) {
+                            $imagesPath[] = $imgPath['dirname'] . '/s-l1600.' . $imgPath['extension'];
+                        } elseif (!empty($imagesPath && !strpos($imgPath['dirname'], 'thumbs'))) {
+                            $imagesPath[] = $imgPath['dirname'] . '/s-l1600.' . $imgPath['extension'];
+                        }
                     }
                 }
             }

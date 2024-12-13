@@ -72,3 +72,22 @@
         </div>
     </div>
 </div>
+{*{literal}
+    <script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-with-polyfills-latest.js"></script>
+    <script src="https://yastatic.net/s3/passport-sdk/autofill/v1/sdk-suggest-token-with-polyfills-latest.js"></script>
+
+    <script>
+        window.YaAuthSuggest.init(
+            {
+                client_id: "a26aa2fa14d242059f7fa4fef5a97f64",
+                response_type: "token",
+                redirect_uri: "https://motokofr.com"
+            },
+            "https://motokofr.com",
+            { view: "default" }
+        )
+            .then(({handler}) => handler())
+            .then(data => console.log('Сообщение с токеном', data))
+            .catch(error => console.log('Обработка ошибки', error))
+{/literal}
+</script>*}

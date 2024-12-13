@@ -22,10 +22,9 @@ $scripts = [
     (new Js('sticky.min.js'))->setPosition('footer'),
     (new Js('jquery.suggestions.min.js'))->setPosition('head')->setIndividual(true),
     (new Js('yametrika.js'))->setPosition('head')->setIndividual(true),
-    //(new Js('jquery.autocomplete-min.js'))->setPosition('footer'),
     //(new Js('jquery.validate.min.js'))->setPosition('footer'),
 
-//(new Js('bootstrap-select.js'))->setPosition('footer'), // не работает на морде, только в админке
+//(new Js('bootstrap-select.js'))->setPosition('footer'), // не работает на морде, вместо него работает select2.min.js
 ];
 
 return $scripts;
