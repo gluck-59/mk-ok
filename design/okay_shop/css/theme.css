@@ -135,7 +135,7 @@ header {
   right: 0;
 }
 .switcher__link {
-  padding: 5px 10px;
+  padding: 7px 20px;
   font-size: 14px;
   font-weight: 600;
   line-height: 1;
@@ -259,7 +259,7 @@ header {
 .header-contact--time {
   position: relative;
   font-size: 16px;
-  font-weight: 600;
+  font-weight: 500;
   text-decoration: none;
   margin-bottom: 13px;
   line-height: 1.2;

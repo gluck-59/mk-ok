@@ -81,6 +81,7 @@
                             {if $settings->site_email}
                                 <div class="header-contact__item header-contact--email {if !$settings->site_phones} header-contact__item--visible{/if}">
                                     <a class="d-flex align-items-center header-contact__section" href="mailto:{$settings->site_email|escape}" >
+                                        {include file="svg.tpl" svgId="email_icon"}
                                         <span>Email</span>
                                     </a>
                                 </div>

@@ -508,7 +508,7 @@ class EbayAdmin extends IndexAdmin
 
         // csv
         if ($format == 'csv') {
-            $file = __DIR__.'/../files/export/_export_'.date('d-m_G-i', time()).'.csv';
+            $file = __DIR__.'/../files/export/_import_'.date('d-m_G-i', time()).'.csv';
             $fp = fopen($file, 'w');
             foreach ($list as $fields) {
                 fputcsv($fp, $fields, ';');

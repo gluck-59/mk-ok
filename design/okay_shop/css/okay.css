@@ -1498,7 +1498,7 @@ select {
   display: none;
 }
 .menu_group--header .menu_group__item--2 .menu_group__link {
-  padding: 5px 10px;
+  padding: 10px 20px;
   display: block;
   font-size: 14px;
   font-weight: 500;

@@ -41,7 +41,7 @@
 				{if $c->enabled}
 					<form method="POST">
 						<button type="submit" name="prg_seo_hide" class="switcher__link d-flex align-items-center {if $currency->id== $c->id} active{/if}" value="{url path={furl price=null} currency_id=$c->id}">
-							<span class="switcher__name">{$c->name|escape}</span>
+							<span class="switcher__name">{$c->sign|escape}&nbsp;&nbsp;{$c->name|escape}</span>
 						</button>
 					</form>
 				{/if}
