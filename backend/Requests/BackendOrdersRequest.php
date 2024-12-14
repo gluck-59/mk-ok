@@ -32,6 +32,7 @@ class BackendOrdersRequest
         $order->payment_method_id = $this->request->post('payment_method_id', 'integer');
         $order->paid = $this->request->post('paid', 'integer');
         $order->user_id = $this->request->post('user_id', 'integer');
+        $order->shipping_number = $this->request->post('shipping_number', 'comment');
         $order->lang_id = $this->request->post('entity_lang_id', 'integer');
 
         return ExtenderFacade::execute(__METHOD__, $order, func_get_args());

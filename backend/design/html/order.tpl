@@ -421,7 +421,7 @@
                                 <div class="okay_list_body">
                                     <div class="okay_list_body_item">
                                         <div class="okay_list_row  d_flex">
-                                            <div class="okay_list_boding okay_list_ordfig_name">
+                                            <div class="okay_list_boding 1okay_list_ordfig_name">
                                                 <div class="text_600 text_dark boxes_inline">{$btr->general_shipping|escape}</div>
                                                 <div class="boxes_inline">
                                                     <select name="delivery_id" class="selectpicker form-control">
@@ -433,14 +433,16 @@
                                                 </div>
                                                 {get_design_block block="order_delivery_info"}
                                             </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <input type=text name="shipping_number" class="form-control" value='{$order->shipping_number|escape}' placeholder="несколько треков — через пробел" style="width: 20vw;">
+                                                </div>
+                                            </div>
                                             <div class="okay_list_boding okay_list_ordfig_val">
                                                 <div class="input-group">
                                                     <input type=text name=delivery_price class="form-control" value='{$order->delivery_price|escape}'>
                                                     <span class="input-group-addon p-0">{$currency->code|escape}</span>
                                                 </div>
-                                            </div>
-                                            <div class="okay_list_boding okay_list_ordfig_price">
-                                                <div class="input-group"></div>
                                             </div>
                                         </div>
                                     </div>
@@ -516,6 +518,7 @@
                         <a class="btn-minimize" href="javascript:;" ><i class="fa fn_icon_arrow fa-angle-down"></i></a>
                     </div>
                 </div>
+{*<pre>{$order|print_r}</pre>*}
                 <div class="toggle_body_wrap on fn_card">
                     <div class="box_border_buyer fn_contact_info">
                         {if $order->date}
@@ -524,22 +527,28 @@
                                 <div class="boxes_inline text_dark text_600">{$order->date|date} {$order->date|time}</div>
                             </div>
                         {/if}
-                        <div class="mb-1">
-                            <div class="heading_label">{$btr->index_name|escape}</div>
-                            <input name="name" class="form-control" type="text" value="{$order->name|escape}" />
-                        </div>
-                        <div class="mb-1">
-                            <div class="heading_label">{$btr->index_last_name|escape}</div>
-                            <input name="last_name" class="form-control" type="text" value="{$order->last_name|escape}" />
-                        </div>
-                        <div class="mb-1">
-                            <div class="heading_label">{$btr->general_phone|escape}</div>
-                            <input name="phone" class="form-control" type="text" value="{$order->phone|phone}" />
-                        </div>
-                        <div class="mb-1">
-                            <div class="heading_label">E-mail</div>
-                            <input name="email" class="form-control" type="text" value="{$order->email|escape}" />
-                        </div>
+
+                        {if $user}
+                            <div class="mb-1">
+                                <div class="heading_label">Данные из профиля</div>
+                                <input name="" class="form-control" type="text" value="{$user->name|escape}{if $user->last_name} {$user->last_name|escape}{/if}" placeholder="имя-фамилия"/>
+                                <input name="" class="form-control" type="text" value="{$user->postal_index}{if $user->address} {$user->address}{/if}" placeholder="индекс-адрес"/>
+                                <input name="phone" class="form-control" type="text" value="{$user->phone|phone}" placeholder="тел"/>
+                                <input name="email" class="form-control" type="text" value="{$user->email|escape}" placeholder="email"/>
+
+                                <a href="/backend/index.php?controller=UserAdmin&id={$user->id}" target="_blank">Редактировать профиль</a>
+                            </div>
+                        {/if}
+
+    <div class="mb-1">
+        <div class="heading_label"><b>Данные из заказа (заказ без профиля)</b></div>
+            <input name="" class="form-control" type="text" value="{$order->name|escape} {$order->last_name|escape}" />
+            <input name="" class="form-control" type="text" value="{$order->address}" />
+            <input name="phone" class="form-control" type="text" value="{$order->phone|phone}" />
+            <input name="email" class="form-control" type="text" value="{$order->email|escape}" />
+        </div>
+    </div>
+
                         <div class="mb-1">
                             <div class="heading_label">{$btr->general_comment|escape}</div>
                             <textarea name="comment" class="form-control short_textarea">{$order->comment|escape}</textarea>

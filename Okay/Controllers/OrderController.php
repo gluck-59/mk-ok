@@ -24,7 +24,6 @@ class OrderController extends AbstractController
         $url
     ) {
         $order = $ordersEntity->get((string)$url);
-
         if (empty($order)) {
             return false;
         }
@@ -46,8 +45,11 @@ class OrderController extends AbstractController
             }
         }
 
+        if (!empty($order->shipping_number)) {
+            $shipping_numbers = explode(' ', $order->shipping_number);
+        }
+        $order->shipping_number = $shipping_numbers;
         $this->design->assign('order', $order);
-
         $orderMetadataHelper->setUp($order);
         $this->setMetadataHelper($orderMetadataHelper);
         

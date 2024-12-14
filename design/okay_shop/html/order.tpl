@@ -178,7 +178,7 @@
             </div>
             <div class="sticky f_col f_col-lg-6 f_col-xl-7 flex-lg-first">
                 <div class="fn_cart_sticky block--boxed block--border d-flex justify-content-center" data-margin-top="15" data-sticky-for="1024" data-sticky-class="is-sticky">
-                    <div class="order_boxeded">
+                    <div class="order_boxeded" style="width: 100%">
                         {if !$order->paid}
                             {if $payment_methods && !$payment_method && $order->total_price>0}
                                 <div class="block form--boxed form form_cart">
@@ -243,11 +243,11 @@
                                                 <span data-language="order_payment">{$lang->order_payment}:</span>
                                                 <span class="order_payment__name">{$payment_method->name|escape}</span>
                                             </div>
-                                            <form class="order_payment__form" method="post">
+                                            <form class="hidden order_payment__form" method="post">
                                                 <input class="order_payment__button" type=submit name='reset_payment_method' data-language="order_change_payment" value='{$lang->order_change_payment}'/>
                                             </form>
                                             {if $payment_method->description}
-                                                <div class="order_payment__description">
+                                                <div class="hidden order_payment__description">
                                                     {$payment_method->description}
                                                 </div>
                                             {/if}
@@ -287,12 +287,6 @@
                                     </tr>
                                     <tr>
                                         <td>
-                                            <span data-language="order_number_text">{$lang->order_number_text}</span>
-                                        </td>
-                                        <td>№ {$order->id}</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
                                             <span data-language="order_name">{$lang->order_name}</span>
                                         </td>
                                         <td>{$order->name|escape} {$order->last_name|escape}</td>
@@ -327,17 +321,33 @@
                                             <td>{$delivery->name|escape}</td>
                                         </tr>
                                     {/if}
+                                    <tr>
+                                        <td>
+                                            <span data-language="order_delivery">{$lang->shipping_number}</span>
+                                        </td>
+                                        <td>
+                                            {if $order->shipping_number}
+                                                {foreach $order->shipping_number as $track}
+                                                    <a href="https://www.pochta.ru/tracking?barcode={$track}" target="_blank">{$track}
+                                                        <svg width="10" height="10" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M21 3L15 3M21 3L12 12M21 3V9" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
+                                                            <path d="M21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H11" stroke="currentColor"  stroke-linecap="round"/>
+                                                        </svg>
+                                                    </a><br>
+                                                {/foreach}
+                                            {else}ожидаем трек-номер
+                                            {/if}</td>
+                                    </tr>
                                 </table>
                             </div>
                         </div>
-
-                        <div class="block form form_cart">
+                        <!--div class="block form form_cart">
                             <div class="o_notify_v2_content">
                                 <div class="o_notify_v2_content_inner" data-language="order_success_text">
                                     <p><strong>{$order->name|escape}</strong>, {$lang->order_success_text}</p>
                                 </div>
                             </div>
-                        </div>
+                        </div-->
                     </div>
                 </div>
             </div>
