@@ -537,7 +537,7 @@
                                         <div class="heading_label">{$btr->general_currency|escape}</div>
                                         <select name="variants[currency_id][]" class="selectpicker form-control">
                                             {foreach $currencies as $c}
-                                                <option value="{$c->id}" >{$c->code|escape}</option>
+                                                <option value="{$c->id}" {if $c->code == 'USD'}selected=""{/if}>{$c->code|escape}</option>
                                             {/foreach}
                                         </select>
                                     </div>
