@@ -1109,7 +1109,7 @@
     function generate_url() {
         url = $('input[name="name"]').val();
         url = translit(url);
-        if ($('[name=partNumber]').val() !== undefined) {
+        if ($('[name=partNumber]').val() !== undefined && $('[name=partNumber]').val() !== '') {
             url = url + ' ' + $('[name=partNumber]').val()
         }
         if (is_translit_alpha.size() > 0) {
