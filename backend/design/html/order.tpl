@@ -518,7 +518,6 @@
                         <a class="btn-minimize" href="javascript:;" ><i class="fa fn_icon_arrow fa-angle-down"></i></a>
                     </div>
                 </div>
-{*<pre>{$order|print_r}</pre>*}
                 <div class="toggle_body_wrap on fn_card">
                     <div class="box_border_buyer fn_contact_info">
                         {if $order->date}
@@ -527,7 +526,6 @@
                                 <div class="boxes_inline text_dark text_600">{$order->date|date} {$order->date|time}</div>
                             </div>
                         {/if}
-
                         {if $user}
                             <div class="mb-1">
                                 <div class="heading_label">Данные из профиля</div>
@@ -535,20 +533,17 @@
                                 <input name="" class="form-control" type="text" value="{$user->postal_index}{if $user->address} {$user->address}{/if}" placeholder="индекс-адрес"/>
                                 <input name="phone" class="form-control" type="text" value="{$user->phone|phone}" placeholder="тел"/>
                                 <input name="email" class="form-control" type="text" value="{$user->email|escape}" placeholder="email"/>
-
                                 <a href="/backend/index.php?controller=UserAdmin&id={$user->id}" target="_blank">Редактировать профиль</a>
                             </div>
+                        {else}
+                            <div class="mb-1">
+                                <div class="heading_label"><b>Данные из заказа (заказ без профиля)</b></div>
+                                <input name="" class="form-control" type="text" value="{$order->name|escape} {$order->last_name|escape}" />
+                                <input name="" class="form-control" type="text" value="{$order->address}" />
+                                <input name="phone" class="form-control" type="text" value="{$order->phone|phone}" />
+                                <input name="email" class="form-control" type="text" value="{$order->email|escape}" />
+                            </div>
                         {/if}
-
-    <div class="mb-1">
-        <div class="heading_label"><b>Данные из заказа (заказ без профиля)</b></div>
-            <input name="" class="form-control" type="text" value="{$order->name|escape} {$order->last_name|escape}" />
-            <input name="" class="form-control" type="text" value="{$order->address}" />
-            <input name="phone" class="form-control" type="text" value="{$order->phone|phone}" />
-            <input name="email" class="form-control" type="text" value="{$order->email|escape}" />
-        </div>
-    </div>
-
                         <div class="mb-1">
                             <div class="heading_label">{$btr->general_comment|escape}</div>
                             <textarea name="comment" class="form-control short_textarea">{$order->comment|escape}</textarea>

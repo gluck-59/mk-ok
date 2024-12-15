@@ -783,7 +783,7 @@
 
         {*Связанные товары*}
         <div class="col-lg-6 col-md-12">
-            <div class="fn_step-12 boxed fn_toggle_wrap min_height_210px">
+            <div class="fn_step-12 boxed fn_toggle_wrap min_height_335px">
                 {backend_compact_product_list title=$btr->general_recommended
                 name="related_products"
                 products=$related_products
