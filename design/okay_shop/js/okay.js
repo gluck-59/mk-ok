@@ -618,7 +618,7 @@ $(function () {
   if ($(".fn_select2").length) {
     $(".fn_select2").each(function () {
       $(this).select2({
-        minimumResultsForSearch: 20,
+        minimumResultsForSearch: 5,
         dropdownParent: $(this).next(".dropDownSelect2"),
       });
     });
