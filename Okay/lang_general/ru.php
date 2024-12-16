@@ -54,4 +54,4 @@ $lang_general['date_FR_12'] = "Декабря";
 $lang_general['cart_title'] = "Оформление заказа";
 $lang_general['general_search'] = "Поиск";
 $lang_general['meta_page'] = ", страница";
-$lang_general['order_title'] = "Ваш заказ №";
+$lang_general['order_title'] = "Заказ №";

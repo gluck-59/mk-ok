@@ -197,10 +197,10 @@
                                     <table class="table">
                                         <thead>
                                         <tr>
-                                            <th></th>  
                                             <th>
                                                 <span data-language="user_number_of_order">{$lang->user_number_of_order}</span>
                                             </th>
+                                            <th>Состав</th>
                                             <th>
                                                 <span data-language="user_order_date">{$lang->user_order_date}</span>
                                             </th>
@@ -211,20 +211,20 @@
                                         </thead>
                                         {foreach $orders as $order}
                                         <tr>
-                                            <td width="50px"><a class="fn_user_orders_switch" href="javascript:;"></a></td>
                                             {* Order number *}
                                             <td>
-                                                <a href='{url_generator route="order" url=$order->url}'><span data-language="user_order_number">{$lang->user_order_number}</span>{$order->id}</a>
+                                                <a href='{url_generator route="order" url=$order->url}'><span data-language="user_order_number">{$lang->user_order_number}</span>{$order->id}
+                                                    {if $order->paid == 1}
+                                                        <span data-language="status_paid">({$lang->status_paid})</span>
+                                                    {/if}
+                                                </a>
                                             </td>
-    
+                                            <td width="150px"><a class="fn_user_orders_switch" href="javascript:;"></a></td>
                                             {* Order date *}
                                             <td>{$order->date|date}</td>
     
                                             {* Order status *}
                                             <td>
-                                                {if $order->paid == 1}
-                                                <span data-language="status_paid">{$lang->status_paid}</span>,
-                                                {/if}
                                                 {$orders_status[$order->status_id]->name|escape}
                                             </td>
                                         </tr>

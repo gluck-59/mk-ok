@@ -265,8 +265,6 @@
 
                         {/if}
                         <div class="block form form_cart">
-{*<pre>{$order|print_r}</pre>*}
-{*<pre>{$order_status|print_r}</pre>*}
                             <div class="h6" data-language="order_details">{$lang->order_details}</div>
                             {* Order details *}
                             <div class="block padding block__description--style">
@@ -285,18 +283,56 @@
                                         </td>
                                         <td>{$order->date|date} <span data-language="order_time">{$lang->order_time}</span> {$order->date|time}</td>
                                     </tr>
+                                    {if $delivery}
+                                        <tr>
+                                            <td>
+                                                <span data-language="order_delivery">{$lang->order_delivery}</span>
+                                            </td>
+                                            <td>{$delivery->name|escape}</td>
+                                        </tr>
+                                    {else}
+                                        <tr>
+                                            <td>
+                                                <span data-language="order_delivery">{$lang->order_delivery}</span>
+                                            </td>
+                                            <td>-= ПЕРЕВОЗЧИК НЕ ВЫБРАН =-</td>
+                                        </tr>
+                                    {/if}
+                                    {if $order->name and $order->last_name}
+                                        {assign var="recepientName" value=$order->name}
+                                        {assign var="recepientLastname" value=$order->last_name}
+                                    {else}
+                                        {assign var="recepientName" value=$user->name}
+                                        {assign var="recepientLastname" value=$user->last_name}
+                                    {/if}
                                     <tr>
                                         <td>
-                                            <span data-language="order_name">{$lang->order_name}</span>
+                                            <span data-language="order_name">{$lang->cart_form_header}</span>
                                         </td>
-                                        <td>{$order->name|escape} {$order->last_name|escape}</td>
+                                        <td>{$recepientName|escape} {$recepientLastname|escape}</td>
                                     </tr>
+                                    {if $order->address}
+                                        {assign var="recepientAddress" value=$order->address}
+                                        {assign var="recepientIndex" value="-= ИНДЕКС НЕ УКАЗАН =-"}
+                                    {elseif $user->address}
+                                        {assign var="recepientAddress" value=$user->address}
+                                        {assign var="recepientIndex" value=$user->postal_index}
+                                    {else}
+                                        {assign var="recepientAddress" value='-= НЕТ АДРЕСА =-'}
+                                        {assign var="recepientIndex" value=''}
+                                    {/if}
                                     <tr>
                                         <td>
-                                            <span data-language="order_email">{$lang->order_email}</span>
+                                            <span data-language="order_name">{$lang->email_order_address}</span>
                                         </td>
-                                        <td>{$order->email|escape}</td>
+                                        <td>{$recepientIndex|escape} {$recepientAddress|escape}</td>
                                     </tr>
+{*                                    <tr>*}
+{*                                        <td>*}
+{*                                            <span data-language="order_email">{$lang->order_email}</span>*}
+{*                                        </td>*}
+{*                                        <td>{$order->email|escape}</td>*}
+{*                                    </tr>*}
                                     {if $order->phone}
                                         <tr>
                                             <td>
@@ -313,14 +349,7 @@
                                             <td>{$order->comment|escape|nl2br}</td>
                                         </tr>
                                     {/if}
-                                    {if $delivery}
-                                        <tr>
-                                            <td>
-                                                <span data-language="order_delivery">{$lang->order_delivery}</span>
-                                            </td>
-                                            <td>{$delivery->name|escape}</td>
-                                        </tr>
-                                    {/if}
+
                                     <tr>
                                         <td>
                                             <span data-language="order_delivery">{$lang->shipping_number}</span>

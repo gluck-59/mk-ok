@@ -10,6 +10,7 @@ use Okay\Entities\OrdersEntity;
 use Okay\Entities\OrderStatusEntity;
 use Okay\Helpers\MetadataHelpers\OrderMetadataHelper;
 use Okay\Helpers\OrdersHelper;
+use Okay\Entities\UsersEntity;
 
 class OrderController extends AbstractController
 {
@@ -21,6 +22,7 @@ class OrderController extends AbstractController
         CurrenciesEntity    $currenciesEntity,
         OrdersHelper        $ordersHelper,
         OrderMetadataHelper $orderMetadataHelper,
+        UsersEntity         $UsersEntity,
         $url
     ) {
         $order = $ordersEntity->get((string)$url);
@@ -49,7 +51,9 @@ class OrderController extends AbstractController
             $shipping_numbers = explode(' ', $order->shipping_number);
         }
         $order->shipping_number = $shipping_numbers;
+
         $this->design->assign('order', $order);
+
         $orderMetadataHelper->setUp($order);
         $this->setMetadataHelper($orderMetadataHelper);
         
@@ -63,7 +67,11 @@ class OrderController extends AbstractController
                 $order = $ordersEntity->get((int)$order->id);
             }
         }
-        
+
+        // user
+        $user = $UsersEntity->findOne(['id' => $order->user_id]);
+        $this->design->assign('user', $user);
+
         // Способ доставки
         $delivery = $ordersHelper->getOrderDelivery($order);
         $this->design->assign('delivery', $delivery);

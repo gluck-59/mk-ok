@@ -109,7 +109,7 @@ class UserController extends AbstractController
         }
         
         $this->design->assign('active_tab', $activeTab);
-        $this->design->assign('meta_title', $this->user->name);
+        $this->design->assign('meta_title', $this->user->name .' — кабинет');
         $this->design->assign('noindex_follow', true);
         $this->design->assign('canonical', Router::generateUrl('user', [], true));
 

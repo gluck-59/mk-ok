@@ -21,7 +21,7 @@ class OrderMetadataHelper extends CommonMetadataHelper
     {
         /** @var FrontTranslations $translations */
         $translations = $this->SL->getService(FrontTranslations::class);
-        $metaTitle = $this->compileMetadata($translations->getTranslation('order_title')) . ' ' . $this->order->id;
+        $metaTitle = $this->compileMetadata($translations->getTranslation('order_title')) . $this->order->id;
         return ExtenderFacade::execute(__METHOD__, $metaTitle, func_get_args());
     }
     
