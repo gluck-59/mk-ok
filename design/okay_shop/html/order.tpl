@@ -3,10 +3,11 @@
 <div class="block">
     <div class="block__header block__header--boxed block__header--border">
         <div class="block__title block__title--order">
-            {include file="svg.tpl" svgId="success_icon"}
-            <span data-language="order_greeting">{$lang->order_greeting}</span>
+            <span data-language="order_greeting">{$lang->order_number_text}</span>
             <span class="order_number">№ {$order->id}</span>
-            <span data-language="order_success_issued">{$lang->order_success_issued}</span>
+            {if $order->paid == 1}
+                &nbsp;<span data-language="status_paid">{$lang->status_paid}</span>
+            {/if}
         </div>
     </div>
 
@@ -264,6 +265,8 @@
 
                         {/if}
                         <div class="block form form_cart">
+{*<pre>{$order|print_r}</pre>*}
+{*<pre>{$order_status|print_r}</pre>*}
                             <div class="h6" data-language="order_details">{$lang->order_details}</div>
                             {* Order details *}
                             <div class="block padding block__description--style">
@@ -274,9 +277,6 @@
                                         </td>
                                         <td>
                                             {$order_status->name|escape}
-                                            {if $order->paid == 1}
-                                                , <span data-language="status_paid">{$lang->status_paid}</span>
-                                            {/if}
                                         </td>
                                     </tr>
                                     <tr>
@@ -328,12 +328,7 @@
                                         <td>
                                             {if $order->shipping_number}
                                                 {foreach $order->shipping_number as $track}
-                                                    <a href="https://www.pochta.ru/tracking?barcode={$track}" target="_blank">{$track}
-                                                        <svg width="10" height="10" viewBox="0 0 24 24" stroke-width="1.5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                            <path d="M21 3L15 3M21 3L12 12M21 3V9" stroke="currentColor"  stroke-linecap="round" stroke-linejoin="round"/>
-                                                            <path d="M21 13V19C21 20.1046 20.1046 21 19 21H5C3.89543 21 3 20.1046 3 19V5C3 3.89543 3.89543 3 5 3H11" stroke="currentColor"  stroke-linecap="round"/>
-                                                        </svg>
-                                                    </a><br>
+                                                    <a href="https://www.pochta.ru/tracking?barcode={$track}" target="_blank">{$track}&nbsp;<i class="fa fa-external-link"></i></a><br>
                                                 {/foreach}
                                             {else}ожидаем трек-номер
                                             {/if}</td>

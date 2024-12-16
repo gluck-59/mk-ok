@@ -17,6 +17,7 @@ Disallow: /*?keyword
 Disallow: /*?utm
 Disallow: /*&utm
 Disallow: /cart
+Disallow: /contact-form.php
 
 User-agent: Yandex
 Allow: *.css

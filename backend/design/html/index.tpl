@@ -99,7 +99,7 @@
         </div>
         <div class="admin_switches">
             <div class="box_adswitch">
-                <a class="btn_admin" href="{url_generator route='main' absolute=1}">
+                <a class="btn_admin" href="{url_generator route='main' absolute=1}" target="_blank">
                     {include file='svg_icon.tpl' svgId='icon_desktop'}
                     <span class="hidden-md-down">{$btr->index_go_to_site|escape}</span>
                 </a>
