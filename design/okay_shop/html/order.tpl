@@ -231,11 +231,11 @@
                                     </div>
                                 </div>
                             {elseif $payment_method}
-                                <div class="block form--boxed form form_cart">
-
+                                <div class="block form form_cart">
                                     {* Payments *}
-                                    <div class="h6">
-                                        <span data-language="order_payment_details">{$lang->order_payment_details}</span>
+                                    <div class="h6" data-language="order_payment_details">
+                                        Заказ ждет оплаты
+{*                                        {$lang->order_payment_details}*}
                                     </div>
                                     {* Selected payment *}
                                     <div class="block_selected_payment">
@@ -258,6 +258,10 @@
                                                 {*payment's form HTML code is in the /payment/ModuleName/form.tpl*}
                                                 {checkout_payment_form order_id=$order->id module=$payment_method->module}
                                             </div>
+                                            <center>
+                                                <img class="lazy" data-src="../../../backend/files/qr_payment/qr_payment.png" src="{$rootUrl}/design/{get_theme}/images/xloading.gif" alt="{$payment_method->name|escape}" title="{$payment_method->name|escape}"/>
+                                            </center>
+
                                         </div>
                                     </div>
                                 </div>
