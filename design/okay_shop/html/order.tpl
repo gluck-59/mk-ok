@@ -7,6 +7,8 @@
             <span class="order_number">№ {$order->id}</span>
             {if $order->paid == 1}
                 &nbsp;<span data-language="status_paid">{$lang->status_paid}</span>
+            {else}
+                <span data-language="status_paid">ждет оплаты</span>
             {/if}
         </div>
     </div>
@@ -233,10 +235,9 @@
                             {elseif $payment_method}
                                 <div class="block form form_cart">
                                     {* Payments *}
-                                    <div class="h6" data-language="order_payment_details">
-                                        Заказ ждет оплаты
+{*                                    <div class="h6" data-language="order_payment_details">*}
 {*                                        {$lang->order_payment_details}*}
-                                    </div>
+{*                                    </div>*}
                                     {* Selected payment *}
                                     <div class="block_selected_payment">
                                         <div class="order_payment">
