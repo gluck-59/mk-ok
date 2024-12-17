@@ -171,7 +171,7 @@ class EbayAdmin extends IndexAdmin
             } elseif (sizeof($lots) == 1) {
                 $this->parsedLot = self::getitemDetails($lots[0]['itemNo']);
             } else {
-                echo 'массив $lots пуст';
+                die('массив $lots пуст. не подключен VPN?');
                 return $this->parsedLot;
             }
 //prettyDump($this->parsedLot, 1);
@@ -526,8 +526,8 @@ class EbayAdmin extends IndexAdmin
     }
 
 
-    public function test() {
-        echo 'test'.PHP_EOL;
+    public function updatePrices() {
+        echo PHP_EOL.PHP_EOL.'updatePrices'.PHP_EOL;
 //        return 'test';
     }
 
