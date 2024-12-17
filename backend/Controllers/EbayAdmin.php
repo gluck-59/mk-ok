@@ -3,21 +3,19 @@
 namespace Okay\Admin\Controllers;
 
 use DiDom\Document;
-use libphonenumber\ValidationResult;
-use Okay\Admin\Helpers\BackendBrandsHelper;
 use Okay\Admin\Helpers\BackendCategoriesHelper;
 use Okay\Admin\Helpers\BackendFeaturesHelper;
-use Okay\Admin\Helpers\BackendImportHelper;
 use Okay\Admin\Helpers\BackendProductsHelper;
 use Okay\Admin\Helpers\BackendSpecialImagesHelper;
 use Okay\Admin\Helpers\BackendValidateHelper;
 use Okay\Admin\Helpers\BackendVariantsHelper;
 use Okay\Admin\Requests\BackendProductsRequest;
 use Okay\Core\Import;
+use Okay\Core\QueryFactory;
 use Okay\Entities\BrandsEntity;
-//use Okay\Entities\ManufacturersEntity;
 use Okay\Entities\CurrenciesEntity;
 use Okay\Entities\RouterCacheEntity;
+
 
 
 class EbayAdmin extends IndexAdmin
@@ -30,7 +28,15 @@ class EbayAdmin extends IndexAdmin
     private $min_prib = 10;
     private $max_prib = 100000;
     private $nacenka_percent = 100; // в процентах %% — учитываются миша, армяне и я
+
     public $debug;
+
+    /**
+     * @var QueryFactory
+     */
+    private static $queryFactory;
+
+
 
     /**
      * пробелы в запросе заменить на +
@@ -50,23 +56,15 @@ class EbayAdmin extends IndexAdmin
     public function fetch(
         BackendCategoriesHelper    $backendCategoriesHelper,
         BrandsEntity               $brandsEntity,
-//        ManufacturersEntity        $manufacturersEntity,
         CurrenciesEntity           $currenciesEntity,
         BackendProductsRequest     $productRequest,
         BackendProductsHelper      $backendProductsHelper,
         BackendVariantsHelper      $backendVariantsHelper,
         BackendFeaturesHelper      $backendFeaturesHelper,
         BackendSpecialImagesHelper $backendSpecialImagesHelper,
-//BackendBrandsHelper         $backendBrandsHelper,
         BackendValidateHelper      $backendValidateHelper,
         RouterCacheEntity          $routerCacheEntity
-
-//        Document                    $document
     ) {
-
-//$ebayBrands = $backendBrandsHelper->findAllBrands();
-//prettyDump($ebayBrands, 1);
-
         if ($this->request->method('post')) {
             $this->parsedLot = self::parse($_POST);
             $this->design->assign('ebayRequest', $_POST); // $this->request->post('ПОЛЕ') может брать только с ПОЛЕ
@@ -84,7 +82,7 @@ class EbayAdmin extends IndexAdmin
     }
 
 
-    function parse($request, $findpair = 0) {
+    function parse($request) {
         if (!$request['keyword']) {
             $this->parsedLot->error = 'В запросе для Ebay нет keyword';
             return $this->parsedLot;
@@ -499,13 +497,6 @@ class EbayAdmin extends IndexAdmin
             ]
         );
 
-        // xlsx
-//        if ($format == 'xlsx') {
-//            // https://github.com/shuchkin/simplexlsxgen
-//            $xlsx = \Shuchkin\SimpleXLSXGen::fromArray($list);
-//            $xlsx->downloadAs('export.xlsx'); // or downloadAs('books.xlsx') or $xlsx_content = (string) $xlsx
-//        }
-
         // csv
         if ($format == 'csv') {
             $file = __DIR__.'/../files/export/_import_'.date('d-m_G-i', time()).'.csv';
@@ -536,7 +527,8 @@ class EbayAdmin extends IndexAdmin
 
 
     public function test() {
-        return 'test';
+        echo 'test'.PHP_EOL;
+//        return 'test';
     }
 
 
