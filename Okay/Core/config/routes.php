@@ -61,7 +61,7 @@ return [
         ],
     ],
     'contact' => [
-        'slug' => '/contact',
+        'slug' => '(.*contact.*)',
         'params' => [
             'controller' => 'FeedbackController',
             'method' => 'render',
