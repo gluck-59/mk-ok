@@ -319,10 +319,25 @@ return [
     'support' => [
         'slug' => '/support.php',
         'params' => [
-            'controller' => 'SupportController',
-            'method' => 'checkDomain',
+            'controller' => 'ProductsController',
+            'method' => 'render',
         ],
     ],
+
+
+'old_product' => [
+    'slug' => '(.*php)',
+    'patterns' => [
+        '{$url}' => '(.*)',
+    ],
+    'params' => [
+        'controller' => 'ProductsController',
+        'method' => 'render',
+    ],
+],
+
+
+
     'product' => [
         'slug' => $productRouteParams->getSlug(),
         'patterns' => $productRouteParams->getPatterns(),

@@ -39,7 +39,9 @@ Disallow: /*?utm
 Disallow: /*&utm
 Disallow: /cart
 Disallow: /product.php?
+Disallow: /category.php?
 Disallow: /modules/
+Disallow: /contact-form.php
 
 User-agent: Googlebot
 Allow: *.css

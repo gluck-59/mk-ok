@@ -83,7 +83,7 @@ class Response
     {
         $this->adapterManager = $adapterManager;
         $this->type = RESPONSE_HTML;
-        $this->addHeader('X-Powered-CMS: OkayCMS ' . $version);
+//        $this->addHeader('X-Powered-CMS: OkayCMS ' . $version);
     }
     
     /**
