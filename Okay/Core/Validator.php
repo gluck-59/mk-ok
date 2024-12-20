@@ -156,4 +156,10 @@ class Validator
         return true;
     }
 
+
+    public function verifySpam($string) {
+        $badWordsArr = explode(' ', $this->settings->site_spam_words);
+        preg_match('/(.*'.implode('|', $badWordsArr).'.*)/', strtolower($string), $isSpam);
+        return !empty($isSpam);
+    }
 }

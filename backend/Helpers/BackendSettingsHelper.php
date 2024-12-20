@@ -283,6 +283,7 @@ class BackendSettingsHelper
 
         $this->settings->update('site_name', $this->request->post('site_name'));
         $this->settings->update('site_annotation', $this->request->post('site_annotation'));
+        $this->settings->update('site_spam_words', $this->request->post('site_spam_words'));
 
         if ($recaptcha_scores = $this->request->post('recaptcha_scores')) {
             foreach ($recaptcha_scores as $k => $score) {

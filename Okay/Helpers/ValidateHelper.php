@@ -117,6 +117,8 @@ class ValidateHelper
             $error = 'empty_text';
         } elseif ($this->settings->get('captcha_feedback') && !$this->validator->verifyCaptcha('captcha_feedback', $captchaCode)) {
             $error = 'captcha';
+        } elseif ($this->validator->verifySpam($feedback->message)) {
+            $error = 'captcha'; // на самом деле мы обнаружили спам, но не будем привлекать внимание и запутаем спамера неправильным сообщением
         }
 
         return ExtenderFacade::execute(__METHOD__, $error, func_get_args());

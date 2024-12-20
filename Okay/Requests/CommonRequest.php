@@ -39,9 +39,6 @@ class CommonRequest
         if ($this->request->post('feedback')) {
             $message = $this->request->post('message');
 
-            preg_match('/(.*COCAIN.*)/', $message, $isSpam);
-            if (!empty($isSpam)) return;
-
             $feedback = new \stdClass;
             $feedback->email    = $this->request->post('email');
             $feedback->name     = $this->request->post('name');

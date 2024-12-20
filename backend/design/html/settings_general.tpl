@@ -110,8 +110,14 @@
                         {*license*}
                         <div class="col-xs-12">
                             <div class="heading_label">{$btr->settings_general_tech_message|escape}</div>
-                            <div class="">
+                            <div class="mb-1">
                                 <textarea name="site_annotation" class="form-control okay_textarea">{$settings->site_annotation|escape}</textarea>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="heading_label">{$btr->settings_general_spam_words|escape}</div>
+                            <div class="">
+                                <textarea name="site_spam_words" class="form-control okay_textarea">{$settings->site_spam_words|escape}</textarea>
                             </div>
                         </div>
                     </div>
