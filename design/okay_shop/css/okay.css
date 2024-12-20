@@ -285,7 +285,7 @@ blockquote cite:before {
   padding: 15px;
 }
 .block--border {
-  border: 1px solid #dbdbdb;
+  border: 1px solid;
   border-radius: 3px;
 }
 .block--shadow {
@@ -965,7 +965,8 @@ textarea,
   display: inline-block;
   color: var(--okay-body-text);
   border: 1px solid #dbdbdb;
-  background-color: rgb(255, 255, 255);
+  /*background-color: rgb(255, 255, 255);*/
+  background-color: var(--okay-bg);
   overflow: visible;
   resize: none;
   text-transform: none;
@@ -1490,7 +1491,7 @@ select {
   position: absolute;
   top: 100%;
   width: auto;
-  background: rgb(255, 255, 255);
+  background: var(--okay-bg);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   color: var(--okay-body-text);
 }
@@ -1550,7 +1551,7 @@ select {
 }
 .menu_group--footer .menu_group__link {
   text-decoration: none;
-  color: var(--okay-second-company-text);
+  /*color: var(--okay-second-company-text);*/
   font-weight: 400;
   font-size: 12px;
   position: relative;

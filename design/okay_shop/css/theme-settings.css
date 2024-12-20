@@ -21,4 +21,36 @@
 	--okay-button-second-text: #fff;
 	--okay-shadow-color: 0 2px 5px rgba(0, 0, 0, .3);
 	--okay-border-color: #dbdbdb;
+
+	/*--okay-dark-backround: #252f3d;*/
+}
+
+@media (prefers-color-scheme: light) {
+	body {
+		background-color: lightgreen;
+	}
+	.day.dark-scheme {
+		--okay-bg: #adc0dc;
+		--okay-body-text: #234;
+		--okay-basic-company: #e87800;
+		--okay-boxed-color: #fff;
+		--okay-boxed-text: #222;
+		--okay-button-color: #3c952e;
+	}
+}
+@media (prefers-color-scheme: dark) {
+	body {
+		background-color: black;
+	}
+	.day.dark-scheme {
+		--okay-bg: #252f3d;
+		--okay-body-text: #7b899a;
+		--okay-basic-company: #d97101;
+		--okay-boxed-color: #4d4d4d;
+		--okay-boxed-text: #ccc;
+		--okay-button-color: #3a6433;
+	}
+	.logo__link img, .logo__link svg {
+		opacity: .8;
+	}
 }
