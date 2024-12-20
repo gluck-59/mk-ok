@@ -41,14 +41,6 @@
   TEMPLATE STYLE
   ================================================== */
 
-/* светаля и темная темы */
-/*body, .main, .container, .block, .swiper-wrapper>div, .product_preview__name, .product_preview__name a, .products_list.no_gutters:before, .search__input {*/
-/*  background-color: var(--okay-bg);*/
-/*}*/
-/*.block--border, .products_list.no_gutters .product_preview, .search__input {*/
-/*  border-color: var(--okay-body-text);*/
-/*}*/
-
 /***** #Header ***********************************************************************/
 header {
   -ms-flex-negative: 0;
@@ -63,12 +55,9 @@ header {
   position: relative;
 }
 
-body {
-  background-color: var(--okay-bg);
-}
 .header__top {
   background: var(--okay-second-company);
-  color: var(--okay-body-text);
+  color: var(--okay-second-company-text);
   padding: 2px 0;
 }
 .header__center {
@@ -86,7 +75,7 @@ body {
 
 /***** #Account **********************************************************************/
 .account__link {
-  color: var(--okay-body-text);
+  color: var(--okay-second-company-text);
   font-size: 12px;
   text-decoration: none;
 }
@@ -331,7 +320,7 @@ body {
   border: 2px solid;
   border-color: var(--okay-second-company);
   border-radius: 50%;
-  color: var(--okay-button-second-text);
+  color: var(--okay-body-text);
   padding: 1px 0 0 1px;
   position: absolute;
   right: 10px;
@@ -358,7 +347,8 @@ body {
   max-width: 100%;
 }
 .search__input {
-  /*border: none;*/
+  background: var(--okay-bg);
+  border: none;
   color: var(--okay-body-text);
   height: 40px;
   width: 100%;
@@ -448,8 +438,7 @@ body {
 }
 
 .categories_nav {
-  /*background: #fff;*/
-  background: var(--okay-bg);
+  background: #fff;
   display: none;
   position: absolute;
   top: 100%;
@@ -468,11 +457,10 @@ body {
   top: 0;
   left: 0;
   /*height: 100%;*/
-  height: auto;
+height: auto;
   width: 100%;
   max-width: 100%;
-  /*background: #fff;*/
-  background: var(--okay-bg);
+  background: #fff;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 .categories_nav .categories_nav__menu .categories_menu__item {
@@ -746,7 +734,6 @@ padding: 0;
   -ms-flex: 1 0 auto;
   flex: 1 0 auto;
   position: relative;
-
 }
 .sidebar {
   width: 284px;
@@ -1893,13 +1880,13 @@ a.filter__catalog_link svg {
 .main_brands {
   border-left: 1px solid;
   border-top: 1px solid;
-  border-color: var(--okay-boxed-color);
+  border-color: var(--okay-border-color);
 }
 .main_brands__item {
   height: 85px;
   border-right: 1px solid;
   border-bottom: 1px solid;
-  border-color: var(--okay-boxed-color);
+  border-color: var(--okay-border-color);
 }
 .main_brands__image,
 .main_brands__name,
@@ -1979,7 +1966,7 @@ a.filter__catalog_link svg {
   position: relative;
   transition: 0.3s;
   width: 100%;
-  /*background: #fff;*/
+  background: #fff;
 }
 .product_item:nth-child(4n) .product_preview {
   border-color: transparent;
@@ -2111,8 +2098,7 @@ a.filter__catalog_link svg {
 }
 .product_preview__name a {
   color: var(--okay-body-text);
-  /*background: rgba(255, 255, 255, 0.9);*/
-  opacity: .9;
+  background: rgba(255, 255, 255, 0.9);
   line-height: 1.2;
   font-size: 14px;
   transition: 0.3s;
@@ -2352,8 +2338,7 @@ a.filter__catalog_link svg {
   text-decoration: none;
   background: transparent;
   border: 1px solid rgb(127, 127, 127);
-  /*color: rgb(69, 69, 69);*/
-  color: var(--okay-body-text);
+  color: rgb(69, 69, 69);
   opacity: 0.7;
   font-size: 0;
   transition: all 0.2s;
@@ -2438,7 +2423,7 @@ a.filter__catalog_link svg {
 }
 .products_list.no_gutters .product_preview {
   position: absolute;
-  border-right: 1px solid;
+  border-right: 1px solid #dbdbdb;
 }
 .products_list.no_gutters {
   position: relative;
@@ -2448,7 +2433,7 @@ a.filter__catalog_link svg {
   position: absolute;
   right: 0;
   top: 0;
-  /*background: #fff;*/
+  background: #fff;
   width: 1px;
   height: 100%;
   z-index: 2;
@@ -3663,7 +3648,7 @@ footer {
 .footer__contact_item .phone {
   position: relative;
   margin-bottom: 15px;
-  color: var(--okay-body-text);
+  color: var(--okay-second-company-text);
   font-weight: 400;
   font-size: 12px;
   text-decoration: none;
@@ -3740,7 +3725,7 @@ footer {
   -ms-user-select: none;
   user-select: none;
   background: transparent;
-  color: var(--okay-body-text);
+  color: var(--okay-second-company-text);
   font-weight: 400;
   text-decoration: none;
   font-size: 12px;
