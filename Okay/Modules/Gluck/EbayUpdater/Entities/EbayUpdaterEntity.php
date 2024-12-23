@@ -15,6 +15,8 @@ class EbayUpdaterEntity extends Entity
         'old_price',
         'new_price',
         'updated',
+        'success',
+        'description',
     ];
 
     protected static $langFields = [
@@ -23,8 +25,15 @@ class EbayUpdaterEntity extends Entity
     protected static $defaultOrderFields = [
     ];
 
-    protected static $table = '__EbayUpdater_report';
-    protected static $langTable = 'EbayUpdater_report';
-    protected static $langObject = 'EbayUpdater_report';
+    protected static $table = '__ebayUpdater_report';
+    protected static $langTable = 'ebayUpdater_report';
+    protected static $langObject = 'ebayUpdater_report';
     protected static $tableAlias = 'er';
+
+    public function add($object)
+    {
+        $object->updated = "NOW()";
+        return parent::add($object);
+    }
+
 }

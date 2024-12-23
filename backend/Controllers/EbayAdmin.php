@@ -524,12 +524,4 @@ class EbayAdmin extends IndexAdmin
             }
         }
     }
-
-
-    public function updatePrices() {
-        echo PHP_EOL.PHP_EOL.'updatePrices'.PHP_EOL;
-//        return 'test';
-    }
-
-
 }

@@ -47,7 +47,7 @@ class Scheduler
                 }
 
                 $subProcesses[$key]['process'] = $process = new Process($command);
-                $subProcesses[$key]['time'] = $this->info("Task #{$task->getId()} ({$task->getName()}): Start");
+                $subProcesses[$key]['time'] = $this->info("Задание №{$task->getId()} ({$task->getName()}): Старт");
 
                 $process
                     ->setTimeout($task->getTimeout())
@@ -74,11 +74,12 @@ class Scheduler
                     }
                 } else {
                     $task = $this->tasks[$key];
-                    $this->info("Task #{$task->getId()} ({$task->getName()}) ({$subProcess['time']}): Finish");
+                    $this->info("Задание №{$task->getId()} ({$task->getName()}) ({$subProcess['time']}): Финиш");
                     unset($subProcesses[$key]);
                 }
             }
-            sleep(1);
+//            sleep(1); // нахуя?
+            usleep(300000);
         }
     }
 

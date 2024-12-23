@@ -16,15 +16,17 @@ $scripts = [
     (new Js('select2.min.js'))->setPosition('footer'),
     (new Js('okay.js'))->setPosition('footer'),
     (new Js('lazyload.min.js'))->setPosition('footer'),
-    //(new Js('jquery.fancybox.min.js'))->setPosition('footer'),
+//(new Js('jquery.fancybox.min.js'))->setPosition('footer')->setIndividual(true),
     (new Js('readmore.min.js'))->setPosition('footer'),
     (new Js('mobile_menu.js'))->setPosition('footer'),
     (new Js('sticky.min.js'))->setPosition('footer'),
     (new Js('jquery.suggestions.min.js'))->setPosition('head')->setIndividual(true),
-    (new Js('yametrika.js'))->setPosition('head')->setIndividual(true),
     //(new Js('jquery.validate.min.js'))->setPosition('footer'),
 
 //(new Js('bootstrap-select.js'))->setPosition('footer'), // не работает на морде, вместо него работает select2.min.js
 ];
+if ($_SERVER['SERVER_ADDR'] != '::1') {
+    $scripts[] = (new Js('yametrika.js'))->setPosition('head')->setIndividual(true);
+}
 
 return $scripts;

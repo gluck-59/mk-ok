@@ -44,7 +44,7 @@ class Import
     protected $categoryDelimiter    = ',,';                    // Разделитель каегорий в файле
     protected $subCategoryDelimiter = '/';                     // Разделитель подкаегорий в файле
     protected $valuesDelimiter      = ',,';                    // Разделитель значений свойства в товаре
-    protected $columnDelimiter      = ';';
+    protected $columnDelimiter      = ','; // ';'
     protected $columns              = [];
     protected $locale               = 'ru_RU.UTF-8';
 

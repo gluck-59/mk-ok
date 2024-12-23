@@ -147,4 +147,27 @@ class VariantsEntity extends Entity
     {
         return $currency->rate_to / $currency->rate_from;
     }
+
+
+    public function getVariantsToUpdate($days = 7) {
+//        /* дебаг sql dbDebug debug */
+//        $select = $this->getSelect()->debug();
+
+        $sql = $this->queryFactory->newSqlQuery();
+        $sql->setStatement("SELECT
+p.id product_id, p.name product_name, p.ebayItemNo, p.partNumber, v.id variant_id, v.name variant_name, v.sku, v.price, v.currency_id, p.last_modify
+FROM ok_products p
+JOIN ok_variants v ON v.product_id = p.id
+WHERE DATEDIFF(now(), v.price_updated) > $days OR v.price_updated IS NULL
+ORDER BY p.last_modify");
+
+        $this->db->query($sql);
+
+//        $select =  $this->getResults();
+//        print_r($select);
+//        /* дебаг debug */
+
+//        $count = $this->db->result('count');
+        return $this->getResults();
+    }
 }
