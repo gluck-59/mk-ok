@@ -841,18 +841,17 @@ class ProductsEntity extends Entity implements RelatedProductsInterface
             $this->getTableAlias()
         );
         foreach ($keywords as $keyNum=>$keyword) {
-            
             $keywordFilter = [];
             $keywordFilter[] = "{$langAlias}.name LIKE :keyword_name_{$keyNum}";
             $keywordFilter[] = "{$langAlias}.meta_keywords LIKE :keyword_meta_keywords_{$keyNum}";
             $keywordFilter[] = "{$tableAlias}.id in (SELECT product_id FROM __variants WHERE sku LIKE :keyword_sku_{$keyNum})";
-            
+$keywordFilter[] = "{$tableAlias}.id in (SELECT product_id FROM __variants WHERE supplier LIKE :keyword_sku_{$keyNum})";
+$keywordFilter[] = "{$tableAlias}.id in (SELECT product_id FROM __variants WHERE partNumber LIKE :keyword_sku_{$keyNum})";
             $this->select->bindValues([
                 "keyword_name_{$keyNum}" => '%' . $keyword . '%',
                 "keyword_meta_keywords_{$keyNum}" => '%' . $keyword . '%',
                 "keyword_sku_{$keyNum}" => '%' . $keyword . '%',
             ]);
-            
             $this->select->where('(' . implode(' OR ', $keywordFilter) . ')');
         }
     }
