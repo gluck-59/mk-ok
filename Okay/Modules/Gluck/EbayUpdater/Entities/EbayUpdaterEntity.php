@@ -5,6 +5,10 @@ namespace Okay\Modules\Gluck\EbayUpdater\Entities;
 
 
 use Okay\Core\Entity\Entity;
+use Okay\Admin\Controllers\EbayAdmin;
+use Okay\Entities\ManagersEntity;
+use Okay\Entities\UsersEntity;
+
 
 class EbayUpdaterEntity extends Entity
 {
@@ -34,6 +38,13 @@ class EbayUpdaterEntity extends Entity
     {
         $object->updated = "NOW()";
         return parent::add($object);
+    }
+
+    public function test() {
+        $managersEntity = new ManagersEntity();
+        $contr = new EbayAdmin($managersEntity->findOne(['login' => 'gluck']), '', '');
+//        return $contr->parse(['keyword' => ])
+//        return __CLASS__.' test()';
     }
 
 }

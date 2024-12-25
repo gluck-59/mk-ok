@@ -40,12 +40,12 @@
 {*форма ebay parser*}
 {if !$product->id}
     <div class="boxed fn_toggle_wrap">
-<div class="heading_box">
-    Поиск на<i class="1fn_tooltips">{include file='svg_icon.tpl' svgId='icon_ebay'}</i> <small>(вернет csv файл для импорта)</small>
-    <div class="toggle_arrow_wrap fn_toggle_card text-primary">
-        <a class="btn-minimize" href="javascript:;" ><i class="fa fn_icon_arrow fa-angle-down"></i></a>
-    </div>
-</div>
+        <div class="heading_box">
+            Поиск на<i class="1fn_tooltips">{include file='svg_icon.tpl' svgId='icon_ebay'}</i> <small>(вернет csv файл для импорта)</small>
+            <div class="toggle_arrow_wrap fn_toggle_card text-primary">
+                <a class="btn-minimize" href="javascript:;" ><i class="fa fn_icon_arrow fa-angle-down"></i></a>
+            </div>
+        </div>
         <form method="post" action="index.php?controller=EbayAdmin" name="ebayParser">
             <div class="row">
                 <div class="col-md-3">
@@ -55,12 +55,12 @@
                 </div>
                 <div class="col-md-3">
                     <div class="1input-group">
-<select name="forBrand" class="selectpicker form-control mb-1{if !$brands} hidden{/if} fn_meta_brand" data-live-search="true">
-    <option value="0" {if !$product->brand_id}selected=""{/if} data-brand_name="">Марка</option>
-    {foreach $brands as $brand}
-        <option value="{$brand->name}" {if $product->brand_id == $brand->id}selected=""{/if} data-brand_name="{$brand->name|escape}">{$brand->name|escape}</option>
-    {/foreach}
-</select>
+                        <select name="forBrand" class="selectpicker form-control mb-1{if !$brands} hidden{/if} fn_meta_brand" data-live-search="true">
+                            <option value="0" {if !$product->brand_id}selected=""{/if} data-brand_name="">Марка</option>
+                            {foreach $brands as $brand}
+                                <option value="{$brand->name}" {if $product->brand_id == $brand->id}selected=""{/if} data-brand_name="{$brand->name|escape}">{$brand->name|escape}</option>
+                            {/foreach}
+                        </select>
                     </div>
                 </div>
 
@@ -87,6 +87,7 @@
                 </div>
             </div>
             <input type="hidden" name="action" id="action" value="ebayParser">
+            <input type="hidden" name="export" value="csv">
         </form>
     </div>
 {* /форма ebay parser*}

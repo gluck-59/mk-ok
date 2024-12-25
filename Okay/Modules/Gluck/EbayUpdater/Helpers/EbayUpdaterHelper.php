@@ -2,30 +2,38 @@
 
 namespace Okay\Modules\Gluck\EbayUpdater\Helpers;
 
+ini_set('display_errors', 'on');
+error_reporting(E_ERROR);
+
+use Okay\Core\Modules\Extender\ExtensionInterface;
+use Okay\Entities\ManagersEntity;
 use Okay\Entities\VariantsEntity;
 use Okay\Modules\Gluck\EbayUpdater\Entities\EbayUpdaterEntity;
 use Okay\Entities\ProductsEntity;
+use Okay\Admin\Controllers\EbayAdmin;
 use Okay\Modules\Gluck\EbayUpdater\Init\Init;
+use Okay\Core\Settings;
 
 
-class EbayUpdaterHelper
+class EbayUpdaterHelper implements ExtensionInterface
 {
     private ProductsEntity $productsEntity;
     private EbayUpdaterEntity $ebayUpdaterEntity;
 
+    private EbayAdmin $ebayAdmin;
+
 
     public function __construct(
-//        Settings      $settings
+//        Settings $settings
     ) {
+//        parent::__construct();
 //        $this->settings = $settings;
     }
 
-    public function cronEbayUpdater(VariantsEntity $variantsEntity, EbayUpdaterEntity $ebayUpdaterEntity) {
-        ini_set('display_errors', 'on');
-        error_reporting(E_ERROR);
-
-//        /** @var VariantsEntity $variantsEntity */
-//        $variantsEntity = $this->entity->get(VariantsEntity::class);
+    public function cronEbayUpdater(VariantsEntity $variantsEntity, EbayUpdaterEntity $ebayUpdaterEntity, Settings $settings) {
+//print_r($settings); die();
+        $managersEntity = new ManagersEntity();
+        $ebayAdmin = new EbayAdmin($managersEntity->findOne(['login' => 'gluck']), '', '');
 
         $variantsToUpd = $variantsEntity->getVariantsToUpdate(7);
         foreach ($variantsToUpd as $variant) {
@@ -39,6 +47,9 @@ print_r($variant);
             // ищем по партномеру из модели Variant, иначе по ID лота из модели Product
             if (!empty($variant->sku)) {
                 echo 'ищем по SKU'.PHP_EOL.PHP_EOL;
+print_r($ebayAdmin->parse(['keyword' => $variant->sku]));
+
+die();
                 $report->new_price = 22.22;
                 $report->success = 1;
             } elseif (!empty($variant->ebayItemNo)) {

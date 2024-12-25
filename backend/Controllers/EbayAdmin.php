@@ -2,6 +2,7 @@
 
 namespace Okay\Admin\Controllers;
 
+//use Okay\Admin\Controllers\IndexAdmin;
 use DiDom\Document;
 use Okay\Admin\Helpers\BackendCategoriesHelper;
 use Okay\Admin\Helpers\BackendFeaturesHelper;
@@ -177,7 +178,7 @@ class EbayAdmin extends IndexAdmin
 //prettyDump($this->parsedLot, 1);
         }
 
-        if (1 || $_POST['export']) {
+        if ($request['export']) {
             self::export($this->parsedLot, 'csv');
             return;
         } else {
@@ -337,7 +338,7 @@ class EbayAdmin extends IndexAdmin
             "Mozilla/5.0 (iPad; CPU OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1",
             "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36"
         ];
-        return rand(0, sizeof($useragents) - 1);
+        return $useragents[rand(0, sizeof($useragents) - 1)];
     }
 
 
@@ -367,25 +368,8 @@ class EbayAdmin extends IndexAdmin
         if ($type == 1 && $_POST['minprice']) $url = $url . '&_udlo=' . $_POST['minprice'];
         if ($type == 1 && $_POST['maxprice']) $url = $url . '&_udhi=' . $_POST['maxprice'];
 
-        $curl = curl_init();
-        // если это первый запрос то надо установить страну доставки &shipToCountryCode=ESP&shippingZipCode=03560
-        if ($setCookie) {
-            curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://www.ebay.com/itemmodules/196433866393?module_groups=GET_RATES_MODAL&co=0&isGetRates=1&rt=nc&quantity=&shipToCountryCode=ESP&shippingZipCode=03560',
-                CURLOPT_RETURNTRANSFER => true,
-                CURLOPT_NOBODY => true, // сама страница, для отладки
-                CURLOPT_FAILONERROR => true,
-                CURLOPT_MAXREDIRS => 10,
-                CURLOPT_USERAGENT => $this->userAgent,
-                CURLOPT_HTTPHEADER, 'Accept-Language: en-US;q=0.6,en;q=0.4',
-                CURLOPT_VERBOSE => true
-            ));
-            curl_exec($curl); // здесь ответ не нужен
-        }
-
-
-        curl_setopt_array($curl, array(
-//            CURLOPT_URL => 'https://motokofr.com', // дебаг
+        $curlOptions = [
+            //            CURLOPT_URL => 'https://motokofr.com', // дебаг
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
 //            CURLOPT_HEADER =>true, // заголовки ответа
@@ -393,9 +377,28 @@ class EbayAdmin extends IndexAdmin
             CURLOPT_FAILONERROR => true,
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_USERAGENT => $this->userAgent,
-            CURLOPT_HTTPHEADER, 'Accept-Language: en-US;q=0.6,en;q=0.4',
+//            CURLOPT_HTTPHEADER, "Accept-Language: en-US;q=0.6,en;q=0.4",
             CURLOPT_VERBOSE => true
-        ));
+        ];
+//print_r($curlOptions); die();
+        $curl = curl_init();
+        // если это первый запрос то надо установить страну доставки &shipToCountryCode=ESP&shippingZipCode=03560
+//        if ($setCookie) {
+//            curl_setopt_array($curl, array(
+//                CURLOPT_URL => 'https://www.ebay.com/itemmodules/196433866393?module_groups=GET_RATES_MODAL&co=0&isGetRates=1&rt=nc&quantity=&shipToCountryCode=ESP&shippingZipCode=03560',
+//                CURLOPT_RETURNTRANSFER => true,
+//                CURLOPT_NOBODY => true, // сама страница, для отладки
+//                CURLOPT_FAILONERROR => true,
+//                CURLOPT_MAXREDIRS => 10,
+//                CURLOPT_USERAGENT => $this->userAgent,
+//                CURLOPT_HTTPHEADER, 'Accept-Language: en-US;q=0.6,en;q=0.4',
+//                CURLOPT_VERBOSE => true
+//            ));
+//            curl_exec($curl); // здесь ответ не нужен
+//        }
+
+
+        curl_setopt_array($curl, $curlOptions);
         $this->debug['curl_effective_url'] = curl_getinfo($curl, CURLINFO_EFFECTIVE_URL);
         $response = curl_exec($curl);
 
