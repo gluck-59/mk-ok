@@ -105,6 +105,7 @@ class EbayAdmin extends IndexAdmin
                 return $curl;
             }
 
+
             $document = new Document($curl['response']);
             // https://github.com/Imangazaliev/DiDOM/blob/master/README-RU.md
             $arr = $document->find('.s-item__wrapper'); //s-item__link
