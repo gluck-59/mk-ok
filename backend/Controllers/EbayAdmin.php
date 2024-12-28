@@ -431,12 +431,12 @@ class EbayAdmin extends IndexAdmin
     public function calculateProfit($lot) {
         $profit_percent = ($_POST['profit_percent'] ? (float) $_POST['profit_percent'] : $this->profit_percent);
         $ebayPrice = (double) $lot['price'] + (double) $lot['shipping'] + (double) $lot['duties'];
-        $profit = 100 * ($profit_percent / 100);
+        $profit = $ebayPrice * ($profit_percent / 100);
 
         if ($profit < $this->minProfit) $profit = $this->minProfit;
         if ($profit > $this->maxProfit) $profit = $this->maxProfit;
 
-        $out = ceil($ebayPrice + $profit );
+        $out = $ebayPrice + $profit;
         return $out;
     }
 

@@ -388,9 +388,10 @@
                 <thead>
                     <tr>
                         <th>Товар</th>
-                        <th>Старая</th>
-                        <th>Новая</th>
-                        <th>Прим.</th>
+                        <th>Старый лот</th>
+                        <th>Старая ц.</th>
+                        <th>Новая ц.</th>
+                        <th>Описание</th>
                         <th>Обновлено</th>
                     </tr>
                 </thead>
@@ -399,6 +400,7 @@
                         {assign var="old_price" value="{$old_price|ceil}"}
                         <tr class="{if $item->success == 1}success{/if}">
                             <td><a href="/backend//index.php?controller=ProductAdmin&id={$item->productId}" target="_blank">{$item->productName}</a></td>
+                            <td>{$item->newEbayItem_id}</td>
                             <td>
                                 {if $item->old_currency_id == 1}${elseif $item->old_currency_id == 5}€{else}? {/if}{$item->old_price|ceil}
                             </td>
