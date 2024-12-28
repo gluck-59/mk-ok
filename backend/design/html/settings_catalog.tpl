@@ -127,9 +127,11 @@
                                 </select>
                             </div>
                         </div>
-
+                        {get_design_block block="settings_catalog_general"}
+                    </div>
+                    <div class="row">
                         <div class="col-lg-4 col-md-6 mt-2">
-                            <div class="fn_step-9">
+                            <div class="fn_step-9 justify-checkbox">
                                 <div class="heading_label boxes_inline">{$btr->settings_catalog_preorder_not_in_stock|escape}</div>
                                 <div class="boxes_inline">
                                     <div class="okay_switch clearfix">
@@ -142,11 +144,6 @@
                                 </div>
                             </div>
                         </div>
-                        
-                        {get_design_block block="settings_catalog_general"}
-                    </div>
-
-                    <div class="row">
                         <div class="fn_step-8 col-lg-4 col-md-6">
                             <div class="heading_label">
                                 {$btr->settings_catalog_features_max_count_products|escape}
@@ -170,7 +167,7 @@
                             </div>
                         </div>
                         <div class="col-lg-4 col-md-6 mt-2">
-                            <div class="fn_step-9">
+                            <div class="fn_step-9 justify-checkbox">
                                 <div class="heading_label boxes_inline">
                                     {$btr->settings_catalog_features_cache_deferred|escape}
                                     <i class="fn_tooltips" title="{$btr->tooltip_settings_catalog_features_cache_deferred|escape}">
@@ -192,7 +189,7 @@
                     
                     <div class="row">
                         <div class="col-lg-4 col-md-6 mt-2">
-                            <div class="fn_step-10">
+                            <div class="fn_step-10 justify-checkbox">
                                 <div class="heading_label boxes_inline">
                                     {$btr->allow_to_visible_empty_categories|escape}
                                     <i class="fn_tooltips" title="{$btr->allow_to_visible_empty_categories_notice|escape}">
@@ -212,7 +209,7 @@
                         </div>
                         
                         <div class="col-lg-4 col-md-6 mt-2">
-                            <div class="fn_step-10">
+                            <div class="fn_step-10 justify-checkbox">
                                 <div class="heading_label boxes_inline">
                                     {$btr->settings_hide_single_filters|escape}
                                     <i class="fn_tooltips" title="{$btr->settings_hide_single_filters_notice|escape}">
@@ -232,7 +229,7 @@
                         </div>
                         
                         <div class="col-lg-4 col-md-6 mt-2">
-                            <div class="fn_step-10">
+                            <div class="fn_step-10 justify-checkbox">
                                 <div class="heading_label boxes_inline">
                                     {$btr->settings_enable_webp|escape}
                                     <i class="fn_tooltips" title="{$btr->settings_enable_webp_notice|escape}"> 
@@ -252,7 +249,7 @@
                         </div>
                         
                         <div class="col-lg-4 col-md-6 mt-2">
-                            <div class="fn_step-10">
+                            <div class="fn_step-10 justify-checkbox">
                                 <div class="heading_label boxes_inline">
                                     {$btr->settings_hide_equal_compare_price|escape}
                                     <i class="fn_tooltips" title="{$btr->settings_hide_equal_compare_price_notice|escape}"> 
@@ -272,7 +269,7 @@
                         </div>
                         
                         <div class="col-lg-4 col-md-6 mt-2">
-                            <div class="fn_step-10">
+                            <div class="fn_step-10 justify-checkbox">
                                 <div class="heading_label boxes_inline">
                                     {$btr->settings_increased_image_size|escape}
                                     <i class="fn_tooltips" title="{$btr->settings_increased_image_size_notice|escape}"> 

@@ -46,7 +46,7 @@ $_SESSION['id'] = session_id();
 
 if ($config->get('debug_mode') == true) {
     ini_set('display_errors', 'on');
-    error_reporting(E_ALL);
+    error_reporting(E_ERROR);
 }
 
 /** @var Request $request */

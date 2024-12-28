@@ -40,6 +40,7 @@ Disallow: /*&utm
 Disallow: /cart
 Disallow: /product.php?
 Disallow: /category.php?
+Disallow: /tags.php?
 Disallow: /modules/
 Disallow: /contact-form.php
 

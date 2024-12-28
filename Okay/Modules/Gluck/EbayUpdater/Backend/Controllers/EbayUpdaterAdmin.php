@@ -8,14 +8,11 @@ class EbayUpdaterAdmin extends IndexAdmin
 
     public function fetch(EbayUpdaterEntity $ebayUpdaterEntity)
     {
-        $fields = EbayUpdaterEntity::getFields();
-//        foreach ($fields as $key => $field) {
-//            if (in_array($field, ['success'])) {
-//                unset($fields[$key]);
-//            }
-//        }
+        $headers = $ebayUpdaterEntity->getAllFieldsWithoutAlias();
+        $fields = $ebayUpdaterEntity->getUpdated();
+
+        $this->design->assign('tableHeaders', $headers);
         $this->design->assign('tableFields', $fields);
-        $this->design->assign('items', $ebayUpdaterEntity->find());
         $this->response->setContent($this->design->fetch('description.tpl'));
     }
 }

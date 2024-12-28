@@ -16,7 +16,10 @@
         border-top: 1px solid #dee2e6;
     }
     .table tbody tr {
-        background-color: #fff5f5;
+        background-color: #fff9f9;
+    }
+    .table tbody tr.success {
+        background-color: #f5fff5;
     }
     .table tbody tr:has(td.success) {
         background-color: #f5fff5;
@@ -292,6 +295,11 @@
         background-color: rgba(255, 255, 255, 0.075);
     }
 
+    .table tbody td.red { background-color: rgba(240, 128, 128, 0.27)
+    }
+    .table tbody td.green { background-color: rgba(0, 255, 128, 0.22)
+    }
+
     @media (max-width: 575.98px) {
         .table-responsive-sm {
             display: block;
@@ -378,20 +386,27 @@
         <div class="col-md-12">
             <table class="table table-bordered table-hover">
                 <thead>
-                    <tr class="">
-                        {foreach $tableFields as $key => $value}
-                            <th>{$value}</th>
-                        {/foreach}
+                    <tr>
+                        <th>Товар</th>
+                        <th>Старая</th>
+                        <th>Новая</th>
+                        <th>Прим.</th>
+                        <th>Обновлено</th>
                     </tr>
                 </thead>
                 <tbody>
-                    {foreach $items as $item}
-                        <tr>
-                            {foreach $item as $key => $field}
-                                <td class="{if $key == 'success' and $field == 1}success{/if}">
-                                    {if $key == 'updated'}{$field|date_format:'%d.%m.%y в %H:%M'}{else}{$field}{/if}
-                                </td>
-                            {/foreach}
+                    {foreach $tableFields as $item}
+                        {assign var="old_price" value="{$old_price|ceil}"}
+                        <tr class="{if $item->success == 1}success{/if}">
+                            <td><a href="/backend//index.php?controller=ProductAdmin&id={$item->productId}" target="_blank">{$item->productName}</a></td>
+                            <td>
+                                {if $item->old_currency_id == 1}${elseif $item->old_currency_id == 5}€{else}? {/if}{$item->old_price|ceil}
+                            </td>
+                            <td class="{if $item->new_price|ceil < $item->old_price|ceil AND !empty($item->new_price)}green{elseif $item->new_price|ceil > $item->old_price|ceil AND !empty($item->new_price)}red{/if}">
+                                {if $item->new_currency_id == 1}${elseif $item->new_currency_id == 5}€{else}? {/if}{$item->new_price|ceil}
+                            </td>
+                            <td>{if $item->old_currency_id != $item->new_currency_id}<b>&larr; ВАЛЮТА</b> {/if}{$item->description}</td>
+                            <td>{$item->upd_date}</td>
                         </tr>
                     {/foreach}
                 </tbody>

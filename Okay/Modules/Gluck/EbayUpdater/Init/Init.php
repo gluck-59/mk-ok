@@ -19,7 +19,9 @@ class Init extends AbstractInit
         $this->migrateEntityTable(EbayUpdaterEntity::class, [
             (new EntityField('id'))->setIndexPrimaryKey()->setTypeInt(11, false)->setAutoIncrement(),
             (new EntityField('variant_id'))->setTypeInt(11, false),
-            (new EntityField('newEbayItem_id'))->setTypeVarchar(64),
+            (new EntityField('newEbayItem_id'))->setTypeVarchar(256),
+            (new EntityField('old_currency_id'))->setTypeTinyInt(2),
+            (new EntityField('new_currency_id'))->setTypeTinyInt(2),
             (new EntityField('old_price'))->setTypeDecimal('14,2'),
             (new EntityField('new_price'))->setTypeDecimal('14,2'),
             (new EntityField('updated'))->setTypeDatetime(),

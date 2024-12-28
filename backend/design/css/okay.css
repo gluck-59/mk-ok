@@ -9029,3 +9029,8 @@ input.error {
     background-color: #b76864;
     border-color: #b76864;
 }
+
+.justify-checkbox {
+    display: flex;
+    justify-content: space-between;
+}

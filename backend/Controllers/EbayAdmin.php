@@ -26,9 +26,9 @@ class EbayAdmin extends IndexAdmin
     private $banlist = array();
     private $sellerMinPositive = 97;
     private $sellerMinFeedback = 1000;
-    private $min_prib = 10;
-    private $max_prib = 100000;
-    private $nacenka_percent = 100; // в процентах %% — учитываются миша, армяне и я
+    private $minProfit = 50; // в долларах
+    private $maxProfit = 1000; // в долларах
+    private $profit_percent = 30; // наценка в процентах — учитываются миша, армяне и я
 
     public $debug;
 
@@ -85,7 +85,7 @@ class EbayAdmin extends IndexAdmin
 
     function parse($request) {
         if (!$request['keyword']) {
-            $this->parsedLot->error = 'В запросе для Ebay нет keyword';
+            $this->parsedLot['error'] = 'В запросе для Ebay нет keyword';
             return $this->parsedLot;
         }
         require_once __DIR__.'/../../thirdParty/DiDom/Document.php';
@@ -102,7 +102,8 @@ class EbayAdmin extends IndexAdmin
             $this->userAgent = self::getRandomUseragent();
             $curl = self::request($request, 1);
             if (!empty($this->debug['errors'])) {
-                return $curl;
+                return $this->debug;
+//                return $curl;
             }
 
 
@@ -114,6 +115,7 @@ class EbayAdmin extends IndexAdmin
             foreach ($arr as $item) {
                 // парсер выдает пару пустых итемов, пропустим их
                 $link = $item->first('.s-item__link');
+                if (!$link) continue;
                 $itm = parse_url($link->getAttribute('href'), PHP_URL_PATH);
                 preg_match('/\d{12}/', $itm, $itemNo);
                 if (!$itemNo) {
@@ -173,7 +175,7 @@ class EbayAdmin extends IndexAdmin
             } elseif (sizeof($lots) == 1) {
                 $this->parsedLot = self::getitemDetails($lots[0]['itemNo']);
             } else {
-                die('массив $lots пуст. не подключен VPN?');
+                echo 'массив $lots пуст. не подключен VPN?';
                 return $this->parsedLot;
             }
 //prettyDump($this->parsedLot, 1);
@@ -213,11 +215,17 @@ class EbayAdmin extends IndexAdmin
         /** сборка массива с данными о лоте */
         $lot['ebayItemNo'] = $itemNo;
 
-        // селлер
-        $lot['storeName'] = $document->first('.x-sellercard-atf__info__about-seller span.ux-textspans--BOLD')->text(); // sellerName
-        $storeUrl = parse_url($document->first('div.x-sellercard-atf a.ux-action')->attr('href'));
-        parse_str($storeUrl['query'], $store);
-        $lot['supplier'] = $store['_ssn'];
+        //  store
+        if ($storeName = $document->first('.x-sellercard-atf__info__about-seller span.ux-textspans--BOLD')) {
+            $lot['storeName'] = $storeName->text();
+        }
+
+        // seller
+        if ($storeUrlWrapper = $document->first('div.x-sellercard-atf a.ux-action')) {
+            $storeUrl = parse_url($storeUrlWrapper->attr('href'));
+            parse_str($storeUrl['query'], $store);
+            $lot['supplier'] = $store['_ssn'];
+        }
 
         if ($positive = $document->first('a[href*=#STORE_INFORMATION]')) {
             $lot['positive'] = floatval($positive->text());
@@ -227,8 +235,11 @@ class EbayAdmin extends IndexAdmin
         }
 
         // товар
-        $lot['name'] = preg_replace('/[|"\'`]/', '', $document->first('.x-item-title__mainTitle span')->text());
-        $lot['url'] = preg_replace('/[ .,;:|!?\/\'\"\`]/', '-', strtolower($lot['name']));
+        if ($nameWrapper = $document->first('.x-item-title__mainTitle span')) {
+            $lot['name'] = preg_replace('/[|"\'`]/', '', $nameWrapper->text());
+            $lot['url'] = preg_replace('/[ .,;:|!?\/\'\"\`]/', '-', strtolower($lot['name']));
+        }
+
         $images = explode(',', self::getEbayImages($document));
         if (sizeof($images) > 0) {
             $lot['image'] = implode(',', $images);
@@ -366,8 +377,8 @@ class EbayAdmin extends IndexAdmin
                 break;
         }
 
-        if ($type == 1 && $_POST['minprice']) $url = $url . '&_udlo=' . $_POST['minprice'];
-        if ($type == 1 && $_POST['maxprice']) $url = $url . '&_udhi=' . $_POST['maxprice'];
+        if ($type == 1 && isset($_POST['minprice'])) $url = $url . '&_udlo=' . $_POST['minprice'];
+        if ($type == 1 && isset($_POST['maxprice'])) $url = $url . '&_udhi=' . $_POST['maxprice'];
 
         $curlOptions = [
             //            CURLOPT_URL => 'https://motokofr.com', // дебаг
@@ -378,27 +389,24 @@ class EbayAdmin extends IndexAdmin
             CURLOPT_FAILONERROR => true,
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_USERAGENT => $this->userAgent,
-//            CURLOPT_HTTPHEADER, "Accept-Language: en-US;q=0.6,en;q=0.4",
-            CURLOPT_VERBOSE => true
+            CURLOPT_VERBOSE => true // для обновлятеля надо TRUE
         ];
-//print_r($curlOptions); die();
         $curl = curl_init();
-        // если это первый запрос то надо установить страну доставки &shipToCountryCode=ESP&shippingZipCode=03560
-//        if ($setCookie) {
-//            curl_setopt_array($curl, array(
-//                CURLOPT_URL => 'https://www.ebay.com/itemmodules/196433866393?module_groups=GET_RATES_MODAL&co=0&isGetRates=1&rt=nc&quantity=&shipToCountryCode=ESP&shippingZipCode=03560',
-//                CURLOPT_RETURNTRANSFER => true,
-//                CURLOPT_NOBODY => true, // сама страница, для отладки
-//                CURLOPT_FAILONERROR => true,
-//                CURLOPT_MAXREDIRS => 10,
-//                CURLOPT_USERAGENT => $this->userAgent,
-//                CURLOPT_HTTPHEADER, 'Accept-Language: en-US;q=0.6,en;q=0.4',
-//                CURLOPT_VERBOSE => true
-//            ));
-//            curl_exec($curl); // здесь ответ не нужен
-//        }
+        // если это первый запрос то отдельным запросом надо установить страну доставки &shipToCountryCode=ESP&shippingZipCode=03560
+        if ($setCookie) {
+            curl_setopt_array($curl, array(
+                CURLOPT_URL => 'https://www.ebay.com/itemmodules/196433866393?module_groups=GET_RATES_MODAL&co=0&isGetRates=1&rt=nc&quantity=&shipToCountryCode=ESP&shippingZipCode=03560',
+                CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_NOBODY => true, // сама страница, для отладки
+                CURLOPT_FAILONERROR => true,
+                CURLOPT_MAXREDIRS => 10,
+                CURLOPT_USERAGENT => $this->userAgent,
+                CURLOPT_VERBOSE => false
+            ));
+            curl_exec($curl); // здесь ответ не нужен
+        }
 
-
+        $this->debug = [];
         curl_setopt_array($curl, $curlOptions);
         $this->debug['curl_effective_url'] = curl_getinfo($curl, CURLINFO_EFFECTIVE_URL);
         $response = curl_exec($curl);
@@ -418,13 +426,18 @@ class EbayAdmin extends IndexAdmin
      * считает прибыль, возвращает цену товара в $
      *
      * @param float $ebayPrice
-     * @return int
+     * @return double
      */
     public function calculateProfit($lot) {
-        $nacenka_percent = ($_POST['nacenka_percent'] ? (float) $_POST['nacenka_percent'] : $this->nacenka_percent);
-//        $nacenka = $ebayPrice * (1 + $nacenka_percent / 100);
+        $profit_percent = ($_POST['profit_percent'] ? (float) $_POST['profit_percent'] : $this->profit_percent);
         $ebayPrice = (double) $lot['price'] + (double) $lot['shipping'] + (double) $lot['duties'];
-        return ceil($ebayPrice * (1 + $nacenka_percent / 100));
+        $profit = 100 * ($profit_percent / 100);
+
+        if ($profit < $this->minProfit) $profit = $this->minProfit;
+        if ($profit > $this->maxProfit) $profit = $this->maxProfit;
+
+        $out = ceil($ebayPrice + $profit );
+        return $out;
     }
 
 

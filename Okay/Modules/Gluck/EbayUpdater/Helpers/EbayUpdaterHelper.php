@@ -8,11 +8,13 @@ error_reporting(E_ERROR);
 use Okay\Core\Modules\Extender\ExtensionInterface;
 use Okay\Entities\ManagersEntity;
 use Okay\Entities\VariantsEntity;
-use Okay\Modules\Gluck\EbayUpdater\Entities\EbayUpdaterEntity;
 use Okay\Entities\ProductsEntity;
+use Okay\Modules\Gluck\EbayUpdater\Entities\EbayUpdaterEntity;
 use Okay\Admin\Controllers\EbayAdmin;
-use Okay\Modules\Gluck\EbayUpdater\Init\Init;
+use Okay\Entities\CurrenciesEntity;
 use Okay\Core\Settings;
+use Okay\Core\Config;
+
 
 
 class EbayUpdaterHelper implements ExtensionInterface
@@ -30,76 +32,102 @@ class EbayUpdaterHelper implements ExtensionInterface
 //        $this->settings = $settings;
     }
 
-    public function cronEbayUpdater(VariantsEntity $variantsEntity, EbayUpdaterEntity $ebayUpdaterEntity, Settings $settings) {
-//print_r($settings); die();
+
+    /**
+     * обновялет цены Ebay по крону
+     * вызывается так: php ok scheduler:run -f
+     *
+     * @param VariantsEntity $variantsEntity
+     * @param ProductsEntity $productsEntity
+     * @param EbayUpdaterEntity $ebayUpdaterEntity
+     * @param Settings $settings
+     * @param Config $config
+     * @return void
+     *
+     *
+     */
+    public function cronEbayUpdater(VariantsEntity $variantsEntity, ProductsEntity $productsEntity, EbayUpdaterEntity $ebayUpdaterEntity, CurrenciesEntity $currenciesEntity, Settings $settings, Config $config) {
         $managersEntity = new ManagersEntity();
         $ebayAdmin = new EbayAdmin($managersEntity->findOne(['login' => 'gluck']), '', '');
 
         $variantsToUpd = $variantsEntity->getVariantsToUpdate(7);
+//print_r($variantsToUpd); die();
+
         foreach ($variantsToUpd as $variant) {
             $report = new \stdClass();
             $report->variant_id = $variant->variant_id;
             $report->old_price = $variant->price;
-            $currency_id = 1; // USD? EUR? еще?
 
-            $variantModel = $variantsEntity->findOne(['id' => $variant->variant_id]);
-print_r($variant);
-            // ищем по партномеру из модели Variant, иначе по ID лота из модели Product
+            // variant не обновляем, т.к. по SKU не ищем — нужен производитель
             if (!empty($variant->sku)) {
-                echo 'ищем по SKU'.PHP_EOL.PHP_EOL;
-print_r($ebayAdmin->parse(['keyword' => $variant->sku]));
-
-die();
-                $report->new_price = 22.22;
-                $report->success = 1;
-            } elseif (!empty($variant->ebayItemNo)) {
-                echo 'ищем по ebayItemNo'.PHP_EOL.PHP_EOL;
-                $report->newEbayItem_id = 9999999;
-                $report->new_price = 22.22;
-                $report->success = 1;
-            } else {
-                echo '=== не ищем? ==='.PHP_EOL.PHP_EOL;
                 $report->success = 0;
-                $report->description = 'описание';
+                $report->description = 'нужно искать по SKU';
+            } elseif (!empty($variant->ebayItemNo)) {
+                echo PHP_EOL.PHP_EOL.'ищем по ebayItemNo '.$variant->ebayItemNo.', если неудачно, тогда по partNumber'.PHP_EOL.PHP_EOL;
+
+                // попытка 1 — ищем по ebayItemNo
+                $newLot = $ebayAdmin->parse(['keyword' => $variant->ebayItemNo]);
+//echo '$newLot 1:'.PHP_EOL;
+//print_r($newLot);
+
+                // попытка 2 — если лот протух, ищем по partNumber
+                if (is_array($newLot) && $newLot['errors']) {
+                    echo PHP_EOL.PHP_EOL.'поиск по ebayItemNo '.$variant->ebayItemNo.' неудачно, ищем по SKU '.$variant->sku.' или partNumber '.$variant->partNumber.PHP_EOL.PHP_EOL;
+                    $newLot = $ebayAdmin->parse(['keyword' => $variant->sku ? $variant->sku : $variant->partNumber]);
+//echo '$newLot 2:'.PHP_EOL;
+//print_r($newLot);
+                    if (is_array($newLot) && $newLot['errors']) {
+                        $report->success = 0;
+                        $report->description = $newLot['errors'].'<br><a href="'.$newLot['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
+                    } else {
+                        // лот найден в попытке 2, пишемся
+                        switch ($newLot->currency) {
+                            case 'US': $currencyModel = $currenciesEntity->findOne(['code' => 'USD']); break;
+                            case 'EUR': $currencyModel = $currenciesEntity->findOne(['code' => 'EUR']); break;
+                            default: $currencyModel = $currenciesEntity->findOne(['code' => 'USD']);
+                        }
+                        $productModel = $productsEntity->findOne(['id' => $variant->product_id]);
+                        $variantModel = $variantsEntity->findOne(['id' => $variant->variant_id]);
+
+                        $report->newEbayItem_id = $newLot->ebayItemNo;
+                        $report->old_currency_id = $variantModel->currency_id;
+                        $report->new_currency_id = $currencyModel->id;
+                        $report->new_price = $newLot->outPrice;
+                        $report->success = 1;
+                        $report->description = $variant->sku ? 'SKU '.$variant->sku : 'partNumber '.$variant->partNumber;
+                        }
+                } else {
+                    // лот найден в попытке 1, пишемся
+                    switch ($newLot->currency) {
+                        case 'US': $currencyModel = $currenciesEntity->findOne(['code' => 'USD']); break;
+                        case 'EUR': $currencyModel = $currenciesEntity->findOne(['code' => 'EUR']); break;
+                        default: $currencyModel = $currenciesEntity->findOne(['code' => 'USD']);
+                    }
+                    $productModel = $productsEntity->findOne(['id' => $variant->product_id]);
+                    $variantModel = $variantsEntity->findOne(['id' => $variant->variant_id]);
+
+                    $report->newEbayItem_id = $newLot->ebayItemNo;
+                    $report->old_currency_id = $variantModel->currency_id;
+                    $report->new_currency_id = $currencyModel->id;
+                    $report->new_price = $newLot->outPrice;
+                    $report->success = 1;
+                    $report->description = 'ebayItemNo '.$variant->ebayItemNo;
+                }
+            } else {
+                $report->success = 0;
+                $report->description = 'у варианта '.$variant->variant_id.' нет SKU и нет ebayItemNo — не обновляли';
             }
+            $report->updated = "NOW()";
 
-$variantsEntity->update($variantModel->id, ['price' => $report->new_price, 'currency_id' => $currency_id /*'price_updated' => "NOW()"*/]);
-$res = $ebayUpdaterEntity->add($report);
-var_dump($res);
+            if ($report->success) {
+                $productsEntity->update($productModel->id, ['ebayItemNo' => $report->newEbayItem_id, 'supplier' => $newLot->supplier]);
+                $variantsEntity->update($variantModel->id, ['price' => $report->new_price, 'compare_price' => $newLot->ebayPrice,'currency_id' => $currencyModel->id, 'price_updated' => "NOW()"]);
+            }
+            $res = $ebayUpdaterEntity->add($report);
+//            var_dump($res);
+
+            if ($config->get('env') != 'local') sleep(rand(5, 20));
         }
-
-
-//$this->ebayUpdaterEntity->success = 0;
-
-
-
-/*
-'variant_id',
-'newEbayItem_id',
-'old_price',
-'new_price',
-'updated',
-'success',
- */
-
-
-//        $report = new EbayUpdaterEntity();
-//        $result = $report->add([
-//            'variant_id' => 111,
-//            'newEbayItem_id' => 'newEbayItem_id',
-//            'old_price' => 1.1,
-//            'new_price' => 2.22,
-//            'success' => 0
-//        ]);
-
-//        print_r($report->getAllFields());
-//        var_dump($result);
-//        return $variantsToUpd;
     }
 
-
-
-
-
-
-}
+} // class
