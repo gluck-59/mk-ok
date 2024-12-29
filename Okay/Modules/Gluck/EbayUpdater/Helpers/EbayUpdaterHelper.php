@@ -54,6 +54,7 @@ class EbayUpdaterHelper implements ExtensionInterface
 //print_r($variantsToUpd); die();
 
         foreach ($variantsToUpd as $variant) {
+print_r($variant);
             $report = new \stdClass();
             $report->variant_id = $variant->variant_id;
             $report->old_price = $variant->price;
@@ -61,9 +62,9 @@ class EbayUpdaterHelper implements ExtensionInterface
             // variant не обновляем, т.к. по SKU не ищем — нужен производитель
             if (!empty($variant->sku)) {
                 $report->success = 0;
-                $report->description = 'нужно искать по SKU';
+                $report->description = 'искать по SKU — нужен manufacturer';
             } elseif (!empty($variant->ebayItemNo)) {
-                echo PHP_EOL.PHP_EOL.'ищем по ebayItemNo '.$variant->ebayItemNo.', если неудачно, тогда по partNumber'.PHP_EOL.PHP_EOL;
+                echo PHP_EOL.PHP_EOL.'=== ищем по ebayItemNo '.$variant->ebayItemNo.', если неудачно, тогда по partNumber'.PHP_EOL.PHP_EOL;
 
                 // попытка 1 — ищем по ebayItemNo
                 $newLot = $ebayAdmin->parse(['keyword' => $variant->ebayItemNo]);
@@ -72,7 +73,7 @@ class EbayUpdaterHelper implements ExtensionInterface
 
                 // попытка 2 — если лот протух, ищем по partNumber
                 if (is_array($newLot) && $newLot['errors']) {
-                    echo PHP_EOL.PHP_EOL.'поиск по ebayItemNo '.$variant->ebayItemNo.' неудачно, ищем по SKU '.$variant->sku.' или partNumber '.$variant->partNumber.PHP_EOL.PHP_EOL;
+                    echo PHP_EOL.PHP_EOL.'=== поиск по ebayItemNo '.$variant->ebayItemNo.' неудачно, ищем по SKU '.$variant->sku.' или partNumber '.$variant->partNumber.PHP_EOL.PHP_EOL;
                     $newLot = $ebayAdmin->parse(['keyword' => $variant->sku ? $variant->sku : $variant->partNumber]);
 //echo '$newLot 2:'.PHP_EOL;
 //print_r($newLot);
@@ -97,6 +98,7 @@ class EbayUpdaterHelper implements ExtensionInterface
                         $report->description = $variant->sku ? 'SKU '.$variant->sku : 'partNumber '.$variant->partNumber;
                         }
                 } else {
+echo PHP_EOL.PHP_EOL.__LINE__.PHP_EOL.PHP_EOL;
                     // лот найден в попытке 1, пишемся
                     switch ($newLot->currency) {
                         case 'US': $currencyModel = $currenciesEntity->findOne(['code' => 'USD']); break;
@@ -114,6 +116,7 @@ class EbayUpdaterHelper implements ExtensionInterface
                     $report->description = 'ebayItemNo '.$variant->ebayItemNo;
                 }
             } else {
+echo PHP_EOL.PHP_EOL.__LINE__.PHP_EOL.PHP_EOL;
                 $report->success = 0;
                 $report->description = 'у варианта '.$variant->variant_id.' нет SKU и нет ebayItemNo — не обновляли';
             }
@@ -124,7 +127,7 @@ class EbayUpdaterHelper implements ExtensionInterface
                 $variantsEntity->update($variantModel->id, ['price' => $report->new_price, 'compare_price' => $newLot->ebayPrice,'currency_id' => $currencyModel->id, 'price_updated' => "NOW()"]);
             }
             $res = $ebayUpdaterEntity->add($report);
-//            var_dump($res);
+            var_dump($res);
 
             if ($config->get('env') != 'local') sleep(rand(5, 20));
         }

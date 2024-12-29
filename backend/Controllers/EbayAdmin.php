@@ -103,7 +103,6 @@ class EbayAdmin extends IndexAdmin
             $curl = self::request($request, 1);
             if (!empty($this->debug['errors'])) {
                 return $this->debug;
-//                return $curl;
             }
 
 
@@ -119,7 +118,7 @@ class EbayAdmin extends IndexAdmin
                 $itm = parse_url($link->getAttribute('href'), PHP_URL_PATH);
                 preg_match('/\d{12}/', $itm, $itemNo);
                 if (!$itemNo) {
-//                prettyDump('пропускаем левый итем в строке '.__LINE__);
+//                    echo ('пропускаем левый итем в строке '.__LINE__);
                     continue;
                 }
                 // если селлер не соответсвует нашим критериям — пропускаем
@@ -129,7 +128,7 @@ class EbayAdmin extends IndexAdmin
                     if (preg_replace('/\D/', '', $sellerArray[1]) < $this->sellerMinFeedback) continue;
                     if (!empty($this->banlist) && in_array($sellerArray[0], $this->banlist)) continue;
                 } else {
-//                prettyDump('пропускаем '.$itemNo[0].' в строке '.__LINE__);
+//                    echo('пропускаем '.$itemNo[0].' в строке '.__LINE__);
                     continue;
                 }
                 // если валюта не бакс-евро — пропускаем
@@ -138,7 +137,7 @@ class EbayAdmin extends IndexAdmin
                     $lot['currency'] = $currency;
                     $lot['price'] = $priceBlock->text();
                     if (empty($currency)) {
-//                    prettyDump('пропускаем '.$itemNo[0].' в строке '.__LINE__);
+//                        echo ('пропускаем '.$itemNo[0].' в строке '.__LINE__);
                         continue;
                     }
                 }
@@ -147,7 +146,7 @@ class EbayAdmin extends IndexAdmin
                     $shipping = preg_replace('/[a-zA-Z\$\s+]/', '', $shippingBlock->text());
                     $lot['shipping'] = $shipping;
                     if (empty($shipping)) {
-//                    prettyDump('пропускаем '.$itemNo[0].' в строке '.__LINE__);
+//                        echo ('пропускаем '.$itemNo[0].' в строке '.__LINE__);
                         continue;
                     }
                 }
@@ -163,11 +162,6 @@ class EbayAdmin extends IndexAdmin
             } // foreach
 //prettyDump($lots, 1);
 
-            // в выдаче Ebay много мусора и сортировать по цене нельзя
-            //        usort($lots, function($a,$b){
-            //            return ($a['ebayPrice']-$b['ebayPrice']);
-            //        });
-
             // берем второй элемент из массива $lots[1] и обрабатываем его
             // второй элемент — чтобы случайно не попал левый лот с другим товаром, который будет самым дешевым
             if (sizeof($lots) > 1) {
@@ -175,8 +169,9 @@ class EbayAdmin extends IndexAdmin
             } elseif (sizeof($lots) == 1) {
                 $this->parsedLot = self::getitemDetails($lots[0]['itemNo']);
             } else {
-                echo 'массив $lots пуст. не подключен VPN?';
-                return $this->parsedLot;
+                echo 'массив $lots пуст. не подключен VPN?'.PHP_EOL.PHP_EOL;
+                $this->debug['errors'] = 'массив $lots пуст. не подключен VPN?';
+                return $this->debug;
             }
 //prettyDump($this->parsedLot, 1);
         }
@@ -203,17 +198,24 @@ class EbayAdmin extends IndexAdmin
      */
     public function getitemDetails($itemNo) {
         $itemDetails = self::request(['request' => $itemNo], 2);
+        $document = new Document($itemDetails['response']);
 
-        // лот протух или ebay вернул хуйню
+        // ebay вернул ошибку
         if($itemDetails['debug']['errors']) {
             return $itemDetails['debug'];
         }
+        //  ended
+        if ($endedBlock = $document->first('.d-statusmessage')) {
+            $this->debug['errors'] = 'лот протух';
+            return $this->debug;
+        }
 
-//        $numberFormat = new \NumberFormatter('en_US', \NumberFormatter::CURRENCY);
-        $document = new Document($itemDetails['response']);
+
+
 
         /** сборка массива с данными о лоте */
         $lot['ebayItemNo'] = $itemNo;
+
 
         //  store
         if ($storeName = $document->first('.x-sellercard-atf__info__about-seller span.ux-textspans--BOLD')) {
@@ -265,7 +267,7 @@ class EbayAdmin extends IndexAdmin
             $duties = preg_replace('/[A-Z$€ ]/', '', $dutiesWrapper->text());
         }
 
-        if (in_array($currency[0], ['US', 'EUR']) && is_double($price) && is_double($shipping)) {
+        if (!$isEnded && in_array($currency[0], ['US', 'EUR']) && is_double($price) && is_double($shipping)) {
             $lot['currency'] = $currency[0];
             $lot['price'] = $price;
             $lot['shipping'] = $shipping;
@@ -300,7 +302,7 @@ class EbayAdmin extends IndexAdmin
         } else {
             // если валюта кривая или вместо доставки херня, то покажем все это и закончим формирование лота
             $lot = [];
-            echo ($currency[0] == 'US' ? 'price = '.$price : '---- цена в ' . (!empty($currency) ? $currency[0] : 'неизвестной валюте') . ' shpping = '.$shipping);
+            echo ($currency[0] == 'US' ? 'price = '.$price : '---- цена в ' . (!empty($currency) ? $currency[0] : 'неизвестной валюте') . ' shpping = '.$shipping).($isEnded ? ' лот протух' : '');
         }
         return (object) $lot;
     } //getItemDetails
@@ -476,7 +478,7 @@ class EbayAdmin extends IndexAdmin
 //            'Old price',
             'Currency ID',
             'Weight',
-            'Stock',
+//            'Stock',
 //            'Units',
             'Visible',
 //            'Featured',
@@ -494,7 +496,7 @@ class EbayAdmin extends IndexAdmin
 //                '',                                                                                             // Old price
                 $currency->id,                                                                                  // Currency ID
                 2,                                                                                              // Weight
-                2,                                                                                              // Stock
+//                2,                                                                                              // Stock
 //                '',                                                                                             // Units
                 1,                                                                                              // Visible
 //                0,                                                                                              // Featured
