@@ -51,10 +51,8 @@ class EbayUpdaterHelper implements ExtensionInterface
         $ebayAdmin = new EbayAdmin($managersEntity->findOne(['login' => 'gluck']), '', '');
 
         $variantsToUpd = $variantsEntity->getVariantsToUpdate(7);
-//print_r($variantsToUpd); die();
-
         foreach ($variantsToUpd as $variant) {
-print_r($variant);
+//print_r($variant);
             $report = new \stdClass();
             $report->variant_id = $variant->variant_id;
             $report->old_price = $variant->price;
@@ -98,7 +96,7 @@ print_r($variant);
                         $report->description = $variant->sku ? 'SKU '.$variant->sku : 'partNumber '.$variant->partNumber;
                         }
                 } else {
-echo PHP_EOL.PHP_EOL.__LINE__.PHP_EOL.PHP_EOL;
+//                echo PHP_EOL.PHP_EOL.__LINE__.PHP_EOL.PHP_EOL;
                     // лот найден в попытке 1, пишемся
                     switch ($newLot->currency) {
                         case 'US': $currencyModel = $currenciesEntity->findOne(['code' => 'USD']); break;
@@ -116,7 +114,7 @@ echo PHP_EOL.PHP_EOL.__LINE__.PHP_EOL.PHP_EOL;
                     $report->description = 'ebayItemNo '.$variant->ebayItemNo;
                 }
             } else {
-echo PHP_EOL.PHP_EOL.__LINE__.PHP_EOL.PHP_EOL;
+//            echo PHP_EOL.PHP_EOL.__LINE__.PHP_EOL.PHP_EOL;
                 $report->success = 0;
                 $report->description = 'у варианта '.$variant->variant_id.' нет SKU и нет ebayItemNo — не обновляли';
             }
