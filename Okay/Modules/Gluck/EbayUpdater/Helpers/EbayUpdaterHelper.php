@@ -127,7 +127,8 @@ class EbayUpdaterHelper implements ExtensionInterface
             $res = $ebayUpdaterEntity->add($report);
             var_dump($res);
 
-            if ($config->get('env') != 'local') sleep(rand(5, 20));
+//            if ($config->get('env') != 'local')
+                sleep(rand(5, 20));
         }
     }
 
