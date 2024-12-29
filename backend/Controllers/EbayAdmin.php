@@ -302,7 +302,10 @@ class EbayAdmin extends IndexAdmin
         } else {
             // если валюта кривая или вместо доставки херня, то покажем все это и закончим формирование лота
             $lot = [];
-            echo ($currency[0] == 'US' ? 'price = '.$price : '---- цена в ' . (!empty($currency) ? $currency[0] : 'неизвестной валюте') . ' shpping = '.$shipping).($isEnded ? ' лот протух' : '');
+            $err = ($currency[0] == 'US' ? 'price = '.$price : '---- цена в ' . (!empty($currency) ? $currency[0] : 'неизвестной валюте') . ' shpping = '.$shipping).($isEnded ? ' лот протух' : '');
+            echo $err;
+            $this->debug['errors'] = $err;
+            return $this->debug;
         }
         return (object) $lot;
     } //getItemDetails
