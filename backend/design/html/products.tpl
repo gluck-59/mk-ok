@@ -59,7 +59,7 @@
                 </div>
                 <div class="fn_step-0 boxed_sorting toggle_body_wrap off fn_card">
                 <div class="row">
-                    <div class="col-md-3 col-lg-3 col-sm-12">
+                    <div class="col-md-2 col-lg-2 col-sm-12">
                         <div>
                             <select id="id_filter" name="products_filter" class="selectpicker form-control" title="{$btr->products_filter|escape}" data-live-search="true" onchange="location = this.value;">
                                 <option value="{url brand_id=null category_id=null keyword=null page=null limit=null filter=null}" {if !$filter}selected{/if}>{$btr->general_all_products|escape}</option>
@@ -74,7 +74,7 @@
                             </select>
                         </div>
                     </div>
-                    <div class="col-md-3 col-lg-3 col-sm-12">
+                    <div class="col-md-2 col-lg-2 col-sm-12">
                         <select id="id_categories" name="categories_filter" title="{$btr->general_category_filter|escape}" class="selectpicker form-control" data-live-search="true" data-size="10" onchange="location = this.value;">
                             <option value="{url keyword=null brand_id=null page=null limit=null category_id=null}" {if !$category_id}selected{/if}>{$btr->general_all_categories|escape}</option>
                             <option value="{url keyword=null brand_id=null page=null limit=null category_id=-1}" {if $category_id==-1}selected{/if}>{$btr->products_without_category|escape}</option>
@@ -89,12 +89,21 @@
                             {category_select categories=$categories}
                         </select>
                     </div>
-                    <div class="col-md-3 col-lg-3 col-sm-12">
+                    <div class="col-md-2 col-lg-2 col-sm-12">
                         <select id="id_brands" name="brands_filter" title="{$btr->general_brand_filter|escape}" class="selectpicker form-control" data-live-search="true" data-size="10" onchange="location = this.value;">
                             <option value="{url keyword=null brand_id=null page=null limit=null}" {if !$brand_id}selected{/if}>{$btr->general_all_brands|escape}</option>
                             <option value="{url keyword=null brand_id=-1 page=null limit=null}" {if $brand_id==-1}selected{/if}>{$btr->products_without_brand}</option>
                             {foreach $brands as $b}
                                 <option value="{url keyword=null page=null limit=null brand_id=$b->id}" brand_id="{$b->id}"  {if $brand_id == $b->id}selected{/if}>{$b->name|escape}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                    <div class="col-md-2 col-lg-2 col-sm-12">
+                        <select id="id_manufacturers" name="manufacturers_filter" title="{$btr->general_manufacturer_filter|escape}" class="selectpicker form-control" data-live-search="true" data-size="10" onchange="location = this.value;">
+                            <option value="{url keyword=null manufacturer_id=null page=null limit=null}" {if !$manufacturer_id}selected{/if}>{$btr->general_all_manufacturers|escape}</option>
+                            <option value="{url keyword=null manufacturer_id=-1 page=null limit=null}" {if $manufacturer_id==-1}selected{/if}>{$btr->products_without_manufacturer}</option>
+                            {foreach $manufacturers as $m}
+                                <option value="{url keyword=null page=null limit=null manufacturer_id=$m->id}" manufacturer_id="{$m->id}"  {if $manufacturer_id == $m->id}selected{/if}>{$m->name|escape}</option>
                             {/foreach}
                         </select>
                     </div>

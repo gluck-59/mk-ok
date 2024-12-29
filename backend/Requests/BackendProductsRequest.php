@@ -24,6 +24,7 @@ class BackendProductsRequest
         $product->visible  = $this->request->post('visible', 'integer');
         $product->featured = $this->request->post('featured', 'integer');
         $product->brand_id = $this->request->post('brand_id', 'integer');
+        $product->manufacturer_id = $this->request->post('manufacturer_id', 'integer');
         $product->ebayItemNo = $this->request->post('ebayItemNo', 'string');
         $product->supplier = $this->request->post('supplier', 'string');
         $product->partNumber = $this->request->post('partNumber', 'string');

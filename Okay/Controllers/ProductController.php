@@ -8,6 +8,7 @@ use Okay\Core\BrowsedProducts;
 use Okay\Core\Router;
 use Okay\Entities\ProductsEntity;
 use Okay\Entities\BrandsEntity;
+use Okay\Entities\ManufacturersEntity;
 use Okay\Entities\CategoriesEntity;
 use Okay\Entities\BlogEntity;
 use Okay\Helpers\BlogHelper;
@@ -23,6 +24,7 @@ class ProductController extends AbstractController
     public function render(
         ProductsEntity $productsEntity,
         BrandsEntity $brandsEntity,
+        ManufacturersEntity $manufacturersEntity,
         CategoriesEntity $categoriesEntity,
         ProductsHelper $productsHelper,
         BlogEntity $blogEntity,
@@ -93,7 +95,11 @@ class ProductController extends AbstractController
         if (!empty($brand) && $brand->visible) {
             $this->design->assign('brand', $brand);
         }
-        
+        $manufacturer = $manufacturersEntity->get(intval($product->manufacturer_id));
+        if (!empty($manufacturer) && $manufacturer->visible) {
+            $this->design->assign('manufacturer', $manufacturer);
+        }
+
         $category = $categoriesEntity->get((int)$product->main_category_id);
         $this->design->assign('category', $category);
 

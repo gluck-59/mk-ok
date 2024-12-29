@@ -8,7 +8,7 @@ use Okay\Admin\Helpers\BackendCategoriesHelper;
 use Okay\Admin\Helpers\BackendValidateHelper;
 use Okay\Entities\RouterCacheEntity;
 use Okay\Entities\BrandsEntity;
-//use Okay\Entities\ManufacturersEntity;
+use Okay\Entities\ManufacturersEntity;
 use Okay\Entities\CurrenciesEntity;
 use Okay\Admin\Requests\BackendProductsRequest;
 use Okay\Admin\Helpers\BackendProductsHelper;
@@ -22,7 +22,7 @@ class ProductAdmin extends IndexAdmin
     public function fetch(
         BackendCategoriesHelper    $backendCategoriesHelper,
         BrandsEntity               $brandsEntity,
-//ManufacturersEntity               $manufacturersEntity,
+        ManufacturersEntity $manufacturersEntity,
         CurrenciesEntity           $currenciesEntity,
         BackendProductsRequest     $productRequest,
         BackendProductsHelper      $backendProductsHelper,
@@ -146,13 +146,12 @@ class ProductAdmin extends IndexAdmin
         $brandsCount = $brandsEntity->count();
         $brands = $brandsEntity->find(['limit' => $brandsCount]);
 
-//$manufacturersCount = $manufacturersEntity->count();
-//$manufacturers = $manufacturersEntity->find(['limit' => $manufacturersCount]);
-//$manufacturers = $this->db->query('SHOW TABLES');
+        $manufacturersCount = $manufacturersEntity->count();
+        $manufacturers = $manufacturersEntity->find(['limit' => $manufacturersCount]);
 
 
         $this->design->assign('brands',     $brands);
-//        $this->design->assign('manufacturers',$manufacturers);
+        $this->design->assign('manufacturers',$manufacturers);
         $this->design->assign('categories', $categoriesTree);
         $this->design->assign('currencies', $currenciesEntity->find());
         $this->design->assign('ebayMotorListUrl', EbayAdmin::EBAY_MOTOR_LIST_URL);

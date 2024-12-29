@@ -6,11 +6,10 @@
 
 {*Название страницы*}
 <div class="row">
-    <h1>manufacturer.tpl</h1>
     <div class="col-lg-12 col-md-12">
         <div class="wrap_heading">
             <div class="box_heading heading_page" onclick="enjoyhintManufacturer();">
-                {if !$v->id}
+                {if !$manufacturer->id}
                     {$btr->manufacturer_add|escape}
                 {else}
                     {$manufacturer->name|escape}
@@ -19,8 +18,8 @@
             {if $manufacturer->id}
                 <div class="box_btn_heading">
                     <a class="btn btn_small btn-info add" target="_blank" href="{url_generator route="manufacturer" url=$manufacturer->url absolute=1}">
-                    {include file='svg_icon.tpl' svgId='icon_desktop'}
-                    <span>{$btr->general_open|escape}</span>
+                        {include file='svg_icon.tpl' svgId='icon_desktop'}
+                        <span>{$btr->general_open|escape}</span>
                     </a>
                 </div>
             {/if}
@@ -150,23 +149,23 @@
     {*Дополнительные настройки*}
     {$switch_checkboxes = {get_design_block block="manufacturer_switch_checkboxes"}}
     {if !empty($switch_checkboxes)}
-    <div class="row">
-        <div class="col-lg-12 col-md-12">
-            <div class="boxed fn_toggle_wrap ">
-                <div class="heading_box">
-                    {$btr->general_additional_settings|escape}
-                    <div class="toggle_arrow_wrap fn_toggle_card text-primary">
-                        <a class="btn-minimize" href="javascript:;" ><i class="fa fn_icon_arrow fa-angle-down"></i></a>
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="boxed fn_toggle_wrap ">
+                    <div class="heading_box">
+                        {$btr->general_additional_settings|escape}
+                        <div class="toggle_arrow_wrap fn_toggle_card text-primary">
+                            <a class="btn-minimize" href="javascript:;" ><i class="fa fn_icon_arrow fa-angle-down"></i></a>
+                        </div>
                     </div>
-                </div>
-                <div class="toggle_body_wrap on fn_card">
-                    <div class="activity_of_switch activity_of_switch--box_settings">
-                        {$switch_checkboxes}
+                    <div class="toggle_body_wrap on fn_card">
+                        <div class="activity_of_switch activity_of_switch--box_settings">
+                            {$switch_checkboxes}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     {/if}
 
     {*Параметры элемента*}
@@ -183,7 +182,7 @@
                     <ul class="manufacturer_images_list">
                         <li class="manufacturer_image_item fn_image_block">
                             {if $manufacturer->image}
-                            <input type="hidden" class="fn_accept_delete" name="delete_image" value="">
+                                <input type="hidden" class="fn_accept_delete" name="delete_image" value="">
                                 <div class="fn_parent_image">
                                     <div class="manufacturer_image image_wrapper fn_image_wrapper text-xs-center">
                                         <a href="javascript:;" class="fn_delete_item remove_image"></a>
@@ -317,11 +316,11 @@
                     </div>
                 </div>
                 <div class="row">
-                   <div class="col-lg-12 col-md-12 mt-1">
-                       <button id="fast_save_button_and_quit" type="submit" class="fn_step-7 btn btn_small btn_blue float-md-right ml-1" name="apply_and_quit" value="1">
-                           {include file='svg_icon.tpl' svgId='checked'}
-                           <span>{$btr->general_apply_and_quit|escape}</span>
-                       </button>
+                    <div class="col-lg-12 col-md-12 mt-1">
+                        <button id="fast_save_button_and_quit" type="submit" class="fn_step-7 btn btn_small btn_blue float-md-right ml-1" name="apply_and_quit" value="1">
+                            {include file='svg_icon.tpl' svgId='checked'}
+                            <span>{$btr->general_apply_and_quit|escape}</span>
+                        </button>
                         <button type="submit" class="fn_step-7 btn btn_small btn_blue float-md-right">
                             {include file='svg_icon.tpl' svgId='checked'}
                             <span>{$btr->general_apply|escape}</span>

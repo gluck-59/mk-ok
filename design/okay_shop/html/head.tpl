@@ -132,7 +132,7 @@
     {/if}
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="OkayCMS {$config->version}">
+    <meta name="generator" content="MotokofrCMS">
 
     {* rel prev next для блога *}
     {if $controller == "BlogController" && $total_pages_num > 1}

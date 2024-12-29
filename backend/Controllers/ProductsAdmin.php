@@ -8,6 +8,7 @@ use Okay\Entities\ProductsEntity;
 use Okay\Admin\Requests\BackendCategoriesRequest;
 use Okay\Admin\Requests\BackendProductsRequest;
 use Okay\Admin\Helpers\BackendBrandsHelper;
+use Okay\Admin\Helpers\BackendManufacturersHelper;
 use Okay\Admin\Helpers\BackendProductsHelper;
 use Okay\Admin\Helpers\BackendVariantsHelper;
 use Okay\Admin\Helpers\BackendCategoriesHelper;
@@ -20,6 +21,7 @@ class ProductsAdmin extends IndexAdmin
         ProductsEntity           $productsEntity,
         BackendCategoriesHelper  $backendCategoriesHelper,
         BackendBrandsHelper      $backendBrandsHelper,
+        BackendManufacturersHelper $backendManufacturersHelper,
         BackendProductsHelper    $backendProductsHelper,
         BackendVariantsHelper    $backendVariantsHelper,
         BackendCurrenciesHelper  $backendCurrenciesHelper,
@@ -35,6 +37,12 @@ class ProductsAdmin extends IndexAdmin
         $brands       = $backendBrandsHelper->findBrands($brandsFilter);
         $allBrands    = $backendBrandsHelper->findAllBrands();
         $brandId      = $this->request->get('brand_id', 'integer');
+
+        // Производители
+        $manufacturersFilter = $backendManufacturersHelper->prepareFilterForProductsAdmin($categoryId);
+        $manufacturers       = $backendManufacturersHelper->findManufacturers($manufacturersFilter);
+        $allManufacturers    = $backendManufacturersHelper->findAllManufacturers();
+        $manufacturerId      = $this->request->get('manufacturer_id', 'integer');
 
         // Фильтр
         $filter = $backendProductsHelper->buildFilter();
@@ -100,6 +108,12 @@ class ProductsAdmin extends IndexAdmin
                         $brands       = $backendBrandsHelper->findBrands($brandsFilter);
                         break;
                     }
+case 'move_to_manufacturer': {
+    $backendProductsHelper->actionMoveToManufacturer($ids);
+    $manufacturersFilter = $backendManufacturersHelper->prepareFilterForProductsAdmin($categoryId);
+    $manufacturers       = $backendManufacturersHelper->findManufacturers($manufacturersFilter);
+    break;
+}
                 }
             }
         }
@@ -120,6 +134,10 @@ class ProductsAdmin extends IndexAdmin
         $this->design->assign('all_brands',     $allBrands);
         $this->design->assign('brand_id',       $brandId);
         $this->design->assign('brands',         $brands);
+
+        $this->design->assign('all_manufacturers',     $allManufacturers);
+        $this->design->assign('manufacturer_id',       $manufacturerId);
+        $this->design->assign('manufacturers',         $manufacturers);
 
         $filter['page'] = min($filter['page'],       $pagesCount);
         $this->design->assign('products_count', $productsCount);

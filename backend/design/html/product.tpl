@@ -319,12 +319,27 @@
                         <select name="brand_id" class="selectpicker form-control mb-1{if !$brands} hidden{/if} fn_meta_brand" data-live-search="true">
                             <option value="0" {if !$product->brand_id}selected=""{/if} data-brand_name="">{$btr->general_not_set|escape}</option>
                             {foreach $brands as $brand}
-                            <option value="{$brand->id}" {if $product->brand_id == $brand->id}selected=""{/if} data-brand_name="{$brand->name|escape}">{$brand->name|escape}</option>
+                                <option value="{$brand->id}" {if $product->brand_id == $brand->id}selected=""{/if} data-brand_name="{$brand->name|escape}">{$brand->name|escape}</option>
                             {/foreach}
                         </select>
                     </div>
                 </div>
-
+                <div class="fn_step-16">
+                    <div class="heading_label">
+                        {$btr->general_manufacturer|escape}
+                        <i class="fn_tooltips" title="{$btr->tooltip_general_manufacturer|escape}">
+                            {include file='svg_icon.tpl' svgId='icon_tooltips'}
+                        </i>
+                    </div>
+                    <div class="">
+                        <select name="manufacturer_id" class="selectpicker form-control mb-1{if !$manufacturers} hidden{/if} fn_meta_manufacturer" data-live-search="true">
+                            <option value="0" {if !$product->manufacturer_id}selected=""{/if} data-manufacturer_name="">{$btr->general_not_set|escape}</option>
+                            {foreach $manufacturers as $manufacturer}
+                                <option value="{$manufacturer->id}" {if $product->manufacturer_id == $manufacturer->id}selected=""{/if} data-manufacturer_name="{$manufacturer->name|escape}">{$manufacturer->name|escape}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                </div>
                 <div class="fn_step-7">
                     <div class="heading_label heading_label--required">
                         <span>{$btr->general_category|escape}</span>
@@ -359,54 +374,38 @@
                             <input id="" type="checkbox" value="" name="categories[]" data-cat_name="">
                         </div>
                     </div>
-<div class="heading_label">Ebay секция (производителя пока пишем в описании)</div>
-<div id="ebayDetails" class="1clearfix">
-    <div class="row mb-1">
-        <div class="col-md-6">
-            <input name="ebayItemNo" class="variant_input" value="{$product->ebayItemNo}" placeholder="номер лота">
-            {if $product->ebayItemNo}
-                <a href="https://ebay.com/itm/{$product->ebayItemNo|escape}" target="_blank">ссылка</a>
-            {/if}
-        </div>
-        <div class="col-md-6">
-            <input name="supplier" class="variant_input" value="{$product->supplier}" placeholder="поставщик">
-            {if $product->supplier}
-                <a href="https://www.ebay.com/sch/i.html?_ssn=oemcycles&store_name={$product->supplier|escape}" target="_blank">поставщик</a>
-            {/if}
-        </div>
-    </div>
-    <div class="row">
-        <div class="col-md-6">
-            <input name="partNumber" class="variant_input" value="{$product->partNumber}" placeholder="партномер">
-            {if $product->partNumber}
-                <a href="{$ebayMotorListUrl}{$product->partNumber|escape}" target="_blank">поиск</a>
-            {/if}
-        </div>
-        <div class="col-md-6 mb-1">
-            <input name="epid" class="variant_input" value="{$product->epid}" placeholder="epid">
-        </div>
-        <!--div class="col-md-12">
-            ПРОВЕРИТЬ СТОИМОСТЬ:
-            <br>shipping (alicante 03560) и Import Duties
-        </div-->
-    </div>
-    <!--div class="row">
-        <div class="col-md-12">
-            {*{assign var ='first_manufacturer' value=$manufacturers}*}
-            {*<select class="selectpicker form-control  1mb-1 fn_product_category fn_meta_categories" name="manufacturer_id" data-live-search="true">*}
-            {*    <option value="0" selected="" disabled="" data-category_name="">Производитель</option>*}
-            {*    {function name=manufacturer_select level=0}*}
-            {*        {foreach $manufacturers as $manufacturer}*}
-            {*            <option value="{$manufacturer->id}" {if $manufacturer->id == $first_manufacturer}selected{/if} data-manufacturer_name="{$manufacturer->name|escape}">{section sp $level}- {/section}{$manufacturer->name|escape}</option>*}
-            {*            {manufacturer_select manufacturers=$manufacturer->submanufacturers level=$level+1}*}
-            {*        {/foreach}*}
-            {*    {/function}*}
-            {*    {manufacturer_select manufacturers=$manufacturers}*}
-            {*</select>*}
-            {*<input name="manufacturer_id" placeholder="производитель ID">*}
-        </div>
-    </div-->
-</div>
+                    <div class="heading_label">Ebay секция</div>
+                    <div id="ebayDetails" class="1clearfix">
+                        <div class="row mb-1">
+                            <div class="col-md-6">
+                                <input name="ebayItemNo" class="variant_input" value="{$product->ebayItemNo}" placeholder="номер лота">
+                                {if $product->ebayItemNo}
+                                    <a href="https://ebay.com/itm/{$product->ebayItemNo|escape}" target="_blank">ссылка</a>
+                                {/if}
+                            </div>
+                            <div class="col-md-6">
+                                <input name="supplier" class="variant_input" value="{$product->supplier}" placeholder="поставщик">
+                                {if $product->supplier}
+                                    <a href="https://www.ebay.com/sch/i.html?_ssn=oemcycles&store_name={$product->supplier|escape}" target="_blank">поставщик</a>
+                                {/if}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <input name="partNumber" class="variant_input" value="{$product->partNumber}" placeholder="партномер">
+                                {if $product->partNumber}
+                                    <a href="{$ebayMotorListUrl}{$product->partNumber|escape}" target="_blank">поиск</a>
+                                {/if}
+                            </div>
+                            <div class="col-md-6 mb-1">
+                                <input name="epid" class="variant_input" value="{$product->epid}" placeholder="epid">
+                            </div>
+                            <!--div class="col-md-12">
+                                ПРОВЕРИТЬ СТОИМОСТЬ:
+                                <br>shipping (alicante 03560) и Import Duties
+                            </div-->
+                        </div>
+                    </div>
                 </div>
                 {get_design_block block="product_relations"}
             </div>

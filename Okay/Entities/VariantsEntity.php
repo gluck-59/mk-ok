@@ -160,7 +160,7 @@ FROM ok_products p
 JOIN ok_variants v ON v.product_id = p.id
 WHERE (DATEDIFF(now(), v.price_updated) > $days OR v.price_updated IS NULL) AND p.visible = 1
 ORDER BY p.last_modify
-LIMIT 0,10
+LIMIT 0,100
 ");
 
         $this->db->query($sql);

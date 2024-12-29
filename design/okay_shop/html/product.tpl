@@ -127,6 +127,30 @@
                                 </div>
                             {/if}
                         {/if}
+                        {* Product manufacturer *}
+                        {if !empty($manufacturer)}
+                            {if !empty($manufacturer->image)}
+                                <div class="details_boxed__manufacturer clearfix">
+                        {*            <a href="{url_generator route="manufacturer" url=$manufacturer->url}">*}
+                                    <a href="">
+                                        <img class="brand_img" src="{$manufacturer->image|resize:120:65:false:$config->resized_manufacturers_dir}" alt="{$manufacturer->name|escape}" title="{$manufacturer->name|escape}">
+                                        <span class="hidden" itemprop="manufacturer" itemtype="https://schema.org/Brand" itemscope>
+                                            <meta itemprop="name" content="{$manufacturer->name|escape}" />
+                                        </span>
+                                    </a>
+                                </div>
+                            {else}
+                                <div class="details_boxed__no_manufacturer clearfix">
+                                    <span class="details_boxed__title" data-language="product_manufacturer_name">{$lang->product_manufacturer_name}</span>
+                                    <a class="theme_link--color" href="{url_generator route="manufacturer" url=$manufacturer->url}">
+                                        <span>{$manufacturer->name|escape}</span>
+                                        <span class="hidden" itemprop="manufacturer" itemtype="https://schema.org/Brand" itemscope>
+                                            <meta itemprop="name" content="{$manufacturer->name|escape}" />
+                                        </span>
+                                    </a>
+                                </div>
+                            {/if}
+                        {/if}
                     </div>
 
                     {* Anchor form comments *}
