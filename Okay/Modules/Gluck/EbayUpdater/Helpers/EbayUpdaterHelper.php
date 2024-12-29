@@ -127,7 +127,12 @@ class EbayUpdaterHelper implements ExtensionInterface
                 $variantsUpd = $variantsEntity->update($variantModel->id, ['price_updated' => "NOW()"]); // если в $report->success мы поставили 0, то отметим "обновлено" в вариантах, иначе неудачные будут лезть каждый запуск
             }
             $ebayUpdaterUpd = $ebayUpdaterEntity->add($report);
-            echo '$productsUpd = '.var_dump($productsUpd).'; '.'$variantsUpd = '.var_dump($variantsUpd).'; $ebayUpdaterUpd = '.var_dump($ebayUpdaterUpd);
+
+            echo PHP_EOL.PHP_EOL;
+            echo '$productsUpd:'; var_dump($productsUpd);
+            echo '$variantsUpd:'; var_dump($variantsUpd);
+            echo '$ebayUpdaterUpd:'; var_dump($ebayUpdaterUpd);
+            echo PHP_EOL.PHP_EOL;
 
             if ($config->get('env') == 'production')
                 sleep(rand(5, 20));
