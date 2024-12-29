@@ -59,10 +59,11 @@ class EbayUpdaterHelper implements ExtensionInterface
 
             // variant не обновляем, т.к. по SKU не ищем — нужен производитель
             if (!empty($variant->sku)) {
+                echo PHP_EOL.PHP_EOL.'=== ищем по SKU '.$variant->sku.PHP_EOL.PHP_EOL;
                 $report->success = 0;
-                $report->description = 'искать по SKU — нужен manufacturer';
+                $report->description = 'нужен manufacturer чтобы искать по SKU '.$variant->sku;
             } elseif (!empty($variant->ebayItemNo)) {
-                echo PHP_EOL.PHP_EOL.'=== ищем по ebayItemNo '.$variant->ebayItemNo.', если неудачно, тогда по partNumber'.PHP_EOL.PHP_EOL;
+                echo PHP_EOL.PHP_EOL.'=== ищем по ebayItemNo '.$variant->ebayItemNo.', затем по partNumber'.PHP_EOL.PHP_EOL;
 
                 // попытка 1 — ищем по ebayItemNo
                 $newLot = $ebayAdmin->parse(['keyword' => $variant->ebayItemNo]);
@@ -79,7 +80,7 @@ class EbayUpdaterHelper implements ExtensionInterface
                         $report->success = 0;
                         $report->description = $newLot['errors'].'<br><a href="'.$newLot['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
                     } else {
-                        // лот найден в попытке 2, пишемся
+                        echo 'лот найден в попытке 2, пишемся'.PHP_EOL.PHP_EOL;
                         switch ($newLot->currency) {
                             case 'US': $currencyModel = $currenciesEntity->findOne(['code' => 'USD']); break;
                             case 'EUR': $currencyModel = $currenciesEntity->findOne(['code' => 'EUR']); break;
@@ -97,7 +98,7 @@ class EbayUpdaterHelper implements ExtensionInterface
                         }
                 } else {
                     //echo PHP_EOL.PHP_EOL.__LINE__.PHP_EOL.PHP_EOL;
-                    // лот найден в попытке 1, пишемся
+                     echo 'лот найден в попытке 1, пишемся'.PHP_EOL.PHP_EOL;
                     switch ($newLot->currency) {
                         case 'US': $currencyModel = $currenciesEntity->findOne(['code' => 'USD']); break;
                         case 'EUR': $currencyModel = $currenciesEntity->findOne(['code' => 'EUR']); break;
@@ -114,7 +115,7 @@ class EbayUpdaterHelper implements ExtensionInterface
                     $report->description = 'ebayItemNo '.$variant->ebayItemNo;
                 }
             } else {
-                //echo PHP_EOL.PHP_EOL.__LINE__.PHP_EOL.PHP_EOL;
+                echo 'у варианта '.$variant->variant_id.' нет ни SKU ни ebayItemNo — не обновляем';
                 $report->success = 0;
                 $report->description = 'у варианта '.$variant->variant_id.' нет SKU и нет ebayItemNo — не обновляли';
             }
@@ -130,14 +131,15 @@ class EbayUpdaterHelper implements ExtensionInterface
             }
             $ebayUpdaterUpd = $ebayUpdaterEntity->add($report);
 
-            echo PHP_EOL.PHP_EOL;
-            echo '$productsUpd:'; var_dump($productsUpd);
-            echo '$variantsUpd:'; var_dump($variantsUpd);
-            echo '$ebayUpdaterUpd:'; var_dump($ebayUpdaterUpd);
-            echo PHP_EOL.PHP_EOL;
 
-            if ($config->get('env') == 'production')
-                sleep(rand(5, 20));
+            if ($config->get('env') == 'production') {
+                echo PHP_EOL.'------------------------'.PHP_EOL;
+                echo '$productsUpd: '; var_dump($productsUpd);
+                echo '$variantsUpd: '; var_dump($variantsUpd);
+                echo '$ebayUpdaterUpd: '; var_dump($ebayUpdaterUpd);
+                echo 'sleep '.$sleep = rand(5, 20).' сек'.PHP_EOL;
+                sleep($sleep);
+            }
         } // foreach variants
     }
 
