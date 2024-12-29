@@ -59,7 +59,7 @@ class EbayUpdaterHelper implements ExtensionInterface
 
             // variant не обновляем, т.к. по SKU не ищем — нужен производитель
             if (!empty($variant->sku)) {
-                echo PHP_EOL.PHP_EOL.'=== ищем по SKU '.$variant->sku.PHP_EOL.PHP_EOL;
+                echo PHP_EOL.PHP_EOL.'=== нужен manufacturer чтобы искать по SKU '.$variant->sku.PHP_EOL.PHP_EOL;
                 $report->success = 0;
                 $report->description = 'нужен manufacturer чтобы искать по SKU '.$variant->sku;
             } elseif (!empty($variant->ebayItemNo)) {
@@ -132,11 +132,11 @@ class EbayUpdaterHelper implements ExtensionInterface
             $ebayUpdaterUpd = $ebayUpdaterEntity->add($report);
 
 
-            if ($config->get('env') == 'production') {
-                echo PHP_EOL.'------------------------'.PHP_EOL;
-                echo '$productsUpd: '; var_dump($productsUpd);
-                echo '$variantsUpd: '; var_dump($variantsUpd);
-                echo '$ebayUpdaterUpd: '; var_dump($ebayUpdaterUpd);
+            echo PHP_EOL.'------------------------'.PHP_EOL;
+            echo '$productsUpd: '; var_dump($productsUpd);
+            echo '$variantsUpd: '; var_dump($variantsUpd);
+            echo '$ebayUpdaterUpd: '; var_dump($ebayUpdaterUpd);
+            if (!in_array($_SERVER['SERVER_ADDR'], ['127.0.0.1', '::1', '0.0.0.0', 'localhost'])) {
                 echo 'sleep '.$sleep = rand(5, 20).' сек'.PHP_EOL;
                 sleep($sleep);
             }

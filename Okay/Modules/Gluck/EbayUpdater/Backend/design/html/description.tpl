@@ -1,4 +1,4 @@
-{$meta_title = $btr->description__title|escape scope=global}
+{$meta_title = 'cronEbayUpdater' scope=global}
 
 {*<pre>{$tableFields|print_r}</pre>*}
 
