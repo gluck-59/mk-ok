@@ -121,15 +121,15 @@ class EbayUpdaterHelper implements ExtensionInterface
             $report->updated = "NOW()";
 
             if ($report->success) {
-                $productsEntity->update($productModel->id, ['ebayItemNo' => $report->newEbayItem_id, 'supplier' => $newLot->supplier]);
-                $variantsEntity->update($variantModel->id, ['price' => $report->new_price, 'compare_price' => $newLot->ebayPrice,'currency_id' => $currencyModel->id, 'price_updated' => "NOW()"]);
+                $productsUpd = $productsEntity->update($productModel->id, ['ebayItemNo' => $report->newEbayItem_id, 'supplier' => $newLot->supplier]);
+                $variantsUpd = $variantsEntity->update($variantModel->id, ['price' => $report->new_price, 'compare_price' => $newLot->ebayPrice,'currency_id' => $currencyModel->id, 'price_updated' => "NOW()"]);
             } else {
-                $variantsEntity->update($variantModel->id, ['price_updated' => "NOW()"]); // если в $report->success мы поставили 0, то отметим "обновлено" в вариантах, иначе неудачные будут лезть каждый запуск
+                $variantsUpd = $variantsEntity->update($variantModel->id, ['price_updated' => "NOW()"]); // если в $report->success мы поставили 0, то отметим "обновлено" в вариантах, иначе неудачные будут лезть каждый запуск
             }
-            $res = $ebayUpdaterEntity->add($report);
-            var_dump($res);
+            $ebayUpdaterUpd = $ebayUpdaterEntity->add($report);
+            echo '$productsUpd = '.var_dump($productsUpd).'; '.'$variantsUpd = '.var_dump($variantsUpd).'; $ebayUpdaterUpd = '.var_dump($ebayUpdaterUpd);
 
-//            if ($config->get('env') != 'local')
+            if ($config->get('env') == 'production')
                 sleep(rand(5, 20));
         }
     }
