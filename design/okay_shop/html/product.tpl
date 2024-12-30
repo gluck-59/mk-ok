@@ -376,7 +376,7 @@
                         </div>
                         <div class="mobile_tab__content">
                             <div class="block__description block__description--style">
-                                {if $product->name_h1}
+                                {if $manufacturer->name_h1}
                                     Производство: {$manufacturer->name_h1|escape}
                                 {/if}
                                 {$description}
