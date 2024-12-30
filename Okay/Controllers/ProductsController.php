@@ -182,10 +182,8 @@ class ProductsController extends AbstractController
             $this->design->getVar('current_page_num')
         );
 
-//$this->design->assign('brands', ['jopa' => 'da']);
-
         $this->setMetadataHelper($allProductsMetadataHelper);
-        
+
         $this->response->setContent('products.tpl');
     }
     

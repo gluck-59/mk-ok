@@ -128,7 +128,7 @@ class EbayAdmin extends IndexAdmin
                     if (preg_replace('/\D/', '', $sellerArray[1]) < $this->sellerMinFeedback) continue;
                     if (!empty($this->banlist) && in_array($sellerArray[0], $this->banlist)) continue;
                 } else {
-                echo 'пропускаем '.$itemNo[0].' по MinPositive / banlist';
+//                echo 'пропускаем '.$itemNo[0].' по MinPositive / banlist';
                     continue;
                 }
                 // если валюта не бакс-евро — пропускаем
@@ -137,7 +137,7 @@ class EbayAdmin extends IndexAdmin
                     $lot['currency'] = $currency;
                     $lot['price'] = $priceBlock->text();
                     if (empty($currency)) {
-                        echo 'пропускаем '.$itemNo[0].' по валюте';
+//                        echo 'пропускаем '.$itemNo[0].' по валюте';
                         continue;
                     }
                 }
@@ -146,7 +146,7 @@ class EbayAdmin extends IndexAdmin
                     $shipping = preg_replace('/[a-zA-Z\$\s+]/', '', $shippingBlock->text());
                     $lot['shipping'] = $shipping;
                     if (empty($shipping)) {
-                        echo 'пропускаем '.$itemNo[0].' — нет доставки';
+//                        echo 'пропускаем '.$itemNo[0].' — нет доставки';
                         continue;
                     }
                 }
@@ -209,6 +209,7 @@ class EbayAdmin extends IndexAdmin
         if ($endedBlock = $document->first('.d-statusmessage')) {
             $this->debug['errors'] = 'лот '.$itemNo.' протух';
             return $this->debug;
+//$isEnded --- ??
         }
 
 
@@ -216,7 +217,6 @@ class EbayAdmin extends IndexAdmin
 
         /** сборка массива с данными о лоте */
         $lot['ebayItemNo'] = $itemNo;
-
 
         //  store
         if ($storeName = $document->first('.x-sellercard-atf__info__about-seller span.ux-textspans--BOLD')) {
@@ -267,7 +267,7 @@ class EbayAdmin extends IndexAdmin
         if ($dutiesWrapper) {
             $duties = preg_replace('/[A-Z$€ ]/', '', $dutiesWrapper->text());
         }
-
+$isEnded = false; // добавить определение $isEnded
         if (!$isEnded && in_array($currency[0], ['US', 'EUR']) && is_double($price) && is_double($shipping)) {
             $lot['currency'] = $currency[0];
             $lot['price'] = $price;
@@ -308,6 +308,9 @@ class EbayAdmin extends IndexAdmin
             $this->debug['errors'] = $err;
             return $this->debug;
         }
+
+
+        $lot['manufacturer'] = '';
         return (object) $lot;
     } //getItemDetails
 
@@ -475,28 +478,31 @@ class EbayAdmin extends IndexAdmin
         // заголовки таблицы
         $tableHeaders = ['Category',
             'Brand',
+            'Manufacturer',
             'Product',
             'Variant',
 //            'SKU',
             'Price',
-//            'Old price',
+            'Old price',
             'Currency ID',
             'Weight',
 //            'Stock',
 //            'Units',
             'Visible',
 //            'Featured',
-            'Meta title','Meta keywords','Meta description','Annotation','Description','Images','ebayItemNo','supplier','partNumber','epid'/*, 'lotPrice', 'lotShipping', 'duties'*/];
+            'Meta title','Meta keywords','Meta description','Description','Images','ebayItemNo','supplier','partNumber','epid'/*, 'lotPrice', 'lotShipping', 'duties'*/];
         // содержимое таблицы
         $list = array (
             $tableHeaders,
             [
                 implode($import->getCategoryDelimiter(), $_POST['parseToCategories']),                          // Category
-                $_POST['forBrand'], //$lot->manufacturer,                                                       // Brand
+                $_POST['forBrand'],                                                                            // Brand
+                $_POST['forManufacturer'],                                                                     // Manufacturer
                 $lot->name,                                                                                     // Product
                 ' ',                                                                                            // Variant
 //                ' ',                                                                                            // SKU
                 $lot->outPrice,                                                                                 // Price
+                (double) $lot->price + (double) $lot->shipping + (double) $lot->duties,                         // Old Price
 //                '',                                                                                             // Old price
                 $currency->id,                                                                                  // Currency ID
                 2,                                                                                              // Weight
@@ -505,10 +511,10 @@ class EbayAdmin extends IndexAdmin
                 1,                                                                                              // Visible
 //                0,                                                                                              // Featured
                 $lot->name,                                                                                     // Meta title
-                $lot->name.' '.$lot->partNumber. ' '.implode(', ', $_POST['parseToCategories']),              // Meta keywords
+                $lot->name.' '.$lot->partNumber. ' '.implode(', ', $_POST['parseToCategories']),       // Meta keywords
                 $lot->name,                                                                                     // Meta description
-                'Производство: '.$lot->manufacturer,                                                                                             // Annotation
-                ($lot->manufacturer ? 'Производство: '.$lot->manufacturer.'<br>' : '').$lot->compatibility,     // Description
+//                'Производство: '.$lot->manufacturer,                                                          // Annotation
+                $lot->compatibility,                                                                             // Description
                 $lot->image,                                                                                     // Images
                 $lot->ebayItemNo,
                 $lot->supplier,
@@ -525,7 +531,7 @@ class EbayAdmin extends IndexAdmin
             $file = __DIR__.'/../files/export/_import_'.date('d-m_G-i', time()).'.csv';
             $fp = fopen($file, 'w');
             foreach ($list as $fields) {
-                fputcsv($fp, $fields, ';');
+                fputcsv($fp, $fields, ','); // ';'
             }
             fclose($fp);
 

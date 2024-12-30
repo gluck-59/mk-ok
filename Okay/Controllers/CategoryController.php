@@ -5,6 +5,7 @@ namespace Okay\Controllers;
 use Okay\Core\Router;
 use Okay\Core\Routes\RouteFactory;
 use Okay\Entities\BrandsEntity;
+use Okay\Entities\ManufacturersEntity;
 use Okay\Entities\ProductsEntity;
 use Okay\Entities\CategoriesEntity;
 use Okay\Helpers\CanonicalHelper;
@@ -19,6 +20,7 @@ class CategoryController extends AbstractController
 {
     public function render(
         BrandsEntity           $brandsEntity,
+        ManufacturersEntity    $manufacturersEntity,
         CategoriesEntity       $categoriesEntity,
         CatalogHelper          $catalogHelper,
         ProductsHelper         $productsHelper,
@@ -87,7 +89,13 @@ class CategoryController extends AbstractController
             'visible' => 1,
             'product_visible' => 1,
         ]);
-         
+
+        $catalogManufacturers = $manufacturersEntity->mappedBy('id')->find([
+            'category_id' => $category->children,
+            'visible' => 1,
+            'product_visible' => 1,
+        ]);
+
         $metaArray = $filterHelper->getMetaArray($filtersUrl);
 
         // Если в строке есть параметры которые не должны быть в фильтре, либо параметры с другой категории, бросаем 404
@@ -95,6 +103,7 @@ class CategoryController extends AbstractController
             && array_intersect_key($metaArray['features_values'], $catalogFeatures) !== $metaArray['features_values']
             || !empty($metaArray['brand'])
             && array_intersect_key($metaArray['brand'], $catalogBrands) !== $metaArray['brand']
+            && array_intersect_key($metaArray['manufacturer'], $catalogManufacturers) !== $metaArray['manufacturer']
         ) {
             return false;
         }
@@ -145,7 +154,7 @@ class CategoryController extends AbstractController
         $products = $productsHelper->getList($productsFilter, $productsSort);
         $products = $productsHelper->attachDescriptionByTemplate($products);
         $this->design->assign('products', $products);
-        
+
         if ($this->request->get('ajax','boolean')) {
             $this->design->assign('ajax', 1);
             $result = $catalogHelper->getAjaxFilterData();
@@ -228,6 +237,7 @@ class CategoryController extends AbstractController
         );
 
         $this->design->assign('brands', $catalogBrands);
+        $this->design->assign('manufacturers', $catalogManufacturers);
 
         $this->setMetadataHelper($categoryMetadataHelper);
 

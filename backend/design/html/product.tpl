@@ -8,10 +8,10 @@
     {assign var='ebayKeyword' value="{$ebayRequest['keyword']}"}
 {/if}
 
-<pre>
-{*$product*}
-{*{$brands|print_r}*}
-</pre>
+{*<pre>*}
+{*{$brands[0]|print_r}*}
+{*{$manufacturers[0]|print_r}*}
+{*</pre>*}
 
 {*Название страницы*}
 <div class="row">
@@ -63,11 +63,20 @@
                         </select>
                     </div>
                 </div>
+                <div class="col-md-3">
+                    <div class="1input-group">
+                        <select name="forManufacturer" class="selectpicker form-control mb-1{if !$brands} hidden{/if} fn_meta_manufacturer" data-live-search="true">
+                            <option value="0" {if !$product->manufacturer_id}selected=""{/if} data-manufacturer_name="">Производитель</option>
+                            {foreach $manufacturers as $manufacturer}
+                                <option value="{$manufacturer->name}" {if $product->manufacturer_id == $manufacturer->id}selected=""{/if} data-manufacturer_name="{$manufacturer->name|escape}">{$manufacturer->name|escape}</option>
+                            {/foreach}
+                        </select>
+                    </div>
+                </div>
 
                 <div class="col-md-3">
                     {assign var ='ebay_first_category' value=$ebayRequest['category']}
                     <select multiple class="selectpicker form-control  mb-1 1fn_product_category 1fn_meta_categories" name="parseToCategories[]" data-live-search="true" data-title="В какую категорию парсить">
-{*                        <option value="0" selected="" disabled="">В какую категорию парсить</option>*}
                         {function name=ebay_category_select level=0}
                             {foreach $categories as $category}
                                 <option value="{$category->name}" {if $category->id == $ebay_first_category}selected{/if} data-category_name="{$category->name|escape}">{section sp $level}- {/section}{$category->name|escape}</option>

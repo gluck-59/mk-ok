@@ -97,7 +97,7 @@ class BackendImportHelper
 if (!empty($item['manufacturer'])) {
     $item['manufacturer'] = trim($item['manufacturer']);
     // Найдем его по имени
-    $brandId = $this->searchManufacturer($item['manufacturer']);
+    $manufacturerId = $this->searchManufacturer($item['manufacturer']);
 
     if (!$product['manufacturer'] = $manufacturerId) {
 
@@ -111,7 +111,7 @@ if (!empty($item['manufacturer'])) {
             'meta_keywords'    => $item['manufacturer'],
             'meta_description' => $item['manufacturer'],
         ]);
-        $product['manufacturer_id'] = $brandsEntity->add($manufacturer);
+        $product['manufacturer_id'] = $manufacturersEntity->add($manufacturer);
     }
 }
 
@@ -646,6 +646,28 @@ if (!empty($item['manufacturer'])) {
                 ->result('id');
         }
         return ExtenderFacade::execute(__METHOD__, $brandId, func_get_args());
+    }
+
+    private function searchManufacturer($manufacturerName)
+    {
+        if ($this->languages->getLangId()) {
+            $select = $this->queryFactory->newSelect();
+            $manufacturerId = $select->cols(['manufacturer_id as id'])
+                ->from('__lang_manufacturers')
+                ->where('name=:name')
+                ->where('lang_id=:lang_id')
+                ->bindValue('name', $manufacturerName)
+                ->bindValue('lang_id', $this->languages->getLangId())
+                ->result('id');
+        } else {
+            $select = $this->queryFactory->newSelect();
+            $brandId = $select->cols(['id'])
+                ->from('__manufacturers')
+                ->where('name=:name')
+                ->bindValue('name', $manufacturerName)
+                ->result('id');
+        }
+        return ExtenderFacade::execute(__METHOD__, $manufacturerId, func_get_args());
     }
 
     /**

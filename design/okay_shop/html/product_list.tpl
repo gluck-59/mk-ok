@@ -1,5 +1,5 @@
 <!-- Product preview -->
-`<div class="product_preview fn_product">
+<div class="product_preview fn_product">
     <input hidden id="brandId" value="{$product->brand_id}">
     <input hidden id="productName" value="{$product->name}">
     <div class="fn_transfer clearfix">
@@ -129,8 +129,11 @@
                     <div class="dropDownSelect2"></div>
                 </div>
             </form>
-            {if $product->annotation && $controller != "MainController"}
+            {if $controller != "MainController"}
                 <div class="product_preview__annotation">
+                    {if $product->manufacturer_id}
+                        Производство: {$manufacturers[$product->manufacturer_id]->name_h1|escape}
+                    {/if}
                     {$product->annotation}
                 </div>
             {/if}

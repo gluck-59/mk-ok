@@ -120,13 +120,13 @@
                                 <div class="available__in_stock d-flex align-items-center icon icon-check-circle-outline fn_in_stock{if $product->variant->stock < 1} hidden-xs-up{/if}" data-language="product_in_stock">{$lang->product_in_stock}</div>
                             </div>
                         </div>
-                        <div id="brands-manufacturers" class="d-flex 1justify-content-between 1align-items-start">
+                        <div id="brands-manufacturers" class="d-flex justify-content-between align-items-center">
                         {* Product brand *}
                         {if !empty($brand)}
                             {if !empty($brand->image)}
                                 <div class="details_boxed__brand clearfix">
                                     <a href="{url_generator route="brand" url=$brand->url}">
-                                        <img class="brand_img" src="{$brand->image|resize:120:65:false:$config->resized_brands_dir}" alt="{$brand->name|escape}" title="{$brand->name_h1|escape}">
+                                        <img class="brand_img" src="{$brand->image|resize:120:65:false:$config->resized_brands_dir}" alt="{$brand->name|escape}" title="{$brand->name|escape}">
                                         <span class="hidden" itemprop="brand" itemtype="https://schema.org/Brand" itemscope>
                                             <meta itemprop="name" content="{$brand->name|escape}" />
                                         </span>
@@ -171,8 +171,6 @@
                         {/if}
                         </div>
                     </div>
-
-
                 </div>
 
                 <div class="details_boxed__item">
@@ -378,6 +376,9 @@
                         </div>
                         <div class="mobile_tab__content">
                             <div class="block__description block__description--style">
+                                {if $product->name_h1}
+                                    Производство: {$manufacturer->name_h1|escape}
+                                {/if}
                                 {$description}
                             </div>
                          </div>

@@ -11,6 +11,7 @@ class Import
     private $columnsNames = [
         'category'=>         ['category', 'категория'],
         'brand'=>            ['brand', 'бренд'],
+        'manufacturer'=>     ['manufacturer', 'производитель'],
         'name'=>             ['product', 'name', 'товар', 'название', 'наименование'],
         'variant'=>          ['variant', 'вариант'],
         'sku'=>              ['sku', 'артикул'],

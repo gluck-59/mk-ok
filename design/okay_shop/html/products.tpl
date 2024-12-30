@@ -1,5 +1,4 @@
 <!-- The Categories page -->
-{*<pre>{$brands|print_r}</pre>*}
 <div class="clearfix">
     {* Sidebar with filters *}
     <div class="fn_mobile_toogle sidebar d-lg-flex flex-lg-column">

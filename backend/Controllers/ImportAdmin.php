@@ -194,7 +194,7 @@ class ImportAdmin extends IndexAdmin
         } else {
             $selected = $fields;
         }
-        
+// prettyDump($source_columns);
         foreach ($source_columns as &$column) {
             $c = new \stdClass();
             $c->name = $column;
@@ -204,6 +204,7 @@ class ImportAdmin extends IndexAdmin
             $c->is_nf_selected = !$c->is_exist && $c->value==$c->name;
             $column = $c;
         }
+//prettyDump($source_columns, 1);
         $this->design->assign('source_columns', $source_columns);
     }
     
