@@ -3033,6 +3033,7 @@ a.filter__catalog_link svg {
   top: 25px;
   right: 120px;
   text-align: left;
+  margin-right: 20px;
 }
 .details_boxed__no_manufacturer {
   position: absolute;
