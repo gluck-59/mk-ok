@@ -22,7 +22,7 @@ class AllManufacturersMetadataHelper extends CommonMetadataHelper
     public function __construct()
     {
         parent::__construct();
-        
+
         if (!$this->keyword) {
             $entityFactory = $this->SL->getService(EntityFactory::class);
             /** @var PagesEntity $pagesEntity */
@@ -38,7 +38,7 @@ class AllManufacturersMetadataHelper extends CommonMetadataHelper
         if ($this->keyword !== null) {
             $h1 .= " «{$this->keyword}»";
         }
-        
+
         return ExtenderFacade::execute(__METHOD__, $h1, func_get_args());
     }
 }

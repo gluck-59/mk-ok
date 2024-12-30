@@ -112,7 +112,7 @@ class ManufacturerController extends AbstractController
 
             $metaRobotsHelper->setAvailableFeatures($catalogFeatures);
         }
-        
+
         if (!$catalogHelper->paginate(
             $this->settings->get('products_num'),
             $currentPage,
@@ -207,7 +207,7 @@ class ManufacturerController extends AbstractController
 
         );
         $this->setMetadataHelper($manufacturerMetadataHelper);
-        
+
         $this->response->setContent('products.tpl');
     }
 

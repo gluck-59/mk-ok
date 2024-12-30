@@ -384,7 +384,7 @@
 <div class="boxed">
     <div class="row">
         <div class="col-md-12">
-            <table class="table table-bordered table-hover">
+            <table class="table table-bordered">
                 <thead>
                     <tr>
                         <th>Товар</th>

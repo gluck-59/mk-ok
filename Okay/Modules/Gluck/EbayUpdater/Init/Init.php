@@ -26,7 +26,7 @@ class Init extends AbstractInit
             (new EntityField('new_price'))->setTypeDecimal('14,2'),
             (new EntityField('updated'))->setTypeDatetime(),
             (new EntityField('success'))->setTypeTinyInt(1),
-            (new EntityField('description'))->setTypeVarchar(64) // описание почему неудачно
+            (new EntityField('description'))->setTypeText() // описание почему неудачно
         ]);
     }
 

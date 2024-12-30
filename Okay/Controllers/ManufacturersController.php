@@ -6,7 +6,6 @@ namespace Okay\Controllers;
 
 use Okay\Core\Router;
 use Okay\Core\Routes\RouteFactory;
-//use Okay\Helpers\ManufacturersHelper;
 use Okay\Helpers\ManufacturersHelper;
 use Okay\Helpers\CatalogHelper;
 use Okay\Helpers\FilterHelper;
@@ -14,10 +13,9 @@ use Okay\Helpers\MetadataHelpers\AllManufacturersMetadataHelper;
 
 class ManufacturersController extends AbstractController
 {
-    /*Отображение страницы всех manufacturers */
+    /*Отображение страницы всех брендов*/
     public function render(
-//        ManufacturersHelper            $manufacturersHelper,
-        ManufacturersHelper     $manufacturersHelper,
+        ManufacturersHelper            $manufacturersHelper,
         FilterHelper            $filterHelper,
         AllManufacturersMetadataHelper $allManufacturersMetadataHelper,
         RouteFactory            $routeFactory,

@@ -118,17 +118,17 @@ class EbayAdmin extends IndexAdmin
                 $itm = parse_url($link->getAttribute('href'), PHP_URL_PATH);
                 preg_match('/\d{12}/', $itm, $itemNo);
                 if (!$itemNo) {
-//                    echo ('пропускаем левый итем в строке '.__LINE__);
+                    //echo ('пропускаем левый итем в строке '.__LINE__);
                     continue;
                 }
                 // если селлер не соответсвует нашим критериям — пропускаем
                 if ($sellerBlock = $item->first('.s-item__seller-info-text')) {
                     $sellerArray = explode(' ', $sellerBlock->text());
-                    if (intval($sellerArray[2]) < $this->sellerMinPositive) continue;
+                        if (intval($sellerArray[2]) < $this->sellerMinPositive) continue;
                     if (preg_replace('/\D/', '', $sellerArray[1]) < $this->sellerMinFeedback) continue;
                     if (!empty($this->banlist) && in_array($sellerArray[0], $this->banlist)) continue;
                 } else {
-//                    echo('пропускаем '.$itemNo[0].' в строке '.__LINE__);
+                echo 'пропускаем '.$itemNo[0].' по MinPositive / banlist';
                     continue;
                 }
                 // если валюта не бакс-евро — пропускаем
@@ -137,7 +137,7 @@ class EbayAdmin extends IndexAdmin
                     $lot['currency'] = $currency;
                     $lot['price'] = $priceBlock->text();
                     if (empty($currency)) {
-//                        echo ('пропускаем '.$itemNo[0].' в строке '.__LINE__);
+                        echo 'пропускаем '.$itemNo[0].' по валюте';
                         continue;
                     }
                 }
@@ -146,7 +146,7 @@ class EbayAdmin extends IndexAdmin
                     $shipping = preg_replace('/[a-zA-Z\$\s+]/', '', $shippingBlock->text());
                     $lot['shipping'] = $shipping;
                     if (empty($shipping)) {
-//                        echo ('пропускаем '.$itemNo[0].' в строке '.__LINE__);
+                        echo 'пропускаем '.$itemNo[0].' — нет доставки';
                         continue;
                     }
                 }
@@ -169,8 +169,8 @@ class EbayAdmin extends IndexAdmin
             } elseif (sizeof($lots) == 1) {
                 $this->parsedLot = self::getitemDetails($lots[0]['itemNo']);
             } else {
-                echo 'массив $lots пуст. не подключен VPN?'.PHP_EOL.PHP_EOL;
-                $this->debug['errors'] = 'массив $lots пуст. не подключен VPN?';
+                echo 'искали '.$request['keyword'].', массив $lots пуст. не подключен VPN?'.PHP_EOL.PHP_EOL;
+                $this->debug['errors'] = 'искали '.$request['keyword'].', массив $lots пуст. не подключен VPN?';
                 return $this->debug;
             }
 //prettyDump($this->parsedLot, 1);
@@ -180,8 +180,8 @@ class EbayAdmin extends IndexAdmin
             self::export($this->parsedLot, 'csv');
             return;
         } else {
+            prettyDump($this->parsedLot);
             return $this->parsedLot;
-//            return ['parsedLot' => $this->parsedLot, 'debug' => $this->debug];
         }
     } // parse
 
@@ -202,11 +202,12 @@ class EbayAdmin extends IndexAdmin
 
         // ebay вернул ошибку
         if($itemDetails['debug']['errors']) {
-            return $itemDetails['debug'];
+            return $this->debug;
+//            return $itemDetails['debug'];
         }
         //  ended
         if ($endedBlock = $document->first('.d-statusmessage')) {
-            $this->debug['errors'] = 'лот протух';
+            $this->debug['errors'] = 'лот '.$itemNo.' протух';
             return $this->debug;
         }
 

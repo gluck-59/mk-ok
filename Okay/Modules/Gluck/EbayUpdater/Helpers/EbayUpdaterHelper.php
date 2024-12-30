@@ -77,8 +77,9 @@ class EbayUpdaterHelper implements ExtensionInterface
 //echo '$newLot 2:'.PHP_EOL;
 //print_r($newLot);
                     if (is_array($newLot) && $newLot['errors']) {
+                        echo PHP_EOL.PHP_EOL.'=== попытка 3 неудачно';
                         $report->success = 0;
-                        $report->description = $newLot['errors'].'<br><a href="'.$newLot['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
+                        $report->description = 'попытка 2: '.$newLot['errors'].'<br><a href="'.$newLot['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
                     } else {
                         echo 'лот найден в попытке 2, пишемся'.PHP_EOL.PHP_EOL;
                         switch ($newLot->currency) {
