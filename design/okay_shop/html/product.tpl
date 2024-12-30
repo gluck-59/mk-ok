@@ -86,16 +86,16 @@
             <div class="block--border boxed--stretch details_boxed">
                 <div class="details_boxed__item details_boxed__item--one">
                     {* Product Rating *}
-                    <div class="d-flex justify-content-between align-items-start">
+                    <div class="d-flex justify-content-between align-items-center">
                         <div class="details_boxed__rating">
-{*                            <div class="details_boxed__title" data-language="product_rating">{$lang->product_rating}:</div>*}
+                            <div class="details_boxed__title" data-language="product_rating">{$lang->product_rating}:</div>
                             <div id="product_{$product->id}" class="product__rating fn_rating" data-rating_post_url="{url_generator route='ajax_product_rating'}" {if $product->rating > 0} itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating"{/if}>
                                 <span class="rating_starOff">
                                     <span class="rating_starOn" style="width:{$product->rating*90/5|string_format:'%.0f'}px;"></span>
                                 </span>
                                 {*Вывод количества голосов данного товара, скрыт ради микроразметки*}
                                 {if $product->rating > 0}
-                                <span class="rating_text">( <span itemprop="reviewCount">{$product->votes|string_format:"%.0f"}</span> )</span>
+                                <span class="rating_text hidden">( <span itemprop="reviewCount">{$product->votes|string_format:"%.0f"}</span> )</span>
                                 <span class="rating_text hidden">( <span itemprop="ratingValue">{$product->rating|string_format:"%.1f"}</span> )</span>
                                 {*Вывод лучшей оценки товара для микроразметки*}
                                 <span class="rating_text hidden" itemprop="bestRating" style="display:none;">5</span>
@@ -103,7 +103,24 @@
                                 <span class="rating_text hidden">({$product->rating|string_format:"%.1f"})</span>
                                 {/if}
                             </div>
+                            {* Anchor form comments *}
+                            <span class="details_boxed__anchor_comments">
+                                <a href="#comments" class="fn_anchor_comments d-inline-flex align-items-center anchor_comments__link">
+                                    {if $comments|count}
+                                        {$comments|count}
+                                        {$comments|count|plural:$lang->product_anchor_comment_plural1:$lang->product_anchor_comment_plural2:$lang->product_anchor_comment_plural3}
+                                    {else}
+                                        <span data-language="product_anchor_comment">{$lang->product_anchor_comment}</span>
+                                    {/if}
+                                </a>
+                            </span>
+                            {* Product available *}
+                            <div class="details_boxed__available">
+                                <div class="available__no_stock d-flex align-items-center icon icon-highlight-off fn_not_stock{if $product->variant->stock > 0} hidden-xs-up{/if}" data-language="product_out_of_stock">{$lang->product_out_of_stock}</div>
+                                <div class="available__in_stock d-flex align-items-center icon icon-check-circle-outline fn_in_stock{if $product->variant->stock < 1} hidden-xs-up{/if}" data-language="product_in_stock">{$lang->product_in_stock}</div>
+                            </div>
                         </div>
+                        <div id="brands-manufacturers" class="d-flex 1justify-content-between 1align-items-start">
                         {* Product brand *}
                         {if !empty($brand)}
                             {if !empty($brand->image)}
@@ -152,25 +169,10 @@
                                 </div>
                             {/if}
                         {/if}
+                        </div>
                     </div>
 
-                    {* Anchor form comments *}
-                    <div class="details_boxed__anchor_comments">
-                        <a href="#comments" class="fn_anchor_comments d-inline-flex align-items-center anchor_comments__link">
-                            {if $comments|count}
-                                {$comments|count}
-                                {$comments|count|plural:$lang->product_anchor_comment_plural1:$lang->product_anchor_comment_plural2:$lang->product_anchor_comment_plural3}
-                            {else}
-                                <span data-language="product_anchor_comment">{$lang->product_anchor_comment}</span>
-                            {/if}
-                        </a>
-                    </div>
 
-                    {* Product available *}
-                    <div class="details_boxed__available">
-                        <div class="available__no_stock d-flex align-items-center icon icon-highlight-off fn_not_stock{if $product->variant->stock > 0} hidden-xs-up{/if}" data-language="product_out_of_stock">{$lang->product_out_of_stock}</div>
-                        <div class="available__in_stock d-flex align-items-center icon icon-check-circle-outline fn_in_stock{if $product->variant->stock < 1} hidden-xs-up{/if}" data-language="product_in_stock">{$lang->product_in_stock}</div>
-                    </div>
                 </div>
 
                 <div class="details_boxed__item">
