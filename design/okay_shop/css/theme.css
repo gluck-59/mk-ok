@@ -3024,7 +3024,8 @@ a.filter__catalog_link svg {
 .details_boxed__no_brand {
   position: absolute;
   right: 0px;
-  top: 40px;
+  top: 30px;
+  max-width: 130px;
 }
 .details_boxed__manufacturer {
   min-width: 80px;
