@@ -3040,6 +3040,11 @@ a.filter__catalog_link svg {
   right: 120px;
   top: 40px;
 }
+
+.details_boxed__brand .brand_img, .details_boxed__manufacturer .brand_img {
+  max-width: 120px;
+  max-height: 55px;
+}
 .details_boxed__available {
   margin-top: 5px;
 }

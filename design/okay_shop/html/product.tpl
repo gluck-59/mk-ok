@@ -109,7 +109,7 @@
                             {if !empty($brand->image)}
                                 <div class="details_boxed__brand clearfix">
                                     <a href="{url_generator route="brand" url=$brand->url}">
-                                        <img class="brand_img" src="{$brand->image|resize:120:65:false:$config->resized_brands_dir}" alt="{$brand->name|escape}" title="{$btr->general_brand|escape}">
+                                        <img class="brand_img" src="{$brand->image|resize:120:65:false:$config->resized_brands_dir}" alt="{$brand->name|escape}" title="{$brand->name_h1|escape}">
                                         <span class="hidden" itemprop="brand" itemtype="https://schema.org/Brand" itemscope>
                                             <meta itemprop="name" content="{$brand->name|escape}" />
                                         </span>
@@ -117,7 +117,7 @@
                                 </div>
                             {else}
                                 <div class="details_boxed__no_brand clearfix">
-                                    <span class="details_boxed__title" data-language="product_brand_name">{$lang->product_brand_name}</span>
+                                    <span class="details_boxed__title" data-language="product_brand_name">{$brand->name_h1|escape}</span>
                                     <a class="theme_link--color" href="{url_generator route="brand" url=$brand->url}">
                                         <span>{$brand->name|escape}</span>
                                         <span class="hidden" itemprop="brand" itemtype="https://schema.org/Brand" itemscope>
@@ -127,13 +127,14 @@
                                 </div>
                             {/if}
                         {/if}
+
                         {* Product manufacturer *}
                         {if !empty($manufacturer)}
                             {if !empty($manufacturer->image)}
                                 <div class="details_boxed__manufacturer clearfix">
                         {*            <a href="{url_generator route="manufacturer" url=$manufacturer->url}">*}
                                     <a href="">
-                                        <img class="brand_img" src="{$manufacturer->image|resize:120:65:false:$config->resized_manufacturers_dir}" alt="{$btr->general_manufacturer|escape}" title="{$manufacturer->name|escape}">
+                                        <img class="brand_img" src="{$manufacturer->image|resize:120:65:false:$config->resized_manufacturers_dir}" alt="{$btr->general_manufacturer|escape}" title="{$manufacturer->name_h1|escape}">
                                         <span class="hidden" itemprop="manufacturer" itemtype="https://schema.org/Brand" itemscope>
                                             <meta itemprop="name" content="{$manufacturer->name|escape}" />
                                         </span>
@@ -141,7 +142,7 @@
                                 </div>
                             {else}
                                 <div class="details_boxed__no_manufacturer clearfix">
-                                    <span class="details_boxed__title" data-language="product_manufacturer_name">{$lang->product_manufacturer_name}</span>
+                                    <span class="details_boxed__title" data-language="product_manufacturer_name">{$manufacturer->name_h1|escape}</span>
                                     <a class="theme_link--color" href="{url_generator route="manufacturer" url=$manufacturer->url}">
                                         <span>{$manufacturer->name|escape}</span>
                                         <span class="hidden" itemprop="manufacturer" itemtype="https://schema.org/Brand" itemscope>
