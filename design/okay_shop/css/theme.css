@@ -3030,7 +3030,7 @@ a.filter__catalog_link svg {
 .details_boxed__manufacturer {
   min-width: 80px;
   position: absolute;
-  top: 15px;
+  top: 25px;
   right: 120px;
   text-align: left;
 }
