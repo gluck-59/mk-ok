@@ -534,13 +534,13 @@
                                         <input name="variants[id][]" type="hidden" value="" />
                                         <input class="variant_input" name="variants[name][]" type="text" value="" />
                                     </div>
-                                    <div class="okay_list_boding variants_item_price">
-                                        <div class="heading_label">{$btr->general_price|escape}</div>
-                                        <input class="variant_input" name="variants[price][]" type="text" value=""/>
-                                    </div>
                                     <div class="okay_list_boding variants_item_discount">
                                         <div class="heading_label">{$btr->general_old_price|escape}</div>
                                         <input class="variant_input" name="variants[compare_price][]" type="text" value=""/>
+                                    </div>
+                                    <div class="okay_list_boding variants_item_price">
+                                        <div class="heading_label">{$btr->general_price|escape}</div>
+                                        <input class="variant_input" name="variants[price][]" type="text" value=""/>
                                     </div>
                                     <div class="okay_list_boding variants_item_currency">
                                         <div class="heading_label">{$btr->general_currency|escape}</div>
