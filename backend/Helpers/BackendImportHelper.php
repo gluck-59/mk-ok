@@ -12,12 +12,12 @@ use Okay\Core\Modules\Extender\ExtenderFacade;
 use Okay\Core\QueryFactory;
 use Okay\Core\Translit;
 use Okay\Entities\BrandsEntity;
+use Okay\Entities\ManufacturersEntity;
 use Okay\Entities\CategoriesEntity;
 use Okay\Entities\CurrenciesEntity;
 use Okay\Entities\FeaturesEntity;
 use Okay\Entities\FeaturesValuesEntity;
 use Okay\Entities\ImagesEntity;
-use Okay\Entities\ManufacturersEntity;
 use Okay\Entities\ProductsEntity;
 use Okay\Entities\VariantsEntity;
 
@@ -93,27 +93,26 @@ class BackendImportHelper
             }
         }
 
-// Если задан manufacturer
-if (!empty($item['manufacturer'])) {
-    $item['manufacturer'] = trim($item['manufacturer']);
-    // Найдем его по имени
-    $manufacturerId = $this->searchManufacturer($item['manufacturer']);
+        // Если задан manufacturer
+        if (!empty($item['manufacturer'])) {
+            $item['manufacturer'] = trim($item['manufacturer']);
+            // Найдем его по имени
+            $manufacturerId = $this->searchManufacturer($item['manufacturer']);
 
-    if (!$product['manufacturer'] = $manufacturerId) {
+            if (!$product['manufacturer_id'] = $manufacturerId) {
+                /** @var ManufacturersEntity $manufacturersEntity */
+                $manufacturersEntity = $this->entityFactory->get(ManufacturersEntity::class);
 
-        /** @var ManufacturersEntity $manufacturersEntity */
-        $manufacturersEntity = $this->entityFactory->get(ManufacturersEntity::class);
-
-        // Создадим, если не найден
-        $manufacturer = $this->prepareAddBrand([
-            'name'             => $item['manufacturer'],
-            'meta_title'       => $item['manufacturer'],
-            'meta_keywords'    => $item['manufacturer'],
-            'meta_description' => $item['manufacturer'],
-        ]);
-        $product['manufacturer_id'] = $manufacturersEntity->add($manufacturer);
-    }
-}
+                // Создадим, если не найден
+                $manufacturer = $this->prepareAddManufacturer([
+                    'name'             => $item['manufacturer'],
+                    'meta_title'       => $item['manufacturer'],
+                    'meta_keywords'    => $item['manufacturer'],
+                    'meta_description' => $item['manufacturer'],
+                ]);
+                $product['manufacturer_id'] = $manufacturersEntity->add($manufacturer);
+            }
+        }
 
         // Если задана категория
         $categoryId = null;
@@ -626,6 +625,11 @@ if (!empty($item['manufacturer'])) {
         return ExtenderFacade::execute(__METHOD__, $brand, func_get_args());
     }
 
+    private function prepareAddManufacturer($manufacturer)
+    {
+    return ExtenderFacade::execute(__METHOD__, $manufacturer, func_get_args());
+    }
+
     private function searchBrand($brandName)
     {
         if ($this->languages->getLangId()) {
@@ -661,7 +665,7 @@ if (!empty($item['manufacturer'])) {
                 ->result('id');
         } else {
             $select = $this->queryFactory->newSelect();
-            $brandId = $select->cols(['id'])
+            $manufacturerId = $select->cols(['id'])
                 ->from('__manufacturers')
                 ->where('name=:name')
                 ->bindValue('name', $manufacturerName)

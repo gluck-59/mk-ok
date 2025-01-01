@@ -240,9 +240,20 @@
                                                       {/if}</span>
                                                     <span class="text_500">{if $product->variants[0]->infinity}∞{else}{$product->variants[0]->stock}{/if} {if $product->variants[0]->units}{$product->variants[0]->units|escape}{else}{$settings->units|escape}{/if}</span>
                                                 </div>
-                                                {if $all_brands[$product->brand_id]->name}
-                                                <div class="okay_list_name_brand text_400 text_grey">{$btr->general_brand|escape} {$all_brands[$product->brand_id]->name|escape}</div>
-                                                {/if}
+                                                <div class="okay_list_name_brand text_400 text_grey">
+                                                    {if $all_manufacturers[$product->manufacturer_id]->name}
+                                                        {assign var="currentManufacturer" value={$all_manufacturers[$product->manufacturer_id]->name|escape}}
+                                                        <span>
+                                                            {$currentManufacturer}&nbsp;
+                                                        </span>
+                                                    {/if}
+                                                    {if $all_brands[$product->brand_id]->name}
+                                                        {assign var="currentBrand" value={$all_brands[$product->brand_id]->name|escape}}
+                                                        <span>
+                                                            для {$currentBrand}
+                                                        </span>
+                                                    {/if}
+                                                </div>
                                             </a>
                                             {if $product->variants|count > 1}
                                                 <div class="fn_variants_toggle variants_toggle">

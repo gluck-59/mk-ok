@@ -10,7 +10,7 @@ class Import
     /*Соответствие полей в базе и имён колонок в файле*/
     private $columnsNames = [
         'category'=>         ['category', 'категория'],
-        'brand'=>            ['brand', 'бренд'],
+        'brand'=>            ['brand', 'марка'],
         'manufacturer'=>     ['manufacturer', 'производитель'],
         'name'=>             ['product', 'name', 'товар', 'название', 'наименование'],
         'variant'=>          ['variant', 'вариант'],
