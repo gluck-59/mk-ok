@@ -155,12 +155,13 @@ class VariantsEntity extends Entity
 //        $select = $this->getSelect()->debug();
 
         $sql = $this->queryFactory->newSqlQuery();
-        $sql->setStatement("SELECT
-p.id product_id, p.name product_name, p.ebayItemNo, p.partNumber, v.id variant_id, v.name variant_name, v.sku, v.price, v.currency_id, p.last_modify
+        $sql->setStatement("SELECT v.price_updated, p.id product_id, v.id variant_id, v.price_updated, p.name product_name, p.ebayItemNo, p.partNumber, v.name variant_name, v.sku, v.price, v.currency_id
 FROM ok_products p
 JOIN ok_variants v ON v.product_id = p.id
-WHERE (DATEDIFF(now(), v.price_updated) > $days OR v.price_updated IS NULL) AND p.visible = 1 and (p.manufacturer_id not in (4,5) AND p.manufacturer_id is not null) 
-ORDER BY UNIX_TIMESTAMP(p.last_modify) 
+WHERE DATEDIFF(date(NOW()), date(v.price_updated)) > $days
+AND p.visible = 1 
+and p.manufacturer_id not in (0,4,5)
+ORDER BY v.price_updated
 LIMIT 0,100
 ");
 
