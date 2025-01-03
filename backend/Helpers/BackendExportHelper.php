@@ -277,7 +277,7 @@ class BackendExportHelper
             if ($product['brand_id'] && isset($allBrands[$product['brand_id']])) {
                 $product['brand'] = $allBrands[$product['brand_id']]->name;
             }
-            if ($product['manufacturer_id'] && isset($allManufacturers[$product['manufacturer']])) {
+            if ($product['manufacturer_id'] && isset($allManufacturers[$product['manufacturer_id']])) {
                 $product['manufacturer'] = $allManufacturers[$product['manufacturer']]->name;
             }
         }
