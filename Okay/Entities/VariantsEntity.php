@@ -159,8 +159,8 @@ class VariantsEntity extends Entity
 p.id product_id, p.name product_name, p.ebayItemNo, p.partNumber, v.id variant_id, v.name variant_name, v.sku, v.price, v.currency_id, p.last_modify
 FROM ok_products p
 JOIN ok_variants v ON v.product_id = p.id
-WHERE (DATEDIFF(now(), v.price_updated) > $days OR v.price_updated IS NULL) AND p.visible = 1 and p.manufacturer_id not in (5)
-ORDER BY p.last_modify
+WHERE (DATEDIFF(now(), v.price_updated) > $days OR v.price_updated IS NULL) AND p.visible = 1 and (p.manufacturer_id not in (4,5) AND p.manufacturer_id is not null) 
+ORDER BY UNIX_TIMESTAMP(p.last_modify) 
 LIMIT 0,100
 ");
 

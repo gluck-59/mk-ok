@@ -25,6 +25,8 @@ class EbayUpdaterHelper implements ExtensionInterface
     private EbayUpdaterEntity $ebayUpdaterEntity;
     private ManufacturersEntity $manufacturersEntity;
 
+    private $sleep;
+
     private EbayAdmin $ebayAdmin;
 
 
@@ -48,11 +50,15 @@ class EbayUpdaterHelper implements ExtensionInterface
         $variantsToUpd = $variantsEntity->getVariantsToUpdate(7);
 
         foreach ($variantsToUpd as $variant) {
+            $this->sleep = rand(5, 20);
+
             $report = new \stdClass();
             $report->success = 0;
             $report->variant_id = $variant->variant_id;
             $report->old_price = $variant->price;
-            echo PHP_EOL.'===================================='.PHP_EOL.PHP_EOL;
+            echo PHP_EOL.'===================================='.PHP_EOL;
+            echo 'sleep '.$this->sleep.' сек'.PHP_EOL;
+            sleep($this->sleep);
 
             // 1. у варианта есть SKU — ищем по SKU
             if (!empty($variant->sku)) {
@@ -118,10 +124,6 @@ class EbayUpdaterHelper implements ExtensionInterface
             $report->success = 0;
             $report->description = 'у product_id '.$variant->product_id.' ('.$variant->product_name.') нет SKU и нет ebayItemNo — не обновляли';
             // 4
-
-            $sleep = rand(5, 20);
-            echo 'sleep '.$sleep.' сек'.PHP_EOL;
-            sleep($sleep);
         } // foreach
     } // cronEbayUpdater
 
