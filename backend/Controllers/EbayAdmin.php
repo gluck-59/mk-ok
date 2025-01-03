@@ -85,7 +85,7 @@ class EbayAdmin extends IndexAdmin
 
     function parse($request) {
         if (!$request['keyword']) {
-            $this->parsedLot['error'] = 'В запросе для Ebay нет keyword';
+            $this->parsedLot['debug']['error'] = 'В запросе для Ebay нет keyword';
             return $this->parsedLot;
         }
         require_once __DIR__.'/../../thirdParty/DiDom/Document.php';
@@ -169,7 +169,7 @@ class EbayAdmin extends IndexAdmin
             } elseif (sizeof($lots) == 1) {
                 $this->parsedLot = self::getitemDetails($lots[0]['itemNo']);
             } else {
-                echo 'искали '.$request['keyword'].', массив $lots пуст. не подключен VPN?'.PHP_EOL.PHP_EOL;
+//                echo 'искали '.$request['keyword'].', массив $lots пуст. не подключен VPN?'.PHP_EOL.PHP_EOL;
                 $this->debug['errors'] = 'искали '.$request['keyword'].', массив $lots пуст. не подключен VPN?';
                 return $this->debug;
             }
@@ -180,7 +180,7 @@ class EbayAdmin extends IndexAdmin
             self::export($this->parsedLot, 'csv');
             return;
         } else {
-            prettyDump($this->parsedLot);
+//            prettyDump($this->parsedLot);
             return $this->parsedLot;
         }
     } // parse
@@ -198,8 +198,14 @@ class EbayAdmin extends IndexAdmin
      */
     public function getitemDetails($itemNo) {
         $itemDetails = self::request(['request' => $itemNo], 2);
+
+        // лот протух? или еще какая хуйня?
+        if (is_array($itemDetails) && $itemDetails['debug']['error']) {
+            return $itemDetails;
+        }
         $document = new Document($itemDetails['response']);
 
+        // ??
         // ebay вернул ошибку
         if($itemDetails['debug']['errors']) {
             return $this->debug;
@@ -211,6 +217,7 @@ class EbayAdmin extends IndexAdmin
             return $this->debug;
 //$isEnded --- ??
         }
+        // ??
 
 
 
@@ -309,7 +316,6 @@ $isEnded = false; // добавить определение $isEnded
             return $this->debug;
         }
 
-
         $lot['manufacturer'] = '';
         return (object) $lot;
     } //getItemDetails
@@ -390,7 +396,6 @@ $isEnded = false; // добавить определение $isEnded
         if ($type == 1 && isset($_POST['maxprice'])) $url = $url . '&_udhi=' . $_POST['maxprice'];
 
         $curlOptions = [
-            //            CURLOPT_URL => 'https://motokofr.com', // дебаг
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
 //            CURLOPT_HEADER =>true, // заголовки ответа
@@ -398,7 +403,7 @@ $isEnded = false; // добавить определение $isEnded
             CURLOPT_FAILONERROR => true,
             CURLOPT_MAXREDIRS => 10,
             CURLOPT_USERAGENT => $this->userAgent,
-            CURLOPT_VERBOSE => true // для обновлятеля надо TRUE
+            CURLOPT_VERBOSE => false // для обновлятеля надо TRUE ?
         ];
         $curl = curl_init();
         // если это первый запрос то отдельным запросом надо установить страну доставки &shipToCountryCode=ESP&shippingZipCode=03560
@@ -422,7 +427,7 @@ $isEnded = false; // добавить определение $isEnded
 
         $curlError = curl_error($curl);
         if (!empty($curlError)) {
-            $this->debug['errors'] = $curlError;
+            $this->debug['error'] = $curlError;
         }
         curl_close($curl);
         return ['debug' => $this->debug, 'response' => $response];
@@ -464,7 +469,6 @@ $isEnded = false; // добавить определение $isEnded
 
 
     private function export($lot, $format) {
-//prettyDump($lot, 1);
         $cur = new CurrenciesEntity();
 
         switch ($lot->currency) {

@@ -11,6 +11,7 @@ use Okay\Core\Database;
 use Okay\Core\QueryFactory;
 use Okay\Core\EntityFactory;
 use Okay\Entities\BrandsEntity;
+use Okay\Entities\ManufacturersEntity;
 use Okay\Entities\FeaturesEntity;
 use Okay\Entities\FeaturesValuesEntity;
 use Okay\Entities\ImagesEntity;
@@ -31,6 +32,9 @@ class BackendProductsHelper
 
     /** @var BrandsEntity */
     private $brandsEntity;
+
+    /** @var ManufacturersEntity */
+    private $manufacturersEntity;
 
     /** @var ImagesEntity */
     private $imagesEntity;
@@ -72,6 +76,7 @@ class BackendProductsHelper
         $this->imageCore           = $imageCore;
         $this->queryFactory        = $queryFactory;
         $this->brandsEntity        = $entityFactory->get(BrandsEntity::class);
+        $this->manufacturersEntity = $entityFactory->get(ManufacturersEntity::class);
         $this->imagesEntity        = $entityFactory->get(ImagesEntity::class);
         $this->productsEntity      = $entityFactory->get(ProductsEntity::class);
         $this->variantsEntity      = $entityFactory->get(VariantsEntity::class);
@@ -367,6 +372,14 @@ class BackendProductsHelper
             $filter['brand_id'] = $brand->id;
         } elseif ($brandId == -1) {
             $filter['brand_id'] = array(0);
+        }
+
+        // Производители
+        $manufacturerId = $this->request->get('manufacturer_id', 'integer');
+        if($manufacturerId && $manufacturer = $this->manufacturersEntity->get($manufacturerId)) {
+            $filter['manufacturer_id'] = $manufacturer->id;
+        } elseif ($manufacturerId == -1) {
+            $filter['manufacturer_id'] = array(0);
         }
 
         if ($features = $this->request->get('features')) {

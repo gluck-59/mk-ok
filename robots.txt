@@ -39,6 +39,7 @@ Disallow: /*?utm
 Disallow: /*&utm
 Disallow: /cart
 Disallow: /product.php?
+Disallow: /supplier.php?
 Disallow: /category.php?
 Disallow: /tags.php?
 Disallow: /modules/

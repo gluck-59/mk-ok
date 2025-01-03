@@ -17,6 +17,7 @@ class VariantsEntity extends Entity
         'weight',
         'price',
         'compare_price',
+        'price_updated',
         'stock',
         'position',
         'external_id',
