@@ -101,7 +101,7 @@ class EbayAdmin extends IndexAdmin
         } else {
             $this->userAgent = self::getRandomUseragent();
             $curl = self::request($request, 1);
-            if (!empty($this->debug['errors'])) {
+            if (!empty($this->debug['errors']) || is_bool($curl['response'])) {
                 return $this->debug;
             }
 
