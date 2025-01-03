@@ -392,7 +392,8 @@
                         <th>Старая ц.</th>
                         <th>Новая ц.</th>
                         <th>Описание</th>
-                        <th>Обновлено</th>
+                        <th>Дата</th>
+                        <th></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -409,6 +410,13 @@
                             </td>
                             <td>{if $item->old_currency_id != $item->new_currency_id}<b>&larr; ВАЛЮТА</b> {/if}{$item->description}</td>
                             <td>{$item->upd_date}</td>
+                            <td>
+                                <label class="switch switch-default ">
+                                    <input class="switch-input fn_ajax_action {if $item->success}fn_active_class{/if}" data-controller="ebayUpdater" data-action="success" data-id="{$item->id}" name="success" value="1" type="checkbox"  {if $item->success}checked=""{/if}/>
+                                    <span class="switch-label"></span>
+                                    <span class="switch-handle"></span>
+                                </label>
+                            </td>
                         </tr>
                     {/foreach}
                 </tbody>

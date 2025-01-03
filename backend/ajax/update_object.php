@@ -157,6 +157,11 @@ switch ($object) {
             $result = $entity->update($id, ['menu_status'=>$values['menu_status']]);
         }
         break;
+    case 'ebayUpdater':
+            if ($managers->access('gluck__ebayupdater', $manager)) {
+                $entity = $entityFactory->get(\Okay\Modules\Gluck\EbayUpdater\Entities\EbayUpdaterEntity::class);
+            }
+            break;
 }
 
 if (empty($entity)) {

@@ -146,7 +146,7 @@ class EbayUpdaterHelper implements ExtensionInterface
                     $currencyModel = $currenciesEntity->findOne(['code' => 'EUR']);
                     break;
                 default:
-                    $currencyModel = $currenciesEntity->findOne(['code' => 'EUR']);
+                    $currencyModel = $currenciesEntity->findOne(['code' => 'USD']);
             }
             $report->newEbayItem_id = $newLot->ebayItemNo;
             $report->old_currency_id = $variant->currency_id;

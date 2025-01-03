@@ -49,7 +49,7 @@ class EbayUpdaterEntity extends Entity
         $variantssEntity = new VariantsEntity();
 
         $sql = $this->queryFactory->newSqlQuery();
-        $sql->setStatement("SELECT variant_id, newEbayItem_id, old_currency_id, new_currency_id, old_price, new_price, DATE_FORMAT(updated, '%d.%m.%Y в %H:%i') upd_date, success, description FROM ".self::getTable()." 
+        $sql->setStatement("SELECT id, variant_id, newEbayItem_id, old_currency_id, new_currency_id, old_price, new_price, DATE_FORMAT(updated, '%d.%m.%Y <br>в %H:%i') upd_date, success, description FROM ".self::getTable()." 
         WHERE DATE(updated) = DATE(now())
         ORDER BY updated DESC");
         $this->db->query($sql);
