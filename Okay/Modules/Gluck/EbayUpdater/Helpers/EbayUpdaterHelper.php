@@ -153,13 +153,17 @@ class EbayUpdaterHelper implements ExtensionInterface
             $report->new_currency_id = $currencyModel->id;
             $report->old_price = $variant->price;
             $report->new_price = $newLot->outPrice;
+            $stock = NULL;
 
-            if ($report->new_price == 0) $report->success = 0;
+            if ($report->new_price == 0) {
+                $report->success = 0;
+                $stock = 0;
+            }
 
             $productsUpd = $productsEntity->update($variant->product_id, ['ebayItemNo' => $newLot->ebayItemNo, 'supplier' => $newLot->supplier, 'visible' => 1]);
-            $variantsUpd = $variantsEntity->update($variant->variant_id, ['price_updated' => "NOW()", 'price' => $newLot->outPrice, 'compare_price' => $newLot->ebayPrice,'currency_id' => $currencyModel->id]);
+            $variantsUpd = $variantsEntity->update($variant->variant_id, ['price_updated' => "NOW()", 'price' => $newLot->outPrice, 'compare_price' => $newLot->ebayPrice,'currency_id' => $currencyModel->id, 'stock' => $stock]);
         } else {
-            $variantsUpd = $variantsEntity->update($variant->variant_id, ['price_updated' => "NOW()"]);
+            $variantsUpd = $variantsEntity->update($variant->variant_id, ['price_updated' => "NOW()", 'stock' => 0]);
             $productsUpd = $productsEntity->update($variant->product_id, ['visible' => 0]);
         }
         $report->updated = "NOW()";
