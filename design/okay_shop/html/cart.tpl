@@ -145,7 +145,6 @@
                                                         <span data-language="cart_form_header">{$lang->cart_form_header}</span>
                                                     </div>
                                                 </div>
-
                                                 <div class="form__body">
                                                     {* Form error messages *}
                                                     {if $error}
@@ -167,7 +166,7 @@
                                                         {* User's name *}
                                                         <div class="f_col-md-6 f_col-lg-12 f_col-xl-6">
                                                             <div class="form__group ">
-                                                                <input class="form__input form__placeholder--focus" name="name" type="text" value="{$request_data.name|escape}" data-language="form_name" >
+                                                                <input class="form__input form__placeholder--focus" name="name" type="text" value="{if $request_data.name}{$request_data.name|escape}{else}{$user->name|escape}{/if}" data-language="form_name" >
                                                                 <span class="form__placeholder">{$lang->form_name}*</span>
                                                             </div>
                                                         </div>
@@ -175,7 +174,7 @@
                                                         {* User's name *}
                                                         <div class="f_col-md-6 f_col-lg-12 f_col-xl-6">
                                                             <div class="form__group ">
-                                                                <input class="form__input form__placeholder--focus" name="last_name" type="text" value="{$request_data.last_name|escape}" data-language="form_name" >
+                                                                <input class="form__input form__placeholder--focus" name="last_name" type="text" value="{if $request_data.last_name}{$request_data.last_name|escape}{else}{$user->last_name|escape}{/if}" data-language="form_name" >
                                                                 <span class="form__placeholder">{$lang->form_last_name}</span>
                                                             </div>
                                                         </div>
