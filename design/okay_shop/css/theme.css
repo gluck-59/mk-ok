@@ -2061,7 +2061,7 @@ a.filter__catalog_link svg {
   background-color: var(--okay-basic-company);
 }
 .sticker--discount {
-  background-color: rgba(177, 7, 7, 0.8);
+  background-color: var(--okay-basic-company);
 }
 .sticker--special {
   -webkit-box-flex: 0;
@@ -2148,7 +2148,7 @@ a.filter__catalog_link svg {
   line-height: 1;
 }
 .product_preview__prices .price--red {
-  color: #b10707;
+  color: var(--okay-basic-company);
 }
 .product_preview__prices .price .currency {
   font-size: 11px;
@@ -3118,8 +3118,8 @@ a.filter__catalog_link svg {
   display: inline-block;
   text-align: center;
   line-height: 1;
-  background-color: rgb(238, 238, 238);
-  color: rgb(251, 63, 76);
+  background-color: var(--okay-basic-company);
+  color: whitesmoke;
   font-weight: 600;
   padding: 4px 5px 4px;
   font-size: 12px;
@@ -3237,7 +3237,7 @@ a.filter__catalog_link svg {
   font-size: 34px;
 }
 .details_boxed__price.price--red {
-  color: #e83841;
+  color: var(--okay-basic-company);
 }
 .details_boxed__buttons > * {
   position: relative;

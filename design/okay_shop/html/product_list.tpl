@@ -39,7 +39,7 @@
                         <span class="fn_discount_label {if $product->variant->price>0 && $product->variant->compare_price>0 && $product->variant->compare_price>$product->variant->price}{else} hidden{/if}">
                             <span class="sticker sticker--discount">
                                 {if $product->variant->price>0 && $product->variant->compare_price>0 && $product->variant->compare_price>$product->variant->price}
-                                {round((($product->variant->price-$product->variant->compare_price)/$product->variant->compare_price)*100, 2)}&nbsp;%
+                                {round((($product->variant->price-$product->variant->compare_price)/$product->variant->compare_price)*100, 0)}&nbsp;%
                                 {/if}
                             </span>
                         </span>

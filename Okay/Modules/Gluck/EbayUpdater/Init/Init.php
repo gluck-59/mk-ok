@@ -4,6 +4,7 @@ namespace Okay\Modules\Gluck\EbayUpdater\Init;
 use Okay\Admin\Controllers\EbayAdmin;
 use Okay\Core\Modules\AbstractInit;
 use Okay\Core\Scheduler\Schedule;
+use Okay\Core\Settings;
 use Okay\Modules\Gluck\EbayUpdater\Entities\EbayUpdaterEntity;
 use Okay\Core\Modules\EntityField;
 use Okay\Modules\Gluck\EbayUpdater\Backend\Controllers\EbayUpdaterAdmin;
@@ -41,7 +42,18 @@ class Init extends AbstractInit
         $this->registerSchedule(
             (new Schedule([EbayUpdaterHelper::class, 'cronEbayUpdater']))
                 ->name('обновляет цены с Ebay')
-                ->time('0 0 * * *')
+                ->time('10 0 * * *')
+                ->overlap(false)
+                ->timeout(3600)
+        );
+
+
+
+        // это не имеет отношения к Ebay, просто Scheduler удобнее объявить в модуле
+        $this->registerSchedule(
+            (new Schedule([Settings::class, 'setPseudoDiscountProducts']))
+                ->name('генерит товары для псевдо-скидки')
+                ->time('0 0 * * 6')
                 ->overlap(false)
                 ->timeout(3600)
         );

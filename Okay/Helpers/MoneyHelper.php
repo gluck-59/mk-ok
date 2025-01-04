@@ -42,9 +42,12 @@ class MoneyHelper
         }
 
         // Если скидкидочная цена меньше или равна обычной цене, такую скидку не выводим
-        if ($this->settings->get('hide_equal_compare_price') && $variant->compare_price <= $variant->price) {
-            $variant->compare_price = null;
-        }
+        // compare_price - ЭТО ЗАКУП, его скрываем всегда
+        // if ($this->settings->get('hide_equal_compare_price') && $variant->compare_price <= $variant->price) // ориг
+        if ( in_array($variant->product_id, explode(',', $this->settings->get('pseudoDiscountProducts'))) )
+        {
+            $variant->compare_price = round($variant->price * 1.11115);
+        } else $variant->compare_price = null;
         
         $currencies = $this->getCurrenciesList();
         if (!isset($currencies[$variant->currency_id])) {
