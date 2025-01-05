@@ -174,6 +174,8 @@ class EbayUpdaterHelper implements ExtensionInterface
             }
 
             // предохранитель от левого лота — если новая цена отличается от старой больше чем на 10% — пишем только репорт
+            if (is_null($variant->price)) $variant->price = 0;
+            if (is_null($newLot->outPrice)) $newLot->outPrice = 0;
             $priceCompare = abs($variant->price / $newLot->outPrice * 100 - 100);
             if ($priceCompare > 10) {
                 unset($toUpdateVariant);
