@@ -71,7 +71,7 @@ class EbayUpdaterHelper implements ExtensionInterface
                     echo 'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно'.PHP_EOL;
                     $report->description = 'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно<br><a href="'.$newLot['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
                 } else {
-                    echo 'нашли товар '.$variant->product_id.' по SKU '.$manufacturer->name.' '.$variant->sku.', пишемся'.PHP_EOL;
+                    echo 'нашли товар '.$variant->product_id.' по SKU '.$manufacturer->name.' '.$variant->sku.', цена'.$newLot->outPrice.PHP_EOL;
                     $report->success = 1;
                     $report->description = 'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' OK';
                     self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
@@ -153,18 +153,31 @@ class EbayUpdaterHelper implements ExtensionInterface
             $report->new_currency_id = $currencyModel->id;
             $report->old_price = $variant->price;
             $report->new_price = $newLot->outPrice;
-            $stock = NULL;
+
+            $toUpdateVariant = [
+                'price' => $newLot->outPrice,
+                'compare_price' => $newLot->ebayPrice,
+                'currency_id' => $currencyModel->id,
+                'price_updated' => "NOW()",
+                'stock' => null
+            ];
 
             if ($report->new_price == 0) {
+                $toUpdateVariant = [
+                    'compare_price' => $newLot->ebayPrice,
+                    'currency_id' => $currencyModel->id,
+                    'price_updated' => "NOW()",
+                    'stock' => 0
+                    ];
+
                 $report->success = 0;
-                $stock = 0;
             }
 
             $productsUpd = $productsEntity->update($variant->product_id, ['ebayItemNo' => $newLot->ebayItemNo, 'supplier' => $newLot->supplier, 'visible' => 1]);
-            $variantsUpd = $variantsEntity->update($variant->variant_id, ['price_updated' => "NOW()", 'price' => $newLot->outPrice, 'compare_price' => $newLot->ebayPrice,'currency_id' => $currencyModel->id, 'stock' => $stock]);
+            $variantsUpd = $variantsEntity->update($variant->variant_id, $toUpdateVariant);
         } else {
-            $variantsUpd = $variantsEntity->update($variant->variant_id, ['price_updated' => "NOW()", 'stock' => 0]);
             $productsUpd = $productsEntity->update($variant->product_id, ['visible' => 0]);
+            $variantsUpd = $variantsEntity->update($variant->variant_id, ['price_updated' => "NOW()", 'stock' => 0]);
         }
         $report->updated = "NOW()";
 
