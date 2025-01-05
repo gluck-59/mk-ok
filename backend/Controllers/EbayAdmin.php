@@ -87,6 +87,7 @@ class EbayAdmin extends IndexAdmin
 echo PHP_EOL.'parse request: '.$request['keyword'];
         if (!$request['keyword']) {
             $this->debug['errors'] = 'В запросе для Ebay нет keyword';
+echo PHP_EOL.'return из стр '.__LINE__;
             return $this->debug;
         }
         require_once __DIR__.'/../../thirdParty/DiDom/Document.php';
@@ -103,6 +104,7 @@ echo PHP_EOL.'parse request: '.$request['keyword'];
             $this->userAgent = self::getRandomUseragent();
             $curl = self::request($request, 1);
             if (!empty($this->debug['errors']) || is_bool($curl['response'])) {
+echo PHP_EOL.'return из стр '.__LINE__;
                 return $this->debug;
             }
 
@@ -170,11 +172,10 @@ echo PHP_EOL.'parse request: '.$request['keyword'];
             } elseif (sizeof($lots) == 1) {
                 $this->parsedLot = self::getitemDetails($lots[0]['itemNo']);
             } else {
-//                echo 'искали '.$request['keyword'].', массив $lots пуст. не подключен VPN?'.PHP_EOL.PHP_EOL;
                 $this->debug['errors'] = 'искали '.$request['keyword'].', массив $lots пуст. не подключен VPN?';
+echo PHP_EOL.'return из стр '.__LINE__;
                 return $this->debug;
             }
-//prettyDump($this->parsedLot, 1);
         }
 
         if ($request['export']) {
