@@ -57,22 +57,21 @@ class EbayUpdaterHelper implements ExtensionInterface
             $report->success = 0;
             $report->variant_id = $variant->variant_id;
             $report->old_price = $variant->price;
-            echo PHP_EOL.'========== осталось '.$remain--.' =========='.PHP_EOL;
-            echo 'sleep '.$this->sleep.' сек'.PHP_EOL;
+            echo PHP_EOL.'========== осталось '.$remain--.' =========='.PHP_EOL.'sleep '.$this->sleep.' сек';
             sleep($this->sleep);
 
             // 1. у варианта есть SKU — ищем по SKU
             if (!empty($variant->sku)) {
                 $product = $productsEntity->findOne(['id' => $variant->product_id]);
                 $manufacturer = $manufacturersEntity->findOne(['id' => $product->manufacturer_id]);
-                echo 'ищем по SKU '.$manufacturer->name.' '.$variant->sku.PHP_EOL;
+                echo PHP_EOL.'ищем по SKU '.$manufacturer->name.' '.$variant->sku;
 
                 $newLot = $ebayAdmin->parse(['keyword' => $manufacturer->name.' '.$variant->sku]);
                 if (is_array($newLot) && $newLot['debug']['errors']) {
-                    echo 'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно'.PHP_EOL;
+                    echo PHP_EOL.'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно';
                     $report->description = 'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно<br><a href="'.$newLot['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
                 } else {
-                    echo 'нашли товар '.$variant->product_id.' по SKU '.$manufacturer->name.' '.$variant->sku.', выход ='.$newLot->currency.$newLot->outPrice.PHP_EOL;
+                    echo PHP_EOL.'нашли товар '.$variant->product_id.' по SKU '.$manufacturer->name.' '.$variant->sku.', выход ='.$newLot->currency.$newLot->outPrice.PHP_EOL;
                     $report->success = 1;
                     $report->description = 'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' OK';
                     self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
@@ -84,16 +83,16 @@ class EbayUpdaterHelper implements ExtensionInterface
 
             // 2. у варианта есть ebayItemNo, проверим не протух ли
             if (!empty($variant->ebayItemNo) && strlen($variant->ebayItemNo) == 12) {
-                echo 'ищем по ebayItemNo '.$variant->ebayItemNo.PHP_EOL;
+                echo PHP_EOL.'ищем по ebayItemNo '.$variant->ebayItemNo;
                 $newLot = $ebayAdmin->parse(['keyword' => $variant->ebayItemNo]);
 
                 // 2а. лот протух — не пишемся, сразу ищем по partNumber
                 if (is_array($newLot) && $newLot['debug']['errors']) {
-                    echo 'поиск по ebayItemNo '.$variant->ebayItemNo.' неудачно, ищем по partNumber '.$variant->partNumber.PHP_EOL;
+                    echo PHP_EOL.'поиск по ebayItemNo '.$variant->ebayItemNo.' неудачно, ищем по partNumber '.$variant->partNumber;
                     }
                 // 2б. не протух
                 else {
-                    echo __LINE__ . ' нашли товар ' . $variant->product_id . ' по ebayItemNo ' . $variant->ebayItemNo . ', пишемся' . PHP_EOL;
+                    echo PHP_EOL.__LINE__ . ' нашли товар ' . $variant->product_id . ' по ebayItemNo ' . $variant->ebayItemNo . ', пишемся';
                     $report->success = 1;
                     $report->description = 'поиск по ebayItemNo ' . $variant->ebayItemNo . ' OK';
                     self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
@@ -106,13 +105,13 @@ class EbayUpdaterHelper implements ExtensionInterface
             $newLot = $ebayAdmin->parse(['keyword' => $variant->partNumber]);
             //print_r($newLot);
             if (is_array($newLot) && $newLot['debug']['errors']) {
-                echo __LINE__.' поиск по partNumber '.$variant->partNumber.' снова неудачно, пишемся'.PHP_EOL;
+                echo PHP_EOL.__LINE__.' поиск по partNumber '.$variant->partNumber.' снова неудачно, пишемся';
                 $report->success = 0;
                 $report->description = 'поиск по ebayItemNo <b>'.$variant->ebayItemNo.'</b> и затем по partNumber <b>'.$variant->partNumber.'</b> неудачно<br><b>ТОВАР ОТКЛ</b> <a href="'.$newLot['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
                 self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
                 continue;
             } else {
-                echo __LINE__. ' нашли товар ' . $variant->product_id . ' по partNumber ' . $variant->partNumber . ', пишемся' . PHP_EOL;
+                echo PHP_EOL.' нашли товар ' . $variant->product_id . ' по partNumber ' . $variant->partNumber . ', пишемся';
                 $report->success = 1;
                 $report->description = 'поиск по partNumber ' . $variant->partNumber . ' OK';
                 self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
@@ -121,7 +120,7 @@ class EbayUpdaterHelper implements ExtensionInterface
 
 
             // 4. если у товара нет ничего — обновляем дату и пишем репорт
-            echo 'у варианта '.$variant->variant_id.' нет ни SKU ни ebayItemNo — не обновляем';
+            echo PHP_EOL.'у варианта '.$variant->variant_id.' нет ни SKU ни ebayItemNo — не обновляем';
             $report->success = 0;
             $report->description = 'у product_id '.$variant->product_id.' ('.$variant->product_name.') нет SKU и нет ebayItemNo — не обновляли';
             // 4
