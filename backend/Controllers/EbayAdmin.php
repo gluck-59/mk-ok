@@ -84,6 +84,7 @@ class EbayAdmin extends IndexAdmin
 
 
     function parse($request) {
+echo PHP_EOL.'parse request: '.$request['keyword'];
         if (!$request['keyword']) {
             $this->debug['errors'] = 'В запросе для Ebay нет keyword';
             return $this->debug;
@@ -197,6 +198,7 @@ class EbayAdmin extends IndexAdmin
      * @return array
      */
     public function getitemDetails($itemNo) {
+echo PHP_EOL.'getitemDetails: '.$itemNo;
         $itemDetails = self::request(['request' => $itemNo], 2);
 
         // лот протух? или еще какая хуйня?
@@ -449,7 +451,7 @@ echo $err;
      * @return double
      */
     public function calculateProfit($lot) {
-echo PHP_EOL,'calculateProfit: '.(double) $lot['price'] .' '. (double) $lot['shipping'] .' '. (double) $lot['duties'];
+echo PHP_EOL.'calculateProfit: '.(double) $lot['price'] .' '. (double) $lot['shipping'] .' '. (double) $lot['duties'];
         $profit_percent = ($_POST['profit_percent'] ? (float) $_POST['profit_percent'] : $this->profit_percent);
         $ebayPrice = (double) $lot['price'] + (double) $lot['shipping'] + (double) $lot['duties'];
         $profit = $ebayPrice * ($profit_percent / 100);
