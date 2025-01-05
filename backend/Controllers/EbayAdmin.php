@@ -453,7 +453,7 @@ echo $err;
      * @return double
      */
     public function calculateProfit($lot) {
-echo PHP_EOL.'calculateProfit: '.(double) $lot['price'] .' + '. (double) $lot['shipping'] .' + '. (double) $lot['duties'];
+echo PHP_EOL.'calculateProfit: '.(double) $lot['price'] .'+'. (double) $lot['shipping'] .'+'. (double) $lot['duties'];
         $profit_percent = ($_POST['profit_percent'] ? (float) $_POST['profit_percent'] : $this->profit_percent);
         $ebayPrice = (double) $lot['price'] + (double) $lot['shipping'] + (double) $lot['duties'];
         $profit = $ebayPrice * ($profit_percent / 100);

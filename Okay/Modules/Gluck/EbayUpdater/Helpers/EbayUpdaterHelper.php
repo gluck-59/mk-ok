@@ -85,14 +85,13 @@ class EbayUpdaterHelper implements ExtensionInterface
             if (!empty($variant->ebayItemNo) && strlen($variant->ebayItemNo) == 12) {
                 echo PHP_EOL.'ищем по ebayItemNo '.$variant->ebayItemNo;
                 $newLot = $ebayAdmin->parse(['keyword' => $variant->ebayItemNo]);
-//prettyDump($newLot, 1);
+
                 // 2а. лот протух — не пишемся, сразу ищем по partNumber
                 if (is_array($newLot) && $newLot['debug']['errors']) {
                     echo PHP_EOL.'поиск по ebayItemNo '.$variant->ebayItemNo.' неудачно, ищем по partNumber '.$variant->partNumber;
                     $newLot = $ebayAdmin->parse(['keyword' => $variant->partNumber]);
-                    }
-                // 2б. не протух
-                else {
+                } else {
+                    // 2б. не протух
                     echo PHP_EOL.__LINE__ . ' нашли товар ' . $variant->product_id . ' по ebayItemNo ' . $variant->ebayItemNo . ', выход = '.$newLot->currency.' '.$newLot->outPrice.PHP_EOL;
                     $report->success = 1;
                     $report->description = 'поиск по ebayItemNo ' . $variant->ebayItemNo . ' OK';
@@ -100,7 +99,6 @@ class EbayUpdaterHelper implements ExtensionInterface
                     continue;
                 }
             }
-prettyDump($newLot, 1);
             // 2
 
 
