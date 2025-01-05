@@ -48,6 +48,7 @@ class EbayUpdaterHelper implements ExtensionInterface
         $ebayAdmin = new EbayAdmin($managersEntity->findOne(['login' => 'gluck']), '', '');
 
         $variantsToUpd = $variantsEntity->getVariantsToUpdate(7);
+        $remain = sizeof($variantsToUpd);
 
         foreach ($variantsToUpd as $variant) {
             $this->sleep = rand(5, 20);
@@ -56,7 +57,7 @@ class EbayUpdaterHelper implements ExtensionInterface
             $report->success = 0;
             $report->variant_id = $variant->variant_id;
             $report->old_price = $variant->price;
-            echo PHP_EOL.'===================================='.PHP_EOL;
+            echo PHP_EOL.'========== осталось '.$remain--.' =========='.PHP_EOL;
             echo 'sleep '.$this->sleep.' сек'.PHP_EOL;
             sleep($this->sleep);
 
@@ -71,7 +72,7 @@ class EbayUpdaterHelper implements ExtensionInterface
                     echo 'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно'.PHP_EOL;
                     $report->description = 'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно<br><a href="'.$newLot['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
                 } else {
-                    echo 'нашли товар '.$variant->product_id.' по SKU '.$manufacturer->name.' '.$variant->sku.', выход='.$newLot->currency.$newLot->outPrice.PHP_EOL;
+                    echo 'нашли товар '.$variant->product_id.' по SKU '.$manufacturer->name.' '.$variant->sku.', выход ='.$newLot->currency.$newLot->outPrice.PHP_EOL;
                     $report->success = 1;
                     $report->description = 'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' OK';
                     self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
