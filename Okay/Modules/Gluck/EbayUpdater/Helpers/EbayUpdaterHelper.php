@@ -172,12 +172,23 @@ prettyDump($newLot, 1);
                     'price_updated' => "NOW()",
                     'stock' => 0
                     ];
-
                 $report->success = 0;
             }
 
-            $productsUpd = $productsEntity->update($variant->product_id, ['ebayItemNo' => $newLot->ebayItemNo, 'supplier' => $newLot->supplier, 'visible' => 1]);
-            $variantsUpd = $variantsEntity->update($variant->variant_id, $toUpdateVariant);
+            // предохранитель от левого лота — если новая цена отличается от старой больше чем на 10% — пишем только репорт
+            $priceCompare = abs($variant->price / $newLot->outPrice * 100 - 100);
+            if ($priceCompare > 10) {
+                unset($toUpdateVariant);
+                $report->success = 0;
+                $report->description = 'разница цен '.$priceCompare.'% — только обновили дату';
+
+                $variantsUpd = $variantsEntity->update($variant->variant_id, ['price_updated' => "NOW()"]);
+            }
+
+            if (isset($toUpdateVariant)) {
+                $productsUpd = $productsEntity->update($variant->product_id, ['ebayItemNo' => $newLot->ebayItemNo, 'supplier' => $newLot->supplier, 'visible' => 1]);
+                $variantsUpd = $variantsEntity->update($variant->variant_id, $toUpdateVariant);
+            }
         } else {
             $variantsUpd = $variantsEntity->update($variant->variant_id, ['price_updated' => "NOW()", 'stock' => 0]);
         }
