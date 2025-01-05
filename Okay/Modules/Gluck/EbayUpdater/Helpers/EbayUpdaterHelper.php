@@ -67,7 +67,7 @@ class EbayUpdaterHelper implements ExtensionInterface
                 echo PHP_EOL.'ищем по SKU '.$manufacturer->name.' '.$variant->sku;
 
                 $newLot = $ebayAdmin->parse(['keyword' => $manufacturer->name.' '.$variant->sku]);
-                if (is_array($newLot) && $newLot['debug']['errors']) {
+                if (is_array($newLot) && $newLot['errors']) {
                     echo PHP_EOL.'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно';
                     $report->description = 'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно<br><a href="'.$newLot['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
                 } else {
@@ -87,7 +87,7 @@ class EbayUpdaterHelper implements ExtensionInterface
                 $newLot = $ebayAdmin->parse(['keyword' => $variant->ebayItemNo]);
 
                 // 2а. лот протух — не пишемся, сразу ищем по partNumber
-                if (is_array($newLot) && $newLot['debug']['errors']) {
+                if (is_array($newLot) && $newLot['errors']) {
                     echo PHP_EOL.'поиск по ebayItemNo '.$variant->ebayItemNo.' неудачно, ищем по partNumber '.$variant->partNumber;
                     }
                 // 2б. не протух
@@ -104,7 +104,7 @@ class EbayUpdaterHelper implements ExtensionInterface
             // 3. ebayItemNo протух, но у варианта есть partNumber
             $newLot = $ebayAdmin->parse(['keyword' => $variant->partNumber]);
             //print_r($newLot);
-            if (is_array($newLot) && $newLot['debug']['errors']) {
+            if (is_array($newLot) && $newLot['errors']) {
                 echo PHP_EOL.__LINE__.' поиск по partNumber '.$variant->partNumber.' снова неудачно, пишемся';
                 $report->success = 0;
                 $report->description = 'поиск по ebayItemNo <b>'.$variant->ebayItemNo.'</b> и затем по partNumber <b>'.$variant->partNumber.'</b> неудачно<br><b>ТОВАР ОТКЛ</b> <a href="'.$newLot['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
