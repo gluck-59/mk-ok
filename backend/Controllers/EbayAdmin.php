@@ -201,9 +201,12 @@ echo PHP_EOL.'return из стр '.__LINE__;
     public function getitemDetails($itemNo) {
 echo PHP_EOL.'getitemDetails: '.$itemNo;
         $itemDetails = self::request(['request' => $itemNo], 2);
-
         // лот протух? или еще какая хуйня?
         if (is_array($itemDetails) && $itemDetails['debug']['errors']) {
+            return $itemDetails;
+        }
+        if (empty($itemDetails['response'])) {
+            $itemDetails['debug']['errors'] = 'лот не найден?';
             return $itemDetails;
         }
         $document = new Document($itemDetails['response']);
@@ -212,13 +215,11 @@ echo PHP_EOL.'getitemDetails: '.$itemNo;
         // ebay вернул ошибку
         if($itemDetails['debug']['errors']) {
             return $itemDetails;
-//            return $itemDetails['debug'];
         }
         //  ended
         if ($endedBlock = $document->first('.d-statusmessage')) {
-            $this->debug['errors'] = 'лот '.$itemNo.' протух';
-            return $this->debug;
-//$isEnded --- ??
+            $itemDetails['debug']['errors'] = 'лот '.$itemNo.' протух';
+            return $itemDetails;
         }
         // ??
 
