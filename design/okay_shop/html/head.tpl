@@ -108,7 +108,7 @@
     {* Title *}
     <title>
         {if $controller == 'BrandController'}Ништяки для{/if}
-        {$meta_title|escape}
+        {$meta_title|escape} {if $manufacturer->name}({$manufacturer->name|escape}){/if}
         {if $controller == 'ProductController' OR $controller == 'BrandController' OR $controller == 'CategoryController'}купить в Motokofr.com{/if}
     </title>
 

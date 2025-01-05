@@ -71,7 +71,7 @@ class EbayUpdaterHelper implements ExtensionInterface
                     echo 'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно'.PHP_EOL;
                     $report->description = 'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно<br><a href="'.$newLot['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
                 } else {
-                    echo 'нашли товар '.$variant->product_id.' по SKU '.$manufacturer->name.' '.$variant->sku.', цена'.$newLot->outPrice.PHP_EOL;
+                    echo 'нашли товар '.$variant->product_id.' по SKU '.$manufacturer->name.' '.$variant->sku.', выход='.$newLot->currency.$newLot->outPrice.PHP_EOL;
                     $report->success = 1;
                     $report->description = 'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' OK';
                     self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
