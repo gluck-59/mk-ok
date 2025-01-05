@@ -108,7 +108,7 @@ class EbayUpdaterHelper implements ExtensionInterface
             if (is_array($newLot) && $newLot['errors']) {
                 echo PHP_EOL.' поиск по partNumber '.$variant->partNumber.' снова неудачно, пишемся';
                 $report->success = 0;
-                $report->description = 'поиск по ebayItemNo <b>'.$variant->ebayItemNo.'</b> и затем по partNumber <b>'.$variant->partNumber.'</b> неудачно<br<a href="'.$newLot['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
+                $report->description = 'поиск по ebayItemNo <b>'.$variant->ebayItemNo.'</b> и затем по partNumber <b>'.$variant->partNumber.'</b> неудачно<br><a href="'.$newLot['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
                 self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
                 continue;
             } else {
