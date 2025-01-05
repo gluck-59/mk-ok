@@ -83,7 +83,7 @@ class EbayUpdaterHelper implements ExtensionInterface
 
             // 2. у варианта есть ebayItemNo, проверим не протух ли
             if (!empty($variant->ebayItemNo) && strlen($variant->ebayItemNo) == 12) {
-                echo PHP_EOL.'ищем по ebayItemNo '.$variant->ebayItemNo;
+                echo PHP_EOL.'ищем товар '.$variant->product_id.' по ebayItemNo '.$variant->ebayItemNo;
                 $newLot = $ebayAdmin->parse(['keyword' => $variant->ebayItemNo]);
 
                 // 2а. лот протух — не пишемся, сразу ищем по partNumber
@@ -180,7 +180,7 @@ class EbayUpdaterHelper implements ExtensionInterface
             if ($priceCompare > 10) {
                 unset($toUpdateVariant);
                 $report->success = 0;
-                $report->description = 'разница цен '.$priceCompare.'% — только обновили дату';
+                $report->description = 'разница цен '.round($priceCompare, '0').'% — только обновили дату';
 
                 $variantsUpd = $variantsEntity->update($variant->variant_id, ['price_updated' => "NOW()"]);
             }
