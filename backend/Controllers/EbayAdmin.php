@@ -85,8 +85,8 @@ class EbayAdmin extends IndexAdmin
 
     function parse($request) {
         if (!$request['keyword']) {
-            $this->parsedLot['debug']['error'] = 'В запросе для Ebay нет keyword';
-            return $this->parsedLot;
+            $this->debug['errors'] = 'В запросе для Ebay нет keyword';
+            return $this->debug;
         }
         require_once __DIR__.'/../../thirdParty/DiDom/Document.php';
         require_once __DIR__.'/../../thirdParty/DiDom/Encoder.php';
@@ -200,7 +200,7 @@ class EbayAdmin extends IndexAdmin
         $itemDetails = self::request(['request' => $itemNo], 2);
 
         // лот протух? или еще какая хуйня?
-        if (is_array($itemDetails) && $itemDetails['debug']['error']) {
+        if (is_array($itemDetails) && $itemDetails['debug']['errors']) {
             return $itemDetails;
         }
         $document = new Document($itemDetails['response']);
@@ -208,7 +208,7 @@ class EbayAdmin extends IndexAdmin
         // ??
         // ebay вернул ошибку
         if($itemDetails['debug']['errors']) {
-            return $this->debug;
+            return $itemDetails;
 //            return $itemDetails['debug'];
         }
         //  ended
@@ -305,15 +305,21 @@ $isEnded = false; // добавить определение $isEnded
                     if ($i == 0 || ($i % sizeof($tr) == 0)) $lot['compatibility'] .= '<br>' . $td[$i]->text() . ' ';
                     else $lot['compatibility'] .= $td[$i]->text() . ' ';
                 }
+                $lot['outPrice'] = self::calculateProfit($lot);
             }
-            $lot['outPrice'] = self::calculateProfit($lot);
         } else {
             // если валюта кривая или вместо доставки херня, то покажем все это и закончим формирование лота
             $lot = [];
-            $err = ($currency[0] == 'US' ? 'price = '.$price : '---- цена в ' . (!empty($currency) ? $currency[0] : 'неизвестной валюте'.PHP_EOL) . ' shpping = '.$shipping).($isEnded ? ' лот протух'.PHP_EOL : '');
-            echo $err;
-            $this->debug['errors'] = $err;
-            return $this->debug;
+            $err = ($currency[0] == 'US' ? 'price = '.$price : '---- цена в ' . (!empty($currency) ? $currency[0] : 'неизвестной валюте') . ' shpping = '.$shipping).($isEnded ? ' лот протух' : '').PHP_EOL;
+
+echo '$currncy;';
+print_r($currency);
+
+echo '$price: '.$price;
+echo '$shipping: '.$shipping;
+
+echo $err;
+            $lot['debug']['errors'] = $err;
         }
 
         $lot['manufacturer'] = '';
@@ -427,7 +433,7 @@ $isEnded = false; // добавить определение $isEnded
 
         $curlError = curl_error($curl);
         if (!empty($curlError)) {
-            $this->debug['error'] = $curlError;
+            $this->debug['errors'] = $curlError;
         }
         curl_close($curl);
         return ['debug' => $this->debug, 'response' => $response];

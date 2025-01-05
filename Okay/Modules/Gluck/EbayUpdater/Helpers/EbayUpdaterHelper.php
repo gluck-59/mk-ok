@@ -67,7 +67,7 @@ class EbayUpdaterHelper implements ExtensionInterface
                 echo 'ищем по SKU '.$manufacturer->name.' '.$variant->sku.PHP_EOL;
 
                 $newLot = $ebayAdmin->parse(['keyword' => $manufacturer->name.' '.$variant->sku]);
-                if (is_array($newLot) && $newLot['errors']) {
+                if (is_array($newLot) && $newLot['debug']['errors']) {
                     echo 'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно'.PHP_EOL;
                     $report->description = 'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно<br><a href="'.$newLot['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
                 } else {
@@ -87,7 +87,7 @@ class EbayUpdaterHelper implements ExtensionInterface
                 $newLot = $ebayAdmin->parse(['keyword' => $variant->ebayItemNo]);
 
                 // 2а. лот протух — не пишемся, сразу ищем по partNumber
-                if (is_array($newLot) && $newLot['debug']['error']) {
+                if (is_array($newLot) && $newLot['debug']['errors']) {
                     echo 'поиск по ebayItemNo '.$variant->ebayItemNo.' неудачно, ищем по partNumber '.$variant->partNumber.PHP_EOL;
                     }
                 // 2б. не протух
@@ -104,7 +104,7 @@ class EbayUpdaterHelper implements ExtensionInterface
             // 3. ebayItemNo протух, но у варианта есть partNumber
             $newLot = $ebayAdmin->parse(['keyword' => $variant->partNumber]);
             //print_r($newLot);
-            if (is_array($newLot) && $newLot['debug']['error']) {
+            if (is_array($newLot) && $newLot['debug']['errors']) {
                 echo __LINE__.' поиск по partNumber '.$variant->partNumber.' снова неудачно, пишемся'.PHP_EOL;
                 $report->success = 0;
                 $report->description = 'поиск по ebayItemNo <b>'.$variant->ebayItemNo.'</b> и затем по partNumber <b>'.$variant->partNumber.'</b> неудачно<br><b>ТОВАР ОТКЛ</b> <a href="'.$newLot['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
