@@ -305,8 +305,8 @@ $isEnded = false; // добавить определение $isEnded
                     if ($i == 0 || ($i % sizeof($tr) == 0)) $lot['compatibility'] .= '<br>' . $td[$i]->text() . ' ';
                     else $lot['compatibility'] .= $td[$i]->text() . ' ';
                 }
-                $lot['outPrice'] = self::calculateProfit($lot);
             }
+            $lot['outPrice'] = self::calculateProfit($lot);
         } else {
             // если валюта кривая или вместо доставки херня, то покажем все это и закончим формирование лота
             $lot = [];
