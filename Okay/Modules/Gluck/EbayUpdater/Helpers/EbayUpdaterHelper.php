@@ -92,7 +92,7 @@ class EbayUpdaterHelper implements ExtensionInterface
                     }
                 // 2б. не протух
                 else {
-                    echo PHP_EOL.__LINE__ . ' нашли товар ' . $variant->product_id . ' по ebayItemNo ' . $variant->ebayItemNo . ', пишемся';
+                    echo PHP_EOL.__LINE__ . ' нашли товар ' . $variant->product_id . ' по ebayItemNo ' . $variant->ebayItemNo . ', выход = '.$newLot->currency.' '.$newLot->outPrice.PHP_EOL;
                     $report->success = 1;
                     $report->description = 'поиск по ebayItemNo ' . $variant->ebayItemNo . ' OK';
                     self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
@@ -111,7 +111,7 @@ class EbayUpdaterHelper implements ExtensionInterface
                 self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
                 continue;
             } else {
-                echo PHP_EOL.' нашли товар ' . $variant->product_id . ' по partNumber ' . $variant->partNumber . ', пишемся';
+                echo PHP_EOL.' нашли товар ' . $variant->product_id . ' по partNumber ' . $variant->partNumber . ', выход = '.$newLot->currency.' '.$newLot->outPrice.PHP_EOL;
                 $report->success = 1;
                 $report->description = 'поиск по partNumber ' . $variant->partNumber . ' OK';
                 self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
@@ -180,9 +180,7 @@ class EbayUpdaterHelper implements ExtensionInterface
             $variantsUpd = $variantsEntity->update($variant->variant_id, ['price_updated' => "NOW()", 'stock' => 0]);
         }
         $report->updated = "NOW()";
-
         $ebayUpdaterUpd = $ebayUpdaterEntity->add($report);
-        echo PHP_EOL.'$productsUpd: '; var_dump($productsUpd);
 
         return ['productsUpd' => $productsUpd, 'variantsUpd' => $variantsUpd, 'ebayUpdaterUpd' => $ebayUpdaterUpd, 'currencyModel' => $currencyModel];
     }
