@@ -42,6 +42,7 @@
                                 {round((($product->variant->price-$product->variant->compare_price)/$product->variant->compare_price)*100, 0)}&nbsp;%
                                 {/if}
                             </span>
+                            <span class="until" style="color: #ccc;">до субботы</span>
                         </span>
                         {if $product->special}
                             <span class="sticker sticker--special">

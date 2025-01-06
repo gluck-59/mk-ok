@@ -384,6 +384,7 @@
                         </div>
                     </div>
                     <div class="heading_label">Ebay секция</div>
+
                     <div id="ebayDetails" class="1clearfix">
                         <div class="row mb-1">
                             <div class="col-md-6">
