@@ -344,3 +344,4 @@ $lang['user_browsed_title'] = 'Products viewed';
 $lang['general_messages_success'] = 'Saved successfully';
 $lang['product_info_validate'] = 'out of stock.';
 $lang['main_popular_categories'] = 'Popular categories';
+$lang['products_for'] = 'Products for';

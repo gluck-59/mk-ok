@@ -181,7 +181,7 @@ class ProductsController extends AbstractController
             $this->design->getVar('is_all_pages'),
             $this->design->getVar('current_page_num')
         );
-
+if ($filtersUrl == 'filter-featured') $this->design->assign('isPseudoDiscount', 1);
         $this->setMetadataHelper($allProductsMetadataHelper);
 
         $this->response->setContent('products.tpl');
