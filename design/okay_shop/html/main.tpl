@@ -48,7 +48,7 @@
                             <div class="product_item swiper-slide no_hover">{include "product_list.tpl"}</div>
                         {/foreach}
                     </div>
-                    <div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div>
+                    <div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div>
                     <div class="swiper-pagination"></div>
                 </div>
             </div>
@@ -78,6 +78,7 @@
                             <div class="product_item swiper-slide no_hover">{include "product_list.tpl"}</div>
                         {/foreach}
                     </div>
+                    <div class="clearfix">&nbsp;</div><div class="clearfix">&nbsp;</div>
                     <div class="swiper-pagination"></div>
                 </div>
             </div>

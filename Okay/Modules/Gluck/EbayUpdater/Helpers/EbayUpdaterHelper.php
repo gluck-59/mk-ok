@@ -184,9 +184,9 @@ class EbayUpdaterHelper implements ExtensionInterface
             if ($priceCompare > 10) {
                 unset($toUpdateVariant);
                 $report->success = 0;
-                $report->description = 'разница цен <b>'.$priceCompare.'%</b>, только обновили дату';
+                $report->description = 'разница цен <b>'.$priceCompare.'%</b>,  дату не обновили';
 
-                $variantsUpd = $variantsEntity->update($variant->variant_id, ['price_updated' => "NOW()"]);
+//                $variantsUpd = $variantsEntity->update($variant->variant_id, ['price_updated' => "NOW()"]);
             }
 
             if (isset($toUpdateVariant)) {
