@@ -72,6 +72,7 @@ $plugins = [
         'arguments' => [
             new SR(EntityFactory::class),
             new SR(ProductsHelper::class),
+            new SR(Settings::class)
         ],
     ],
     Plugins\Convert::class => [

@@ -8,6 +8,7 @@ use Okay\Core\EntityFactory;
 use Okay\Entities\ProductsEntity;
 use Okay\Helpers\ProductsHelper;
 use Okay\Core\SmartyPlugins\Func;
+use Okay\Core\Settings;
 
 class GetDiscountedProducts extends Func
 {
@@ -25,10 +26,11 @@ class GetDiscountedProducts extends Func
 
 
 
-    public function __construct(EntityFactory $entityFactory, ProductsHelper $productsHelper)
+    public function __construct(EntityFactory $entityFactory, ProductsHelper $productsHelper, Settings $settings)
     {
         $this->productsEntity = $entityFactory->get(ProductsEntity::class);
         $this->productsHelper = $productsHelper;
+        $this->settings = $settings;
     }
 
     public function run($params, \Smarty_Internal_Template $smarty)
@@ -37,21 +39,12 @@ class GetDiscountedProducts extends Func
             $params['visible'] = 1;
         }
         $params['discounted'] = 1;
+        $params['isPseudoDiscount'] = 1;
+
         if (!empty($params['var'])) {
             $sort = isset($params['sort']) ? $params['sort'] : null;
+            $params['pseudoDiscountIds'] = explode(',', $this->settings->get('pseudoDiscountProducts'));
             $products = $this->productsHelper->getList($params, $sort); // ориг
-
-
-/** сюда нужно как-то пробросить возможность прочитать Settings pseudoDiscountProducts */
-
-//$sql = $this->queryFactory->newSqlQuery();
-//$sql->setStatement("SELECT value FROM ok_settings_lang WHERE raram = 'pseudoDiscountProducts' AND lang = 1");
-//
-//$this->db->query($sql);
-//
-//$a = $this->getResults();
-//prettyDump($a);
-//            $products = $this->productsHelper->getList(['id' => [100,200], $sort);
 
             $smarty->assign($params['var'], $products);
         }
