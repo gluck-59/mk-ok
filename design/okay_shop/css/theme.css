@@ -3127,6 +3127,8 @@ a.filter__catalog_link svg {
 }
 .details_boxed_pct.until {
   left: 40px;
+  top: 0;
+  width: 100px;
   background: none;
   color: #ccc;
   text-align: left;

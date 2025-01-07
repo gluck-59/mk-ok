@@ -219,8 +219,8 @@
                                         {if $product->variant->price>0 && $product->variant->compare_price>0 && $product->variant->compare_price>$product->variant->price}
                                         {round((($product->variant->price-$product->variant->compare_price)/$product->variant->compare_price)*100, 0)}&nbsp;%
                                         {/if}
+                                        <span class="fn_discount_label details_boxed_pct until">до субботы</span>
                                     </span>
-                                    <span class="fn_discount_label details_boxed_pct until">до субботы</span>
                                 </div>
 
                                 {* Quantity *}

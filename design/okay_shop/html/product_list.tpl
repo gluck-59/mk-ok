@@ -132,7 +132,7 @@
                     <div class="dropDownSelect2"></div>
                 </div>
             </form>
-            {if $controller != "MainController"}
+            {if 1 || $controller != "MainController"}
                 <div class="product_preview__annotation">
                     {if $product->manufacturer_id}
                         Производство: {$manufacturers[$product->manufacturer_id]->name_h1|escape}
