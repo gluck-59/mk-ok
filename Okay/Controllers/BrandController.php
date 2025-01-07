@@ -14,12 +14,14 @@ use Okay\Helpers\FilterHelper;
 use Okay\Helpers\MetadataHelpers\BrandMetadataHelper;
 use Okay\Helpers\MetaRobotsHelper;
 use Okay\Helpers\ProductsHelper;
+use Okay\Entities\ManufacturersEntity;
 
 class BrandController extends AbstractController
 {
     /*Отображение страницы бренда*/
     public function render(
         BrandsEntity        $brandsEntity,
+        ManufacturersEntity $manufacturersEntity,
         CatalogHelper       $catalogHelper,
         ProductsHelper      $productsHelper,
         ProductsEntity      $productsEntity,
@@ -207,6 +209,13 @@ class BrandController extends AbstractController
 
         );
         $this->setMetadataHelper($brandMetadataHelper);
+
+        $catalogManufacturers = $manufacturersEntity->mappedBy('id')->find([
+//            'category_id' => $category->children,
+            'visible' => 1,
+            'product_visible' => 1,
+        ]);
+        $this->design->assign('manufacturers', $catalogManufacturers);
         
         $this->response->setContent('products.tpl');
     }
