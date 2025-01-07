@@ -103,8 +103,8 @@ class ManufacturersEntity extends Entity
         }
 
         if (in_array("discounted", $filters)) {
-//            $otherFilter[] = '(SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND pv.compare_price>pv.price LIMIT 1) = 1'; // ориг
-            $otherFilter[] = '(SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND p.id IN ('.$this->settings->get('pseudoDiscountProducts').') LIMIT 1) = 1';
+            $otherFilter[] = '(SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND pv.compare_price>pv.price LIMIT 1) = 1'; // ориг
+//            $otherFilter[] = '(SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND p.id IN ('.$this->settings->get('pseudoDiscountProducts').') LIMIT 1) = 1';
         }
 
         return ExtenderFacade::execute([static::class, __FUNCTION__], $otherFilter, func_get_args());

@@ -800,12 +800,14 @@ class ProductsEntity extends Entity implements RelatedProductsInterface
 
     protected function filter__discounted($state)
     {
-//        $this->select->where('(SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND pv.compare_price>pv.price LIMIT 1) = :discounted')
-//            ->bindValue('discounted', (int)$state); // ориг
-//
-///
-        $this->select->where('(SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND p.id IN ('.$this->settings->get('pseudoDiscountProducts').') LIMIT 1) = :discounted')
-            ->bindValue('discounted', (int)$state); // ориг
+        // если поле pseudoDiscountProducts не пусто, берем ID товаров для псевдо-скидок /*@TODO проконтролировать содержимое поля
+        if ($this->settings->get('pseudoDiscountProducts')) {
+            $this->select->where('(SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND p.id IN ('.$this->settings->get('pseudoDiscountProducts').') LIMIT 1) = :discounted')
+            ->bindValue('discounted', (int)$state);
+        } else {
+            $this->select->where('(SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND pv.compare_price>pv.price LIMIT 1) = :discounted')
+                ->bindValue('discounted', (int)$state); // ориг
+        }
     }
     
     protected function filter__other_filter($filters)
