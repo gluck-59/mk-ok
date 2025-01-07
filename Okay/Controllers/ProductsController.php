@@ -8,6 +8,7 @@ use Okay\Core\Image;
 use Okay\Core\Money;
 use Okay\Core\Response;
 use Okay\Core\Router;
+use Okay\Entities\ManufacturersEntity;
 use Okay\Entities\ProductsEntity;
 use Okay\Helpers\CanonicalHelper;
 use Okay\Helpers\CatalogHelper;
@@ -22,6 +23,7 @@ class ProductsController extends AbstractController
         CatalogHelper             $catalogHelper,
         ProductsHelper            $productsHelper,
         ProductsEntity            $productsEntity,
+        ManufacturersEntity       $manufacturersEntity,
         FilterHelper              $filterHelper,
         AllProductsMetadataHelper $allProductsMetadataHelper,
         CanonicalHelper           $canonicalHelper,
@@ -184,6 +186,14 @@ class ProductsController extends AbstractController
 //if ($filtersUrl == 'filter-featured') {
 //    $this->design->assign('isPseudoDiscount', 1);
 //}
+
+        $catalogManufacturers = $manufacturersEntity->mappedBy('id')->find([
+//            'category_id' => $category->children,
+            'visible' => 1,
+            'product_visible' => 1,
+        ]);
+
+        $this->design->assign('manufacturers', $catalogManufacturers);
         $this->setMetadataHelper($allProductsMetadataHelper);
 
         $this->response->setContent('products.tpl');
