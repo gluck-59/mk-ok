@@ -31,12 +31,14 @@
                         </div>
                     {/if}
 
-                    {if $product->featured || $product->special || ($product->variant->price>0 && $product->variant->compare_price>0 && $product->variant->compare_price>$product->variant->price)}
+{*                    {if $product->featured || $product->special || ($product->variant->price>0 && $product->variant->compare_price>0 && $product->variant->compare_price>$product->variant->price)} *}{* ориг *}
+                    {if $product->featured || $product->special || 1}
                     <div class="stickers">
                         {if $product->featured}
                         <span class="sticker sticker--hit" data-language="product_sticker_hit">{$lang->product_sticker_hit}</span>
                         {/if}
-                        <span class="fn_discount_label {if $product->variant->price>0 && $product->variant->compare_price>0 && $product->variant->compare_price>$product->variant->price}{else} hidden{/if}">
+{*                        <span class="fn_discount_label {if $product->variant->price>0 && $product->variant->compare_price>0 && $product->variant->compare_price>$product->variant->price}{else} hidden{/if}"> *}{* ориг *}
+                        <span class="fn_discount_label {if 0}{else} hidden{/if}">
                             <span class="sticker sticker--discount">
                                 {if $product->variant->price>0 && $product->variant->compare_price>0 && $product->variant->compare_price>$product->variant->price}
                                 {round((($product->variant->price-$product->variant->compare_price)/$product->variant->compare_price)*100, 0)}&nbsp;%

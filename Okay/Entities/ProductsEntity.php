@@ -71,7 +71,7 @@ class ProductsEntity extends Entity implements RelatedProductsInterface
     public function find(array $filter = [])
     {
         $this->select->leftJoin(RouterCacheEntity::getTable() . ' AS r', 'r.url=p.url AND r.type="product"');
-        
+
         return parent::find($filter);
     }
     
@@ -800,8 +800,12 @@ class ProductsEntity extends Entity implements RelatedProductsInterface
 
     protected function filter__discounted($state)
     {
-        $this->select->where('(SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND pv.compare_price>pv.price LIMIT 1) = :discounted')
-            ->bindValue('discounted', (int)$state);
+//        $this->select->where('(SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND pv.compare_price>pv.price LIMIT 1) = :discounted')
+//            ->bindValue('discounted', (int)$state); // ориг
+//
+///
+        $this->select->where('(SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND p.id IN ('.$this->settings->get('pseudoDiscountProducts').') LIMIT 1) = :discounted')
+            ->bindValue('discounted', (int)$state); // ориг
     }
     
     protected function filter__other_filter($filters)
@@ -823,7 +827,8 @@ class ProductsEntity extends Entity implements RelatedProductsInterface
         }
 
         if (in_array("discounted", $filters)) {
-            $otherFilter[] = "(SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND pv.compare_price>pv.price LIMIT 1) = 1";
+//            $otherFilter[] = "(SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND pv.compare_price>pv.price LIMIT 1) = 1"; // ориг
+            $otherFilter[] = '(SELECT 1 FROM __variants pv WHERE pv.product_id=p.id AND p.id IN ('.$this->settings->get('pseudoDiscountProducts').') LIMIT 1) = 1';
         }
 
         return ExtenderFacade::execute([static::class, __FUNCTION__], $otherFilter, func_get_args());

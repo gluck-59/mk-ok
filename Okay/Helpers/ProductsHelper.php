@@ -138,9 +138,11 @@ class ProductsHelper implements GetListInterface
         $productsEntity->order($sortName, $this->getOrderProductsAdditionalData());
 
 
-        if ($filter['isPseudoDiscount']) {
+        if (0 && $filter['isPseudoDiscount']) {
             $products = $productsEntity->mappedBy('id')->find(['id' => $filter['pseudoDiscountIds']]);
-        } else $products = $productsEntity->mappedBy('id')->find($filter);
+        } else {
+            $products = $productsEntity->mappedBy('id')->find($filter);
+        }
 
         if (empty($products)) {
             return ExtenderFacade::execute(__METHOD__, [], func_get_args());

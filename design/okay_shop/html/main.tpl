@@ -65,11 +65,11 @@
                 <div class="block__title">
                     <span data-language="main_discount_products">{$lang->main_discount_products}</span>
                 </div>
-{*                <div class="block__header_button">*}
-{*                    <a class="block__more d-flex align-items-center" href="{url_generator route='products' filtersUrl=['filter' => ['discounted']]}">*}
-{*                        <span data-language="main_look_all">{$lang->main_look_all} </span>{include file="svg.tpl" svgId="arrow_right2"}*}
-{*                    </a>*}
-{*                </div>*}
+                <div class="block__header_button">
+                    <a class="block__more d-flex align-items-center" href="{url_generator route='products' filtersUrl=['filter' => ['discounted']]}">
+                        <span data-language="main_look_all">{$lang->main_look_all} </span>{include file="svg.tpl" svgId="arrow_right2"}
+                    </a>
+                </div>
             </div>
             <div class="block__body">
                 <div class="fn_products_slide products_list row no_gutters swiper-container">
