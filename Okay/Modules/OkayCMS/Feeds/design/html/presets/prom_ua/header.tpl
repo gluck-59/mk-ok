@@ -9,7 +9,7 @@
         {foreach $allCategories as $category}
             <item turbo="true">
                 <title>{$category->name}</title>
-                <link>https://motokofr.com</link>
+                <link>https://motokofr.com/catalog/{$category->url}</link>
                 <turbo:content>
                     <![CDATA[
                     <header>
@@ -23,7 +23,7 @@
                     <p>
                         {foreach $allBrands as $brand}
                             <span>
-                                <a href="https://motokofr.com/catalog/{{$category->url}}/brand-{$brand->url}">{$brand->name|escape}</a>
+                                <a href="https://motokofr.com/catalog/{$category->url}/brand-{$brand->url}">{$brand->name|escape}</a>
                             </span> |
                         {/foreach}
                     </p>
