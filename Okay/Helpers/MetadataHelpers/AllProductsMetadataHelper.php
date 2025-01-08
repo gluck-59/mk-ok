@@ -47,7 +47,8 @@ class AllProductsMetadataHelper extends CommonMetadataHelper
         if ($this->keyword) {
             /** @var FrontTranslations $translations */
             $translations = $this->SL->getService(FrontTranslations::class);
-            $h1 = $translations->getTranslation('general_search') . ' ' . $this->keyword;
+//            $h1 = $translations->getTranslation('general_search') . ' ' . $this->keyword; // ориг
+            $h1 = $translations->getTranslation('general_search');
         } else {
             $h1 = parent::getH1Template();
         }

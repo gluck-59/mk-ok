@@ -227,10 +227,17 @@ class ProductsController extends AbstractController
             }
         }
 
+        if (sizeof($suggestions) >= $filter['limit']) {
+            $suggestions[] = [
+                'value' => 'Первые '.$filter['limit'].' ништяков. Искать все &rarr;',
+                'currency' => '',
+                'price' => '',
+                'data' => ['url' => '/all-products?keyword='.$filter['keyword']]
+            ];
+        }
         $res = new \stdClass;
         $res->query = $filter['keyword'];
         $res->suggestions = $suggestions;
-
         $this->response->setContent(json_encode($res), RESPONSE_JSON);
     }
 

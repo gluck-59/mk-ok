@@ -130,7 +130,7 @@
                 <div class="view_info_visited__item">
                     <div class="view_info_visited__inner">
                         <div class="view_info_visited__left">
-                            <a href="{url status=$s->id}" class="view_info_visited__status" style="color: #{$s->color|escape};">{$s->name|escape}</a>
+                            <a href="{url status=$s->id}" class="view_info_visited__status" style="background-color: #{$s->color|escape}; padding: 0 5px;">{$s->name|escape}</a>
                             <div class="view_info_visited__percent">{round($ordersCount->count / $count_orders_for_statuses * 100, 1)}%</div>
                         </div>
                         <div class="view_info_visited__right">
@@ -242,7 +242,7 @@
                                     </div>
 
                                     <div class="okay_list_boding okay_list_order_number">
-                                        <a class="text_600 mb-h" href="{url controller=OrderAdmin id=$order->id return=$smarty.server.REQUEST_URI}" style="text-decoration: underline;">{$btr->orders_order|escape} #{$order->id}</a>
+                                        <a class="text_600 mb-h" href="{url controller=OrderAdmin id=$order->id return=$smarty.server.REQUEST_URI}" style="text-decoration: underline;">{$order->id}</a>
                                         {if $order->last_update}
                                             <span class="tag tag-update fn_history_toggle">{$btr->order_history_changed} {$order->last_update->date|date} {$order->last_update->date|time} <i class="fn_icon_arrow fa fa-angle-down fa-lg m-t-2 "></i></span>
                                         {else}

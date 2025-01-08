@@ -350,3 +350,4 @@ $lang['general_messages_success'] = 'Успешно сохранено';
 $lang['product_info_validate'] = 'отсутствует в наличии.';
 $lang['main_popular_categories'] = 'Популярные категории';
 $lang['products_for'] = 'Ништяки для';
+$lang['general_search'] = 'Вот что нашлось';
