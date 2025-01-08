@@ -26,30 +26,34 @@ return [
                         'backend_adapter' => BackendGoogleMerchantAdapter::class,
                         'frontend_adapter' => GoogleMerchantAdapter::class
                     ],
-                    'Hotline' => [
-                        'backend_adapter' => BackendHotlineAdapter::class,
-                        'frontend_adapter' => HotlineAdapter::class
-                    ],
-                    'Rozetka' => [
-                        'backend_adapter' => BackendRozetkaAdapter::class,
-                        'frontend_adapter' => RozetkaAdapter::class
-                    ],
                     'YML' => [
                         'backend_adapter' => BackendYmlAdapter::class,
                         'frontend_adapter' => YmlAdapter::class
                     ],
+                    'RSS-Turbo' => [
+                        'backend_adapter' => BackendPromUaAdapter::class,
+                        'frontend_adapter' => PromUaAdapter::class
+                    ],
+                    'Hotline' => [
+                        'backend_adapter' => BackendHotlineAdapter::class,
+                        'frontend_adapter' => HotlineAdapter::class
+                    ],
+//                    'Rozetka' => [
+//                        'backend_adapter' => BackendRozetkaAdapter::class,
+//                        'frontend_adapter' => RozetkaAdapter::class
+//                    ],
                     'Facebook' => [
                         'backend_adapter' => BackendFacebookAdapter::class,
                         'frontend_adapter' => FacebookAdapter::class
                     ],
-                    'Price.ua' => [
-                        'backend_adapter' => BackendPriceUaAdapter::class,
-                        'frontend_adapter' => PriceUaAdapter::class
-                    ],
-                    'Prom.ua' => [
-                        'backend_adapter' => BackendPromUaAdapter::class,
-                        'frontend_adapter' => PromUaAdapter::class
-                    ],
+//                    'Price.ua' => [
+//                        'backend_adapter' => BackendPriceUaAdapter::class,
+//                        'frontend_adapter' => PriceUaAdapter::class
+//                    ],
+//                    'Prom.ua' => [
+//                        'backend_adapter' => BackendPromUaAdapter::class,
+//                        'frontend_adapter' => PromUaAdapter::class
+//                    ],
                 ]
             ]
         ]

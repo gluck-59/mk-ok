@@ -1,2 +1,2 @@
-    </items>
-</shop>
+    </channel>
+</rss>
