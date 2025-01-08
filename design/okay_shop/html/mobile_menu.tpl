@@ -144,11 +144,11 @@
 
 {/foreach}
 {/if}
-{if $settings->site_email}
+{if $settings->order_email}
 <ul>
     <li>
-        <a class="email icon icon-mail-outline" href="mailto:{$settings->site_email|escape}">
-            <span>{$settings->site_email|escape}</span>
+        <a class="email icon icon-mail-outline" href="mailto:{$settings->order_email|escape}">
+            <span>{$settings->order_email|escape}</span>
         </a>
     </li>
 </ul>

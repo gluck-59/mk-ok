@@ -78,9 +78,9 @@
                                     </div>
                                 {/foreach}
                             {/if}
-                            {if $settings->site_email}
+                            {if $settings->order_email}
                                 <div class="header-contact__item header-contact--email {if !$settings->site_phones} header-contact__item--visible{/if}">
-                                    <a class="d-flex align-items-center header-contact__section" href="mailto:{$settings->site_email|escape}" >
+                                    <a class="d-flex align-items-center header-contact__section" href="mailto:{$settings->order_email|escape}" >
                                         {include file="svg.tpl" svgId="email_icon"}
                                         <span>Email</span>
                                     </a>
@@ -211,9 +211,9 @@
                                 </div>
                             {/foreach}
                         {/if}
-                        {if $settings->site_email}
+                        {if $settings->order_email}
                             <div class="footer__contact_item">
-                                <a class="d-flex align-items-start email " href="mailto:{$settings->site_email|escape}">
+                                <a class="d-flex align-items-start email " href="mailto:{$settings->order_email|escape}">
                                     {include file="svg.tpl" svgId="email_icon"}
 {*                                    <span>{$settings->site_email|escape}</span>*}
                                     <span>Email</span>
