@@ -2397,7 +2397,7 @@ a.filter__catalog_link svg {
   background-image: linear-gradient(
     to right,
     rgba(255, 255, 255, 0),
-    rgb(255, 255, 255) 40%,
+    rgb(255, 255, 255) 90%,
     rgb(255, 255, 255)
   );
 }

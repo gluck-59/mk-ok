@@ -1449,7 +1449,6 @@ $lang['order_match_by_phone'] = 'Телефон';
 $lang['order_match_by_email_and_phone'] = 'По номеру телефоне и электронной почте почте';
 $lang['order_match_by_unknown'] = 'Неизвестно';
 $lang['order_match_orders'] = 'Другие заказы клиента';
-$lang['order_history_changed_on'] = 'Изменён на';
 $lang['order_history_changed'] = 'Изменён';
 $lang['order_history_created'] = 'Создан';
 $lang['order_history_add'] = 'Добавил';

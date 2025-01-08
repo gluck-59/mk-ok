@@ -364,7 +364,7 @@
                                                 {foreach $order->shipping_number as $track}
                                                     <a href="https://www.pochta.ru/tracking?barcode={$track}" target="_blank">{$track}&nbsp;<i class="fa fa-external-link"></i></a><br>
                                                 {/foreach}
-                                            {else}ожидаем трек-номер
+                                            {else}ожидаем
                                             {/if}</td>
                                     </tr>
                                 </table>

@@ -57,7 +57,7 @@
 {/if}
 
 {* Discount products *}
-{get_discounted_products var=discounted_products limit=5}
+{get_discounted_products var=discounted_products limit=10}
 {if $discounted_products}
     <div class="main-products main-products__sale container">
         <div class="block block--boxed block--border">

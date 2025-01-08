@@ -49,7 +49,6 @@
             </div>
         </div>
     {/if}
-
     {if $order_history}
         {foreach $order_history as $history_item}
             {if $history_item->new_status_id}
@@ -58,7 +57,7 @@
                     <div class="order_history__content">
                         <div class="order_history__title">
                             <span>{$btr->order_history_changed_on}</span>
-                            <span style="color: #{$all_status[$history_item->new_status_id]->color};">{$all_status[$history_item->new_status_id]->name|escape}</span>
+                            <span style="background-color: #{$all_status[$history_item->new_status_id]->color};padding: 10px;">«{$all_status[$history_item->new_status_id]->name|escape}»</span>
                             <span class="tag tag-chanel_unknown">{$history_item->date|date} | {$history_item->date|time}</span>
                             <span>{$btr->order_history_by_manager|escape}</span>
                             <span>{$history_item->manager_name|escape}</span>
@@ -76,7 +75,7 @@
                             <span>{$btr->order_history_by_manager|escape}</span>
                             <span>{$history_item->manager_name|escape}</span>
                         </div>
-                        <div class="boxed boxed--grey">
+                        <div class="boxed boxed--notify">
                             <div class="boxed__content">
                                 {$history_item->text}
                             </div>

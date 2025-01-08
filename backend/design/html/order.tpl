@@ -529,19 +529,53 @@
                         {if $user}
                             <div class="mb-1">
                                 <div class="heading_label">Данные из профиля</div>
-                                <input name="" class="form-control" type="text" value="{$user->name|escape}{if $user->last_name} {$user->last_name|escape}{/if}" placeholder="имя-фамилия"/>
-                                <input name="" class="form-control" type="text" value="{$user->postal_index}{if $user->address} {$user->address}{/if}" placeholder="индекс-адрес"/>
-                                <input name="phone" class="form-control" type="text" value="{$user->phone|phone}" placeholder="тел"/>
-                                <input name="email" class="form-control" type="text" value="{$user->email|escape}" placeholder="email"/>
+                                <div class="row mb-1">
+                                    <div class="col-md-6">
+                                        <input name="name" class="form-control" type="text" value="{$user->name|escape}"/>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input name="last_name" class="form-control" type="text" value="{$user->last_name|escape}"/>
+                                    </div>
+                                </div>
+                                <div class="row mb-1">
+                                    <div class="col-md-12">
+                                        <input name="address" class="form-control" type="text" value="{$user->postal_index}{if $user->address} {$user->address}{/if}" placeholder="индекс-адрес"/>
+                                    </div>
+                                </div>
+                                <div class="row mb-1">
+                                    <div class="col-md-6">
+                                        <input name="phone" class="form-control" type="text" value="{$user->phone|phone}" placeholder="тел"/>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input name="email" class="form-control" type="text" value="{$user->email|escape}" placeholder="email"/>
+                                    </div>
+                                </div>
                                 <a href="/backend/index.php?controller=UserAdmin&id={$user->id}" target="_blank">Редактировать профиль</a>
                             </div>
                         {else}
                             <div class="mb-1">
-                                <div class="heading_label"><b>Данные из заказа (заказ без профиля)</b></div>
-                                <input name="" class="form-control" type="text" value="{$order->name|escape} {$order->last_name|escape}" />
-                                <input name="" class="form-control" type="text" value="{$order->address}" />
-                                <input name="phone" class="form-control" type="text" value="{$order->phone|phone}" />
-                                <input name="email" class="form-control" type="text" value="{$order->email|escape}" />
+                                <div class="heading_label" style="background-color: #fca; padding: 5px">Данные из заказа (заказ без профиля)</div>
+                                <div class="row mb-1">
+                                    <div class="col-md-6">
+                                        <input name="name" class="form-control" type="text" value="{$order->name|escape}"/>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input name="last_name" class="form-control" type="text" value="{$order->last_name|escape}"/>
+                                    </div>
+                                </div>
+                                <div class="row mb-1">
+                                    <div class="col-md-12">
+                                        <input name="address" class="form-control" type="text" value="{$order->address}" />
+                                    </div>
+                                </div>
+                                <div class="row mb-1">
+                                    <div class="col-md-6">
+                                        <input name="phone" class="form-control" type="text" value="{$order->phone|phone}" />
+                                    </div>
+                                    <div class="col-md-6">
+                                        <input name="email" class="form-control" type="text" value="{$order->email|escape}" />
+                                    </div>
+                                </div>
                             </div>
                         {/if}
                         <div class="mb-1">
