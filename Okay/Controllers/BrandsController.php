@@ -102,6 +102,10 @@ class BrandsController extends AbstractController
 
         $this->design->assign('brands', $brands);
 
+//if ($filtersUrl == 'filter-discounted') {
+//    $this->design->assign('isPseudoDiscount', 1);
+//}
+
         if ($this->request->get('ajax','boolean')) {
             $this->design->assign('ajax', 1);
             $result = $brandsHelper->getBrandsAjaxFilterData();

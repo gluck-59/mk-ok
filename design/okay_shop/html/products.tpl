@@ -52,18 +52,39 @@
             {include file='browsed_products.tpl'}
         </div>
     </div>
+{*{debug}*}
+{*<pre>{$brands.{$selected_catalog_brands_ids.0}->name|print_r}</pre>*}
 
     <div class="products_container d-flex flex-column">
         <div class="products_container__boxed">
-            <h1 class="h1"
-                    {if $category} data-category="{$category->id}"{/if}{if $brand} data-brand="{$brand->id}"{/if}
-            >
-                {if $brand}
-                    {$lang->products_for}
+            <h1 class="h1" {if $category} data-category="{$category->id}"{/if}{if $brand} data-brand="{$brand->id}"{/if}>
+                {if $category}
+{*                    1*}
+                    {$category->name}
                 {/if}
-                {if $isPseudoDiscount}
-                    {$lang->main_recommended_products}
-                {else}
+                {if $brand OR in_array('brand', $selected_catalog_other_filters)}
+{*                    2*}
+                    {$lang->products_for} {$brand->name}
+                {elseif !$category}
+{*                    2a*}
+                    {$lang->products}
+                {/if}
+                {if !$brand AND $filtersUrl|strstr:"brand"}
+{*                    3*}
+                    для {$brands.{$selected_catalog_brands_ids.0}->name}
+                {/if}
+                {if $isPseudoDiscount OR in_array('discounted', $selected_catalog_other_filters)}
+{*                    4*}
+                    {$lang->features_filter_discounted_lowcase}
+                {/if}
+
+                {if !$category
+                    AND !$brand
+                    AND (!in_array('brand', $selected_catalog_other_filters) OR !$filtersUrl|strstr:"brand")
+                    AND !$isPseudoDiscount
+                    AND !in_array('discounted', $selected_catalog_other_filters)
+                }
+{*                    0*}
                     {$h1|escape}
                 {/if}
             </h1>

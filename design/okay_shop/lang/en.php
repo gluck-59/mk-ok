@@ -346,3 +346,4 @@ $lang['product_info_validate'] = 'out of stock.';
 $lang['main_popular_categories'] = 'Popular categories';
 $lang['products_for'] = 'Products for';
 $lang['general_search'] = 'Search';
+$lang['products'] = 'Products';
