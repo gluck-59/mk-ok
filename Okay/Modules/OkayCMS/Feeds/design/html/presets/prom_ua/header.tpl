@@ -56,5 +56,3 @@
                 </turbo:content>
             </item>
         {/foreach}
-    </channel>
-</rss>

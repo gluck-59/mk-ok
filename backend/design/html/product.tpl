@@ -9,8 +9,7 @@
 {/if}
 
 {*<pre>*}
-{*{$brands[0]|print_r}*}
-{*{$manufacturers[0]|print_r}*}
+{*{$smarty.now|print_r}*}
 {*</pre>*}
 
 {*Название страницы*}
@@ -460,6 +459,7 @@
                                         <div class="okay_list_boding variants_item_name">
                                             <div class="heading_label">{$btr->general_option_name|escape} {if $variant->price_updated}<span style="float: right;">Ebay upd. {$variant->price_updated|date_format:'%d.%m.%Y в %H:%M'}</span>{/if}</div>
                                             <input name="variants[id][]" type="hidden" value="{$variant->id|escape}" />
+<input name="variants[price_updated][]" type="hidden" value="NOW()" />
                                             <input class="variant_input" name="variants[name][]" type="text" value="{$variant->name|escape}" />
                                         </div>
                                         <div class="okay_list_boding variants_item_discount">
@@ -533,6 +533,7 @@
                                     <div class="okay_list_boding variants_item_name">
                                         <div class="heading_label">{$btr->general_option_name|escape} {if $variant->price_updated}<span style="float: right;">Ebay upd. {$variant->price_updated|date_format:'%d.%m.%Y в %H:%M'}</span>{/if}</div>
                                         <input name="variants[id][]" type="hidden" value="" />
+<input name="variants[price_updated][]" type="hidden" value="NOW()" />
                                         <input class="variant_input" name="variants[name][]" type="text" value="" />
                                     </div>
                                     <div class="okay_list_boding variants_item_discount">

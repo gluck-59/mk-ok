@@ -850,10 +850,10 @@ $(function () {
     });
   }
 
-  /* Автозаполнитель поиска */
+  /* Автозаполнитель поиска suggestion */
   $(".fn_search").devbridgeAutocomplete({
     serviceUrl: okay.router["ajax_search"],
-    minChars: 1,
+    minChars: 3,
     appendTo: "#fn_search",
     maxHeight: 320,
     noCache: true,

@@ -35,12 +35,6 @@ class PromUaAdapter extends AbstractPresetAdapter
     /** @var string */
     static protected $footerTemplate = 'presets/prom_ua/footer.tpl';
 
-    private $uaLang;
-
-    private string $siteNameUa;
-    private array $allCategoriesUa;
-    private object $defaultProductsSeoPatternUa;
-
     public function __construct(
         Money            $money,
         Design           $design,
@@ -96,6 +90,7 @@ class PromUaAdapter extends AbstractPresetAdapter
         $this->response->setContentType(RESPONSE_XML);
         $this->response->sendHeaders();
         $this->response->sendStream($this->design->fetch($this->getHeaderTemplate()));
+        $this->response->sendStream($this->design->fetch($this->getFooterTemplate()));
     }
 
 
