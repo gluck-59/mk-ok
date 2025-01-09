@@ -53,25 +53,34 @@
         </div>
     </div>
 {*{debug}*}
-{*<pre>{$brands.{$selected_catalog_brands_ids.0}->name|print_r}</pre>*}
+{*<pre>{$selected_catalog_brands_ids|print_r}</pre>*}
 
     <div class="products_container d-flex flex-column">
         <div class="products_container__boxed">
             <h1 class="h1" {if $category} data-category="{$category->id}"{/if}{if $brand} data-brand="{$brand->id}"{/if}>
                 {if $category}
-{*                    1*}
+{*                    1a*}
                     {$category->name}
+                {else}
+{*                    1b*}
+                    {$lang->products}
                 {/if}
                 {if $brand OR in_array('brand', $selected_catalog_other_filters)}
 {*                    2*}
-                    {$lang->products_for} {$brand->name}
-                {elseif !$category}
+{*                    {$lang->products_for}*}
+                    для {$brand->name}
+                {elseif !$category AND $brand OR in_array('brand', $selected_catalog_other_filters)}
 {*                    2a*}
                     {$lang->products}
                 {/if}
                 {if !$brand AND $filtersUrl|strstr:"brand"}
 {*                    3*}
-                    для {$brands.{$selected_catalog_brands_ids.0}->name}
+                    {if $brands AND $selected_catalog_brands_ids}
+                        {foreach $selected_catalog_brands_ids as $id}
+                            {append var="brand_to_show" value=$brands.$id->name}
+                        {/foreach}
+                    {/if}
+                    для {', '|implode:$brand_to_show}
                 {/if}
                 {if $isPseudoDiscount OR in_array('discounted', $selected_catalog_other_filters)}
 {*                    4*}
@@ -84,7 +93,7 @@
                     AND !$isPseudoDiscount
                     AND !in_array('discounted', $selected_catalog_other_filters)
                 }
-{*                    0*}
+                    0
                     {$h1|escape}
                 {/if}
             </h1>
