@@ -230,7 +230,7 @@ if ($filtersUrl == 'filter-discounted') {
 
         if (sizeof($suggestions) >= $filter['limit']) {
             $suggestions[] = [
-                'value' => 'Первые '.$filter['limit'].' ништяков. Искать все &rarr;',
+                'value' => 'Здесь только первые '.$filter['limit'].' ништяков. Смотреть все &rarr;',
                 'currency' => '',
                 'price' => '',
                 'data' => ['url' => '/all-products?keyword='.$filter['keyword']]

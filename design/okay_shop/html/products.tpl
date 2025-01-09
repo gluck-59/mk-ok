@@ -53,7 +53,7 @@
         </div>
     </div>
 {*{debug}*}
-{*<pre>{$lang->products_for|cat:" +JOPA"}</pre>*}
+{*<pre>{$keyword|print_r}</pre>*}
 
     <div class="products_container d-flex flex-column">
         <div class="products_container__boxed">
@@ -64,7 +64,11 @@
                     {$myH1|cat:$category->name}
                 {else}
 {*                    1b*}
-                    {$myH1|cat:$lang->products}
+                    {if $keyword}
+                        {$lang->general_search|escape}
+                    {else}
+                        {$myH1|cat:$lang->products}
+                    {/if}
                 {/if}
                 {if $brand OR in_array('brand', $selected_catalog_other_filters)}
 {*                    2*}
@@ -92,6 +96,7 @@
                     AND (!in_array('brand', $selected_catalog_other_filters) OR !$filtersUrl|strstr:"brand")
                     AND !$isPseudoDiscount
                     AND !in_array('discounted', $selected_catalog_other_filters)
+                    AND !$keyword
                 }
 {*                    0*}
                     {$h1|escape}
