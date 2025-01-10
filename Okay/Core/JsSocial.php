@@ -32,6 +32,7 @@ class JsSocial
         "line",
         "odnoklassniki",
         "vkontakte",
+        "reformal",
     ];
     
     private $customJsSocials = [

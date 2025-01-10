@@ -308,6 +308,9 @@
                                     <i class="fa fa-{$social.domain|escape}"></i>
                                 </a>
                             {/foreach}
+                            <a href="https://motokofr.reformal.ru/" target="_blank">
+                                <img src="files/images/reformal-logo.svg" style="">
+                            </a>
                         </div>
                     {/if}
                 </div>
