@@ -528,26 +528,26 @@
                         {/if}
                         {if $user}
                             <div class="mb-1">
-                                <div class="heading_label">Данные из профиля</div>
+                                <div class="heading_label">Данные из профиля (редакт. через профиль)</div>
                                 <div class="row mb-1">
                                     <div class="col-md-6">
-                                        <input name="name" class="form-control" type="text" value="{$user->name|escape}"/>
+                                        <input disabled name="name" class="form-control" type="text" value="{$user->name|escape}"/>
                                     </div>
                                     <div class="col-md-6">
-                                        <input name="last_name" class="form-control" type="text" value="{$user->last_name|escape}"/>
+                                        <input disabled name="last_name" class="form-control" type="text" value="{$user->last_name|escape}"/>
                                     </div>
                                 </div>
                                 <div class="row mb-1">
                                     <div class="col-md-12">
-                                        <input name="address" class="form-control" type="text" value="{$user->postal_index}{if $user->address} {$user->address}{/if}" placeholder="индекс-адрес"/>
+                                        <input disabled name="address" class="form-control" type="text" value="{$user->postal_index}{if $user->address} {$user->address}{/if}" placeholder="индекс-адрес"/>
                                     </div>
                                 </div>
                                 <div class="row mb-1">
                                     <div class="col-md-6">
-                                        <input name="phone" class="form-control" type="text" value="{$user->phone|phone}" placeholder="тел"/>
+                                        <input disabled name="phone" class="form-control" type="text" value="{$user->phone|phone}" placeholder="тел"/>
                                     </div>
                                     <div class="col-md-6">
-                                        <input name="email" class="form-control" type="text" value="{$user->email|escape}" placeholder="email"/>
+                                        <input disabled name="email" class="form-control" type="text" value="{$user->email|escape}" placeholder="email"/>
                                     </div>
                                 </div>
                                 <a href="/backend/index.php?controller=UserAdmin&id={$user->id}" target="_blank">Редактировать профиль</a>

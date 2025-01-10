@@ -23,6 +23,7 @@ class CartRequest
         $order->delivery_id = $this->request->post('delivery_id', 'integer');
         $order->name        = $this->request->post('name');
         $order->last_name   = $this->request->post('last_name');
+        $order->address     = $this->request->post('postal_index'). ' '.$this->request->post('address');
         $order->email       = $this->request->post('email');
         $order->phone       = $this->request->post('phone');
         $order->comment     = $this->request->post('comment');
