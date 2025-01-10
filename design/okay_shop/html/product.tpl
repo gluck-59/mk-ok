@@ -583,9 +583,9 @@
 {if $related_products}
     <div class="block block--boxed block--border">
         <div class="block__header">
-            <div class="block__title">
+            <h2 class="block__title">
                 <span data-language="product_recommended_products">{$lang->product_recommended_products}</span>
-            </div>
+            </h2>
         </div>
 
         <div class="block__body">
@@ -603,9 +603,9 @@
 {if $related_posts}
     <div class="block block--boxed block--border">
         <div class="block__header">
-            <div class="block__title">
+            <h2 class="block__title">
                 <span data-language="product_related_post">{$lang->product_related_post}</span>
-            </div>
+            </h2>
         </div>
         <div class="block__body article">
             <div class="fn_articles_slide article_list row no_gutters">

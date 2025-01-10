@@ -6,9 +6,9 @@
     <div class="main-products main-products__featured container">
         <div class="block block--boxed block--border">
             <div class="block__header block__header--promo">
-                <div class="block__title">
+                <h3 class="block__title">
                     <span data-language="main_recommended_products">{$lang->main_recommended_products}</span>
-                </div>
+                </h3>
                 <div class="block__header_button">
                     <a class="block__more d-flex align-items-center" href="{url_generator route='products' filtersUrl=['filter' => ['featured']]}">
                         <span data-language="main_look_all">{$lang->main_look_all}</span>{include file="svg.tpl" svgId="arrow_right2"}
@@ -37,9 +37,9 @@
     <div class="main-products main-products__new container">
         <div class="block block--boxed block--border">
             <div class="block__header">
-                <div class="block__title">
+                <h3 class="block__title">
                     <span data-language="main_new_products">{$lang->main_new_products}</span>
-                </div>
+                </h3>
             </div>
             <div class="block__body">
                 <div class="fn_products_slide products_list row no_gutters swiper-container">
@@ -62,9 +62,9 @@
     <div class="main-products main-products__sale container">
         <div class="block block--boxed block--border">
             <div class="block__header block__header--promo">
-                <div class="block__title">
+                <h3 class="block__title">
                     <span data-language="main_discount_products">{$lang->main_discount_products}</span>
-                </div>
+                </h3>
                 <div class="block__header_button">
                     <a class="block__more d-flex align-items-center" href="{url_generator route='products' filtersUrl=['filter' => ['discounted']]}">
                         <span data-language="main_look_all">{$lang->main_look_all} </span>{include file="svg.tpl" svgId="arrow_right2"}
@@ -95,7 +95,7 @@
                     <div class="d-lg-flex align-items-lg-stretch {if $all_brands}f_col-lg-7 f_col-xl-8{else}f_col-lg-12{/if}">
                         <div class="block__abouts_us">
                             <div class="block__header">
-                                <h1 class="block__title"><span>{$h1|escape}</span></h1>
+                                <h3 class="block__title">{$h1|escape}</h3>
                             </div>
                             <div class="block__body">
                                 <div class="fn_readmore">
@@ -110,7 +110,7 @@
                     <div class="d-lg-flex align-items-lg-stretch {if $description}f_col-lg-5 f_col-xl-4{else}f_col-lg-12 {/if}">
                         <div class="block__main_brands">
                             <div class="block__header block__header--promo">
-                                <div class="block__title"><span data-language="main_brands">{$lang->main_brands}</span></div>
+                                <h3 class="block__title"><span data-language="main_brands">{$lang->main_brands}</span></h3>
                                 <div class="block__header_button">
                                     <a class="block__more d-flex align-items-center" href="{url_generator route='brands'}">
                                         <span data-language="main_look_all">{$lang->main_look_all} </span>{include file="svg.tpl" svgId="arrow_right2"}
@@ -156,9 +156,9 @@
     <div class="main-articles container">
         <div class="block block--boxed block--border">
             <div class="block__header block__header--promo">
-                <div class="block__title">
+                <h3 class="block__title">
                     <span data-language="main_news">{$lang->main_news}</span>
-                </div>
+                </h3>
                 <div class="block__header_button">
                     <a class="block__more d-flex align-items-center" href="{url_generator route='blog_category' url=$blog_categories[1]->url}">
                         <span data-language="main_all_news">{$lang->main_all_news} </span>{include file="svg.tpl" svgId="arrow_right2"}
