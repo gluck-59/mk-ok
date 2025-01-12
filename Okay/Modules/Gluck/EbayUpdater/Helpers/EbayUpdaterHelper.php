@@ -51,8 +51,6 @@ class EbayUpdaterHelper implements ExtensionInterface
         $remain = sizeof($variantsToUpd);
 
         foreach ($variantsToUpd as $variant) {
-            $this->sleep = rand(5, 20);
-
             $report = new \stdClass();
             $report->success = 0;
             $report->variant_id = $variant->variant_id;
@@ -177,7 +175,12 @@ class EbayUpdaterHelper implements ExtensionInterface
 
             // предохранитель от левого лота — если новая цена отличается от старой больше чем на 10% — пишем только репорт
             if (is_null($variant->price)) $variant->price = 0;
-            if (is_null($newLot->outPrice)) $newLot->outPrice = 0;
+            if (is_null($newLot->outPrice)) {
+                $newLot->outPrice = 0;
+                $this->sleep = rand(40, 60);
+            } else {
+                $this->sleep = rand(5, 20);
+            }
 
             $priceCompare = round(abs(round($variant->price) / round($newLot->outPrice) * 100 - 100));
 

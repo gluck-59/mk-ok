@@ -26,6 +26,7 @@
                             <li><a href="" class="fn_clipboard hint-bottom-middle-t-info-s-small-mobile" data-hint="Click to copy" data-hint-copied="✔ Copied to clipboard">{$category_h1}</a> - {/literal}{$btr->seo_patterns_ajax_cat_h1|escape}</li>{literal}
                             <li><a href="" class="fn_clipboard hint-bottom-middle-t-info-s-small-mobile" data-hint="Click to copy" data-hint-copied="✔ Copied to clipboard">{$category_url}</a> - {/literal}{$btr->seo_patterns_ajax_cat_url|escape}</li>{literal}
                             <li><a href="" class="fn_clipboard hint-bottom-middle-t-info-s-small-mobile" data-hint="Click to copy" data-hint-copied="✔ Copied to clipboard">{$brand}</a> - {/literal}{$btr->seo_patterns_ajax_brand_name|escape}</li>{literal}
+                            <li><a href="" class="fn_clipboard hint-bottom-middle-t-info-s-small-mobile" data-hint="Click to copy" data-hint-copied="✔ Copied to clipboard">{$manufacturer}</a> - {/literal}--- эксп manufacturer</li>{literal}
                             <li><a href="" class="fn_clipboard hint-bottom-middle-t-info-s-small-mobile" data-hint="Click to copy" data-hint-copied="✔ Copied to clipboard">{$sitename}</a> - {/literal}{$btr->seo_patterns_ajax_site_name|escape}</li>{literal}
                             <li><a href="" class="fn_clipboard hint-bottom-middle-t-info-s-small-mobile" data-hint="Click to copy" data-hint-copied="✔ Copied to clipboard">{$feature_name}</a> - {/literal}{$btr->seo_patterns_ajax_feature_name|escape}</li>{literal}
                             <li><a href="" class="fn_clipboard hint-bottom-middle-t-info-s-small-mobile" data-hint="Click to copy" data-hint-copied="✔ Copied to clipboard">{$feature_val}</a> - {/literal}{$btr->seo_patterns_ajax_feature_val|escape}</li>{literal}
@@ -90,8 +91,10 @@
             <div class="mb_mobile_seofilter">
                 <select class="selectpicker fn_pattern_type form-control" data-size="2" data-live-search="false">
                     <option value="brand">+ {$btr->seo_filter_patterns_brand}</option>
+                    <option value="manufacturer">+ --- эксп manufacturer</option>
                     <option value="feature">+ {$btr->seo_filter_patterns_feature}</option>
                     <option value="brand_feature">+ {$btr->seo_filter_patterns_brand} + {$btr->seo_filter_patterns_feature}</option>
+                    <option value="manufacturer_feature">+ {$btr->seo_filter_patterns_manufacturer} + {$btr->seo_filter_patterns_feature}</option>
                     <option value="feature_feature">+ {$btr->seo_filter_patterns_feature} + {$btr->seo_filter_patterns_feature}</option>
                 </select>
             </div>
@@ -127,10 +130,16 @@
                             {$btr->seo_filter_patterns_category} +
                             {if $p->type == 'brand'}
                                 {$btr->seo_filter_patterns_brand}
+                            {elseif $p->type == 'manufacturer'}
+                                {$btr->seo_filter_patterns_manufacturer}
                             {elseif $p->type == 'feature'}
                                 {$btr->seo_filter_patterns_feature}
                             {elseif $p->type == 'brand_feature'}
                                 {$btr->seo_filter_patterns_brand}
+                                +
+                                {$btr->seo_filter_patterns_feature}
+                            {elseif $p->type == 'manufacturer_feature'}
+                                {$btr->seo_filter_patterns_manufacturer}
                                 +
                                 {$btr->seo_filter_patterns_feature}
                             {elseif $p->type == 'feature_feature'}
