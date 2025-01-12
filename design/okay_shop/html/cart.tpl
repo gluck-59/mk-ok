@@ -251,7 +251,13 @@
 
                                                     <input type="hidden" name="checkout" value="1">
                                                     {* Submit button *}
-                                                    <div>Оплати заказ и затем нажми кнопку</div>
+{*                                                    <ul>*}
+{*                                                        <li>Сканируй QR-код камерой телефона</li>*}
+{*                                                        <li>Выбери СБП</li>*}
+{*                                                        <li>Введи сумму с экрана</li>*}
+{*                                                        <li>Подтведи платеж и вернись на эту страницу</li>*}
+{*                                                        <li>Нажми "Создать заказ"</li>*}
+{*                                                    </ul>*}
                                                     <button class="form__button button--blick g-recaptcha" type="submit" name="checkout" {if $settings->captcha_type == "invisible"}data-sitekey="{$settings->public_recaptcha_invisible}" data-badge='bottomleft' data-callback="onSubmit"{/if} value="{$lang->cart_checkout}">
                                                         <span data-language="cart_button">{$lang->cart_button}</span>
                                                     </button>

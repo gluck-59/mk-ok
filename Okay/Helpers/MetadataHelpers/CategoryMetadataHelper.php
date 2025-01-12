@@ -52,6 +52,7 @@ class CategoryMetadataHelper extends CommonMetadataHelper
         array $metaArray = [],
         ?string $keyword = null
     ): void {
+////prettyDump(__FUNCTION__);
         $this->category        = $category;
         $this->isFilterPage    = $isFilterPage;
         $this->isAllPages      = $isAllPages;
@@ -66,6 +67,7 @@ class CategoryMetadataHelper extends CommonMetadataHelper
      */
     public function getH1Template(): string
     {
+////prettyDump(__FUNCTION__);
         $seoFilterPattern = $this->getSeoFilterPattern();
         $filterAutoMeta = $this->getFilterAutoMeta();
 
@@ -85,6 +87,7 @@ class CategoryMetadataHelper extends CommonMetadataHelper
 
     public function matchPriorityH1($pageH1, $seoFilterPatternH1, $filterAutoMetaH1, $categoryH1): string
     {
+////prettyDump(__FUNCTION__);
         if ($pageH1) {
             $h1 = $pageH1;
         } elseif (!empty($seoFilterPatternH1)) {
@@ -103,6 +106,7 @@ class CategoryMetadataHelper extends CommonMetadataHelper
      */
     public function getAnnotationTemplate(): string
     {
+////prettyDump(__FUNCTION__);
         $seoFilterPattern = $this->getSeoFilterPattern();
         $filterAutoMeta = $this->getFilterAutoMeta();
 
@@ -127,6 +131,7 @@ class CategoryMetadataHelper extends CommonMetadataHelper
      */
     public function getDescriptionTemplate(): string
     {
+////prettyDump(__FUNCTION__);
         $seoFilterPattern = $this->getSeoFilterPattern();
         $filterAutoMeta = $this->getFilterAutoMeta();
 
@@ -156,6 +161,7 @@ class CategoryMetadataHelper extends CommonMetadataHelper
         $isFilterPage,
         $categoryDescription
     ): string {
+////prettyDump(__FUNCTION__);
         if ((int)$currentPageNum > 1 || $isAllPages === true) {
             $description = '';
         } elseif ($pageDescription) {
@@ -175,6 +181,7 @@ class CategoryMetadataHelper extends CommonMetadataHelper
     
     public function getMetaTitleTemplate(): string // todo проверить как отработают экстендеры если их навесить на этот метод (где юзается parent::getMetaTitle())
     {
+////prettyDump(__FUNCTION__);
         $seoFilterPattern = $this->getSeoFilterPattern();
         $filterAutoMeta = $this->getFilterAutoMeta();
 
@@ -196,6 +203,8 @@ class CategoryMetadataHelper extends CommonMetadataHelper
 
     public function matchPriorityMetaTitle($pageTitle, $seoFilterPatternMetaTitle, $filterAutoMetaTitle, $categoryMetaTitle): string
     {
+////prettyDump(__FUNCTION__);
+//prettyDump($categoryMetaTitle, 1);
         if ($pageTitle) {
             $metaTitle = $pageTitle;
         } elseif (!empty($seoFilterPatternMetaTitle)) {
@@ -211,6 +220,7 @@ class CategoryMetadataHelper extends CommonMetadataHelper
 
     public function getMetaKeywordsTemplate(): string
     {
+////prettyDump(__FUNCTION__);
         $seoFilterPattern = $this->getSeoFilterPattern();
         $filterAutoMeta = $this->getFilterAutoMeta();
 
@@ -225,6 +235,7 @@ class CategoryMetadataHelper extends CommonMetadataHelper
 
     public function matchPriorityMetaKeywords($pageKeywords, $seoFilterPatternMetaKeywords, $filterAutoMetaMetaKeywords, $categoryMetaKeywords): string
     {
+//prettyDump(__FUNCTION__);
         if ($pageKeywords) {
             $metaKeywords = $pageKeywords;
         } elseif (!empty($seoFilterPatternMetaKeywords)) {
@@ -240,6 +251,7 @@ class CategoryMetadataHelper extends CommonMetadataHelper
     
     public function getMetaDescriptionTemplate(): string
     {
+//prettyDump(__FUNCTION__);
         $seoFilterPattern = $this->getSeoFilterPattern();
         $filterAutoMeta = $this->getFilterAutoMeta();
 
@@ -254,6 +266,7 @@ class CategoryMetadataHelper extends CommonMetadataHelper
 
     public function matchPriorityMetaDescription($pageMetaDescription, $seoFilterPatternMetaDescription, $filterAutoMetaMetaDescription, $categoryMetaDescription): string
     {
+//prettyDump(__FUNCTION__);
         if ($pageMetaDescription) {
             $metaDescription = $pageMetaDescription;
         } elseif (!empty($seoFilterPatternMetaDescription)) {
@@ -269,7 +282,7 @@ class CategoryMetadataHelper extends CommonMetadataHelper
 
     private function getFilterAutoMeta()
     {
-        
+//prettyDump(__FUNCTION__);
         if (empty($this->metaRobots)) {
             /** @var MetaRobotsHelper $metaRobotsHelper */
             $metaRobotsHelper = $this->SL->getService(MetaRobotsHelper::class);
@@ -296,9 +309,16 @@ class CategoryMetadataHelper extends CommonMetadataHelper
                 'annotation' => '',
                 'description' => '',
             ];
+//prettyDump($this->autoMeta);
 
-            if (!empty($this->metaArray)) {
+//$this->metaArray = ['filter' => ['JOPA1', 'JOPA2']];
+//prettyDump($this->getParts(), 1);
+
+            if (!empty($this->metaArray)) // ориг
+//            if (empty($this->metaArray))
+            {
                 foreach ($this->metaArray as $type => $_meta_array) {
+//prettyDump($type);
                     switch ($type) {
                         case 'brand': // no break
                         case 'filter':
@@ -324,6 +344,7 @@ class CategoryMetadataHelper extends CommonMetadataHelper
             $this->autoMeta = (object)$autoMeta;
         }
 
+
         return ExtenderFacade::execute(__METHOD__, $this->autoMeta, func_get_args());
     }
     
@@ -332,7 +353,7 @@ class CategoryMetadataHelper extends CommonMetadataHelper
      */
     protected function getParts(): array
     {
-
+//prettyDump(__FUNCTION__);
         if (!empty($this->parts)) {
             return $this->parts; // no ExtenderFacade
         }
@@ -459,7 +480,7 @@ class CategoryMetadataHelper extends CommonMetadataHelper
 
     private function getSeoFilterPattern()
     {
-        
+//prettyDump(__FUNCTION__);
         if (empty($this->metaRobots)) {
             /** @var MetaRobotsHelper $metaRobotsHelper */
             $metaRobotsHelper = $this->SL->getService(MetaRobotsHelper::class);
@@ -483,6 +504,7 @@ class CategoryMetadataHelper extends CommonMetadataHelper
 
             /** @var SEOFilterPatternsEntity $SEOFilterPatternsEntity */
             $SEOFilterPatternsEntity = $entityFactory->get(SEOFilterPatternsEntity::class);
+//prettyDump($SEOFilterPatternsEntity->getAllFields());
 
             if (!empty($this->metaArray['brand']) && count($this->metaArray['brand']) == 1 && !empty($this->metaArray['features_values']) && count($this->metaArray['features_values']) == 1) {
                 /** @var FeaturesEntity $featuresEntity */
@@ -490,6 +512,7 @@ class CategoryMetadataHelper extends CommonMetadataHelper
 
                 $seoFilterPatterns = [];
                 foreach ($SEOFilterPatternsEntity->find(['category_id' => $categoriesIdsForPattern, 'type' => 'brand_feature']) as $p) {
+
                     $isDefaultKey = $p->category_id == 0 ? 'default_' : '';
                     $key = $isDefaultKey.'brand_feature' . (!empty($p->feature_id) ? '_' . $p->feature_id : '');
                     $seoFilterPatterns[$key] = $p;

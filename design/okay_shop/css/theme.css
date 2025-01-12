@@ -4458,7 +4458,7 @@ table.order_details {
 .delivery__description p {
   margin-bottom: 0;
 }
-.checkbox.active + .delivery__description {
+.checkbox.delivery__label.active + .delivery__description {
   display: block;
 }
 
