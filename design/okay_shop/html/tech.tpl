@@ -15,6 +15,7 @@
 {literal}
 <style>
     .site_off{
+        font-family: 'Open Sans', sans-serif;
         height: 100vh;
         display: -webkit-box;
         display: -webkit-flex;

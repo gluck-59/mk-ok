@@ -7,7 +7,7 @@
     <channel>
         {foreach $allCategories as $category}
             <item turbo="true">
-                <pubDate>{$smarty.now|date_format:'%A, %B %e %Y %T +0300'}</pubDate>
+                <pubDate>{$smarty.now|date_format:'D, d M Y G:i:s +0300'}</pubDate>
                 <title>{$category->name}</title>
                 <link>https://motokofr.com/catalog/{$category->url}</link>
                 <turbo:content>
