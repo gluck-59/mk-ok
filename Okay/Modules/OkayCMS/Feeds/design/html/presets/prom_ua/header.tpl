@@ -1,5 +1,4 @@
 {*{$allCategories|print_r}*}
-{*{$allBrands|print_r}*}
 <?xml version="1.0" encoding="UTF-8"?>
 <rss xmlns:yandex="http://news.yandex.ru"
      xmlns:media="http://search.yahoo.com/mrss/"
@@ -8,6 +7,7 @@
     <channel>
         {foreach $allCategories as $category}
             <item turbo="true">
+                <pubDate>{$smarty.now|date_format:'%A, %B %e %Y %T +0300'}</pubDate>
                 <title>{$category->name}</title>
                 <link>https://motokofr.com/catalog/{$category->url}</link>
                 <turbo:content>
