@@ -61,9 +61,11 @@ use Okay\Helpers\DeliveriesHelper;
 use Okay\Helpers\DiscountsHelper;
 use Okay\Helpers\MainHelper;
 use Okay\Helpers\MetadataHelpers\AllBrandsMetadataHelper;
+use Okay\Helpers\MetadataHelpers\AllManufacturersMetadataHelper;
 use Okay\Helpers\MetadataHelpers\AllProductsMetadataHelper;
 use Okay\Helpers\MetadataHelpers\BlogCategoryMetadataHelper;
 use Okay\Helpers\MetadataHelpers\BrandMetadataHelper;
+use Okay\Helpers\MetadataHelpers\ManufacturerMetadataHelper;
 use Okay\Helpers\MetadataHelpers\CartMetadataHelper;
 use Okay\Helpers\MetadataHelpers\CategoryMetadataHelper;
 use Okay\Helpers\MetadataHelpers\CommonMetadataHelper;
@@ -636,6 +638,9 @@ ManufacturersHelper::class => [
     BrandMetadataHelper::class => [
         'class' => BrandMetadataHelper::class,
     ],
+    ManufacturerMetadataHelper::class => [
+        'class' => ManufacturerMetadataHelper::class,
+    ],
     PostMetadataHelper::class => [
         'class' => PostMetadataHelper::class,
     ],
@@ -644,6 +649,9 @@ ManufacturersHelper::class => [
     ],
     AllBrandsMetadataHelper::class => [
         'class' => AllBrandsMetadataHelper::class,
+    ],
+    AllManufacturersMetadataHelper::class => [
+        'class' => AllManufacturersMetadataHelper::class,
     ],
     BlogCategoryMetadataHelper::class => [
         'class' => BlogCategoryMetadataHelper::class,
@@ -673,10 +681,12 @@ ManufacturersHelper::class => [
                     new PR('seo.canonical.catalog_pagination'),
                     new PR('seo.canonical.catalog_page_all'),
                     new PR('seo.canonical.category_brand'),
+//                    new PR('seo.canonical.category_manufacturer'),
                     new PR('seo.canonical.category_features'),
                     new PR('seo.canonical.catalog_other_filter'),
                     new PR('seo.canonical.catalog_filter_pagination'),
                     new PR('seo.filter.max_brands_filter_depth'),
+//                    new PR('seo.filter.max_manufacturers_filter_depth'),
                     new PR('seo.filter.max_other_filter_depth'),
                     new PR('seo.filter.max_features_filter_depth'),
                     new PR('seo.filter.max_features_values_filter_depth'),
@@ -694,10 +704,12 @@ ManufacturersHelper::class => [
                     new PR('seo.robots.catalog_pagination'),
                     new PR('seo.robots.catalog_page_all'),
                     new PR('seo.robots.category_brand'),
+//                    new PR('seo.robots.category_manufacturer'),
                     new PR('seo.robots.category_features'),
                     new PR('seo.robots.catalog_other_filter'),
                     new PR('seo.robots.catalog_filter_pagination'),
                     new PR('seo.filter.max_brands_filter_depth'),
+//                    new PR('seo.filter.max_manufacturers_filter_depth'),
                     new PR('seo.filter.max_other_filter_depth'),
                     new PR('seo.filter.max_features_filter_depth'),
                     new PR('seo.filter.max_features_values_filter_depth'),

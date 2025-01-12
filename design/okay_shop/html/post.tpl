@@ -214,9 +214,9 @@
         {if $related_products}
         <div class="block block--boxed block--border">
             <div class="block__header">
-                <div class="block__title">
+                <h2 class="block__title">
                     <span data-language="product_recommended_products">{$lang->product_recommended_products}</span>
-                </div>
+                </h2>
             </div>
 
             <div class="block__body">
@@ -233,9 +233,9 @@
 
         <div class="block block--boxed block--border">
             <div class="block__header">
-                <div class="block__title">
+                <h2 class="block__title">
                     <span data-language="post_comments">{$lang->post_comments}</span>
-                </div>
+                </h2>
             </div>
 
             <div id="comments">

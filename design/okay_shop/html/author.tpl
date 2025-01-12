@@ -48,9 +48,9 @@
         </div>
         <div class="block block--boxed block--border">
             <div class="block__header">
-                <div class="block__title">
+                <h2 class="block__title">
                     <span data-language="author_posts">{$lang->author_posts}</span>
-                </div>
+                </h2>
             </div>
             <div class="block__body article">
                 <div class="article_list f_row">

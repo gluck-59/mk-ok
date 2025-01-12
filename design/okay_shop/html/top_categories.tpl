@@ -21,9 +21,9 @@
 <section class="container section_top_categories"> 
     <div class="block block--boxed block--border">
         <div class="block__header block__header--promo">
-            <div class="block__title">
+            <h2 class="block__title">
                 <span data-language="main_popular_categories">{$lang->main_popular_categories}</span>
-            </div>
+            </h2>
         </div>
 
         <div class="block__body">
