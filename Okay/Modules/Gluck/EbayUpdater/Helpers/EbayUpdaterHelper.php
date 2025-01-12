@@ -49,6 +49,7 @@ class EbayUpdaterHelper implements ExtensionInterface
 
         $variantsToUpd = $variantsEntity->getVariantsToUpdate(7);
         $remain = sizeof($variantsToUpd);
+        $this->sleep = 0;
 
         foreach ($variantsToUpd as $variant) {
             $report = new \stdClass();
