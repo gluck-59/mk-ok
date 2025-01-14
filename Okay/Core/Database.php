@@ -111,7 +111,7 @@ class Database
             }
         } catch (\Exception $e) {
             $log = 'Sql query error: (ЗАПРОС ВНУТРИ) "' . $e->getMessage() . '"' . PHP_EOL;
-            $log .= 'Query Object: '.print_r($e, 1).PHP_EOL;
+//            $log .= 'Query Object: '.print_r($e, 1).PHP_EOL;
             $log .= 'Запрос: '.$e->getTrace()[1]['args'][0] .', Bind: '. print_r($e->getTrace()[1]['args'][1], 1);
             $log .= 'Трассировка:' . PHP_EOL;
             $trace = $e->getTrace();

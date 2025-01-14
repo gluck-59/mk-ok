@@ -161,7 +161,12 @@ switch ($object) {
             if ($managers->access('gluck__ebayupdater', $manager)) {
                 $entity = $entityFactory->get(\Okay\Modules\Gluck\EbayUpdater\Entities\EbayUpdaterEntity::class);
             }
-            break;
+        break;
+    case 'tochkaAdmin':
+            if ($managers->access('gluck__tochkaAdmin', $manager)) {
+                $entity = $entityFactory->get(\Okay\Modules\Gluck\Tochka\Entities\TochkaEntity::class);
+            }
+        break;
 }
 
 if (empty($entity)) {
