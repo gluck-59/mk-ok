@@ -109,7 +109,7 @@
     <title>
         {if $controller == 'BrandController'}Ништяки для{/if}
         {$meta_title|escape} {if $manufacturer->name}({$manufacturer->name|escape}){/if}
-        {if $controller == 'BrandController' OR $controller == 'CategoryController'}купить в Motokofr.com{/if}
+{*        {if $controller == 'BrandController' OR $controller == 'CategoryController'}купить в Motokofr.com{/if}*}
     </title>
 
     {* Meta tags *}
