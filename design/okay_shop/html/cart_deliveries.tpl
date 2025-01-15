@@ -62,7 +62,9 @@
 		</div>
     </div> 
 
-    {* Payment methods *}
+	<p class="clearfix">&nbsp;</p>
+
+	{* Payment methods *}
 	{if $payment_methods}
 		<div class="fn_payments_block"{if !$active_delivery->payment_methods_ids} style="display: none;" {/if}>
 		   	<div class="block form form_cart">
@@ -97,14 +99,6 @@
 									</span>
 								{/if}
 							</label>
-{*							<div class="row">*}
-{*								<div class="col-md-12">*}
-{*									<center>*}
-{*										<img class="lazy" data-src="../../../backend/files/qr_payment/qr_payment.png" src="{$rootUrl}/design/{get_theme}/images/xloading.gif" alt="{$payment_method->name|escape}" title="{$payment_method->name|escape}"/>*}
-{*										<h1 class="block__heading"><strong>{$active_delivery->total_price_with_delivery|convert:$payment_method->currency_id} {$all_currencies[$payment_method->currency_id]->sign|escape}</strong></h1>*}
-{*									</center>*}
-{*								</div>*}
-{*							</div>*}
 							{$block = {get_design_block block='front_cart_payment' vars=['payment_method' => $payment_method]}}
 							{if $payment_method->description || $block}
 								<div class="delivery__description">
@@ -117,6 +111,9 @@
 								</div>
 							{/if}
 						</div>
+
+						<p class="clearfix">&nbsp;</p>
+
 					{/foreach}
 					<div class="row">
 						<div class="col-md-12">

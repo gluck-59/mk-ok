@@ -26,6 +26,8 @@ use Okay\Helpers\DeliveriesHelper;
 use Okay\Helpers\PaymentsHelper;
 use Okay\Helpers\ValidateHelper;
 use Okay\Helpers\OrdersHelper;
+use Okay\Modules\Gluck\Tochka\Entities\TochkaEntity;
+use Okay\Core\Config;
 
 class CartController extends AbstractController
 {
@@ -46,7 +48,9 @@ class CartController extends AbstractController
         CartHelper         $cartHelper,
         ValidateHelper     $validateHelper,
         CouponHelper       $couponHelper,
-        CartMetadataHelper $cartMetadataHelper
+        CartMetadataHelper $cartMetadataHelper,
+        TochkaEntity       $tochkaEntity,
+        Config             $config
     ) {
 
         // Если передан id варианта, добавим его в корзину
@@ -75,6 +79,35 @@ class CartController extends AbstractController
             } else {
                 // Добавляем заказ в базу
                 $order->lang_id = $languages->getLangId();
+
+// временный костыль для СБП, здесь не должно быть больше 1 записи в ok_tochka_settings
+$paymentMethods = $paymentsHelper->getCartPaymentsList($cart);
+
+if (!is_dir($config->get('qrcodes_dir'))) {
+    mkdir($config->get('qrcodes_dir'), 0777);
+}
+
+foreach ($paymentMethods as $method) {
+    if ($method->module == 'Gluck/Tochka') {
+        $param = new \StdClass();
+        $param->id = 1; // пока костыль
+        $param->amount = round($cart->total_price);
+        $param->paymentPurpose = 'Оплата заказа в Motokofr'; // в этом месте еще нет order ID
+
+        $tochkaResponse = $tochkaEntity->generateQR($param);
+        if ($tochkaResponse || !empty($tochkaResponse->Data->qrcId)) {
+            file_put_contents($config->get('qrcodes_dir').$tochkaResponse->Data->qrcId.'.png', base64_decode($tochkaResponse->Data->image->content));
+            unset($tochkaResponse->Data->image);
+            unset($tochkaResponse->Links);
+            unset($tochkaResponse->Meta);
+
+            $order->payment_details = json_encode($tochkaResponse);
+        } else {
+            $this->design->assign('error', 'Ошибка НСПК: QR-код не создан. Свяжитесь с нами.');
+        }
+    }
+}
+
                 $preparedOrder  = $ordersHelper->prepareAdd($order);
                 $orderId        = $ordersHelper->add($preparedOrder);
 
@@ -113,8 +146,7 @@ class CartController extends AbstractController
                     $this->response->redirectTo(Router::generateUrl('order', ['url' => $order->url], true));
                 }
             }
-        } else {
-            
+        } else { // нету ['checkout'] в $_POST
             if ($request->post('amounts')) {
                 $couponCode = $cartRequest->postCoupon();
                 if (empty($couponCode)) {
@@ -146,15 +178,16 @@ class CartController extends AbstractController
         $this->design->assign('currencyEuro', $currenciesEntity->findOne(['code' => 'EUR'])); // для расчета пошлин
         $this->design->assign('deliveries', $deliveries);
         $this->design->assign('payment_methods', $paymentMethods);
+
+        // это влияет только на галочку, а в корзину передаются все методы
         $this->design->assign('active_delivery', $activeDelivery);
         $this->design->assign('active_payment', $activePayment);
-        
+
         if ($couponsEntity->count(['valid'=>1])>0) {
             $this->design->assign('coupon_request', true);
         }
 
         $this->design->assign('noindex_follow', true);
-        
         $this->response->setContent('cart.tpl');
     }
     

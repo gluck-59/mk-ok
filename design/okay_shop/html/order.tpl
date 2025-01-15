@@ -183,53 +183,63 @@
                 <div class="fn_cart_sticky block--boxed block--border d-flex justify-content-center" data-margin-top="15" data-sticky-for="1024" data-sticky-class="is-sticky">
                     <div class="order_boxeded" style="width: 100%">
                         {if !$order->paid}
-                            {if $payment_methods && !$payment_method && $order->total_price>0}
-                                <div class="block form--boxed form form_cart">
+                            {if $payment_methods && (!$payment_method || !$order->paid) && $order->total_price>0} {* добавил !$order->paid *}
+                                <div class="block 1form--boxed form form_cart">
                                     {* Payments *}
                                     <div class="h6">
                                         <span data-language="order_payment_details">{$lang->order_payment_details}</span>
                                     </div>
                                     <div class="delivery padding block">
-                                        <form method="post">
-                                            <div class="delivery form__group">
-                                                {foreach $payment_methods as $payment_method}
-                                                    <div class="delivery__item">
-                                                        <label class="checkbox delivery__label{if $payment_method@first} active{/if}">
-                                                            <input class="checkbox__input delivery__input"  type="radio" name="payment_method_id"{if $payment_method@first} checked{/if} value="{$payment_method->id}" {if $delivery@first && $payment_method@first} checked{/if} id="payment_{$delivery->id}_{$payment_method->id}">
+                                        {if $order->payment_details}
+                                            {if $is_mobile || $is_tablet}
+                                                <p><b><a href="{$order->payment_details->Data->payload}" target="_blank">Оплатить в НСПК</a></b></p>
+                                            {else}
+                                                <div style="margin: -80px 0">
+                                                    <center><img class="lazy" data-src="/{$config->qrcodes_dir}{$order->payment_details->Data->qrcId}.png" src="{$rootUrl}/design/{get_theme}/images/xloading.gif" alt="{$payment_method->name|escape}" title="{$payment_method->name|escape}"/></center>
+                                                </div>
+                                            {/if}
+                                        {/if}
+{* изменение способа оплаты *}
+{*                                        <form method="post">*}
+{*                                            <div class="delivery form__group">*}
+{*                                                {foreach $payment_methods as $payment_method}*}
+{*                                                    <div class="delivery__item">*}
+{*                                                        <label class="checkbox delivery__label{if $payment_method->id == $order->payment_method_id} active{/if}">*}
+{*                                                            <input class="checkbox__input delivery__input"  type="radio" name="payment_method_id"{if $payment_method->id == $order->payment_method_id} checked{/if} value="{$payment_method->id}" {if $delivery@first && $payment_method@first} checked{/if} id="payment_{$delivery->id}_{$payment_method->id}">*}
 
-                                                            <svg class="checkbox__icon" viewBox="0 0 20 20">
-                                                                <path class="checkbox__mark" fill="none" d="M4 10 l5 4 8-8.5"></path>
-                                                            </svg>
+{*                                                            <svg class="checkbox__icon" viewBox="0 0 20 20">*}
+{*                                                                <path class="checkbox__mark" fill="none" d="M4 10 l5 4 8-8.5"></path>*}
+{*                                                            </svg>*}
 
-                                                            <div class="delivery__name">
-                                                                {$payment_method->name|escape} {$lang->cart_deliveries_to_pay}
-                                                                <span class="delivery__name_price">{$order->total_price|convert:$payment_method->currency_id} {$all_currencies[$payment_method->currency_id]->sign}</span>
-                                                            </div>
+{*                                                            <div class="delivery__name">*}
+{*                                                                {$payment_method->name|escape}*}
+{*                                                                {$lang->cart_deliveries_to_pay} <span class="delivery__name_price">{$order->total_price|convert:$payment_method->currency_id} {$all_currencies[$payment_method->currency_id]->sign}</span>*}
+{*                                                            </div>*}
 
-                                                            {if $payment_method->image}
-                                                                <div class="delivery__image">
-                                                                    <picture>
-                                                                        {if $settings->support_webp}
-                                                                            <source type="image/webp" srcset="{$payment_method->image|resize:80:30:false:$config->resized_payments_dir|webp}">
-                                                                        {/if}
-                                                                        <source srcset="{$payment_method->image|resize:80:30:false:$config->resized_payments_dir}">
-                                                                        <img class="lazy" data-src="{$payment_method->image|resize:80:30:false:$config->resized_payments_dir}" src="{$rootUrl}/design/{get_theme}/images/xloading.gif" alt="{$purchase->product->name|escape}" title="{$purchase->product->name|escape}"/>
-                                                                    </picture>
-                                                                </div>
-                                                            {/if}
-                                                        </label>
+{*                                                            {if $payment_method->image}*}
+{*                                                                <div class="delivery__image">*}
+{*                                                                    <picture>*}
+{*                                                                        {if $settings->support_webp}*}
+{*                                                                            <source type="image/webp" srcset="{$payment_method->image|resize:80:30:false:$config->resized_payments_dir|webp}">*}
+{*                                                                        {/if}*}
+{*                                                                        <source srcset="{$payment_method->image|resize:80:30:false:$config->resized_payments_dir}">*}
+{*                                                                        <img class="lazy" data-src="{$payment_method->image|resize:80:30:false:$config->resized_payments_dir}" src="{$rootUrl}/design/{get_theme}/images/xloading.gif" alt="{$purchase->product->name|escape}" title="{$purchase->product->name|escape}"/>*}
+{*                                                                    </picture>*}
+{*                                                                </div>*}
+{*                                                            {/if}*}
+{*                                                        </label>*}
 
-                                                        {if $payment_method->description}
-                                                            <div class="delivery__description">
-                                                                {$payment_method->description}
-                                                            </div>
-                                                        {/if}
-                                                    </div>
-                                                {/foreach}
-                                            </div>
+{*                                                        {if $payment_method->description}*}
+{*                                                            <div class="delivery__description">*}
+{*                                                                {$payment_method->description}*}
+{*                                                            </div>*}
+{*                                                        {/if}*}
+{*                                                    </div>*}
+{*                                                {/foreach}*}
+{*                                            </div>*}
 
-                                            <input type="submit" data-language="cart_checkout" value="{$lang->cart_checkout}" name="checkout" class="form__button">
-                                        </form>
+{*                                            <input type="submit" data-language="cart_checkout" value="{$lang->cart_checkout}" name="checkout" class="form__button">*}
+{*                                        </form>*}
                                     </div>
                                 </div>
                             {elseif $payment_method}
@@ -259,10 +269,6 @@
                                                 {*payment's form HTML code is in the /payment/ModuleName/form.tpl*}
                                                 {checkout_payment_form order_id=$order->id module=$payment_method->module}
                                             </div>
-                                            <center>
-                                                <img class="lazy" data-src="../../../backend/files/qr_payment/qr_payment.png" src="{$rootUrl}/design/{get_theme}/images/xloading.gif" alt="{$payment_method->name|escape}" title="{$payment_method->name|escape}"/>
-                                            </center>
-
                                         </div>
                                     </div>
                                 </div>
@@ -318,7 +324,7 @@
                                     </tr>
                                     {if $order->address}
                                         {assign var="recepientAddress" value=$order->address}
-                                        {assign var="recepientIndex" value="-= ИНДЕКС НЕ УКАЗАН =-"}
+{*                                        {assign var="recepientIndex" value="-= ИНДЕКС НЕ УКАЗАН =-"}*}
                                     {elseif $user->address}
                                         {assign var="recepientAddress" value=$user->address}
                                         {assign var="recepientIndex" value=$user->postal_index}

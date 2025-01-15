@@ -528,7 +528,7 @@
                         {/if}
                         {if $user}
                             <div class="mb-1">
-                                <div class="heading_label">Данные из профиля (редакт. через профиль)</div>
+                                <div class="heading_label">Данные из профиля (<a href="/backend/index.php?controller=UserAdmin&id={$user->id}" target="_blank">Редакт. профиль</a>)</div>
                                 <div class="row mb-1">
                                     <div class="col-md-6">
                                         <input disabled name="name" class="form-control" type="text" value="{$user->name|escape}"/>
@@ -550,7 +550,6 @@
                                         <input disabled name="email" class="form-control" type="text" value="{$user->email|escape}" placeholder="email"/>
                                     </div>
                                 </div>
-                                <a href="/backend/index.php?controller=UserAdmin&id={$user->id}" target="_blank">Редактировать профиль</a>
                             </div>
                         {else}
                             <div class="mb-1">

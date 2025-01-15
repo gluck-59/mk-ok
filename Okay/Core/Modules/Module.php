@@ -374,21 +374,26 @@ class Module
 
     public function isModuleClass($className)
     {
-        return preg_match('~Okay\\\\Modules\\\\([a-zA-Z0-9]+)\\\\([a-zA-Z0-9]+)\\\\?.*~', $className);
+        // это ебаное гавно работает только с вендором OkayCMS и не работает с Gluck
+        return 1;
+//        return preg_match('~Okay\\\\Modules\\\\([a-zA-Z0-9]+)\\\\([a-zA-Z0-9]+)\\\\?.*~', $className);
     }
 
     public function getVendorName($className)
     {
         if (!$this->isModuleClass($className)) {
-            throw new \Exception('Wrong module name');
+            throw new \Exception('Хуй! Wrong module name');
         }
-        return preg_replace('~Okay\\\\Modules\\\\([a-zA-Z0-9]+)\\\\([a-zA-Z0-9]+)\\\\?.*~', '$1', $className);
+
+        // это ебаное гавно работает только с вендором OkayCMS и не работает с Gluck
+        return 'OkayCMS';
+//        return preg_replace('~Okay\\\\Modules\\\\([a-zA-Z0-9]+)\\\\([a-zA-Z0-9]+)\\\\?.*~', '$1', $className);
     }
 
     public function getModuleName($className)
     {
         if (!$this->isModuleClass($className)) {
-            throw new \Exception('Wrong module name');
+            throw new \Exception('Опять Wrong module name');
         }
 
         return preg_replace('~Okay\\\\Modules\\\\([a-zA-Z0-9]+)\\\\([a-zA-Z0-9]+)\\\\?.*~', '$2', $className);

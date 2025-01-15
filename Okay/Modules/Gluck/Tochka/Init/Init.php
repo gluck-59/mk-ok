@@ -2,8 +2,8 @@
 namespace Okay\Modules\Gluck\Tochka\Init;
 
 use Okay\Core\Modules\AbstractInit;
-use Okay\Core\Scheduler\Schedule;
-use Okay\Core\Settings;
+//use Okay\Core\Scheduler\Schedule;
+//use Okay\Core\Settings;
 use Okay\Modules\Gluck\Tochka\Entities\TochkaEntity;
 use Okay\Core\Modules\EntityField;
 

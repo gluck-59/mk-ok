@@ -30,6 +30,7 @@ class OrdersEntity extends Entity
         'comment',
         'status_id',
         'url',
+        'payment_details',
         'undiscounted_total_price',
         'total_price',
         'note',

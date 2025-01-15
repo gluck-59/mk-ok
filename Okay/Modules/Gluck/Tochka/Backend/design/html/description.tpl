@@ -9,6 +9,9 @@
             <div class="box_heading heading_page">
                 Установки Точка
             </div>
+            <div>
+                название модуля должно быть Tochka, vendor Gluck
+            </div>
         </div>
     </div>
 </div>

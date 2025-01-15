@@ -52,6 +52,13 @@ class OrderController extends AbstractController
         }
         $order->shipping_number = $shipping_numbers;
 
+        // точка tochka
+        if (!empty($order->payment_details)) {
+            $order->payment_details = json_decode($order->payment_details);
+        }
+        $this->design->assign('is_mobile',  $this->design->isMobile());
+        $this->design->assign('is_tablet',  $this->design->isTablet());
+
         $this->design->assign('order', $order);
 
         $orderMetadataHelper->setUp($order);
