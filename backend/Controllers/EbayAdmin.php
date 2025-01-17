@@ -314,7 +314,7 @@ $isEnded = false; // добавить определение $isEnded
         } else {
             // если валюта кривая или вместо доставки херня, то покажем все это и закончим формирование лота
             $lot = [];
-            $err = ($currency[0] == 'US' ? ' price = '.$price : ' ---- цена в ' . (!empty($currency) ? $currency[0] : ' неизвестной валюте ') . ' shpping = '.$shipping).($isEnded ? ' лот протух? ' : '').PHP_EOL;
+            $err = ($currency[0] == 'US' ? ' price = '.$price : ' ---- цена в ' . (!empty($currency) ? $currency[0] : ' неизвестной валюте: ') . 'price = '.$price.', shpping = '.$shipping).($isEnded ? ' лот протух? ' : '').PHP_EOL;
 
 echo PHP_EOL.'$currency: ';
 print_r($currency);
@@ -323,7 +323,7 @@ echo '$price: '.$price;
 echo ' $shipping: '.$shipping;
 
 echo $err;
-            $lot['errors'] = $err;
+            $lot['debug']['errors'] = $err;
         }
 
         $lot['manufacturer'] = '';

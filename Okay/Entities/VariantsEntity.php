@@ -162,7 +162,7 @@ WHERE DATEDIFF(date(NOW()), date(v.price_updated)) > $days
 AND p.visible = 1 
 and p.manufacturer_id not in (0,4,5)
 ORDER BY v.price_updated
-LIMIT 0,100
+LIMIT 0,50
 ");
 
         $this->db->query($sql);
