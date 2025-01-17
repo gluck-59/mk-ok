@@ -668,7 +668,7 @@
                         <div class="">
                             <div class="form-group">
                                 <div class="heading_label">Ответы оплаты Точки</div>
-                                <textarea name="note" class="form-control 1short_textarea">{$order->payment_details|json_decode|print_r}</textarea>
+                                <textarea class="form-control 1short_textarea">{$order->payment_details|json_decode|print_r}</textarea>
                             </div>
                         </div>
                         {get_design_block block="order_additional_info"}
