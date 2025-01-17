@@ -94,12 +94,13 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
     echo PHP_EOL . __LINE__ . ': поиск по partNumber ' . $variant->partNumber . ' неудачно, не пишем'. PHP_EOL;
     $report->description = 'не нашли по partNumber ' . $variant->partNumber;
     self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
+    continue;
 } else {
     $report->success = 1;
-    echo PHP_EOL . __LINE__ . ': нашли товар ' . $variant->product_id . ' по partNumber ' . $variant->partNumber . ', выход = ' . $newLot->currency . ' ' . $newLot->outPrice . PHP_EOL;
+    echo PHP_EOL . __LINE__ . ': нашли товар ' . $variant->product_id . ' по partNumber ' . $variant->partNumber . ', выход = ' . $newLot->currency . ' ' . $newLot->outPrice;
     $report->description = 'нашли по partNumber ' . $variant->partNumber;
     self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
-
+    continue;
 }
                 } else {
                     // 2б. не протух
