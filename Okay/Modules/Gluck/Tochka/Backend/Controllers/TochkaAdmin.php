@@ -1,5 +1,7 @@
 <?php
+
 namespace Okay\Modules\Gluck\Tochka\Backend\Controllers;
+
 use Okay\Admin\Controllers\IndexAdmin;
 use Okay\Modules\Gluck\Tochka\Entities\TochkaEntity;
 

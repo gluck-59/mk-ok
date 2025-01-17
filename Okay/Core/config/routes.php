@@ -60,6 +60,18 @@ return [
             'method' => 'render',
         ],
     ],
+
+
+    'tochkaWebhook' => [
+        'slug' => 'tochka_webhook',
+        'patterns' => $pageRouteParams->getPatterns(),
+        'params' => [
+            'controller' => '\Okay\Modules\Gluck\Tochka\Controllers\TochkaController',
+            'method' => 'decodeIncomingWebhook',
+        ],
+    ],
+
+
     'contact' => [
         'slug' => '(.*contact.*)',
         'params' => [
@@ -401,47 +413,42 @@ return [
         ],
         'defaults' => $allBrandsRouteParams->getDefaults(),
     ],
-
-
-'manufacturer_features' => [
-    'slug' => '/manufacturer_features' . $manufacturerRouteParams->getSlug(),
-    'patterns' => $manufacturerRouteParams->getPatterns(),
-    'params' => [
-        'controller' => 'ManufacturerController',
-        'method' => 'getFilter',
+    'manufacturer_features' => [
+        'slug' => '/manufacturer_features' . $manufacturerRouteParams->getSlug(),
+        'patterns' => $manufacturerRouteParams->getPatterns(),
+        'params' => [
+            'controller' => 'ManufacturerController',
+            'method' => 'getFilter',
+        ],
+        'defaults' => $manufacturerRouteParams->getDefaults()
     ],
-    'defaults' => $manufacturerRouteParams->getDefaults()
-],
-'manufacturer' => [
-    'slug' => $manufacturerRouteParams->getSlug(),
-    'patterns' => $manufacturerRouteParams->getPatterns(),
-    'params' => [
-        'controller' => 'ManufacturerController',
-        'method' => 'render',
+    'manufacturer' => [
+        'slug' => $manufacturerRouteParams->getSlug(),
+        'patterns' => $manufacturerRouteParams->getPatterns(),
+        'params' => [
+            'controller' => 'ManufacturerController',
+            'method' => 'render',
+        ],
+        'defaults' => $manufacturerRouteParams->getDefaults()
     ],
-    'defaults' => $manufacturerRouteParams->getDefaults()
-],
-'manufacturers_features' => [
-    'slug' => '/manufacturers_features' . $allManufacturersRouteParams->getSlug(),
-    'patterns' => $allManufacturersRouteParams->getPatterns(),
-    'params' => [
-        'controller' => 'ManufacturersController',
-        'method' => 'getFilter',
+    'manufacturers_features' => [
+        'slug' => '/manufacturers_features' . $allManufacturersRouteParams->getSlug(),
+        'patterns' => $allManufacturersRouteParams->getPatterns(),
+        'params' => [
+            'controller' => 'ManufacturersController',
+            'method' => 'getFilter',
+        ],
+        'defaults' => $allManufacturersRouteParams->getDefaults()
     ],
-    'defaults' => $allManufacturersRouteParams->getDefaults()
-],
-'manufacturers' => [
-    'slug' => $allManufacturersRouteParams->getSlug(),
-    'patterns' => $allManufacturersRouteParams->getPatterns(),
-    'params' => [
-        'controller' => 'ManufacturersController',
-        'method' => 'render',
+    'manufacturers' => [
+        'slug' => $allManufacturersRouteParams->getSlug(),
+        'patterns' => $allManufacturersRouteParams->getPatterns(),
+        'params' => [
+            'controller' => 'ManufacturersController',
+            'method' => 'render',
+        ],
+        'defaults' => $allManufacturersRouteParams->getDefaults(),
     ],
-    'defaults' => $allManufacturersRouteParams->getDefaults(),
-],
-
-
-
     'author' => [
         'slug' => 'authors/{$url}',
         'params' => [

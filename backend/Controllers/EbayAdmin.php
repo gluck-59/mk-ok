@@ -173,7 +173,7 @@ echo PHP_EOL.'return из стр '.__LINE__;
                 $this->parsedLot = self::getitemDetails($lots[0]['itemNo']);
             } else {
                 $itemDetails['debug']['errors'] = 'искали '.$request['keyword'].', массив $lots пуст. не подключен VPN?';
-echo PHP_EOL.'return из стр '.__LINE__;
+echo PHP_EOL.'искали '.$request['keyword'].', массив $lots пуст. не подключен VPN?';
                 return $itemDetails;
             }
         }
