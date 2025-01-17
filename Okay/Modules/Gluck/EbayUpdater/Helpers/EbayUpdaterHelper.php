@@ -87,11 +87,20 @@ class EbayUpdaterHelper implements ExtensionInterface
 
                 // 2а. лот протух — не пишемся, сразу ищем по partNumber
                 if (is_array($newLot) && $newLot['debug']['errors']) {
-                    echo PHP_EOL.'поиск по ebayItemNo '.$variant->ebayItemNo.' неудачно, ищем по partNumber '.$variant->partNumber;
-                    $newLot = $ebayAdmin->parse(['keyword' => $variant->partNumber]);
-$report->success = 1;
-$report->description = 'нашли по partNumber '.$variant->partNumber;
-self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
+echo PHP_EOL.'поиск по ebayItemNo '.$variant->ebayItemNo.' неудачно, ищем по partNumber '.$variant->partNumber;
+$newLot = $ebayAdmin->parse(['keyword' => $variant->partNumber]);
+if (is_array($newLot) && $newLot['debug']['errors']) {
+    $report->success = 0;
+    echo PHP_EOL . __LINE__ . ': поиск по partNumber ' . $variant->partNumber . ' неудачно, не пишем'. PHP_EOL;
+    $report->description = 'не нашли по partNumber ' . $variant->partNumber;
+    self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
+} else {
+    $report->success = 1;
+    echo PHP_EOL . __LINE__ . ': нашли товар ' . $variant->product_id . ' по partNumber ' . $variant->partNumber . ', выход = ' . $newLot->currency . ' ' . $newLot->outPrice . PHP_EOL;
+    $report->description = 'нашли по partNumber ' . $variant->partNumber;
+    self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
+
+}
                 } else {
                     // 2б. не протух
                     echo PHP_EOL.__LINE__ . ': нашли товар ' . $variant->product_id . ' по ebayItemNo ' . $variant->ebayItemNo . ', выход = '.$newLot->currency.' '.$newLot->outPrice.PHP_EOL;
