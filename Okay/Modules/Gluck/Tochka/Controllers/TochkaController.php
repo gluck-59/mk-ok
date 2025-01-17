@@ -38,14 +38,12 @@ class TochkaController extends AbstractController
             // изменения в заказе: paid = 1 + дополним payment_details
             $payment_details = json_decode($order->payment_details);
             $payment_details->webhook = $webhookData;
-            $payment_details = json_encode($payment_details);
+            $payment_details = json_encode($payment_details, JSON_UNESCAPED_SLASHES);
             $orderId = $order->id;
 
             $query = $queryFactory->newSqlQuery();
-            $sql = "update ok_orders set paid = 1, payment_details = '$payment_details' where id = $orderId";
-            $query->setStatement($sql);
-            $database->query($query);
-            $query->result();
+            $sql = "update ok_orders set paid = 1, payment_details = :payment_details where id = :orderId";
+            $query->setStatement($sql)->bindValues(['payment_details' => $payment_details, 'orderId' => $orderId])->execute();
         }
 
 file_put_contents('test.log', '$orderId: '. $orderId. PHP_EOL .print_r($webhookData, 1).PHP_EOL.PHP_EOL, FILE_APPEND);
