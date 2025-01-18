@@ -31,6 +31,7 @@ class EbayAdmin extends IndexAdmin
     private $profit_percent = 30; // наценка в процентах — учитываются миша, армяне и я
 
     public $debug;
+    public $isAjax;
 
     /**
      * @var QueryFactory
@@ -83,7 +84,8 @@ class EbayAdmin extends IndexAdmin
     }
 
 
-    function parse($request) {
+    function parse($request, $isAjax = false) {
+        $this->isAjax = $isAjax;
 echo PHP_EOL.'parse request: '.$request['keyword'];
         if (!$request['keyword']) {
             $itemDetails['debug']['errors'] = 'В запросе для Ebay нет keyword';
@@ -174,6 +176,7 @@ echo PHP_EOL.'return из стр '.__LINE__;
             } else {
                 $itemDetails['debug']['errors'] = 'искали '.$request['keyword'].', массив $lots пуст. не подключен VPN?';
 echo PHP_EOL.'искали '.$request['keyword'].', массив $lots пуст. не подключен VPN?';
+                if ($this->isAjax) ob_end_clean();
                 return $itemDetails;
             }
         }
@@ -183,6 +186,7 @@ echo PHP_EOL.'искали '.$request['keyword'].', массив $lots пуст.
             return;
         } else {
 //            prettyDump($this->parsedLot);
+            if ($this->isAjax) ob_end_clean();
             return $this->parsedLot;
         }
     } // parse
@@ -327,6 +331,7 @@ echo $err;
         }
 
         $lot['manufacturer'] = '';
+        if ($this->isAjax) ob_end_clean();
         return (object) $lot;
     } //getItemDetails
 
@@ -485,7 +490,7 @@ echo PHP_EOL.'calculateProfit: '.(double) $lot['price'] .'+'. (double) $lot['shi
         switch ($lot->currency) {
             case 'US': $currentCurrency = 'USD'; break;
             case 'EUR': $currentCurrency = 'EUR'; break;
-            default: $currentCurrency = 'EUR';
+            default: $currentCurrency = 'USD';
         }
         $currency = $cur->findOne(['code' => $currentCurrency, 'enabled' => 1]);
         $import = new Import();

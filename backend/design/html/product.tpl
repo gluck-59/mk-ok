@@ -459,16 +459,16 @@
                                         <div class="okay_list_boding variants_item_name">
                                             <div class="heading_label">{$btr->general_option_name|escape} {if $variant->price_updated}<span style="float: right;">Ebay upd. {$variant->price_updated|date_format:'%d.%m.%Y в %H:%M'}</span>{/if}</div>
                                             <input name="variants[id][]" type="hidden" value="{$variant->id|escape}" />
-<input name="variants[price_updated][]" type="hidden" value="NOW()" />
+                                            <input name="variants[price_updated][]" type="hidden" value="NOW()" />
                                             <input class="variant_input" name="variants[name][]" type="text" value="{$variant->name|escape}" />
                                         </div>
                                         <div class="okay_list_boding variants_item_discount">
                                             <div class="heading_label">{$btr->general_old_price|escape}</div>
-                                            <input class="variant_input" name="variants[compare_price][]" type="text" value="{$variant->compare_price|escape}"/>
+                                            <input class="variant_input" name="variants[compare_price][]" id="compare_price" variant_id="{$variant->id|escape}" type="text" value="{$variant->compare_price|escape}"/>
                                         </div>
                                         <div class="okay_list_boding variants_item_price">
                                             <div class="heading_label">{$btr->general_price|escape}</div>
-                                            <input class="variant_input" name="variants[price][]" type="text" value="{$variant->price|escape}"/>
+                                            <input class="variant_input" name="variants[price][]" id="price" variant_id="{$variant->id|escape}" type="text" value="{$variant->price|escape}"/>
                                         </div>
                                         <div class="okay_list_boding variants_item_currency">
                                             <div class="heading_label">{$btr->general_currency|escape}</div>
@@ -478,15 +478,15 @@
                                                 {/foreach}
                                             </select>
                                         </div>
-                                        <div class="okay_list_boding variants_item_weight">
-                                            <div class="heading_label">
-                                                {$btr->general_weight|escape}
-                                                <i class="fn_tooltips" title="{$btr->tooltip_general_weight|escape}">
-                                                    {include file='svg_icon.tpl' svgId='icon_tooltips'}
-                                                </i>
-                                            </div>
-                                            <input class="variant_input" name="variants[weight][]" type="text" value="{$variant->weight|escape}"/>
-                                        </div>
+{*                                        <div class="okay_list_boding variants_item_weight">*}
+{*                                            <div class="heading_label">*}
+{*                                                {$btr->general_weight|escape}*}
+{*                                                <i class="fn_tooltips" title="{$btr->tooltip_general_weight|escape}">*}
+{*                                                    {include file='svg_icon.tpl' svgId='icon_tooltips'}*}
+{*                                                </i>*}
+{*                                            </div>*}
+{*                                            <input class="variant_input" name="variants[weight][]" type="text" value="{$variant->weight|escape}"/>*}
+{*                                        </div>*}
                                         <div class="okay_list_boding variants_item_amount">
                                             <div class="heading_label">{$btr->general_qty|escape}</div>
                                             <input class="variant_input" name="variants[stock][]" type="text" value="{if $variant->infinity}∞{else}{$variant->stock|escape}{/if}"/>
@@ -494,6 +494,10 @@
                                         <div class="okay_list_boding variants_item_units">
                                             <div class="heading_label">{$btr->products_variant_units|escape}</div>
                                             <input class="variant_input" name="variants[units][]" type="text" value="{$variant->units|escape}"/>
+                                        </div>
+                                        <div class="okay_list_boding variants_item_units">
+                                            <div class="heading_label">Ebay цена</div>
+                                            <button id="ebayPriceCheck" class="btn btn_small btn-warning" value="{$variant->id|escape}">Check</button>
                                         </div>
                                         {if !$variant@first}
                                         <div class="okay_list_boding okay_list_close remove_variant">
@@ -533,7 +537,7 @@
                                     <div class="okay_list_boding variants_item_name">
                                         <div class="heading_label">{$btr->general_option_name|escape} {if $variant->price_updated}<span style="float: right;">Ebay upd. {$variant->price_updated|date_format:'%d.%m.%Y в %H:%M'}</span>{/if}</div>
                                         <input name="variants[id][]" type="hidden" value="" />
-<input name="variants[price_updated][]" type="hidden" value="NOW()" />
+                                        <input name="variants[price_updated][]" type="hidden" value="NOW()" />
                                         <input class="variant_input" name="variants[name][]" type="text" value="" />
                                     </div>
                                     <div class="okay_list_boding variants_item_discount">
@@ -1059,6 +1063,14 @@
             return false;
         });
 
+// ebay price check
+$(document).on("click", "#ebayPriceCheck", function (e) {
+    e.stopPropagation();
+    e.preventDefault();
+    let ebayResult = ebayPriceCheck(e.target.value);
+// console.log('ebayResult', ebayResult);
+})
+
         var clone_cat = $(".fn_new_category_item").clone();
         $(".fn_new_category_item").remove();
         clone_cat.removeClass("fn_new_category_item");
@@ -1265,5 +1277,27 @@
         });
     });
 
+
+
+    function ebayPriceCheck(variantId) {
+        $.ajax({
+            type: 'post',
+            url: "/ebayCheck",
+            data: {variantId: variantId},
+            dataType: 'json',
+            success: function (data) {
+console.log('data', data);
+                if (data.debug !== undefined && data.debug.errors !== undefined) {
+                    toastr.error(data.debug.errors);
+                } else {
+                    toastr.success(
+                        'Искали: ' + data.искали
+                        + '<br>Закуп: ' + data.currency + Math.round(data.ebayPrice)
+                        + '<br>Выход: ' + data.currency + Math.round(data.outPrice),
+                        data.name, {"timeOut": 0})
+                }
+            }
+        })
+    }
 </script>
 {/literal}

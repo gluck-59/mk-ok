@@ -958,7 +958,8 @@
                 progressBar: true,
                 positionClass: 'toast-top-right',
                 preventDuplicates: false,
-                onclick: null
+                onclick: null,
+                timeOut: 0
             };
             $.ajax({
                 type: "POST",

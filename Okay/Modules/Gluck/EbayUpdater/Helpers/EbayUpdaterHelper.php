@@ -7,6 +7,7 @@ error_reporting(E_ERROR);
 
 use Cassandra\Set;
 use Okay\Core\Modules\Extender\ExtensionInterface;
+use Okay\Core\Response;
 use Okay\Entities\ManagersEntity;
 use Okay\Entities\VariantsEntity;
 use Okay\Entities\ProductsEntity;
@@ -28,6 +29,8 @@ class EbayUpdaterHelper implements ExtensionInterface
     private $sleep;
 
     private EbayAdmin $ebayAdmin;
+    /** @var Response */
+    protected $response;
 
 
 
@@ -217,6 +220,4 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
 
         return ['productsUpd' => $productsUpd, 'variantsUpd' => $variantsUpd, 'ebayUpdaterUpd' => $ebayUpdaterUpd, 'currencyModel' => $currencyModel];
     }
-
-
 } // class
