@@ -177,20 +177,20 @@
                                                         </div>
 
                                                         {* User's name *}
-                                                        <div class="f_col-md-6 f_col-lg-12 f_col-xl-6">
-                                                            <div class="form__group ">
-                                                                <input class="form__input form__placeholder--focus" name="last_name" type="text" value="{if $request_data.last_name}{$request_data.last_name|escape}{else}{$user->last_name|escape}{/if}" data-language="form_name" >
-                                                                <span class="form__placeholder">{$lang->form_last_name}</span>
-                                                            </div>
-                                                        </div>
+{*                                                        <div class="f_col-md-6 f_col-lg-12 f_col-xl-6">*}
+{*                                                            <div class="form__group ">*}
+{*                                                                <input class="form__input form__placeholder--focus" name="last_name" type="text" value="{if $request_data.last_name}{$request_data.last_name|escape}{else}{$user->last_name|escape}{/if}" data-language="form_name" >*}
+{*                                                                <span class="form__placeholder">{$lang->form_last_name}</span>*}
+{*                                                            </div>*}
+{*                                                        </div>*}
 
                                                         {* User's phone *}
-                                                        <div class="f_col-md-6 f_col-lg-12 f_col-xl-6">
-                                                            <div class="form__group">
-                                                                <input class="form__input form__placeholder--focus" name="phone" type="text" value="{$request_data.phone|escape}" data-language="form_phone" >
-                                                                <span class="form__placeholder">{$lang->form_phone}</span>
-                                                            </div>
-                                                        </div>
+{*                                                        <div class="f_col-md-6 f_col-lg-12 f_col-xl-6">*}
+{*                                                            <div class="form__group">*}
+{*                                                                <input class="form__input form__placeholder--focus" name="phone" type="text" value="{$request_data.phone|escape}" data-language="form_phone" >*}
+{*                                                                <span class="form__placeholder">{$lang->form_phone}</span>*}
+{*                                                            </div>*}
+{*                                                        </div>*}
 
                                                         {* User's email *}
                                                         <div class="f_col-md-6 f_col-lg-12 f_col-xl-6">
@@ -251,13 +251,6 @@
 
                                                     <input type="hidden" name="checkout" value="1">
                                                     {* Submit button *}
-{*                                                    <ul>*}
-{*                                                        <li>Сканируй QR-код камерой телефона</li>*}
-{*                                                        <li>Выбери СБП</li>*}
-{*                                                        <li>Введи сумму с экрана</li>*}
-{*                                                        <li>Подтведи платеж и вернись на эту страницу</li>*}
-{*                                                        <li>Нажми "Создать заказ"</li>*}
-{*                                                    </ul>*}
                                                     <button class="form__button button--blick g-recaptcha" type="submit" name="checkout" {if $settings->captcha_type == "invisible"}data-sitekey="{$settings->public_recaptcha_invisible}" data-badge='bottomleft' data-callback="onSubmit"{/if} value="{$lang->cart_checkout}">
                                                         <span data-language="cart_button">{$lang->cart_button}</span>
                                                     </button>
@@ -296,3 +289,12 @@
 
     <div id="fn_pop_up_validate_stok"></div>
 </div>
+<script>
+    $("#address").suggestions({
+        token: "0a4626882bbbd48b65b3d11beb6e1332aa0a366c",
+        type: "ADDRESS",
+        onSelect: function(suggestion) {
+            $("#postal_index").val(suggestion.data.postal_code);
+        }
+    });
+</script>

@@ -51,10 +51,10 @@
                         </div>
 
                         {* User's  last name *}
-                        <div class="form__group">
-                            <input class="form__input form__placeholder--focus" type="text" name="last_name" value="{$request_data.name|escape}" data-language="form_last_name" />
-                            <span class="form__placeholder">{$lang->form_last_name}</span>
-                        </div>
+{*                        <div class="form__group">*}
+{*                            <input class="form__input form__placeholder--focus" type="text" name="last_name" value="{$request_data.name|escape}" data-language="form_last_name" />*}
+{*                            <span class="form__placeholder">{$lang->form_last_name}</span>*}
+{*                        </div>*}
                         <div class="row">
                             <div class="col-md-9">
                                 {* User's  address *}
@@ -79,10 +79,10 @@
                         </div>
 
                         {* User's  phone *}
-                        <div class="form__group">
-                            <input class="form__input form__placeholder--focus" type="text" name="phone" value="{$request_data.phone|escape}" data-language="form_phone" />
-                            <span class="form__placeholder">{$lang->form_phone}</span>
-                        </div>
+{*                        <div class="form__group">*}
+{*                            <input class="form__input form__placeholder--focus" type="text" name="phone" value="{$request_data.phone|escape}" data-language="form_phone" />*}
+{*                            <span class="form__placeholder">{$lang->form_phone}</span>*}
+{*                        </div>*}
 
                         {* User's  password *}
                         <div class="form__group">
@@ -110,6 +110,13 @@
                         {/if}
                         <input name="register" type="hidden" value="1">
                         {* Submit button *}
+                        <label class="checkbox">
+                            <input id="cookie" type="checkbox" {if $request_data.name} checked{/if} class="checkbox__input">
+                            <svg class="checkbox__icon" viewBox="0 0 20 20">
+                                <path class="checkbox__mark" fill="none" d="M4 10 l5 4 8-8.5"></path>
+                            </svg>
+                            Сохранять минимально возможные cookie. Без них часть функционала не будет работать.
+                        </label>
                         <button type="submit" value="{$lang->register_create_account}" class="form__button button--blick g-recaptcha" name="register" {if $settings->captcha_type == "invisible"}data-sitekey="{$settings->public_recaptcha_invisible}" data-badge='bottomleft' data-callback="onSubmit"{/if}>
                             <span data-language="register_create_account">{$lang->register_create_account}</span>
                         </button>
