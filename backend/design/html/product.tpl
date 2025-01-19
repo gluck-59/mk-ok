@@ -171,7 +171,7 @@
 <form method="post" id="product" enctype="multipart/form-data" class="clearfix fn_fast_button">
     <input type=hidden name="session_id" value="{$smarty.session.id}">
     <input type="hidden" name="lang_id" value="{$lang_id}" />
-    <input type="hidden" id="manufacturerName" value="{$manufacturers[$product->manufacturer_id]->url}">
+    <input type="hidden" id="manufacturerName" value="{$manufacturers[$product->manufacturer_id]->name}">
     <div class="row">
         <div class="col-xs-12">
             <div class="boxed">
@@ -498,11 +498,11 @@
 {*                                        </div>*}
                                         <div class="okay_list_boding variants_item_units">
                                             <div class="heading_label">Ebay цена</div>
-                                            <button class="ebayPriceCheck btn btn_small btn_inner" value="{$variant->id|escape}">Обнов.</button>
+                                            <button class="ebayPriceCheck btn btn_small btn_inner" type="button" value="{$variant->id|escape}">Обнов.</button>
                                         </div>
                                         <div class="okay_list_boding variants_item_units">
                                             <div class="heading_label">Поиск</div>
-                                            <button {if !$variant->sku && !$product->partNumber && $product->ebayItemNo == 0 }disabled{/if} id="ebaySearch" class="btn btn_small btn-warning" value="{$variant->id|escape}">Ebay</button>
+                                            <button {if !$variant->sku && !$product->partNumber && $product->ebayItemNo == 0 }disabled{/if} type="button" id="ebaySearch" class="btn btn_small btn-warning" value="{$variant->id|escape}">Ebay</button>
                                         </div>
                                         {if !$variant@first}
                                         <div class="okay_list_boding okay_list_close remove_variant">
