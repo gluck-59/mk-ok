@@ -171,6 +171,7 @@
 <form method="post" id="product" enctype="multipart/form-data" class="clearfix fn_fast_button">
     <input type=hidden name="session_id" value="{$smarty.session.id}">
     <input type="hidden" name="lang_id" value="{$lang_id}" />
+    <input type="hidden" id="manufacturerName" value="{$manufacturers[$product->manufacturer_id]->url}">
     <div class="row">
         <div class="col-xs-12">
             <div class="boxed">
@@ -454,7 +455,7 @@
                                                     {include file='svg_icon.tpl' svgId='icon_tooltips'}
                                                 </i>
                                             </div>
-                                            <input class="variant_input" name="variants[sku][]" type="text" value="{$variant->sku|escape}"/>
+                                            <input class="variant_input" id="sku" variant_id="{$variant->id|escape}" name="variants[sku][]" type="text" value="{$variant->sku|escape}"/>
                                         </div>
                                         <div class="okay_list_boding variants_item_name">
                                             <div class="heading_label">{$btr->general_option_name|escape} {if $variant->price_updated}<span style="float: right;">Ebay upd. {$variant->price_updated|date_format:'%d.%m.%Y в %H:%M'}</span>{/if}</div>
@@ -497,7 +498,11 @@
 {*                                        </div>*}
                                         <div class="okay_list_boding variants_item_units">
                                             <div class="heading_label">Ebay цена</div>
-                                            <button id="ebayPriceCheck" class="btn btn_small btn-warning" value="{$variant->id|escape}">Check</button>
+                                            <button class="ebayPriceCheck btn btn_small btn_inner" value="{$variant->id|escape}">Обнов.</button>
+                                        </div>
+                                        <div class="okay_list_boding variants_item_units">
+                                            <div class="heading_label">Поиск</div>
+                                            <button {if !$variant->sku && !$product->partNumber && $product->ebayItemNo == 0 }disabled{/if} id="ebaySearch" class="btn btn_small btn-warning" value="{$variant->id|escape}">Ebay</button>
                                         </div>
                                         {if !$variant@first}
                                         <div class="okay_list_boding okay_list_close remove_variant">
@@ -1063,13 +1068,25 @@
             return false;
         });
 
-// ebay price check
-$(document).on("click", "#ebayPriceCheck", function (e) {
-    e.stopPropagation();
-    e.preventDefault();
-    let ebayResult = ebayPriceCheck(e.target.value);
-// console.log('ebayResult', ebayResult);
-})
+
+        // ebay найти новый
+        $(document).on("click", "#ebaySearch", function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+            let ebaySeachUrl = ebaySearchUrl(e.target.value);
+        });
+
+        // ebay price check
+        $(document).on("click", ".ebayPriceCheck", function (e) {
+            e.stopPropagation();
+            e.preventDefault();
+
+            ebayPriceCheck(e.target.value);
+            $(this).toggleClass('loading');
+        })
+
+
+
 
         var clone_cat = $(".fn_new_category_item").clone();
         $(".fn_new_category_item").remove();
@@ -1278,6 +1295,15 @@ $(document).on("click", "#ebayPriceCheck", function (e) {
     });
 
 
+    function ebaySearchUrl(variantId) {
+        let sku = $('#sku[variant_id="'+variantId+'"]').val();
+        let manufacturerName = $('#manufacturerName').val();
+        if (sku.length == 0) {
+            sku = $('[name=partNumber]').val();
+            manufacturerName = '';
+        }
+        window.open('https://www.ebay.com/sch/i.html?_stpos=03560&_fcid=186&LH_ItemCondition=3&rt=nc&LH_BIN=1&_stpos=03000&_fcid=186&_osacat=6000&_sacat=6000&_sop=15&_nkw=' + manufacturerName + '%20' + sku);
+    }
 
     function ebayPriceCheck(variantId) {
         $.ajax({
@@ -1286,21 +1312,20 @@ $(document).on("click", "#ebayPriceCheck", function (e) {
             data: {variantId: variantId},
             dataType: 'json',
             success: function (data) {
-console.log('data', data);
                 if (data.debug !== undefined && data.debug.errors !== undefined) {
                     toastr.error(data.debug.errors);
                 } else {
-// let oldComparePrice = $('#compare_price[variant_id="'+variantId+'"]').val();
-// let oldPrice = $('#price[variant_id="'+variantId+'"]').val();
-
-$('#compare_price[variant_id="'+variantId+'"]').prev().text(Math.round(data.ebayPrice))
-$('#price[variant_id="'+variantId+'"]').prev().text(Math.round(data.outPrice))
+                    $('#compare_price[variant_id="'+variantId+'"]').prev().text(data.currency +' ' + Math.round(data.ebayPrice)).css('background', 'rgb(255, 247, 212)').css('padding', '3%');
+                    $('#price[variant_id="'+variantId+'"]').prev().text(data.currency + ' ' + Math.round(data.outPrice)).css('background', 'rgb(255, 247, 212)').css('padding', '3%');
                     toastr.success(
                         'Искали: ' + data.искали
                         + '<br>Закуп: ' + data.currency + Math.round(data.ebayPrice)
                         + '<br>Выход: ' + data.currency + Math.round(data.outPrice),
                         data.name, {"timeOut": 0})
                 }
+            },
+            complete: function () {
+                $('.ebayPriceCheck').removeClass('loading');
             }
         })
     }

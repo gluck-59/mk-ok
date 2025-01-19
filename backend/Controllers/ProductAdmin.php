@@ -141,7 +141,7 @@ class ProductAdmin extends IndexAdmin
         $brands = $brandsEntity->find(['limit' => $brandsCount]);
 
         $manufacturersCount = $manufacturersEntity->count();
-        $manufacturers = $manufacturersEntity->find(['limit' => $manufacturersCount]);
+        $manufacturers = $manufacturersEntity->mappedBy('id')->find(['limit' => $manufacturersCount]);
 
 
         $this->design->assign('brands',     $brands);

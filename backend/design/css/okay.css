@@ -672,6 +672,9 @@ a.link_white:hover{
     font-size: 13px;
     transition: all 0.2s ease-in-out;
 }
+.btn.loading {
+    background: url(/backend/design/images/loader.gif) center no-repeat;
+}
 .btn_admin{
     display: inline-block;
     font-weight: 500;
