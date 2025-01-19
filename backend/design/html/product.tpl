@@ -491,10 +491,10 @@
                                             <div class="heading_label">{$btr->general_qty|escape}</div>
                                             <input class="variant_input" name="variants[stock][]" type="text" value="{if $variant->infinity}∞{else}{$variant->stock|escape}{/if}"/>
                                         </div>
-                                        <div class="okay_list_boding variants_item_units">
-                                            <div class="heading_label">{$btr->products_variant_units|escape}</div>
-                                            <input class="variant_input" name="variants[units][]" type="text" value="{$variant->units|escape}"/>
-                                        </div>
+{*                                        <div class="okay_list_boding variants_item_units">*}
+{*                                            <div class="heading_label">{$btr->products_variant_units|escape}</div>*}
+{*                                            <input class="variant_input" name="variants[units][]" type="text" value="{$variant->units|escape}"/>*}
+{*                                        </div>*}
                                         <div class="okay_list_boding variants_item_units">
                                             <div class="heading_label">Ebay цена</div>
                                             <button id="ebayPriceCheck" class="btn btn_small btn-warning" value="{$variant->id|escape}">Check</button>
@@ -1290,6 +1290,11 @@ console.log('data', data);
                 if (data.debug !== undefined && data.debug.errors !== undefined) {
                     toastr.error(data.debug.errors);
                 } else {
+// let oldComparePrice = $('#compare_price[variant_id="'+variantId+'"]').val();
+// let oldPrice = $('#price[variant_id="'+variantId+'"]').val();
+
+$('#compare_price[variant_id="'+variantId+'"]').prev().text(Math.round(data.ebayPrice))
+$('#price[variant_id="'+variantId+'"]').prev().text(Math.round(data.outPrice))
                     toastr.success(
                         'Искали: ' + data.искали
                         + '<br>Закуп: ' + data.currency + Math.round(data.ebayPrice)
