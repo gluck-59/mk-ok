@@ -20,6 +20,8 @@ if (!empty($_SERVER['HTTP_USER_AGENT'])) {
     session_name(md5($_SERVER['HTTP_USER_AGENT']));
 }
 session_start();
+$_SESSION['user_ip'] = $_SERVER['REMOTE_ADDR'];
+$_SESSION['user_ua'] = $_SERVER['HTTP_USER_AGENT'];
 
 /** @var OkayContainer $DI */
 $DI = include 'Okay/Core/config/container.php';
