@@ -458,7 +458,7 @@
                                             <input class="variant_input" id="sku" variant_id="{$variant->id|escape}" name="variants[sku][]" type="text" value="{$variant->sku|escape}"/>
                                         </div>
                                         <div class="okay_list_boding variants_item_name">
-                                            <div class="heading_label">{$btr->general_option_name|escape} {if $variant->price_updated}<span style="float: right;">Ebay upd. {$variant->price_updated|date_format:'%d.%m.%Y в %H:%M'}</span>{/if}</div>
+                                            <div class="heading_label">{$btr->general_option_name|escape} {if $variant->price_updated}<span style="float: right;">Price upd. {$variant->price_updated|date_format:'%d.%m.%Y в %H:%M'}</span>{/if}</div>
                                             <input name="variants[id][]" type="hidden" value="{$variant->id|escape}" />
                                             <input name="variants[price_updated][]" type="hidden" value="NOW()" />
                                             <input class="variant_input" name="variants[name][]" type="text" value="{$variant->name|escape}" />
@@ -540,7 +540,7 @@
                                         <input class="variant_input" name="variants[sku][]" type="text" value=""/>
                                     </div>
                                     <div class="okay_list_boding variants_item_name">
-                                        <div class="heading_label">{$btr->general_option_name|escape} {if $variant->price_updated}<span style="float: right;">Ebay upd. {$variant->price_updated|date_format:'%d.%m.%Y в %H:%M'}</span>{/if}</div>
+                                        <div class="heading_label">{$btr->general_option_name|escape} {if $variant->price_updated}<span style="float: right;">Price upd. {$variant->price_updated|date_format:'%d.%m.%Y в %H:%M'}</span>{/if}</div>
                                         <input name="variants[id][]" type="hidden" value="" />
                                         <input name="variants[price_updated][]" type="hidden" value="NOW()" />
                                         <input class="variant_input" name="variants[name][]" type="text" value="" />

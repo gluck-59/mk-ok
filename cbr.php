@@ -5,7 +5,7 @@ const USD_COEFF = 1.049;
 const EUR_COEFF = 1.017;
 
 
-if (1 /*in_array($_SERVER['SERVER_ADDR'], ['127.0.0.1', '::1', '0.0.0.0', 'localhost'])*/) {
+if (0 /*in_array($_SERVER['SERVER_ADDR'], ['127.0.0.1', '::1', '0.0.0.0', 'localhost'])*/) {
     $ini_array = parse_ini_file("config/config.local.php");
 } else {
     $ini_array = parse_ini_file("config/config.php");

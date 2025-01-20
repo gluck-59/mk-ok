@@ -959,7 +959,7 @@
                 positionClass: 'toast-top-right',
                 preventDuplicates: false,
                 onclick: null,
-                timeOut: 0
+                // timeOut: 0
             };
             $.ajax({
                 type: "POST",

@@ -194,7 +194,7 @@
                                             {if $is_mobile || $is_tablet}
                                                 <p><b><a href="{$order->payment_details->Data->payload}" target="_blank">Оплатить в НСПК</a></b></p>
                                             {else}
-                                                <div style="margin: -80px 0">
+                                                <div style="margin: -60px 0">
                                                     <center><img class="lazy" data-src="/{$config->qrcodes_dir}{$order->payment_details->Data->qrcId}.png" src="{$rootUrl}/design/{get_theme}/images/xloading.gif" alt="{$payment_method->name|escape}" title="{$payment_method->name|escape}"/></center>
                                                 </div>
                                             {/if}
