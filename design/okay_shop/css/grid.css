@@ -10,6 +10,27 @@
 .container {
     max-width: 1366px;
 }
+
+.cookie.container {
+    color: var(--okay-body-text);
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50px;
+    background: whitesmoke;
+    padding: 15px;
+    border-radius: 10px 10px 0 0;
+}
+.cookie.container button {
+    padding: 0 10px;
+    border: solid;
+    border-color: var(--okay-basic-company);
+    border-radius: 2px;
+    cursor: pointer;
+    color: var(--okay-body-text);
+}
+
 .container-less{
     max-width: 860px;
 }

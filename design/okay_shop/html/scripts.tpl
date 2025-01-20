@@ -505,4 +505,8 @@
         };
     }
 
+    function hideCookiePanel() {
+        $('.cookie.container').hide();
+        document.cookie = encodeURIComponent('hideCookiePanel') + '=' + encodeURIComponent(1);
+    }
 </script>

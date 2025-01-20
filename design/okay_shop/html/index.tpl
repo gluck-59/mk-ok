@@ -359,6 +359,11 @@
                 </div>
             </div>
         </div>
+        {if !$user && !$smarty.cookies.hideCookiePanel}
+            <div class="cookie container">
+                Мы используем cookie потому что без них не будет работать вообще ничего. <button type="button" onclick="hideCookiePanel()">Понятно</button>
+            </div>
+        {/if}
     </footer>
     {/if}
 
