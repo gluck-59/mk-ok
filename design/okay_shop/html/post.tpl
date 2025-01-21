@@ -9,7 +9,7 @@
     {* Content with post *}
     <div class="post_container post_container--left">
         <div class="post_container__wrapper">
-            <div class="post_container__wallpaper" style="background: #F4F6F9 url({$post->image|resize:1100:600:false:$config->resized_blog_dir}) no-repeat center center;background-size: cover;">
+            <div class="post_container__wallpaper" style="background: var(--okay-bg) url({$post->image|resize:1100:600:false:$config->resized_blog_dir}) no-repeat center center;background-size: cover;">
                 {* Post category label *}
                 {if !empty($post->categories)}
                     <div class="post__labels">

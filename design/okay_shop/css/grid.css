@@ -18,7 +18,7 @@
     left: 0;
     right: 0;
     height: 50px;
-    background: whitesmoke;
+    background: var(--okay-boxed-color);
     padding: 15px;
     border-radius: 10px 10px 0 0;
 }
@@ -29,6 +29,7 @@
     border-radius: 2px;
     cursor: pointer;
     color: var(--okay-body-text);
+    background: bottom;
 }
 
 .container-less{

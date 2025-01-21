@@ -10,6 +10,30 @@
     <link href="{$rootUrl}/design/{$settings->theme}/fonts/montserrat/Montserrat-Medium.woff2" rel="preload" as="font" crossorigin="anonymous" type="font/woff2">
 
     <style>
+        :root {
+            color-scheme: light dark;
+            --okay-bg: light-dark(#FFF, #282828);
+            --okay-border-color: light-dark(#dbdbdb,#515151);
+
+            --okay-button-color: light-dark(#3c952e, #204f19);
+            --okay-button-text: light-dark(#f5f5f5, #959595);
+
+            --okay-basic-company: light-dark(#e87800, #763f03);
+            --okay-second-company: light-dark(#232f3e, #3c3c3c);
+            --okay-basic-company-text: light-dark(#fff4e8, #cecece);
+            --okay-second-company-text: light-dark(#fff, #999);
+
+            --okay-boxed-color: light-dark(#FFF, #282828);
+            --okay-boxed-text: light-dark(#222, #eee);
+            --okay-body-heading: light-dark(#222, #999);
+            --okay-body-text: light-dark(#222, #999);
+
+            --okay-button-color-hover: light-dark(#0ec40e, #065e06);
+            --okay-button-text-hover: light-dark(#fff, #000);
+            --okay-button-second-color: light-dark(#ddd, #222);
+            --okay-button-second-text: light-dark(#fff, #aaa);
+--okay-shadow-color: 0 2px 5px rgba(0, 0, 0, .3);
+        }
         @font-face {
             font-family: 'Montserrat';
             font-display: swap;

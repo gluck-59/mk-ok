@@ -137,7 +137,7 @@
                                         <div class="block__inner">
                                             <div class="h6" data-language="cart_title">{$lang->cart_title}</div>
                                             {if !$user}
-                                                <div class="message_info">
+                                                <div>
                                                     <p>Мы не настаиваем, но без регистрации ты не увидишь трек-номера посылок и историю заказов
                                                     <br><a href="/user/login">Вход / регистрация</a></>
                                                 </div>

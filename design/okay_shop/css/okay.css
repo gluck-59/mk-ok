@@ -141,7 +141,7 @@ h6,
 
 /***** #Links ***************************************************************/
 a {
-  color: var(--okay-basic-company);
+  color: var(--okay-boxed-text);
   text-decoration: underline;
   background-color: transparent;
   -webkit-text-decoration-skip: objects;
@@ -285,7 +285,7 @@ blockquote cite:before {
   padding: 15px;
 }
 .block--border {
-  border: 1px solid #dbdbdb;
+  border: 1px solid var(--okay-border-color);
   border-radius: 3px;
 }
 .block--shadow {
@@ -308,7 +308,7 @@ blockquote cite:before {
   margin-bottom: 15px;
 }
 .block__header--border {
-  border: 1px solid #dbdbdb;
+  border: 1px solid var(--okay-border-color);
   border-radius: 3px;
 }
 .block__main_brands {
@@ -316,7 +316,7 @@ blockquote cite:before {
   max-width: 100%;
 }
 .block__title {
-  color: var(--okay-boxed-text);
+  color: var(--okay-body-heading);
   font-size: 24px;
   line-height: 1.2;
   font-weight: 500;
@@ -354,11 +354,11 @@ blockquote cite:before {
 }
 
 .block__title--order .order_number {
-  color: #1dc116;
+  color: var(--okay-button-color);
   padding: 3px 5px;
   display: inline-block;
   font-size: 24px;
-  border: 1px solid #1dc116;
+  border: 1px solid var(--okay-button-color);
   border-radius: 4px;
   line-height: 1;
   margin: 0px 8px;
@@ -374,8 +374,8 @@ blockquote cite:before {
   white-space: nowrap;
   position: absolute;
   padding: 5px 10px;
-  background: rgb(255, 224, 172);
-  color: rgb(47, 47, 47);
+  background: var(--okay-basic-company);
+  color: var(--okay-second-company-text);
   font-size: 12px;
   font-weight: 400;
   right: 0;
@@ -454,7 +454,7 @@ blockquote cite:before {
 }
 .block__description--style {
   background: var(--okay-boxed-color);
-  color: var(--okay-boxed-text);
+  /*color: var(--okay-boxed-text);*/
   font-size: 16px;
   line-height: 1.8;
 }
@@ -641,8 +641,8 @@ blockquote cite:before {
   clear: both;
   padding: 10px;
   margin: 10px 0;
-  border-left: 4px solid rgb(188, 188, 188);
-  background: rgb(247, 247, 247);
+  border: solid 1px var(--okay-border-color);
+  border-left: 4px solid var(--okay-border-color);
   display: block;
   border-radius: 5px;
   font-weight: 400;
@@ -686,7 +686,8 @@ blockquote cite:before {
   color: #222;
 }
 .boxed--notify {
-  background-color: #f8f8f8;
+  background-color: var(--okay-bg);
+  border: solid var(--okay-border-color);
   border-left: 4px solid #c2c2c2;
   color: #6f6f6f;
 }
@@ -927,7 +928,7 @@ a.button--blick:hover:after,
   user-select: none;
   padding: 0 15px 0 15px;
   color: var(--okay-body-text);
-  background: rgb(255, 255, 255);
+  background: var(--okay-bg);
   overflow: hidden;
   position: relative;
   line-height: 1.2;
@@ -964,8 +965,8 @@ textarea,
 .form__input {
   display: inline-block;
   color: var(--okay-body-text);
-  border: 1px solid #dbdbdb;
-  background-color: rgb(255, 255, 255);
+  border: 1px solid var(--okay-border-color);
+  background-color: var(--okay-bg);
   overflow: visible;
   resize: none;
   text-transform: none;
@@ -1053,7 +1054,7 @@ input::-webkit-input-placeholder {
   font-size: 11px;
   font-weight: 400;
   font-style: italic;
-  background: #fff;
+  background: var(--okay-bg);
   padding: 0 5px;
   top: -5px;
   cursor: default;
@@ -1500,7 +1501,7 @@ select {
   position: absolute;
   top: 100%;
   width: auto;
-  background: rgb(255, 255, 255);
+  background: var(--okay-boxed-color);
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   color: var(--okay-body-text);
 }
@@ -1616,7 +1617,7 @@ select {
   user-select: none;
   padding: 0;
   color: var(--okay-body-text);
-  background: #fff;
+  background: var(--okay-bg);
   overflow: hidden;
   position: relative;
   z-index: 2;
@@ -1663,8 +1664,8 @@ select {
   -webkit-align-items: center;
   -ms-flex-align: center;
   align-items: center;
-  border-bottom: 4px solid rgb(233, 234, 237);
-  background: #fff;
+  border-bottom: 4px solid var(--okay-border-color);
+  background: var(--okay-bg);
 }
 .tabs__navigation--user {
   -webkit-box-orient: vertical;
@@ -1673,7 +1674,7 @@ select {
   -ms-flex-direction: column;
   flex-direction: column;
   border-bottom: none;
-  background: #fff;
+  background: var(--okay-bg);
 }
 .tabs__link {
   position: relative;
@@ -1688,7 +1689,7 @@ select {
   text-decoration: none;
   height: 45px;
   padding: 0 30px;
-  color: #222;
+  color: var(--okay-body-text);
   font-size: 16px;
   font-weight: 600;
   -webkit-transition: all 0.3s ease 0s;
@@ -1723,7 +1724,7 @@ select {
   border-bottom: 1px solid rgb(227, 227, 227);
   text-decoration: none;
   padding: 18px 0px;
-  color: rgb(34, 34, 34);
+  color: var(--okay-second-company-text);
   font-size: 13px;
   font-weight: 500;
   min-height: 40px;
@@ -1742,12 +1743,13 @@ select {
   border-bottom: none;
 }
 .tabs__navigation--user .tabs__link.selected {
-  color: var(--okay-basic-company);
+  color: var(--okay-boxed-text);
+  font-weight: bold;
 }
 
 .tabs__content {
   overflow: hidden;
-  background: #fff;
+  /*background: #fff;*/
 }
 .tab {
   display: none;
@@ -1821,12 +1823,12 @@ select {
 .table_wrapper {
   overflow: auto;
   max-width: 100%;
-  background: linear-gradient(to right, #fff 30%, #fff0),
-    linear-gradient(to right, #fff0, #fff 70%) 0 100%,
-    radial-gradient(farthest-side at 0% 50%, #0003, #0000),
-    radial-gradient(farthest-side at 100% 50%, #0003, #0000) 0 100%;
-  background-repeat: no-repeat;
-  background-color: #fff;
+  /*background: linear-gradient(to right, #fff 30%, #fff0),*/
+  /*  linear-gradient(to right, #fff0, #fff 70%) 0 100%,*/
+  /*  radial-gradient(farthest-side at 0% 50%, #0003, #0000),*/
+  /*  radial-gradient(farthest-side at 100% 50%, #0003, #0000) 0 100%;*/
+  /*background-repeat: no-repeat;*/
+  /*background-color: #fff;*/
   background-size: 40px 100%, 40px 100%, 14px 100%, 14px 100%;
   background-position: 0 0, 100%, 0 0, 100%;
   background-attachment: local, local, scroll, scroll;
@@ -1848,7 +1850,7 @@ select {
   border: 1px solid #dbdbdb;
 }
 .block__description--style:not(.table_not_bg) tbody tr:nth-child(2n) {
-  background-color: #e9e9e9;
+  background-color: var(--okay-button-second-color);
 }
 .block__description--style th {
   position: -webkit-sticky;
@@ -2373,7 +2375,7 @@ select {
   top: -7px;
   border-radius: 4px;
   border: 3px solid #e1e8ed;
-  background-color: #fff;
+  background-color: var(--okay-bg);
   border-color: var(--okay-basic-company);
   cursor: pointer;
   box-shadow: none;
@@ -3226,4 +3228,9 @@ button.swiper-pagination-bullet {
 
 .details_boxed .select2-container--default .select2-results>.select2-results__options {
   max-height: 400px!important;
+}
+
+.select2-container--default .select2-results>.select2-results__options
+{
+  background: var(--okay-bg);
 }

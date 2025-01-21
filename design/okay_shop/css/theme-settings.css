@@ -3,22 +3,3 @@
 * Регистрировать этот файл для подключения в шаблоне не нужно
 */
 
-:root {
-	--okay-button-color: #3c952e;
-	--okay-button-text: #f5f5f5;
-	--okay-button-color-hover: #0ec40e;
-	--okay-button-text-hover: #fff;
-	--okay-basic-company: #e87800;
-	--okay-second-company: #232f3e;
-	--okay-basic-company-text: #fff4e8;
-	--okay-second-company-text: #fff;
-	--okay-bg: #f5f5f5;
-	--okay-body-text: #234;
-	--okay-body-heading: #222;
-	--okay-boxed-color: #fff;
-	--okay-boxed-text: #222;
-	--okay-button-second-color: #222;
-	--okay-button-second-text: #fff;
-	--okay-shadow-color: 0 2px 5px rgba(0, 0, 0, .3);
-	--okay-border-color: #dbdbdb;
-}

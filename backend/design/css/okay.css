@@ -31,6 +31,32 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300i,700|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&subset=cyrillic,cyrillic-ext,latin-ext');
 */
 
+:root {
+    color-scheme: light dark;
+    --okay-bg: light-dark(#FFF, #282828);
+    --okay-border-color: light-dark(#dbdbdb,#515151);
+
+    --okay-button-color: light-dark(#3c952e, #204f19);
+    --okay-button-text: light-dark(#f5f5f5, #959595);
+
+    --okay-basic-company: light-dark(#e87800, #763f03);
+    --okay-second-company: light-dark(#232f3e, #3c3c3c);
+    --okay-basic-company-text: light-dark(#fff4e8, #cecece);
+    --okay-second-company-text: light-dark(#fff, #999);
+
+    --okay-boxed-color: light-dark(#FFF, #282828);
+    --okay-boxed-text: light-dark(#222, #eee);
+    --okay-body-heading: light-dark(#222, #999);
+    --okay-body-text: light-dark(#222, #999);
+
+    --okay-button-color-hover: #0ec40e;
+    --okay-button-text-hover: #fff;
+    --okay-button-second-color: light-dark(#ddd, #222);
+    --okay-button-second-text: light-dark(#fff, #aaa);
+--okay-shadow-color: 0 2px 5px rgba(0, 0, 0, .3);
+}
+
+
 /************************************************************************* Общие стили  */
 html {
     max-width: 100%;
@@ -46,7 +72,7 @@ body {
     line-height: 1.2;
     color: #848484;
     font-weight: normal;
-    background-color: rgb(247, 247, 247);
+    background-color: var(--okay-bg);
     max-width: 100%;
     min-width: 320px;
     -moz-osx-font-smoothing: grayscale;
@@ -364,7 +390,7 @@ body:not(.top-nav) header.navbar {
 .heading_page{
     font-family: 'Open Sans Condensed', sans-serif;
     font-weight: 600;
-    color: #2b303b;
+    color: var(--okay-body-heading);
     font-size: 28px;
     line-height: 30px;
     margin-top: 20px;
@@ -372,7 +398,7 @@ body:not(.top-nav) header.navbar {
 }
 .heading_box{
     font-weight: 600;
-    color: #333;
+    color: var(--okay-body-text);
     font-size: 18px;
     line-height: 22px;
     margin-bottom: 15px;
@@ -573,7 +599,7 @@ body:not(.top-nav) header.navbar {
 }
 .feature_value_name,
 .okay_list_heading a{
-    color: #fff;
+    color: var(--okay-button-text);
     margin-left: 0;
     display: -webkit-box;
     display: -webkit-flex;
@@ -1469,10 +1495,10 @@ a.link_white:hover{
 
 
 .boxed{
-    background: #FFF;
+    background-color: var(--okay-bg);
     border-radius: 3px;
-    border: 1px solid rgb(238, 238, 238);
-    color: #333;
+    border: 1px solid var(--okay-border-color);
+    color: var(--okay-body-text);
     font-size: 14px;
     font-weight: 500;
     padding: 10px;
@@ -1722,11 +1748,11 @@ a.link_white:hover{
 /************************************************************************* Form  */
 .variant_input,
 .form-control {
-    background-color: #FCFCFC;
+    background-color: var(--okay-bg);
     background-image: none;
-    border: 1px solid #E4E4E4;
+    border: 1px solid var(--okay-border-color);
     -webkit-appearance: none;
-    color: #333;
+    /*color: #333;*/
     outline: 0;
     height: 35px;
     padding: 6px 12px;
@@ -1943,7 +1969,7 @@ a.link_white:hover{
 .variant_input:focus,
 .form-control:focus {
     border-color: #BFBFBF;
-    background-color: #fff;
+    /*background-color: #fff;*/
     outline: 0 !important;
     -webkit-box-shadow: none;
     box-shadow: none;
@@ -2101,8 +2127,8 @@ select{
 
 .okay_ckeckbox::before {
     cursor: pointer;
-    background: rgb(240, 240, 240);
-    color: #fff;
+    background: var(--okay-button-second-color);
+    color: var(--okay-bg);
     border: 1px solid transparent;
     border-radius: 4px;
     content: "";
@@ -3013,7 +3039,7 @@ label.switch_label i{
 /***************************************************  Стилизация списков на всех страницах    */
 .okay_list{
     text-align: center;
-    border: 1px solid #f2f2f2;
+    border: 1px solid var(--okay-border-color);
 }
 .ok_related_list{
     border: none;
@@ -3097,7 +3123,8 @@ label.switch_label i{
     -ms-flex-pack: justify;
 }
 .okay_list .okay_list_body_item{
-    border-bottom: 1px solid #f2f2f2;
+    background-color: var(--okay-bg);
+    border-bottom: 1px solid var(--okay-border-color);
     min-height: 80px;
 }
 .okay_list .min_h{
@@ -3105,7 +3132,7 @@ label.switch_label i{
     min-height: 80px;
 }
 .okay_list .okay_list_body_item:hover{
-    background-color: rgba(250, 250, 250, 0.51);
+    background-color: var(--okay-border-color);
 }
 
 .okay_list .okay_list_body_item.module_access_expire{
@@ -3345,7 +3372,7 @@ label.switch_label i{
     text-align: center!important;
 }
 .okay_list .okay_list_boding a:not(.btn){
-    color: #2b303b;
+    color: var(--okay-body-heading);
     display: block;
     text-decoration: none;
     word-wrap: break-word;
@@ -3363,7 +3390,7 @@ label.switch_label i{
     transition: 0.15s ease-out;
 }
 .okay_list .okay_list_boding a:not(.btn):hover{
-    color: #2b303b;
+    /*color: #2b303b;*/
     text-decoration: none;
 }
 .okay_list .okay_list_boding.okay_list_comments_name a:hover{
@@ -4076,7 +4103,7 @@ label.switch_label i{
 .input-group.input-group--search .form-control{
     -moz-appearance: none;
     z-index: 0!important;
-    border-right: 1px solid RGB(228, 228, 228);
+    border-right: 1px solid var(--okay-border-color);
     border-radius: 4px;
     width: 100%;
     -webkit-box-flex: 0;
@@ -4153,13 +4180,13 @@ label.switch_label i{
     border-collapse: separate;
 }
 .input-group .form-control:focus {
-    border-color: rgba(0,0,0,0.1);
-    background-color: #f0f0f0;
+    border-color: var(--okay-boxed-text);
+    /*background-color: #f0f0f0;*/
     outline: 0 !important;
     -webkit-box-shadow: none;
     box-shadow: none;
     -webkit-transition: none !important;
-    color: #626262;
+    color: var(--okay-body-text);
 }
 .input-group .input-group-addon {
     -webkit-box-flex: 0;
@@ -4254,7 +4281,7 @@ label.switch_label i{
     max-width: calc(100% - 40px);
     border-radius: 4px 0 0 4px;
     border-right: 0;
-    color: #333;
+    color: var(--okay-body-text);
     margin: 0;
 }
 .input-group-button .form-control{
@@ -5877,7 +5904,7 @@ body.menu-pin .menu_switch .menu_hamburger::after {
     cursor: pointer;
 }
 .dropzone_block_banner{
-    background: #F8F8F8;
+    background: #838383;
     width: 100%;
     height: 100%;
     text-align: center;
@@ -9037,3 +9064,17 @@ input.error {
     display: flex;
     justify-content: space-between;
 }
+
+
+.dropdown-menu, .bs-searchbox input, .bootstrap-select.btn-group .no-results, .bootstrap-select.btn-group li a, .bootstrap-select > .dropdown-toggle {
+    background: var(--okay-bg);
+    color: var(--okay-boxed-text);
+    border-color: var(--okay-border-color);
+}
+/* editor */
+.tox :not(svg) {
+    /*background-color: var(--okay-bg)!important;*/
+    /*color: var(--okay-body-text)!important;*/
+}
+
+

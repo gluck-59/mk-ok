@@ -6,7 +6,7 @@
     .table {
         width: 100%;
         margin-bottom: 1rem;
-        color: #212529;
+        color: var(--okay-body-heading);
     }
 
     .table th,
@@ -45,6 +45,7 @@
     .table-bordered th,
     .table-bordered td {
         border: 1px solid #dee2e6;
+        background-color: var(--okay-bg);
     }
 
     .table-bordered thead th,

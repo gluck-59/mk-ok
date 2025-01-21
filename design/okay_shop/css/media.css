@@ -86,8 +86,8 @@
   }
   .product_sort__link:not(.active_down):hover,
   .product_sort__link:not(.active_up):hover {
-    color: var(--okay-button-color);
-    border-color: var(--okay-button-color);
+    color: var(--okay-basic-company);
+    border-color: var(--okay-basic-company);
   }
   .form__button:hover {
     color: var(--okay-button-second-text);
@@ -152,7 +152,7 @@
     text-decoration: none;
   }
   .header-contact__inner:hover {
-    background: #fff;
+    background: var(--okay-boxed-color);
     box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.3);
     z-index: 1;
     height: auto;
@@ -197,12 +197,12 @@
   .categories_nav .categories_menu__item .categories_menu__link:hover {
     color: var(--okay-basic-company);
     text-decoration: none;
-    background: #f2f2f2;
+    background: var(--okay-boxed-color);
   }
   .categories_nav
-    .subcategory
-    .categories_menu__item
-    .categories_menu__link:hover {
+  .subcategory
+  .categories_menu__item
+  .categories_menu__link:hover {
     color: var(--okay-basic-company);
     text-decoration: none;
   }
@@ -210,10 +210,10 @@
     background: #fff;
   }
   .categories_nav
-    .level_3
-    .subcategory
-    .categories_menu__item
-    .categories_menu__link:hover {
+  .level_3
+  .subcategory
+  .categories_menu__item
+  .categories_menu__link:hover {
     color: var(--okay-basic-company);
     text-decoration: none;
   }
@@ -222,7 +222,7 @@
   }
   .author_list__item:hover .author_list__preview,
   .brand__item:hover .brand__preview {
-    background: #fff;
+    /*background: #fff;*/
     border-color: transparent;
     border-radius: 4px;
     -webkit-box-shadow: 0 5px 15px #00000059;
@@ -234,7 +234,7 @@
     width: 264px;
   }
   .product_item:not(.no_hover):hover .product_preview {
-    background: #fff;
+    background: var(--okay-bg);
     border-color: transparent;
     border-radius: 4px;
     -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
@@ -298,7 +298,7 @@
     color: var(--okay-button-color);
   }
   .article_item:hover .article__preview {
-    background: rgb(255, 255, 255);
+    background: var(--okay-bg);
     border-color: transparent;
     border-radius: 4px;
     -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.35);
@@ -324,9 +324,9 @@
   }
   .pager a:hover {
     text-decoration: none;
-    color: var(--okay-button-color);
-    background: #fff;
-    border-color: #dbdbdb;
+    color: var(--okay-button-second-text);
+    background: var(--okay-second-company);
+    border-color: var(--okay-button-second-text);
   }
   .sidebar_card__link:hover,
   .browsed__link:hover {
@@ -1364,6 +1364,7 @@
   }
   .details_boxed__select .select2-container {
     width: 100% !important;
+    background: var(--okay-bg)!important;
   }
   .header_informers__item i {
     width: 24px;
