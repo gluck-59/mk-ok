@@ -2641,7 +2641,7 @@ a.filter__catalog_link svg {
   align-items: center;
   position: absolute;
   bottom: 0;
-  background: #fff;
+  /*background: #fff;*/
   width: 100%;
 }
 .article__footer::after {
@@ -2651,18 +2651,18 @@ a.filter__catalog_link svg {
   left: 0;
   height: 20px;
   width: 100%;
-  background-image: -webkit-linear-gradient(
-    top,
-    rgba(255, 255, 255, 0),
-    #fff 50%,
-    #fff
-  );
-  background-image: linear-gradient(
-    to bottom,
-    rgba(255, 255, 255, 0),
-    rgb(255, 255, 255) 50%,
-    rgb(255, 255, 255)
-  );
+  /*background-image: -webkit-linear-gradient(*/
+  /*  top,*/
+  /*  rgba(255, 255, 255, 0),*/
+  /*  #fff 50%,*/
+  /*  #fff*/
+  /*);*/
+  /*background-image: linear-gradient(*/
+  /*  to bottom,*/
+  /*  rgba(255, 255, 255, 0),*/
+  /*  rgb(255, 255, 255) 50%,*/
+  /*  rgb(255, 255, 255)*/
+  /*);*/
 }
 .author_card {
   display: -webkit-box;
