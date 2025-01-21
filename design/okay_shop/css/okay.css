@@ -3234,3 +3234,7 @@ button.swiper-pagination-bullet {
 {
   background: var(--okay-bg);
 }
+
+.fancybox-content {
+  background-color: var(--okay-bg);
+}
