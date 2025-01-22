@@ -11,8 +11,8 @@
 
     <style>
         :root {
-            color-scheme: light dark;
-            --okay-bg: light-dark(#FFF, #282828);
+             color-scheme: light dark;
+            --okay-bg: light-dark(#f5f5f5, #282828);
             --okay-border-color: light-dark(#dbdbdb,#515151);
 
             --okay-button-color: light-dark(#3c952e, #204f19);

@@ -572,14 +572,14 @@
     content: none;
   }
   .footer__title {
-    border: 1px solid #e2e2e2;
+    border: 1px solid var(--okay-border-color);
     margin-bottom: 10px;
     padding: 0 15px;
     border-radius: 3px;
-    background: #eee;
+    background: var(--okay-bg);
     line-height: 36px;
     text-transform: uppercase;
-    color: #222;
+    color: var(--okay-body-text);
     font-weight: 500;
     font-size: 13px;
   }
@@ -1207,7 +1207,7 @@
     top: 0px;
     display: block;
     z-index: 1;
-    background: #fff;
+    background: var(--okay-border-color);
   }
   .product_preview__button--pre_order {
     padding: 0;
