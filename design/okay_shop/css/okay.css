@@ -2039,8 +2039,8 @@ select {
   display: table-cell;
   vertical-align: middle;
   text-decoration: none;
-  border-left: 1px solid #dbdbdb;
-  border-bottom: 1px solid #dbdbdb;
+  border-left: 1px solid var(--okay-border-color);
+  border-bottom: 1px solid var(--okay-border-color);
 }
 .autocomplete-suggestions span {
   white-space: nowrap;
