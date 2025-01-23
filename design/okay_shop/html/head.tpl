@@ -142,7 +142,7 @@
     {/if}
     
 {*    {if !empty($meta_description)}*}
-        <meta name="description" content="{if $meta_description}{$meta_description|escape}{else}{$meta_title|escape}{/if}}"/>
+        <meta name="description" content="{if $meta_description}{$meta_description|escape}{else}{$meta_title|escape}{/if}"/>
 {*    {/if}*}
 
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
