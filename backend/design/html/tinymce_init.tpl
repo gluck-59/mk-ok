@@ -91,10 +91,12 @@
 
             save_enablewhendirty: true,
             save_title: "save",
+            skin: window.matchMedia("(prefers-color-scheme: dark)").matches ? "oxide-dark": "oxide",
             content_css : [
                 {foreach $registered_front_css as $css}
                     "{$rootUrl}/{$css}",
                 {/foreach}
+                window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "default",
             ],
             body_class: "block__description block__description--style",
             theme_advanced_buttons3_add : "save",
@@ -103,11 +105,11 @@
                 {literal}}{/literal},
 
             language : "{$manager->lang|escape}",
-            /* Замена тега P на BR при разбивке на абзацы
+            /* Замена тега P на BR при разбивке на абзацы */
              force_br_newlines : true,
              force_p_newlines : false,
              forced_root_block : '',
-             */
+
 
             setup : function(editor) {
                 {if $smarty.get.controller != "SeoPatternsAdmin"}

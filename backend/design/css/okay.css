@@ -511,7 +511,7 @@ body:not(.top-nav) header.navbar {
     position: relative;
     height: 26px;
     padding: 0 6px;
-    background: rgb(240, 240, 240);
+    /*background: rgb(240, 240, 240);*/
     color: #333;
     border: 1px solid transparent;
     border-radius: 4px;
@@ -1994,7 +1994,11 @@ a.link_white:hover{
     opacity: 0.7
 }
 .form-control:disabled,
-.form-control[readonly] {background-color: #cfd8dc;opacity: 1;cursor: not-allowed}
+.form-control[readonly] {
+    background-color: light-dark(#ddd, #444);
+    opacity: 1;
+    cursor: not-allowed
+}
 .date_filter .form-control[readonly] {background-color: transparent;cursor: pointer}
 input[type=search] {
     -webkit-appearance: none
@@ -3048,7 +3052,7 @@ label.switch_label i{
 
 .okay_list.variants_list{
     text-align: left;
-    border: 1px solid #ccc;
+    /*border: 1px solid #ccc;*/
     border-bottom: none;
     -webkit-overflow-scrolling: touch;
     width: 100%;
@@ -3383,7 +3387,7 @@ label.switch_label i{
 .fn_switch_add_module.active .minus{display: inline-block;}
 .okay_list .okay_list_boding.okay_list_module_name .okay_list_module_name_link,
 .okay_list .okay_list_boding.okay_list_comments_name a{
-    color: #2b303b;
+    color: var(--okay-basic-company);
     display: inline-block;
     text-decoration: underline;
     word-break: break-all;
@@ -4180,7 +4184,7 @@ label.switch_label i{
     border-collapse: separate;
 }
 .input-group .form-control:focus {
-    border-color: var(--okay-boxed-text);
+    border-color: var(--okay-border-color);
     /*background-color: #f0f0f0;*/
     outline: 0 !important;
     -webkit-box-shadow: none;
@@ -4202,8 +4206,8 @@ label.switch_label i{
     line-height: 1.25;
     color: rgb(98, 98, 98);
     text-align: center;
-    border: 1px solid rgba(0,0,0,0.1);
-    background-color: rgb(240, 240, 240);
+    border: 1px solid var(--okay-border-color);
+    background-color: var(--okay-bg);
     margin: 0;
     display: -webkit-inline-box;
     display: -webkit-inline-flex;
@@ -4308,7 +4312,7 @@ label.switch_label i{
 .card .input-group .form-control {
     width: 100%;
     max-width: 100%;
-    background: #fff;
+    background: var(--okay-bg);
     border-radius:  0 4px 4px 0 ;
 }
 .input-group--small .form-control {
@@ -4438,10 +4442,10 @@ label.switch_label i{
     display: inline-block;
     height: 28px;
     width: 40px;
-    background: rgb(240, 240, 240);
+    background: var(--okay-bg);
     color: rgb(140, 140, 140);
     position: relative;
-    border: 1px solid transparent;
+    border: 1px solid var(--okay-border-color);
     border-radius: 4px;
     cursor: pointer;
     transition: 0.1s all;
@@ -6157,7 +6161,7 @@ body.menu-pin .menu_switch .menu_hamburger::after {
     line-height: 115px;
 }
 .product_image_item{
-    border: 1px solid #ddd;
+    border: 1px solid var(--okay-border-color);
     padding: 0;
     float: left;
     width: 18%;
@@ -6173,7 +6177,7 @@ body.menu-pin .menu_switch .menu_hamburger::after {
 }
 
 .dropzone_block{
-    background: #F8F8F8;
+    background: light-dark(#eee, #555);
     width: 18%;
     float: left;
     text-align: center;
@@ -6206,7 +6210,7 @@ body.menu-pin .menu_switch .menu_hamburger::after {
     color: #F8F8F8;
 }
 .first_image{
-    border-color: #4DCDC1;
+    border-color: light-dark(#4DCDC1, #457772);
 }
 .first_image:before{
     display: block;
@@ -6215,8 +6219,8 @@ body.menu-pin .menu_switch .menu_hamburger::after {
     right: 0;
     content: '';
     border: 20px solid transparent;
-    border-top: 20px solid #4DCDC1;
-    border-right: 20px solid #4DCDC1;
+    border-top: 20px solid light-dark(#4DCDC1, #457772);
+    border-right: 20px solid light-dark(#4DCDC1, #457772);
 }
 
 .first_image:after{
@@ -6576,7 +6580,7 @@ input[type=range]:focus::-ms-fill-upper {
     align-items: center;
     padding: .5rem 1rem;
     font-size:16px;
-    color: rgb(149, 149, 149);
+    color: var(--okay-boxed-text);
     margin: 0 0 -1px;
 }
 .tab_navigation_link svg{
@@ -6585,8 +6589,8 @@ input[type=range]:focus::-ms-fill-upper {
     margin-right: 10px;
 }
 .tab_navigation_link.selected{
-    color: rgb(43, 48, 59);
-    background-color: rgb(255, 255, 255);
+    color: var(--okay-body-text);
+    background-color: var(--okay-bg);
     border-color: rgb(222, 226, 230) rgb(222, 226, 230) rgb(255, 255, 255);
     text-decoration: none;
 }
@@ -6645,15 +6649,15 @@ input[type=range]:focus::-ms-fill-upper {
 .product_category_item{
     float: left;
     padding: 5px 5px;
-    background: #f7f7f7;
+    background: var(--okay-bg);
     border-radius: 4px;
-    color: #83959d;
+    color: var(--okay-body-text);
     margin: 5px;
     position: relative;
     cursor: pointer;
     max-width: 100%;
     white-space: nowrap;
-    border: 1px solid transparent;
+    border: 1px solid var(--okay-border-color);
     line-height: 14px;
 }
 .sortable_cat{
@@ -6685,7 +6689,7 @@ input[type=range]:focus::-ms-fill-upper {
     display: none;
 }
 .product_category_item.first_category{
-    border-color: #4DCDC1;
+    border-color: light-dark(#4DCDC1, #457772);
 }
 .first_category:before{
     display: block;
@@ -6694,8 +6698,8 @@ input[type=range]:focus::-ms-fill-upper {
     right: 0;
     content: '';
     border: 5px solid transparent;
-    border-top: 5px solid #4DCDC1;
-    border-right: 5px solid #4DCDC1;
+    border-top: 5px solid light-dark(#4DCDC1, #457772);
+    border-right: 5px solid light-dark(#4DCDC1, #457772);
 }
 
 
@@ -7700,14 +7704,16 @@ base::-moz-progress-bar,
 
 .d-table{display: table;height: 100%}
 .d-100vh-va-middle{display: table-cell;vertical-align: middle;}
-.d-table .input-group .form-control{border-right: 1px solid rgb(204, 204, 204);border-left: 0
+.d-table .input-group .form-control{
+    border-right: 1px solid var(--okay-border-color);
+    border-left: 0
 }
 
 .card {
     position: relative;
     display: block;
-    background-color: #fff;
-    border: 1px solid #cfd8dc;
+    background-color: var(--okay-bg);
+    border: 1px solid var(--okay-border-color);
 }
 .card-block {padding: 20px;}
 .card-block img {max-width: 100%;}
@@ -7717,7 +7723,7 @@ base::-moz-progress-bar,
     font-size: 14px;
 }
 .card-inverse .card-block--version{
-    color: #fff;
+    color: var(--okay-second-company-text);
 }
 .okay_bg {background: RGB(9, 26, 51);}
 .card-group {
@@ -7949,7 +7955,7 @@ div.tox-fullscreen {
 }
 .auth_heading {
     font-weight: 700;
-    color: #2b303b;
+    color: var(--okay-second-company-text);
     font-size: 26px;
     line-height: 1.2;
     margin-top: 0;
@@ -7957,7 +7963,7 @@ div.tox-fullscreen {
     text-align: center;
 }
 .auth_heading_promo{
-    color: #8d8d8d;
+    color: var(--okay-second-company-text);
     font-style: italic;
     text-align: center;
     margin-bottom: 25px;

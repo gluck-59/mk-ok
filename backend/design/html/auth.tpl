@@ -100,10 +100,9 @@
                     <div class="card card-inverse okay_bg py-3 hidden-md-down" style="width:50%">
                         <div class="card-block text-xs-center">
                             <div>
-                                <p>
-                                    <img src="design/images/system_logo.png" alt="OkayCMS" />
-                                </p>
-                                <div class="card-block--version">Version {$config->version|escape}</div>
+                                <p><img src="/files/images/logo.png" /></p>
+                                <p class="clearfix"></p>
+                                <div class="card-block--version">OkayCMS Version {$config->version|escape}</div>
                             </div>
                         </div>
                     </div>

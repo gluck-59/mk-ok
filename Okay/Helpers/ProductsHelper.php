@@ -138,7 +138,7 @@ class ProductsHelper implements GetListInterface
         $productsEntity->order($sortName, $this->getOrderProductsAdditionalData());
 
 
-        if ($filter['isPseudoDiscount']) {
+        if (isset($filter['isPseudoDiscount'])) {
             $products = $productsEntity->mappedBy('id')->find(['id' => $filter['pseudoDiscountIds']]);
         } else {
             $products = $productsEntity->mappedBy('id')->find($filter);

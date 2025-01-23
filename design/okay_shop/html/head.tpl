@@ -24,7 +24,7 @@
             --okay-second-company-text: light-dark(#fff, #999);
 
             --okay-boxed-color: light-dark(#FFF, #282828);
-            --okay-boxed-text: light-dark(#222, #eee);
+            --okay-boxed-text: light-dark(#333, #eee);
             --okay-body-heading: light-dark(#222, #999);
             --okay-body-text: light-dark(#222, #999);
 

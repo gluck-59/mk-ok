@@ -755,8 +755,8 @@ padding: 0;
   margin-bottom: 15px;
 }
 .sidebar__boxed--subscribe {
-  background: var(--okay-basic-company);
-  color: var(--okay-basic-company-text);
+  background: var(--okay-border-color);
+  color: var(--okay-body-text);
   padding: 30px 15px 30px;
   position: relative;
 }
