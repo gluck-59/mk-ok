@@ -11,7 +11,8 @@
 
     <style>
         :root {
-             color-scheme: light dark;
+            color-scheme: light dark;
+
             --okay-bg: light-dark(#f5f5f5, #282828);
             --okay-border-color: light-dark(#dbdbdb,#515151);
 
@@ -32,7 +33,7 @@
             --okay-button-text-hover: light-dark(#fff, #000);
             --okay-button-second-color: light-dark(#ddd, #222);
             --okay-button-second-text: light-dark(#fff, #aaa);
---okay-shadow-color: 0 2px 5px rgba(0, 0, 0, .3);
+            --okay-shadow-color: light-dark(rgba(0, 0, 0, .3), rgba(255, 255, 255, .3))
         }
         @font-face {
             font-family: 'Montserrat';
@@ -132,6 +133,7 @@
     {* Title *}
     <title>
         {if $controller == 'BrandController'}Ништяки для{/if}
+        {if $controller == 'ManufacturerController'}Ништяки производства{/if}
         {$meta_title|escape} {*if $manufacturer->name}({$manufacturer->name|escape}){/if*}
 {*        {if $controller == 'BrandController' OR $controller == 'CategoryController'}купить в Motokofr.com{/if}*}
     </title>

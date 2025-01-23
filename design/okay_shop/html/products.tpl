@@ -62,6 +62,8 @@
                 {if $category}
 {*                    1a*}
                     {$myH1|cat:$category->name}
+                {elseif $manufacturer}
+                     {$lang->product_manufacturer_name} {$myH1}
                 {else}
 {*                    1b*}
                     {if $keyword}

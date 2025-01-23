@@ -747,7 +747,7 @@ padding: 0;
 .sidebar__boxed {
   background: var(--okay-boxed-color);
   color: var(--okay-boxed-text);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 5px var(--okay-shadow-color);
   border-radius: 3px;
   display: block;
   z-index: 1;
@@ -1690,10 +1690,10 @@ a.filter__catalog_link svg {
   fill: #a1a1a1;
 }
 .product_sort__link.active_down .sorting_icon--left {
-  fill: var(--okay-button-color);
+  fill: var(--okay-basic-company);
 }
 .product_sort__link.active_up .sorting_icon--right {
-  fill: var(--okay-button-color);
+  fill: var(--okay-basic-company);
 }
 
 /***** #Pagination *******************************************************************/
@@ -1714,8 +1714,8 @@ a.filter__catalog_link svg {
   min-width: 45px;
   text-align: center;
   text-decoration: none;
-  border: 1px solid #dbdbdb;
-  background-color: #fff;
+  border: 1px solid var(--okay-border-color);
+  background-color: var(--okay-bg);
   color: var(--okay-body-text);
   font-size: 12px;
   font-weight: 500;
@@ -2382,26 +2382,26 @@ a.filter__catalog_link svg {
   margin: 0;
   font-size: 12px;
 }
-.product_preview__annotation::after {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  height: 16px;
-  width: 80px;
-  content: "";
-  background-image: -webkit-linear-gradient(
-    left,
-    rgba(255, 255, 255, 0),
-    #fff 40%,
-    #fff
-  );
-  background-image: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0),
-    rgb(255, 255, 255) 90%,
-    rgb(255, 255, 255)
-  );
-}
+/*.product_preview__annotation::after {*/
+/*  position: absolute;*/
+/*  bottom: 0;*/
+/*  right: 0;*/
+/*  height: 16px;*/
+/*  width: 80px;*/
+/*  content: "";*/
+/*  background-image: -webkit-linear-gradient(*/
+/*    left,*/
+/*    rgba(255, 255, 255, 0),*/
+/*    #fff 40%,*/
+/*    #fff*/
+/*  );*/
+/*  background-image: linear-gradient(*/
+/*    to right,*/
+/*    rgba(255, 255, 255, 0),*/
+/*    rgb(255, 255, 255) 90%,*/
+/*    rgb(255, 255, 255)*/
+/*  );*/
+/*}*/
 .product_preview__annotation ol,
 .product_preview__annotation ul {
   margin: 10px 0 0 15px;
