@@ -94,13 +94,13 @@
                                     <span class="rating_starOn" style="width:{$product->rating*90/5|string_format:'%.0f'}px;"></span>
                                 </span>
                                 {*Вывод количества голосов данного товара, скрыт ради микроразметки*}
-                                {if $product->rating > 0}
-                                <span class="rating_text hidden">( <span itemprop="reviewCount">{$product->votes|string_format:"%.0f"}</span> )</span>
-                                <span class="rating_text hidden">( <span itemprop="ratingValue">{$product->rating|string_format:"%.1f"}</span> )</span>
-                                {*Вывод лучшей оценки товара для микроразметки*}
-                                <span class="rating_text hidden" itemprop="bestRating" style="display:none;">5</span>
+                                {if $product->votes > 0}
+                                    <span class="rating_text">( <span itemprop="reviewCount">{$product->votes|string_format:"%.0f"}</span> )</span>
+                                    <span class="rating_text hidden">( <span itemprop="ratingValue">{$product->rating|string_format:"%.1f"}</span> )</span>
+                                    {*Вывод лучшей оценки товара для микроразметки*}
+                                    <span class="rating_text hidden" itemprop="bestRating" style="display:none;">5</span>
                                 {else}
-                                <span class="rating_text hidden">({$product->rating|string_format:"%.1f"})</span>
+                                    <span class="rating_text hidden">({$product->rating|string_format:"%.1f"})</span>
                                 {/if}
                             </div>
                             {* Anchor form comments *}
