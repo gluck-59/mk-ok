@@ -111,7 +111,7 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
 }
                 } else { // 2б. не протух
                     // нет цены или доставки
-                    if (!$newLot->price || !$newLot->shipping || empty($newLot->currency)) {
+                    if (!$newLot->outPrice || !$newLot->currency) {
                         echo PHP_EOL . __LINE__ . ': нашли товар ' . $variant->product_id . ' по ebayItemNo ' . $variant->ebayItemNo . ', нет цены/валюты/доставки?'. PHP_EOL;
                         $report->success = 0;
                         $report->description = 'нашли по ebayItemNo <a href="https://www.ebay.com/itm/' . $variant->ebayItemNo . '">' . $variant->ebayItemNo . '</a>, нет цены/валюты/доставки?';
