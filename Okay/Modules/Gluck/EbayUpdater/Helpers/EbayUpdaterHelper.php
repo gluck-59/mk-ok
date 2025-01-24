@@ -60,7 +60,7 @@ class EbayUpdaterHelper implements ExtensionInterface
             $report->success = 0;
             $report->variant_id = $variant->variant_id;
             $report->old_price = $variant->price;
-            echo PHP_EOL.'========== осталось '.$remain--.' =========='.PHP_EOL.date('h:i:s', time()).', sleep '.$this->sleep.' сек';
+            echo PHP_EOL.'========== осталось '.$remain--.' =========='.PHP_EOL.'sleep '.gmdate("i:s", $this->sleep);
             sleep($this->sleep);
 
             // 1. у варианта есть SKU — ищем по SKU
