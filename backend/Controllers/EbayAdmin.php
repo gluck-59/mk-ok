@@ -129,12 +129,11 @@ echo PHP_EOL.'return из стр '.__LINE__;
                 // если селлер не соответсвует нашим критериям — пропускаем
                 if ($sellerBlock = $item->first('.s-item__seller-info-text')) {
                     $sellerArray = explode(' ', $sellerBlock->text());
-                        if (intval($sellerArray[2]) < $this->sellerMinPositive) continue;
+                    if (intval($sellerArray[2]) < $this->sellerMinPositive) continue;
                     if (preg_replace('/\D/', '', $sellerArray[1]) < $this->sellerMinFeedback) continue;
                     if (!empty($this->banlist) && in_array($sellerArray[0], $this->banlist)) continue;
                 } else {
-//                echo 'пропускаем '.$itemNo[0].' по MinPositive / banlist';
-                    continue;
+//continue;
                 }
                 // если валюта не бакс-евро — пропускаем
                 if ($priceBlock = $item->first('.s-item__price')) {
@@ -165,7 +164,14 @@ echo PHP_EOL.'return из стр '.__LINE__;
                 $lot['itemNo'] = $itemNo[0];
                 $lots[] = $lot;
             } // foreach
-//prettyDump($lots, 1);
+
+
+
+
+
+            /** в итоге мы имеем массив $lots с номерами подходящих лотов
+             * берем подходящий и отправляем на подробный анализ
+            */
 
             // берем второй элемент из массива $lots[1] и обрабатываем его
             // второй элемент — чтобы случайно не попал левый лот с другим товаром, который будет самым дешевым
@@ -175,7 +181,8 @@ echo PHP_EOL.'return из стр '.__LINE__;
                 $this->parsedLot = self::getitemDetails($lots[0]['itemNo']);
             } else {
                 $itemDetails['debug']['errors'] = 'искали '.$request['keyword'].', массив $lots пуст. не подключен VPN?';
-echo PHP_EOL.'искали '.$request['keyword'].', массив $lots пуст. не подключен VPN?';
+                echo PHP_EOL.'искали '.$request['keyword'].', массив $lots пуст. не подключен VPN?';
+
                 if ($this->isAjax) ob_end_clean();
                 return $itemDetails;
             }
