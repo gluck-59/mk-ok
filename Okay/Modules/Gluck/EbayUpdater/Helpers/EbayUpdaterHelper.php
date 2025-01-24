@@ -226,7 +226,7 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
                 $variantsUpd = $variantsEntity->update($variant->variant_id, $toUpdateVariant);
             }
         } else {
-            $this->sleep = rand(40, 60);
+            $this->sleep = rand(70, 90);
             $variantsUpd = $variantsEntity->update($variant->variant_id, ['price_updated' => "NOW()", 'stock' => 0]);
         }
         $report->updated = "NOW()";
