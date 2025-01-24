@@ -4501,7 +4501,7 @@ table.order_details {
 .profile__name {
   font-size: 18px;
   font-weight: 500;
-  color: rgb(34, 34, 34);
+  color: var(--okay-body-text);
   line-height: 1.2;
 }
 .profile__logout {

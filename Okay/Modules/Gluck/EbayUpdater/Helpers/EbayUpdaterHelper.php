@@ -60,7 +60,7 @@ class EbayUpdaterHelper implements ExtensionInterface
             $report->success = 0;
             $report->variant_id = $variant->variant_id;
             $report->old_price = $variant->price;
-            echo PHP_EOL.'========== осталось '.$remain--.' =========='.PHP_EOL.'sleep '.$this->sleep.' сек';
+            echo PHP_EOL.'========== осталось '.$remain--.' =========='.PHP_EOL.date('h:i:s', time()).', sleep '.$this->sleep.' сек';
             sleep($this->sleep);
 
             // 1. у варианта есть SKU — ищем по SKU
@@ -226,7 +226,7 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
                 $variantsUpd = $variantsEntity->update($variant->variant_id, $toUpdateVariant);
             }
         } else {
-            $this->sleep = rand(70, 90);
+            $this->sleep = rand(200, 300);
             $variantsUpd = $variantsEntity->update($variant->variant_id, ['price_updated' => "NOW()", 'stock' => 0]);
         }
         $report->updated = "NOW()";

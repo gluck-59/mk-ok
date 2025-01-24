@@ -132,18 +132,18 @@
 {/if}
 {/if}
 
-{if $settings->site_phones}
-{foreach $settings->site_phones as $phone}
-<ul>
-    <li>
-        <a class="phone icon icon-phone-callback" href="tel:{preg_replace('~[^0-9\+]~', '', $phone)}">
-            <span>{$phone|escape}</span>
-        </a>
-    </li>
-</ul>
+{*{if $settings->site_phones}*}
+{*{foreach $settings->site_phones as $phone}*}
+{*<ul>*}
+{*    <li>*}
+{*        <a class="phone icon icon-phone-callback" href="tel:{preg_replace('~[^0-9\+]~', '', $phone)}">*}
+{*            <span>{$phone|escape}</span>*}
+{*        </a>*}
+{*    </li>*}
+{*</ul>*}
 
-{/foreach}
-{/if}
+{*{/foreach}*}
+{*{/if}*}
 {if $settings->order_email}
 <ul>
     <li>

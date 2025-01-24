@@ -1665,7 +1665,7 @@ select {
   -ms-flex-align: center;
   align-items: center;
   border-bottom: 4px solid var(--okay-border-color);
-  background: var(--okay-bg);
+  /*background: var(--okay-bg);*/
 }
 .tabs__navigation--user {
   -webkit-box-orient: vertical;
@@ -1674,7 +1674,7 @@ select {
   -ms-flex-direction: column;
   flex-direction: column;
   border-bottom: none;
-  background: var(--okay-bg);
+  /*background: var(--okay-bg);*/
 }
 .tabs__link {
   position: relative;
@@ -1724,7 +1724,7 @@ select {
   border-bottom: 1px solid rgb(227, 227, 227);
   text-decoration: none;
   padding: 18px 0px;
-  color: var(--okay-second-company-text);
+  /*color: var(--okay-second-company-text);*/
   font-size: 13px;
   font-weight: 500;
   min-height: 40px;
