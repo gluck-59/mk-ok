@@ -69,16 +69,19 @@ class EbayUpdaterHelper implements ExtensionInterface
                 echo PHP_EOL.'ищем по SKU '.$manufacturer->name.' '.$variant->sku;
 
                 $newLot = $ebayAdmin->parse(['keyword' => $manufacturer->name.' '.$variant->sku]);
-                if (is_array($newLot) && $newLot['errors']) {
+                if (is_array($newLot) && $newLot['debug']['errors']) {
                     echo PHP_EOL.'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно';
                     $report->description = 'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно<br><a href="'.$newLot['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
+
+self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
+continue;
                 } else {
                     echo PHP_EOL.'нашли товар '.$variant->product_id.' по SKU '.$manufacturer->name.' '.$variant->sku.', выход = '.$newLot->currency.' '.$newLot->outPrice.PHP_EOL;
                     $report->success = 1;
                     $report->description = 'нашли по SKU <a href="'.EbayAdmin::EBAY_MOTOR_LIST_URL.$manufacturer->name.'%20'.$variant->sku.'" target="_blank">'.$manufacturer->name.' '.$variant->sku.'</a>';
 
-                    self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
-                    continue;
+//                    self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
+//                    continue;
                 }
             } // 1.
 

@@ -376,7 +376,7 @@
     <div class="col-lg-12 col-md-12">
         <div class="wrap_heading">
             <div class="box_heading heading_page">
-                Обновление цен с Ebay cronEbayUpdater
+                <span>Обновление цен с Ebay cronEbayUpdater <small>— {$tableFields|count} строк</small> </span>
             </div>
         </div>
     </div>
