@@ -109,13 +109,22 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
     self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
     continue;
 }
-                } else {
-                    // 2б. не протух
-                    echo PHP_EOL.__LINE__ . ': нашли товар ' . $variant->product_id . ' по ebayItemNo ' . $variant->ebayItemNo . ', выход = '.$newLot->currency.' '.$newLot->outPrice.PHP_EOL;
-                    $report->success = 1;
-                    $report->description = 'нашли по ebayItemNo <a href="https://www.ebay.com/itm/'.$variant->ebayItemNo.'">'.$variant->ebayItemNo.'</a>';
-                    self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
-                    continue;
+                } else { // 2б. не протух
+                    // нет цены или доставки
+                    if (!$newLot->price || !$newLot->shipping || empty($newLot->currency)) {
+                        echo PHP_EOL . __LINE__ . ': нашли товар ' . $variant->product_id . ' по ebayItemNo ' . $variant->ebayItemNo . ', нет цены/валюты/доставки?'. PHP_EOL;
+                        $report->success = 0;
+                        $report->description = 'нашли по ebayItemNo <a href="https://www.ebay.com/itm/' . $variant->ebayItemNo . '">' . $variant->ebayItemNo . '</a>, нет цены/валюты/доставки?';
+                        self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
+                        continue;
+                    } else {
+                        // все норм
+                        echo PHP_EOL . __LINE__ . ': нашли товар ' . $variant->product_id . ' по ebayItemNo ' . $variant->ebayItemNo . ', выход = ' . $newLot->currency . ' ' . $newLot->outPrice . PHP_EOL;
+                        $report->success = 1;
+                        $report->description = 'нашли по ebayItemNo <a href="https://www.ebay.com/itm/' . $variant->ebayItemNo . '">' . $variant->ebayItemNo . '</a>';
+                        self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
+                        continue;
+                    }
                 }
             }
             // 2
