@@ -80,8 +80,8 @@ continue;
                     $report->success = 1;
                     $report->description = 'нашли по SKU <a href="'.EbayAdmin::EBAY_MOTOR_LIST_URL.$manufacturer->name.'%20'.$variant->sku.'" target="_blank">'.$manufacturer->name.' '.$variant->sku.'</a>';
 
-//                    self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
-//                    continue;
+                    self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
+                    continue;
                 }
             } // 1.
 
