@@ -133,7 +133,7 @@ echo PHP_EOL.'return из стр '.__LINE__;
                     if (preg_replace('/\D/', '', $sellerArray[1]) < $this->sellerMinFeedback) continue;
                     if (!empty($this->banlist) && in_array($sellerArray[0], $this->banlist)) continue;
                 } else {
-//continue;
+//continue; непонятно зачем ?
                 }
                 // если валюта не бакс-евро — пропускаем
                 if ($priceBlock = $item->first('.s-item__price')) {
