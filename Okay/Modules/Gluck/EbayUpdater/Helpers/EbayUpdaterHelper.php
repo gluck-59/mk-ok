@@ -36,7 +36,7 @@ class EbayUpdaterHelper implements ExtensionInterface
 
     /**
      * обновялет цены Ebay по крону
-     * вызывается так: php ok scheduler:run -f
+     * вручную вызывается так: php ok scheduler:task 1 -f | tee ./_ebay
      * --- continue пишем во всех случаях ---
      *
      * @param VariantsEntity $variantsEntity
@@ -99,7 +99,7 @@ echo PHP_EOL.'поиск по ebayItemNo '.$variant->ebayItemNo.' неудачн
 $newLot = $ebayAdmin->parse(['keyword' => $variant->partNumber]);
 if (is_array($newLot) && $newLot['debug']['errors']) {
     $report->success = 0;
-    echo PHP_EOL . __LINE__ . ': поиск по partNumber ' . $variant->partNumber . ' неудачно, не пишем'. PHP_EOL;
+    echo PHP_EOL . __LINE__ . ': не нашли по partNumber ' . $variant->partNumber . ', не пишем'. PHP_EOL;
     $report->description = 'не нашли по partNumber ' . $variant->partNumber;
     self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
     continue;
@@ -226,6 +226,7 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
                 $variantsUpd = $variantsEntity->update($variant->variant_id, $toUpdateVariant);
             }
         } else {
+            $this->sleep = rand(40, 60);
             $variantsUpd = $variantsEntity->update($variant->variant_id, ['price_updated' => "NOW()", 'stock' => 0]);
         }
         $report->updated = "NOW()";

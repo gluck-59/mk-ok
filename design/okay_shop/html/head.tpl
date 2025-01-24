@@ -10,6 +10,7 @@
     <link href="{$rootUrl}/design/{$settings->theme}/fonts/montserrat/Montserrat-Medium.woff2" rel="preload" as="font" crossorigin="anonymous" type="font/woff2">
 
     <style>
+        /* морда */
         :root {
             color-scheme: light dark;
 
@@ -31,6 +32,7 @@
 
             --okay-button-color-hover: light-dark(#0ec40e, #065e06);
             --okay-button-text-hover: light-dark(#fff, #000);
+
             --okay-button-second-color: light-dark(#ddd, #222);
             --okay-button-second-text: light-dark(#fff, #aaa);
             --okay-shadow-color: light-dark(rgba(0, 0, 0, .3), rgba(255, 255, 255, .3))

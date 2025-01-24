@@ -31,9 +31,12 @@
 @import url('https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300i,700|Open+Sans:300,300i,400,400i,600,600i,700,700i,800,800i&subset=cyrillic,cyrillic-ext,latin-ext');
 */
 
+/* админка */
 :root {
     color-scheme: light dark;
     --okay-bg: light-dark(#FFF, #282828);
+    --okay-bg-hover: light-dark(#eee, #333
+    );
     --okay-border-color: light-dark(#dbdbdb,#515151);
 
     --okay-button-color: light-dark(#3c952e, #204f19);
@@ -3136,7 +3139,7 @@ label.switch_label i{
     min-height: 80px;
 }
 .okay_list .okay_list_body_item:hover{
-    background-color: var(--okay-border-color);
+    background-color: var(--okay-bg-hover);
 }
 
 .okay_list .okay_list_body_item.module_access_expire{
