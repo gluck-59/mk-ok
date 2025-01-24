@@ -37,6 +37,7 @@ class EbayUpdaterHelper implements ExtensionInterface
     /**
      * обновялет цены Ebay по крону
      * вызывается так: php ok scheduler:run -f
+     * --- continue пишем во всех случаях ---
      *
      * @param VariantsEntity $variantsEntity
      * @param ProductsEntity $productsEntity
@@ -71,10 +72,10 @@ class EbayUpdaterHelper implements ExtensionInterface
                 $newLot = $ebayAdmin->parse(['keyword' => $manufacturer->name.' '.$variant->sku]);
                 if (is_array($newLot) && $newLot['debug']['errors']) {
                     echo PHP_EOL.'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно';
-                    $report->description = 'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно<br><a href="'.$newLot['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
+                    $report->description = 'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно<br><a href="'.$newLot['debug']['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
 
-self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
-continue;
+                    self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
+                    continue;
                 } else {
                     echo PHP_EOL.'нашли товар '.$variant->product_id.' по SKU '.$manufacturer->name.' '.$variant->sku.', выход = '.$newLot->currency.' '.$newLot->outPrice.PHP_EOL;
                     $report->success = 1;
@@ -114,7 +115,7 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
                     if (!$newLot->outPrice || !$newLot->currency) {
                         echo PHP_EOL . __LINE__ . ': нашли товар ' . $variant->product_id . ' по ebayItemNo ' . $variant->ebayItemNo . ', нет цены/валюты/доставки?'. PHP_EOL;
                         $report->success = 0;
-                        $report->description = 'нашли по ebayItemNo <a href="https://www.ebay.com/itm/' . $variant->ebayItemNo . '">' . $variant->ebayItemNo . '</a>, нет цены/валюты/доставки?';
+                        $report->description = 'лот <a href="https://www.ebay.com/itm/' . $variant->ebayItemNo . '">' . $variant->ebayItemNo . '</a>, нет цены/валюты/доставки?';
                         self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
                         continue;
                     } else {
@@ -137,7 +138,7 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
                 if (is_array($newLot) && $newLot['errors']) {
                     echo PHP_EOL.'поиск по partNumber '.$variant->partNumber.' снова неудачно, пишемся';
                     $report->success = 0;
-                    $report->description = 'поиск по ebayItemNo <b>'.$variant->ebayItemNo.'</b> и затем по partNumber <b>'.$variant->partNumber.'</b> неудачно<br><a href="'.$newLot['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
+                    $report->description = 'поиск по ebayItemNo <b>'.$variant->ebayItemNo.'</b> и затем по partNumber <b>'.$variant->partNumber.'</b> неудачно<br><a href="'.$newLot['debug']['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
                     self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
                     continue;
                 } else {
