@@ -258,6 +258,9 @@
         <meta name="twitter:card" content="summary">
         <meta name="twitter:title" content="{$post->name|escape}">
         <meta name="twitter:description" content="{if !empty($annotation)}{$annotation|strip_tags|escape|trim}{else}{$description|strip_tags|escape|trim}{/if}">
+{elseif $controller == 'MainController'}
+<meta property="og:image" content="{$rootUrl}/{$config->design_images}{$settings->site_favicon}">
+<link rel="image_src" href="{$rootUrl}/{$config->design_images}{$settings->site_favicon}">
     {else}
         <meta property="og:title" content="{$meta_title|escape}">
         <meta property="og:type" content="website">
@@ -271,7 +274,6 @@
         <meta name="twitter:description" content="{$meta_description|escape}">
         <meta name="twitter:image" content="{$rootUrl}/{$config->design_images}{$settings->site_logo}">
     {/if}
-
     {* The canonical address of the page *}
     {if isset($canonical)}
         <link rel="canonical" href="{$canonical|escape}">
