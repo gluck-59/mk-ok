@@ -289,7 +289,6 @@
             <link rel="alternate" hreflang="{$l->href_lang}" href="{$l->url|escape}">
         {/if}
     {/foreach}
-<pre>{$settings|print_r}</pre>
     {if $settings->captcha_type == "v3"}
         <script>ut_tracker.start('render:recaptcha');</script>
         <script src="https://www.google.com/recaptcha/api.js?render={$settings->public_recaptcha_v3|escape}"></script>
