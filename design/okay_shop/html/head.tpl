@@ -261,6 +261,10 @@
 {elseif $controller == 'MainController'}
 <meta property="og:image" content="{$rootUrl}/{$config->design_images}{$settings->site_favicon}">
 <link rel="image_src" href="{$rootUrl}/{$config->design_images}{$settings->site_favicon}">
+<meta property="og:url" content="{$canonical}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{$settings->site_name|escape}">
+<meta property="og:description" content="{$meta_description|escape}">
     {else}
         <meta property="og:title" content="{$meta_title|escape}">
         <meta property="og:type" content="website">
@@ -285,7 +289,7 @@
             <link rel="alternate" hreflang="{$l->href_lang}" href="{$l->url|escape}">
         {/if}
     {/foreach}
-
+<pre>{$settings|print_r}</pre>
     {if $settings->captcha_type == "v3"}
         <script>ut_tracker.start('render:recaptcha');</script>
         <script src="https://www.google.com/recaptcha/api.js?render={$settings->public_recaptcha_v3|escape}"></script>
