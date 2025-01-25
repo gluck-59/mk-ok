@@ -259,8 +259,8 @@
         <meta name="twitter:title" content="{$post->name|escape}">
         <meta name="twitter:description" content="{if !empty($annotation)}{$annotation|strip_tags|escape|trim}{else}{$description|strip_tags|escape|trim}{/if}">
 {elseif $controller == 'MainController'}
-<meta property="og:image" content="{$rootUrl}/{$config->design_images}{$settings->site_favicon}">
-<link rel="image_src" href="{$rootUrl}/{$config->design_images}{$settings->site_favicon}">
+<meta property="og:image" content="{$rootUrl}/{$config->design_images}logo_square.png">
+<link rel="image_src" href="{$rootUrl}/{$config->design_images}logo_square.png">
 <meta property="og:url" content="{$canonical}">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{$settings->site_name|escape}">

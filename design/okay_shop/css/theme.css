@@ -3548,7 +3548,7 @@ a.filter__catalog_link svg {
   padding-left: 10px;
 }
 .sidebar_card__title {
-  color: rgb(34, 34, 34);
+  color: var(--okay-body-heading);
   font-size: 13px;
   line-height: 1.2;
   font-weight: 500;
