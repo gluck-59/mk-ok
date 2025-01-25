@@ -2423,7 +2423,7 @@ a.filter__catalog_link svg {
   max-width: 100%;
 }
 .select2-container--default .select2-selection--single .select2-selection__rendered {
-  color: var(--okay-second-company-text)!important;
+  color: var(--okay-body-text)!important;
 }
 .select2-container--default .select2-selection--single {
   background: var(--okay-bg);
@@ -2631,7 +2631,7 @@ a.filter__catalog_link svg {
 }
 .article__footer {
   height: 36px;
-  border-top: 1px solid #dbdbdb;
+  border-top: 1px solid var(--okay-border-color);
   margin: 10px 0 0;
   padding: 0 15px;
   display: -webkit-inline-box;
