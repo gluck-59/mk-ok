@@ -601,90 +601,6 @@
         </div>
     </div>
 
-    {*Промо-изображения товара*}
-    <div class="row">
-        <div class="col-lg-8 col-md-12 pr-0 ">
-            <div class="fn_step-9 boxed fn_toggle_wrap min_height_230px">
-                <div class="heading_box">
-                    {$btr->product_promotions|escape}
-                    <i class="fn_tooltips" title="{$btr->tooltip_product_promotions|escape}">
-                        {include file='svg_icon.tpl' svgId='icon_tooltips'}
-                    </i>
-                    <div class="toggle_arrow_wrap fn_toggle_card text-primary">
-                        <a class="btn-minimize" href="javascript:;" ><i class="fa fn_icon_arrow fa-angle-down"></i></a>
-                    </div>
-                </div>
-                <div class="toggle_body_wrap on fn_card">
-                    <ul class="fn_droplist_wrap product_images_list clearfix sortable" data-image="special">
-                        <li class="fn_dropzone dropzone_block">
-                            <i class="fa fa-plus font-5xl" aria-hidden="true"></i>
-                            <input type="file" name="" data-name="spec_dropped_images[]" multiple class="dropinput fn_template">
-                        </li>
-                        {if $special_images|count > 0}
-                            {foreach $special_images as $special}
-                                <li class="product_image_item {if $special@iteration > 8}fn_toggle_hidden hidden{/if} fn_sort_item {if $product->special == $special->filename}product_special{/if}">
-                                    <button type="button" class=" fn_remove_image remove_image"></button>
-                                    <i class="move_zone">
-                                        <img class="product_icon" title="{$special->name|escape}" src="../{$config->special_images_dir|escape}{$special->filename|escape}" alt="{$special->filename|escape}" />
-                                        <span class="fn_change_special change_special" data-origin="{$btr->general_select|escape}" data-result="{$btr->general_unselect|escape}">
-                                            {if $product->special == $special->filename}
-                                                {$btr->general_unselect|escape}
-                                            {else}
-                                                {$btr->general_select|escape}
-                                            {/if}
-                                        </span>
-                                        <input type="radio" name="special" value="{$special->filename|escape}" class="hidden" {if $product->special == $special->filename}checked{/if}>
-                                    </i>
-                                    <input type="hidden" name="spec_images_ids[]" value="{$special->id}" />
-                                </li>
-                            {/foreach}
-                        {/if}
-                        <li class="fn_new_spec_image_item product_image_item fn_sort_item hidden">
-                            <button type="button" class="fn_remove_image remove_image"></button>
-                            <img src="" alt=""/>
-                            <i class="move_zone fa fa-arrows font-2xl"></i>
-                        </li>
-                    </ul>
-                    {if $special_images|count > 4}
-                        <div class="show_more_images fn_show_images">{$btr->product_images_all|escape}</div>
-                    {/if}
-                </div>
-                {get_design_block block="product_promo_images"}
-            </div>
-        </div>
-        {*Рейтинг*}
-        <div class="col-lg-4 col-md-12">
-            <div class="fn_step-10 boxed fn_toggle_wrap min_height_230px">
-                <div class="heading_box">
-                    {$btr->product_rating|escape}
-                    <div class="toggle_arrow_wrap fn_toggle_card text-primary">
-                        <a class="btn-minimize" href="javascript:;" ><i class="fa fn_icon_arrow fa-angle-down"></i></a>
-                    </div>
-                </div>
-                <div class="toggle_body_wrap on fn_card">
-                    <div class="heading_label">
-                        {$btr->product_rating_value|escape}
-                        <span class="font-weight-bold fn_show_rating">{$product->rating|escape}</span>
-                    </div>
-                    <div class="raiting_boxed">
-                        <input class="fn_rating_value" type="hidden" value="{$product->rating|escape}" name="rating" />
-                        <input class="fn_rating range_input" type="range" min="1" max="5" step="0.1" value="{$product->rating|escape}" />
-
-                        <div class="raiting_range_number">
-                            <span class="float-xs-left">1</span>
-                            <span class="float-xs-right">5</span>
-                        </div>
-                    </div>
-                    <div class="heading_label">
-                        {$btr->product_rating_number|escape}
-                        <input type="text" class="form-control" name="votes" value="{$product->votes|escape}">
-                    </div>
-                </div>
-                {get_design_block block="product_rationg"}
-            </div>
-        </div>
-    </div>
-
     {*Свойства товара*}
     <div class="row">
         <div class="col-lg-6 col-md-12 pr-0 ">
@@ -803,7 +719,7 @@
 
         {*Связанные товары*}
         <div class="col-lg-6 col-md-12">
-            <div class="fn_step-12 boxed fn_toggle_wrap min_height_335px">
+            <div class="fn_step-12 boxed fn_toggle_wrap min_height_210px">
                 {backend_compact_product_list title=$btr->general_recommended
                 name="related_products"
                 products=$related_products
@@ -812,6 +728,134 @@
                 }
             </div>
             {get_design_block block="product_related_products"}
+        </div>
+    </div>
+
+
+    {$block = {get_design_block block="product_custom_block"}}
+    {if !empty($block)}
+        <div class="row custom_block">
+            {$block}
+        </div>
+    {/if}
+
+    {*Описание элемента*}
+    <div class="row">
+        <div class="col-lg-12 col-md-12">
+            <div class="fn_step-14 boxed match fn_toggle_wrap tabs">
+                <div class="heading_tabs">
+                    <div class="tab_navigation">
+                        <a href="#tab1" class="heading_box tab_navigation_link">
+                            {$btr->general_short_description|escape}
+
+                        </a>
+                        <a href="#tab2" class="heading_box tab_navigation_link">
+                            {$btr->general_full_description|escape}
+                            <i style="right: -8px" class="fn_tooltips" title="{$btr->tooltip_general_full_description|escape}">
+                                {include file='svg_icon.tpl' svgId='icon_tooltips'}
+                            </i>
+                        </a>
+                    </div>
+                    <div class="toggle_arrow_wrap fn_toggle_card text-primary">
+                        <a class="btn-minimize" href="javascript:;" ><i class="icon-arrow-down"></i></a>
+                    </div>
+                </div>
+                <div class="toggle_body_wrap on fn_card">
+                    <div class="tab_container">
+                        <div id="tab1" class="tab">
+                            <textarea name="annotation" id="annotation" data-ai_entity="{Okay\Helpers\AiRequests\AiProductRequest::ENTITY_TYPE}" class="editor_small">{$product->annotation|escape}</textarea>
+                        </div>
+                        <div id="tab2" class="tab">
+                            <textarea id="fn_editor" name="description" data-ai_entity="{Okay\Helpers\AiRequests\AiProductRequest::ENTITY_TYPE}" class="editor_large fn_editor_class">{$product->description|escape}</textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    {*Промо-изображения товара*}
+    <div class="row">
+        <div class="col-lg-8 col-md-12 pr-0 ">
+            <div class="fn_step-9 boxed fn_toggle_wrap min_height_230px">
+                <div class="heading_box">
+                    {$btr->product_promotions|escape}
+                    <i class="fn_tooltips" title="{$btr->tooltip_product_promotions|escape}">
+                        {include file='svg_icon.tpl' svgId='icon_tooltips'}
+                    </i>
+                    <div class="toggle_arrow_wrap fn_toggle_card text-primary">
+                        <a class="btn-minimize" href="javascript:;" ><i class="fa fn_icon_arrow fa-angle-down"></i></a>
+                    </div>
+                </div>
+                <div class="toggle_body_wrap on fn_card">
+                    <ul class="fn_droplist_wrap product_images_list clearfix sortable" data-image="special">
+                        <li class="fn_dropzone dropzone_block">
+                            <i class="fa fa-plus font-5xl" aria-hidden="true"></i>
+                            <input type="file" name="" data-name="spec_dropped_images[]" multiple class="dropinput fn_template">
+                        </li>
+                        {if $special_images|count > 0}
+                            {foreach $special_images as $special}
+                                <li class="product_image_item {if $special@iteration > 8}fn_toggle_hidden hidden{/if} fn_sort_item {if $product->special == $special->filename}product_special{/if}">
+                                    <button type="button" class=" fn_remove_image remove_image"></button>
+                                    <i class="move_zone">
+                                        <img class="product_icon" title="{$special->name|escape}" src="../{$config->special_images_dir|escape}{$special->filename|escape}" alt="{$special->filename|escape}" />
+                                        <span class="fn_change_special change_special" data-origin="{$btr->general_select|escape}" data-result="{$btr->general_unselect|escape}">
+                                            {if $product->special == $special->filename}
+                                                {$btr->general_unselect|escape}
+                                            {else}
+                                                {$btr->general_select|escape}
+                                            {/if}
+                                        </span>
+                                        <input type="radio" name="special" value="{$special->filename|escape}" class="hidden" {if $product->special == $special->filename}checked{/if}>
+                                    </i>
+                                    <input type="hidden" name="spec_images_ids[]" value="{$special->id}" />
+                                </li>
+                            {/foreach}
+                        {/if}
+                        <li class="fn_new_spec_image_item product_image_item fn_sort_item hidden">
+                            <button type="button" class="fn_remove_image remove_image"></button>
+                            <img src="" alt=""/>
+                            <i class="move_zone fa fa-arrows font-2xl"></i>
+                        </li>
+                    </ul>
+                    {if $special_images|count > 4}
+                        <div class="show_more_images fn_show_images">{$btr->product_images_all|escape}</div>
+                    {/if}
+                </div>
+                {get_design_block block="product_promo_images"}
+            </div>
+        </div>
+        {*Рейтинг*}
+        <div class="col-lg-4 col-md-12">
+            <div class="fn_step-10 boxed fn_toggle_wrap min_height_230px">
+                <div class="heading_box">
+                    {$btr->product_rating|escape}
+                    <div class="toggle_arrow_wrap fn_toggle_card text-primary">
+                        <a class="btn-minimize" href="javascript:;" ><i class="fa fn_icon_arrow fa-angle-down"></i></a>
+                    </div>
+                </div>
+                <div class="toggle_body_wrap on fn_card">
+                    <div class="heading_label">
+                        {$btr->product_rating_value|escape}
+                        <span class="font-weight-bold fn_show_rating">{$product->rating|escape}</span>
+                    </div>
+                    <div class="raiting_boxed">
+                        <input class="fn_rating_value" type="hidden" value="{$product->rating|escape}" name="rating" />
+                        <input class="fn_rating range_input" type="range" min="1" max="5" step="0.1" value="{$product->rating|escape}" />
+
+                        <div class="raiting_range_number">
+                            <span class="float-xs-left">1</span>
+                            <span class="float-xs-right">5</span>
+                        </div>
+                    </div>
+                    <div class="heading_label">
+                        {$btr->product_rating_number|escape}
+                        <input type="text" class="form-control" name="votes" value="{$product->votes|escape}">
+                    </div>
+                </div>
+                {get_design_block block="product_rationg"}
+            </div>
         </div>
     </div>
 
@@ -885,60 +929,19 @@
             </div>
         </div>
     </div>
-
-    {$block = {get_design_block block="product_custom_block"}}
-    {if !empty($block)}
-        <div class="row custom_block">
-            {$block}
-        </div>
-    {/if}
-
-    {*Описание элемента*}
     <div class="row">
-        <div class="col-lg-12 col-md-12">
-            <div class="fn_step-14 boxed match fn_toggle_wrap tabs">
-                <div class="heading_tabs">
-                    <div class="tab_navigation">
-                        <a href="#tab1" class="heading_box tab_navigation_link">
-                            {$btr->general_short_description|escape}
-
-                        </a>
-                        <a href="#tab2" class="heading_box tab_navigation_link">
-                            {$btr->general_full_description|escape}
-                            <i style="right: -8px" class="fn_tooltips" title="{$btr->tooltip_general_full_description|escape}">
-                                {include file='svg_icon.tpl' svgId='icon_tooltips'}
-                            </i>
-                        </a>
-                    </div>
-                    <div class="toggle_arrow_wrap fn_toggle_card text-primary">
-                        <a class="btn-minimize" href="javascript:;" ><i class="icon-arrow-down"></i></a>
-                    </div>
-                </div>
-                <div class="toggle_body_wrap on fn_card">
-                    <div class="tab_container">
-                        <div id="tab1" class="tab">
-                            <textarea name="annotation" id="annotation" data-ai_entity="{Okay\Helpers\AiRequests\AiProductRequest::ENTITY_TYPE}" class="editor_small">{$product->annotation|escape}</textarea>
-                        </div>
-                        <div id="tab2" class="tab">
-                            <textarea id="fn_editor" name="description" data-ai_entity="{Okay\Helpers\AiRequests\AiProductRequest::ENTITY_TYPE}" class="editor_large fn_editor_class">{$product->description|escape}</textarea>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-12 col-md-12 mt-1">
-                        <button id="fast_save_button_and_quit" type="submit" class="fn_step-15 btn btn_small btn_blue float-md-right ml-1" name="apply_and_quit" value="1">
-                            {include file='svg_icon.tpl' svgId='checked'}
-                            <span>{$btr->general_apply_and_quit|escape}</span>
-                        </button>
-                        <button type="submit" class="fn_step-15 btn btn_small btn_blue float-md-right">
-                            {include file='svg_icon.tpl' svgId='checked'}
-                            <span>{$btr->general_apply|escape}</span>
-                        </button>
-                    </div>
-                </div>
-            </div>
+        <div class="col-lg-12 col-md-12 mt-1">
+            <button id="fast_save_button_and_quit" type="submit" class="fn_step-15 btn btn_small btn_blue float-md-right ml-1" name="apply_and_quit" value="1">
+                {include file='svg_icon.tpl' svgId='checked'}
+                <span>{$btr->general_apply_and_quit|escape}</span>
+            </button>
+            <button type="submit" class="fn_step-15 btn btn_small btn_blue float-md-right">
+                {include file='svg_icon.tpl' svgId='checked'}
+                <span>{$btr->general_apply|escape}</span>
+            </button>
         </div>
     </div>
+
 </form>
 
 {* Learning script *}
