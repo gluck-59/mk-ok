@@ -67,7 +67,7 @@ class EbayUpdaterHelper implements ExtensionInterface
             if (!empty($variant->sku)) {
                 $product = $productsEntity->findOne(['id' => $variant->product_id]);
                 $manufacturer = $manufacturersEntity->findOne(['id' => $product->manufacturer_id]);
-                echo PHP_EOL.'ищем по SKU '.$manufacturer->name.' '.$variant->sku;
+                echo PHP_EOL.'ищем товар '.$variant->product_id.' по SKU '.$manufacturer->name.' '.$variant->sku;
 
                 $newLot = $ebayAdmin->parse(['keyword' => $manufacturer->name.' '.$variant->sku]);
                 if (is_array($newLot) && $newLot['debug']['errors']) {
