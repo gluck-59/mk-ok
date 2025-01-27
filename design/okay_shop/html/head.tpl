@@ -131,13 +131,20 @@
     }
     </script>
     {/literal}
-    
+
     {* Title *}
     <title>
         {if $controller == 'BrandController'}Ништяки для{/if}
         {if $controller == 'ManufacturerController'}Ништяки производства{/if}
-        {$meta_title|escape} {*if $manufacturer->name}({$manufacturer->name|escape}){/if*}
-{*        {if $controller == 'BrandController' OR $controller == 'CategoryController'}купить в Motokofr.com{/if}*}
+
+        {$meta_title|escape}
+
+        {if !$brand && $controller != 'ProductController'&& $controller != 'FeedbackController' && $filtersUrl == ''}
+            для мотоциклов Honda, Kawasaki, Suzuki, Yamaha, Harley-Davidson, BMW
+        {/if}
+        {if $controller == 'CategoryController' || $controller == 'BrandController' || $controller == 'ManufacturerController' || $controller == 'ProductController'}
+            купить в Motokofr.com
+        {/if}
     </title>
 
     {* Meta tags *}
@@ -258,14 +265,14 @@
         <meta name="twitter:card" content="summary">
         <meta name="twitter:title" content="{$post->name|escape}">
         <meta name="twitter:description" content="{if !empty($annotation)}{$annotation|strip_tags|escape|trim}{else}{$description|strip_tags|escape|trim}{/if}">
-{elseif $controller == 'MainController'}
-<meta property="og:image" content="{$rootUrl}/{$config->design_images}logo_square.png">
-<link rel="image_src" href="{$rootUrl}/{$config->design_images}logo_square.png">
-<meta property="og:url" content="{$canonical}">
-<meta property="og:type" content="website">
-<meta property="og:title" content="{$settings->site_name|escape}">
-<meta property="og:description" content="{$meta_description|escape}">
-    {else}
+        {elseif $controller == 'MainController'}
+        <meta property="og:image" content="{$rootUrl}/{$config->design_images}logo_square.png">
+        <link rel="image_src" href="{$rootUrl}/{$config->design_images}logo_square.png">
+        <meta property="og:url" content="{$canonical}">
+        <meta property="og:type" content="website">
+        <meta property="og:title" content="{$settings->site_name|escape}">
+        <meta property="og:description" content="{$meta_description|escape}">
+        {else}
         <meta property="og:title" content="{$meta_title|escape}">
         <meta property="og:type" content="website">
         <meta property="og:url" content="{$rootUrl}">
