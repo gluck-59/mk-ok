@@ -190,24 +190,6 @@
                                 <input id="product_id" name="id" type="hidden" value="{$product->id|escape}"/>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-xs-12 col-md-8 col-lg-6">
-                                <div class="fn_step-2">
-                                    <div class="input-group input-group--dabbl">
-                                        <span class="input-group-addon input-group-addon--left">URL</span>
-                                        <input name="url" class="fn_meta_field form-control fn_url {if $product->id}fn_disabled{/if}" {if $product->id}readonly=""{/if} type="text" value="{$product->url|escape}" />
-                                        <input type="checkbox" id="block_translit" class="hidden" value="1" {if $product->id}checked=""{/if}>
-                                        <span class="input-group-addon fn_disable_url">
-                                            {if $product->id}
-                                                <i class="fa fa-lock"></i>
-                                            {else}
-                                                <i class="fa fa-lock fa-unlock"></i>
-                                            {/if}
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         {get_design_block block="product_general"}
                     </div>
                     <div class="col-lg-2 col-md-3 col-sm-12">
@@ -230,43 +212,83 @@
                         </div>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-10 col-md-9 col-sm-12">
+                        <div class="fn_step-2">
+                            <div class="input-group input-group--dabbl">
+                                <span class="input-group-addon input-group-addon--left">URL</span>
+                                <input name="url" class="fn_meta_field form-control fn_url {if $product->id}fn_disabled{/if}" {if $product->id}readonly=""{/if} type="text" value="{$product->url|escape}" />
+                                <input type="checkbox" id="block_translit" class="hidden" value="1" {if $product->id}checked=""{/if}>
+                                <span class="input-group-addon fn_disable_url">
+                                    {if $product->id}
+                                        <i class="fa fa-lock"></i>
+                                    {else}
+                                        <i class="fa fa-lock fa-unlock"></i>
+                                    {/if}
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-2 col-md-3 col-sm-12">
+                    <div class="toggle_body_wrap on fn_card">
+                        <div class="activity_of_switch activity_of_switch--box_settings1">
+                            <div class="fn_step-4 activity_of_switch_item">
+                                <div class="okay_switch clearfix">
+                                    <label class="switch_label">
+                                        {$btr->general_bestseller|escape}
+                                        <i class="fn_tooltips" title="{$btr->tooltip_general_bestseller|escape}">
+                                            {include file='svg_icon.tpl' svgId='icon_tooltips'}
+                                        </i>
+                                    </label>
+                                    <label class="switch switch-default">
+                                        <input class="switch-input" name="featured" value="1" type="checkbox" id="featured_checkbox" {if $product->featured}checked=""{/if}/>
+                                        <span class="switch-label"></span>
+                                        <span class="switch-handle"></span>
+                                    </label>
+                                </div>
+                            </div>
+                            {get_design_block block="product_switch_checkboxes"}
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 
     {*Дополнительные настройки*}
-    <div class="row">
-        <div class="col-lg-12 col-md-12">
-            <div class="boxed fn_toggle_wrap ">
-                <div class="heading_box">
-                    {$btr->general_additional_settings|escape}
-                    <div class="toggle_arrow_wrap fn_toggle_card text-primary">
-                        <a class="btn-minimize" href="javascript:;" ><i class="fa fn_icon_arrow fa-angle-down"></i></a>
-                    </div>
-                </div>
-                <div class="toggle_body_wrap on fn_card">
-                    <div class="activity_of_switch activity_of_switch--box_settings">
-                        <div class="fn_step-4 activity_of_switch_item">
-                            <div class="okay_switch clearfix">
-                                <label class="switch_label">
-                                    {$btr->general_bestseller|escape}
-                                    <i class="fn_tooltips" title="{$btr->tooltip_general_bestseller|escape}">
-                                        {include file='svg_icon.tpl' svgId='icon_tooltips'}
-                                    </i>
-                                </label>
-                                <label class="switch switch-default">
-                                    <input class="switch-input" name="featured" value="1" type="checkbox" id="featured_checkbox" {if $product->featured}checked=""{/if}/>
-                                    <span class="switch-label"></span>
-                                    <span class="switch-handle"></span>
-                                </label>
-                            </div>
-                        </div>
-                        {get_design_block block="product_switch_checkboxes"}
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+{*    <div class="row">*}
+{*        <div class="col-lg-12 col-md-12">*}
+{*            <div class="boxed fn_toggle_wrap ">*}
+{*                <div class="heading_box">*}
+{*                    {$btr->general_additional_settings|escape}*}
+{*                    <div class="toggle_arrow_wrap fn_toggle_card text-primary">*}
+{*                        <a class="btn-minimize" href="javascript:;" ><i class="fa fn_icon_arrow fa-angle-down"></i></a>*}
+{*                    </div>*}
+{*                </div>*}
+{*                <div class="toggle_body_wrap on fn_card">*}
+{*                    <div class="activity_of_switch activity_of_switch--box_settings">*}
+{*                        <div class="fn_step-4 activity_of_switch_item">*}
+{*                            <div class="okay_switch clearfix">*}
+{*                                <label class="switch_label">*}
+{*                                    {$btr->general_bestseller|escape}*}
+{*                                    <i class="fn_tooltips" title="{$btr->tooltip_general_bestseller|escape}">*}
+{*                                        {include file='svg_icon.tpl' svgId='icon_tooltips'}*}
+{*                                    </i>*}
+{*                                </label>*}
+{*                                <label class="switch switch-default">*}
+{*                                    <input class="switch-input" name="featured" value="1" type="checkbox" id="featured_checkbox" {if $product->featured}checked=""{/if}/>*}
+{*                                    <span class="switch-label"></span>*}
+{*                                    <span class="switch-handle"></span>*}
+{*                                </label>*}
+{*                            </div>*}
+{*                        </div>*}
+{*                        {get_design_block block="product_switch_checkboxes"}*}
+{*                    </div>*}
+{*                </div>*}
+{*            </div>*}
+{*        </div>*}
+{*    </div>*}
 
     {*Изображения товара*}
     <div class="row">
@@ -318,37 +340,45 @@
         <div class="col-lg-4 col-md-12 ">
             <div class="boxed min_height_230px">
                 <div class="fn_step-6">
-                    <div class="heading_label">
-                        {$btr->general_brand|escape}
-                        <i class="fn_tooltips" title="{$btr->tooltip_general_brand|escape}">
-                            {include file='svg_icon.tpl' svgId='icon_tooltips'}
-                        </i>
+                    <div class="row">
+                        <div class="col-xs-12 col-md-6">
+                            <div class="heading_label">
+                                {$btr->general_brand|escape}
+                                <i class="fn_tooltips" title="{$btr->tooltip_general_brand|escape}">
+                                    {include file='svg_icon.tpl' svgId='icon_tooltips'}
+                                </i>
+                            </div>
+                            <div class="">
+                                <select name="brand_id" class="selectpicker form-control mb-1{if !$brands} hidden{/if} fn_meta_brand" data-live-search="true">
+                                    <option value="0" {if !$product->brand_id}selected=""{/if} data-brand_name="">{$btr->general_not_set|escape}</option>
+                                    {foreach $brands as $brand}
+                                        <option value="{$brand->id}" {if $product->brand_id == $brand->id}selected=""{/if} data-brand_name="{$brand->name|escape}">{$brand->name|escape}</option>
+                                    {/foreach}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-xs-12 col-md-6">
+                            <div class="fn_step-16">
+                                <div class="heading_label">
+                                    {$btr->general_manufacturer|escape}
+                                    <i class="fn_tooltips" title="{$btr->tooltip_general_manufacturer|escape}">
+                                        {include file='svg_icon.tpl' svgId='icon_tooltips'}
+                                    </i>
+                                </div>
+                                <div class="">
+                                    <select name="manufacturer_id" class="selectpicker form-control mb-1{if !$manufacturers} hidden{/if} fn_meta_manufacturer" data-live-search="true">
+                                        <option value="0" {if !$product->manufacturer_id}selected=""{/if} data-manufacturer_name="">{$btr->general_not_set|escape}</option>
+                                        {foreach $manufacturers as $manufacturer}
+                                            <option value="{$manufacturer->id}" {if $product->manufacturer_id == $manufacturer->id}selected=""{/if} data-manufacturer_name="{$manufacturer->name|escape}">{$manufacturer->name|escape}</option>
+                                        {/foreach}
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="">
-                        <select name="brand_id" class="selectpicker form-control mb-1{if !$brands} hidden{/if} fn_meta_brand" data-live-search="true">
-                            <option value="0" {if !$product->brand_id}selected=""{/if} data-brand_name="">{$btr->general_not_set|escape}</option>
-                            {foreach $brands as $brand}
-                                <option value="{$brand->id}" {if $product->brand_id == $brand->id}selected=""{/if} data-brand_name="{$brand->name|escape}">{$brand->name|escape}</option>
-                            {/foreach}
-                        </select>
-                    </div>
+
                 </div>
-                <div class="fn_step-16">
-                    <div class="heading_label">
-                        {$btr->general_manufacturer|escape}
-                        <i class="fn_tooltips" title="{$btr->tooltip_general_manufacturer|escape}">
-                            {include file='svg_icon.tpl' svgId='icon_tooltips'}
-                        </i>
-                    </div>
-                    <div class="">
-                        <select name="manufacturer_id" class="selectpicker form-control mb-1{if !$manufacturers} hidden{/if} fn_meta_manufacturer" data-live-search="true">
-                            <option value="0" {if !$product->manufacturer_id}selected=""{/if} data-manufacturer_name="">{$btr->general_not_set|escape}</option>
-                            {foreach $manufacturers as $manufacturer}
-                                <option value="{$manufacturer->id}" {if $product->manufacturer_id == $manufacturer->id}selected=""{/if} data-manufacturer_name="{$manufacturer->name|escape}">{$manufacturer->name|escape}</option>
-                            {/foreach}
-                        </select>
-                    </div>
-                </div>
+
                 <div class="fn_step-7">
                     <div class="heading_label heading_label--required">
                         <span>{$btr->general_category|escape}</span>
