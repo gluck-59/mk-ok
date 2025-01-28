@@ -57,54 +57,63 @@
 
     <div class="products_container d-flex flex-column">
         <div class="products_container__boxed">
-            {assign var="myH1" value=""}
-            <h1 class="h1" {if $category} data-category="{$category->id}"{/if}{if $brand} data-brand="{$brand->id}"{/if}>
-                {if $category}
-{*                    1a*}
-                    {$myH1|cat:$category->name}
-                {elseif $manufacturer}
-                     {$lang->product_manufacturer_name} {$myH1}
-                {else}
-{*                    1b*}
-                    {if $keyword}
-                        {$lang->general_search|escape}
+            <div class="d-flex align-items-center justify-content-between">
+                {assign var="myH1" value=""}
+                <h1 class="h1" {if $category} data-category="{$category->id}"{/if}{if $brand} data-brand="{$brand->id}"{/if}>
+                    {if $category}
+    {*                    1a*}
+                        {$myH1|cat:$category->name}
+                    {elseif $manufacturer}
+                         {$lang->product_manufacturer_name} {$myH1}
                     {else}
-                        {$myH1|cat:$lang->products}
+    {*                    1b*}
+                        {if $keyword}
+                            {$lang->general_search|escape}
+                        {else}
+                            {$myH1|cat:$lang->products}
+                        {/if}
                     {/if}
-                {/if}
-                {if $brand OR in_array('brand', $selected_catalog_other_filters)}
-{*                    2*}
-                    {$myH1|cat:" для "|cat:{$brand->name}}
-                {elseif !$category AND $brand OR in_array('brand', $selected_catalog_other_filters)}
-{*                    2a*}
-                    {$myH1|cat:" для ":$lang->products}
-                {/if}
-                {if !$brand AND $filtersUrl|strstr:"brand"}
-{*                    3*}
-                    {if $brands AND $selected_catalog_brands_ids}
-                        {foreach $selected_catalog_brands_ids as $id}
-                            {append var="brand_to_show" value=$brands.$id->name}
-                        {/foreach}
+                    {if $brand OR in_array('brand', $selected_catalog_other_filters)}
+    {*                    2*}
+                        {$myH1|cat:" для "|cat:{$brand->name}}
+                    {elseif !$category AND $brand OR in_array('brand', $selected_catalog_other_filters)}
+    {*                    2a*}
+                        {$myH1|cat:" для ":$lang->products}
                     {/if}
-                    {$myH1|cat:" для ":{', '|implode:$brand_to_show}}
-                {/if}
-                {if $isPseudoDiscount OR in_array('discounted', $selected_catalog_other_filters)}
-{*                    4*}
-                    {$myH1|cat:$lang->features_filter_discounted_lowcase}
-                {/if}
+                    {if !$brand AND $filtersUrl|strstr:"brand"}
+    {*                    3*}
+                        {if $brands AND $selected_catalog_brands_ids}
+                            {foreach $selected_catalog_brands_ids as $id}
+                                {append var="brand_to_show" value=$brands.$id->name}
+                            {/foreach}
+                        {/if}
+                        {$myH1|cat:" для ":{', '|implode:$brand_to_show}}
+                    {/if}
+                    {if $isPseudoDiscount OR in_array('discounted', $selected_catalog_other_filters)}
+    {*                    4*}
+                        {$myH1|cat:$lang->features_filter_discounted_lowcase}
+                    {/if}
 
-                {if !$category
-                    AND !$brand
-                    AND (!in_array('brand', $selected_catalog_other_filters) OR !$filtersUrl|strstr:"brand")
-                    AND !$isPseudoDiscount
-                    AND !in_array('discounted', $selected_catalog_other_filters)
-                    AND !$keyword
-                }
-{*                    0*}
-                    {$h1|escape}
-                {/if}
-            </h1>
-
+                    {if !$category
+                        AND !$brand
+                        AND (!in_array('brand', $selected_catalog_other_filters) OR !$filtersUrl|strstr:"brand")
+                        AND !$isPseudoDiscount
+                        AND !in_array('discounted', $selected_catalog_other_filters)
+                        AND !$keyword
+                    }
+    {*                    0*}
+                        {$h1|escape}
+                    {/if}
+                </h1>
+                <div class="product-brand-logo">
+                    {if $brand->image && !$is_mobile}
+                        <img src="{$brand->image|resize:55:55:false:$config->resized_brands_dir}" alt="{$brand->name}" />
+                    {/if}
+                    {if $manufacturer->image && !$is_mobile}
+                        <img src="{$manufacturer->image|resize:55:55:false:$config->resized_manufacturers_dir}" alt="{$manufacturer->name}" />
+                    {/if}
+                </div>
+            </div>
             {if !empty($annotation)}
                 <div class="boxed boxed--big">
                     <div class="">

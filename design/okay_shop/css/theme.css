@@ -2450,6 +2450,10 @@ a.filter__catalog_link svg {
   border: 1px solid var(--okay-border-color);
 }
 
+.product-brand-logo img {
+  max-height: 50px;
+}
+
 /***** #Preview article *************************************************************/
 .boxed .article_item,
 .fn_articles_slide .article_item {
