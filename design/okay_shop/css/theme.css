@@ -3140,8 +3140,9 @@ a.filter__catalog_link svg {
   top: 0;
   width: 100px;
   background: none;
-  color: var(--okay-second-company-text);
+  color: var(--okay-body-text);
   text-align: left;
+  font-weight: normal;
 }
 .details_boxed__amount {
   margin-bottom: 10px;
