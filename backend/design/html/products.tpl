@@ -9,17 +9,7 @@
 <div class="main_header">
     <div class="main_header__item">
         <div class="main_header__inner">
-            {if $variants_count}
-                <div class="box_heading heading_page">
-                    {if $category->name || $brand->name}
-                        {$category->name|escape} {$brand->name|escape}&nbsp;<small>— {$variants_count} вариантов</small>
-                    {elseif $keyword}
-                         {$btr->general_products|escape}&nbsp;<small>— {$variants_count} вариантов</small>
-                    {else}
-                        {$btr->general_products|escape}&nbsp;<small>— {$variants_count} вариантов</small>
-                    {/if}
-                </div>
-            {elseif $products_count}
+            {if $products_count}
                 <div class="box_heading heading_page">
                     {if $category->name || $brand->name}
                         {$category->name|escape} {$brand->name|escape}&nbsp;<small>— {$variants_count} товаров</small>
@@ -27,6 +17,10 @@
                          {$btr->general_products|escape}&nbsp;<small>— {$variants_count} товаров</small>
                     {else}
                         {$btr->general_products|escape}&nbsp;<small>— {$variants_count} товаров</small>
+                    {/if}
+
+                    {if $variants_count}
+                        &nbsp;<small>({$variants_count} вариантов всего)</small>
                     {/if}
                 </div>
             {else}

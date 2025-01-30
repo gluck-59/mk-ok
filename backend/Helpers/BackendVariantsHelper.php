@@ -99,7 +99,7 @@ class BackendVariantsHelper
     }
 
 
-    public function countVariants($products) {
-        return $this->variantsEntity->count(['product_id' => $products]);
+    public function countVariants() {
+        return $this->variantsEntity->count();
     }
 }

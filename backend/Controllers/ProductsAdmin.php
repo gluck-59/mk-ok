@@ -126,7 +126,7 @@ case 'move_to_manufacturer': {
         }
         $products   = $backendProductsHelper->findProductsForProductsAdmin($filter, $backendProductsHelper->getProductsSortName());
         $currencies = $backendCurrenciesHelper->findAllCurrencies();
-        $variants_count = $backendVariantsHelper->countVariants(array_keys($products));
+        $variants_count = $backendVariantsHelper->countVariants();
 
         $this->design->assign('category_id',    $categoryId);
         $this->design->assign('categories',     $categories);
