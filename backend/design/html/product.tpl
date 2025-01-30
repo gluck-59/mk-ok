@@ -1341,7 +1341,7 @@
     function ebayPriceCheck(variantId) {
         $.ajax({
             type: 'post',
-            url: "/ebayCheck",
+            url: "/ebayPriceCheck",
             data: {variantId: variantId},
             dataType: 'json',
             success: function (data) {

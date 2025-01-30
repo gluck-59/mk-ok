@@ -23,7 +23,7 @@ class EbayUpdaterController extends AbstractController
      * @param Response $response
      * @return void
      */
-    function ebayCheck(ProductsEntity $productsEntity, VariantsEntity $variantsEntity,  Database $database, QueryFactory $queryFactory, Response $response, CurrenciesEntity $currenciesEntity) {
+    function ebayPriceCheck(ProductsEntity $productsEntity, VariantsEntity $variantsEntity,  Database $database, QueryFactory $queryFactory, Response $response, CurrenciesEntity $currenciesEntity) {
         $managersEntity = new ManagersEntity();
         $ebayAdmin = new EbayAdmin($managersEntity->findOne(['login' => 'gluck']), '', '');
 

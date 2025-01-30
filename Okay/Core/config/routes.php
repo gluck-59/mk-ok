@@ -70,12 +70,12 @@ return [
             'method' => 'decodeIncomingWebhook',
         ],
     ],
-    'ebayCheck' => [
-        'slug' => 'ebayCheck',
+    'ebayPriceCheck' => [
+        'slug' => 'ebayPriceCheck',
         'patterns' => $pageRouteParams->getPatterns(),
         'params' => [
             'controller' => '\Okay\Modules\Gluck\EbayUpdater\Controllers\EbayUpdaterController',
-            'method' => 'ebayCheck',
+            'method' => 'ebayPriceCheck',
         ],
     ],
 
