@@ -191,7 +191,7 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
                 'compare_price' => ceil($newLot->ebayPrice),
                 'currency_id' => $currencyModel->id,
                 'price_updated' => "NOW()",
-                'stock' => null
+                'stock' => 99 // тест, по уму надо бы NULL
             ];
 
             if ($report->new_price == 0) {
