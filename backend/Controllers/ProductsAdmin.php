@@ -124,9 +124,9 @@ case 'move_to_manufacturer': {
         } else {
             $pagesCount = 0;
         }
-
         $products   = $backendProductsHelper->findProductsForProductsAdmin($filter, $backendProductsHelper->getProductsSortName());
         $currencies = $backendCurrenciesHelper->findAllCurrencies();
+        $variants_count = $backendVariantsHelper->countVariants(array_keys($products));
 
         $this->design->assign('category_id',    $categoryId);
         $this->design->assign('categories',     $categories);
@@ -141,6 +141,7 @@ case 'move_to_manufacturer': {
 
         $filter['page'] = min($filter['page'],       $pagesCount);
         $this->design->assign('products_count', $productsCount);
+        $this->design->assign('variants_count', $variants_count);
         $this->design->assign('pages_count',    $pagesCount);
         $this->design->assign('current_page',   $filter['page']);
 

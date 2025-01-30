@@ -9,14 +9,24 @@
 <div class="main_header">
     <div class="main_header__item">
         <div class="main_header__inner">
-            {if $products_count}
+            {if $variants_count}
                 <div class="box_heading heading_page">
                     {if $category->name || $brand->name}
-                        {$category->name|escape} {$brand->name|escape} - {$products_count}
+                        {$category->name|escape} {$brand->name|escape}&nbsp;<small>— {$variants_count} вариантов</small>
                     {elseif $keyword}
-                         {$btr->general_products|escape} - {$products_count}
+                         {$btr->general_products|escape}&nbsp;<small>— {$variants_count} вариантов</small>
                     {else}
-                        {$btr->general_products|escape} - {$products_count}
+                        {$btr->general_products|escape}&nbsp;<small>— {$variants_count} вариантов</small>
+                    {/if}
+                </div>
+            {elseif $products_count}
+                <div class="box_heading heading_page">
+                    {if $category->name || $brand->name}
+                        {$category->name|escape} {$brand->name|escape}&nbsp;<small>— {$variants_count} товаров</small>
+                    {elseif $keyword}
+                         {$btr->general_products|escape}&nbsp;<small>— {$variants_count} товаров</small>
+                    {else}
+                        {$btr->general_products|escape}&nbsp;<small>— {$variants_count} товаров</small>
                     {/if}
                 </div>
             {else}
@@ -28,7 +38,7 @@
                     <span>{$btr->products_add|escape}</span>
                 </a>
             </div>
-            {*{get_design_block block="products_heading"}*}
+            {get_design_block block="products_heading"}
         </div>
     </div>
     <div class="main_header__item">

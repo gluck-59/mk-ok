@@ -3178,7 +3178,6 @@ label.switch_label i{
 .okay_list .okay_list_row{
     width: 100%;
     height: auto;
-    min-height: 80px;
     display: flex;
     display: -webkit-box;
     display: -webkit-flex;

@@ -97,4 +97,9 @@ class BackendVariantsHelper
 
         ExtenderFacade::execute(__METHOD__, null, func_get_args());
     }
+
+
+    public function countVariants($products) {
+        return $this->variantsEntity->count(['product_id' => $products]);
+    }
 }
