@@ -12,15 +12,15 @@
             {if $products_count}
                 <div class="box_heading heading_page">
                     {if $category->name || $brand->name}
-                        {$category->name|escape} {$brand->name|escape}&nbsp;<small>— {$variants_count} товаров</small>
+                        {$category->name|escape} {$brand->name|escape}&nbsp;<small>— {$products_count} товаров</small>
                     {elseif $keyword}
-                         {$btr->general_products|escape}&nbsp;<small>— {$variants_count} товаров</small>
+                         {$btr->general_products|escape}&nbsp;<small>— {$products_count} товаров</small>
                     {else}
-                        {$btr->general_products|escape}&nbsp;<small>— {$variants_count} товаров</small>
+                        {$btr->general_products|escape}&nbsp;<small>— {$products_count} товаров</small>
                     {/if}
 
                     {if $variants_count}
-                        &nbsp;<small>({$variants_count} вариантов всего)</small>
+                        &nbsp;<small>({$variants_count} вариантов)</small>
                     {/if}
                 </div>
             {else}

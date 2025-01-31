@@ -67,7 +67,7 @@
                         <select name="forManufacturer" class="selectpicker form-control mb-1{if !$brands} hidden{/if} fn_meta_manufacturer" data-live-search="true">
                             <option value="0" {if !$product->manufacturer_id}selected=""{/if} data-manufacturer_name="">Производитель</option>
                             {foreach $manufacturers as $manufacturer}
-                                <option value="{$manufacturer->name}" {if $product->manufacturer_id == $manufacturer->id}selected=""{/if} data-manufacturer_name="{$manufacturer->name|escape}">{$manufacturer->name|escape}</option>
+                                <option value="{$manufacturer->name}" {if $product->manufacturer_id == $manufacturer->id}selected=""{/if} data-manufacturer_name="{$manufacturer->meta_title|escape}">{$manufacturer->meta_title|escape}</option>
                             {/foreach}
                         </select>
                     </div>
@@ -369,7 +369,7 @@
                                     <select name="manufacturer_id" class="selectpicker form-control mb-1{if !$manufacturers} hidden{/if} fn_meta_manufacturer" data-live-search="true">
                                         <option value="0" {if !$product->manufacturer_id}selected=""{/if} data-manufacturer_name="">{$btr->general_not_set|escape}</option>
                                         {foreach $manufacturers as $manufacturer}
-                                            <option value="{$manufacturer->id}" {if $product->manufacturer_id == $manufacturer->id}selected=""{/if} data-manufacturer_name="{$manufacturer->name|escape}">{$manufacturer->name|escape}</option>
+                                            <option value="{$manufacturer->id}" {if $product->manufacturer_id == $manufacturer->id}selected=""{/if} data-manufacturer_name="{$manufacturer->meta_title|escape}">{$manufacturer->meta_title|escape}</option>
                                         {/foreach}
                                     </select>
                                 </div>

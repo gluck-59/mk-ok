@@ -221,7 +221,6 @@ echo PHP_EOL.'getitemDetails: '.$itemNo;
             return $itemDetails;
         }
         $document = new Document($itemDetails['response']);
-
         // ??
         // ebay вернул ошибку
         if($itemDetails['debug']['errors']) {
@@ -279,12 +278,10 @@ echo PHP_EOL.'getitemDetails: '.$itemNo;
             $price = preg_replace('/[A-Z$€ ]/', '', $price);
             $price = (double) str_replace(',', '', $price);
         }
-
         if ($shippingWrapper = $document->first('.ux-labels-values--shipping .ux-labels-values__values-content .ux-textspans--BOLD')) {
             $shipping = preg_replace('/[A-Z$€ ]/', '', $shippingWrapper->text());
             $shipping = (double)str_replace(',', '', $shipping);
         }
-
         $dutiesWrapper = $document->first('.ux-labels-values--importCharges .ux-textspans--BOLD');
         if ($dutiesWrapper) {
             $duties = preg_replace('/[A-Z$€ ]/', '', $dutiesWrapper->text());
@@ -444,6 +441,12 @@ echo $err;
 
         $this->debug = [];
         curl_setopt_array($curl, $curlOptions);
+
+// не работает ?
+//        if ($type == 2) {
+//            curl_setopt($curl, CURLOPT_COOKIE, "__deba=sZtrRJL1jGhnglTERuUOmjojHYU48SZZ70JncK3irP1AKIjQAvTA96y2fumGaVWbXR8UW1J2_XMwSXzXGqPFGLOkJ8jeCfY2fF-7A5Lz8WlqMVoEmRAcn7r3JiZJU1C3sfBavT0NFY8x_gKeoYqEXA==; domain=.ebay.com; path=/'"); // доставка в испанию
+//        }
+
         $this->debug['curl_effective_url'] = curl_getinfo($curl, CURLINFO_EFFECTIVE_URL);
         $response = curl_exec($curl);
 
