@@ -210,7 +210,7 @@ body:not(.top-nav) header.navbar {
 .text-primary,
 .text-info,
 .text_primary{color: RGB(39, 133, 226);}
-.text_dark{color: #2b303b;}
+.text_dark{color: var(--okay-basic-company);}
 .text-white,
 .text_white{color: #fff;}
 .text-muted,
@@ -6501,7 +6501,7 @@ input[type=range]:focus::-ms-fill-upper {
     color: #607d8b;
     transition: border-color ease-in-out 0.15s,
     box-shadow ease-in-out 0.15s;
-    background: #f7f7f7;
+    background: var(--okay-border-color);
     height: 34px;
     font-weight: 400;
     border: 1px solid transparent;
@@ -6509,7 +6509,7 @@ input[type=range]:focus::-ms-fill-upper {
 }
 .feature_input:focus {
     border-color: rgba(118, 118, 118, 0.7);
-    background: #fff;
+    background: var(--okay-border-color);
     border-radius: 0 5px 5px 0;
 }
 .feature_value::-ms-expand {

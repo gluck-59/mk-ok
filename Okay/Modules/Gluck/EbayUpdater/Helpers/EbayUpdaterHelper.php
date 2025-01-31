@@ -210,7 +210,7 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
                 $newLot->outPrice = 0;
                 $this->sleep = rand(40, 60);
             } else {
-                $this->sleep = rand(5, 20);
+                $this->sleep = rand(5, 10);
             }
 
             $priceCompare = round(abs(round($variant->price) / round($newLot->outPrice) * 100 - 100));

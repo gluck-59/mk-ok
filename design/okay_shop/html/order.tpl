@@ -309,7 +309,7 @@
                                             <td>-= ПЕРЕВОЗЧИК НЕ ВЫБРАН =-</td>
                                         </tr>
                                     {/if}
-                                    {if $order->name and $order->last_name}
+                                    {if $order->name || $order->last_name}
                                         {assign var="recepientName" value=$order->name}
                                         {assign var="recepientLastname" value=$order->last_name}
                                     {else}

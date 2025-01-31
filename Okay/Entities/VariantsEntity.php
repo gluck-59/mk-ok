@@ -153,8 +153,11 @@ class VariantsEntity extends Entity
     public function getVariantsToUpdate($days = 7) {
 //        /* дебаг sql dbDebug debug */
 //        $select = $this->getSelect()->debug();
-
         $sql = $this->queryFactory->newSqlQuery();
+
+        $sql->setStatement("delete from ok_ebayupdater_report where DATEDIFF(NOW(), updated) > 10");
+        $this->db->query($sql);
+
         $sql->setStatement("SELECT v.price_updated, p.id product_id, v.id variant_id, v.price_updated, p.name product_name, p.ebayItemNo, p.partNumber, v.name variant_name, v.sku, v.price, v.currency_id
 FROM ok_products p
 JOIN ok_variants v ON v.product_id = p.id

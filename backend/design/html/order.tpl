@@ -578,7 +578,7 @@
                             </div>
                         {/if}
                         <div class="mb-1">
-                            <div class="heading_label">{$btr->general_comment|escape}</div>
+                            <div class="heading_label">{$btr->general_comment|escape} юзера (виден юзеру)</div>
                             <textarea name="comment" class="form-control short_textarea">{$order->comment|escape}</textarea>
                         </div>
                          <div class="mb-1">
