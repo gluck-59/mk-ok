@@ -131,68 +131,63 @@
     }
     </script>
     {/literal}
-    {* Title *}
-    <title>
-        {if $controller == 'BrandController'}Ништяки для{/if}
-        {if $controller == 'ManufacturerController'}Ништяки производства{/if}
-
-        {$meta_title|escape}
-        {*if $btr->products_discount}{$btr->products_discount|escape|lower}{/if*}
-
-        {if !$brand && $controller != 'ProductController'&& $controller != 'FeedbackController' && $filtersUrl == '' && $controller != 'BrandsController'}
-            для мотоциклов Honda, Kawasaki, Suzuki, Yamaha, Harley-Davidson, BMW
-        {/if}
-        {if $controller == 'CategoryController' || $controller == 'BrandController' || $controller == 'BrandsController' || $controller == 'ManufacturerController'}
-            купить в Motokofr.com
-        {/if}
-        {if $isPseudoDiscount}
-            {$lang->features_filter_discounted_lowcase}
-        {/if}
-    </title>
 
 
-    {* Meta keywords *}
-    {if empty($meta_keywords)}
-        <meta name="keywords" content="мотоцикл, кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защита, Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
-    {else}
-        <meta name="keywords" content="{$meta_keywords|escape}"/>
-    {/if}
-{*<pre>*}
-{*{$controller}*}
-{*{$meta_keywords}*}
-{*{if in_array($controller, ['ProductController'])}IN ARR{/if}*}
-{*</pre>*}
-
-    {* Meta description *}
-    {if $controller == 'BrandController'}
-        <meta name="description" content="Купить для мотоцикла {$brand->name} кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту"/>
-    {elseif $controller == 'BrandsController'}
-        <meta name="description" content="Купить кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
-    {elseif $controller == 'MainController'}
-        <meta name="description" content="Купить кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
-    {elseif $controller == 'ProductsController'}
-        <meta name="description" content="Купить {if $isPseudoDiscount}{$lang->features_filter_discounted_lowcase}{/if} кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
-    {elseif $controller == 'CategoryController'}
-        <meta name="description" content="Купить {if $category->meta_title}{$category->meta_title|escape|lower}{else}{$category->name|escape|lower}{/if} для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
-    {elseif $controller == 'ProductController'}
-        <meta name="description" content="Купить {$product->name|escape} {if $isPseudoDiscount}{$lang->features_filter_discounted_lowcase}{/if} для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
-    {/if}
+{* Title *}
+<title>{if $controller == 'BrandController'}Ништяки для{/if}
+{if $controller == 'ManufacturerController'}Ништяки производства{/if}
+{$meta_title|escape}
+{if !$brand && $controller != 'ProductController'&& $controller != 'FeedbackController' && $filtersUrl == '' && $controller != 'BrandsController'}
+    для мотоциклов Honda, Kawasaki, Suzuki, Yamaha, Harley-Davidson, BMW
+{/if}
+{if $controller == 'CategoryController' || $controller == 'BrandController' || $controller == 'BrandsController' || $controller == 'ManufacturerController'}
+    купить в Motokofr.com
+{/if}
+{if $isPseudoDiscount}
+    {$lang->features_filter_discounted_lowcase}
+{/if}</title>
 
 
+{* Meta keywords *}
+{if !empty($product->meta_keywords)}
+    {assign var="kw" value="{$product->meta_keywords|escape}"}
+{elseif !empty($meta_keywords)}
+    {assign var="kw" value="{$meta_keywords|escape}"}
+{else}
+    {assign var="kw" value="купить кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защита, для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"}
+{/if}
+<meta name="keywords" content="{$kw}" />
+
+{* Meta description *}
+{if $controller == 'BrandController'}
+    <meta name="description" content="Купить для мотоцикла {$brand->name} кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту"/>
+{elseif $controller == 'BrandsController'}
+    <meta name="description" content="Купить кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
+{elseif $controller == 'MainController'}
+    <meta name="description" content="Купить кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
+{elseif $controller == 'ProductsController'}
+    <meta name="description" content="Купить {if $isPseudoDiscount}{$lang->features_filter_discounted_lowcase}{/if} кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
+{elseif $controller == 'CategoryController'}
+    <meta name="description" content="Купить {if $category->meta_title}{$category->meta_title|escape|lower}{else}{$category->name|escape|lower}{/if} для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
+{elseif $controller == 'ProductController'}
+    <meta name="description" content="Купить {$product->name|escape} {if $isPseudoDiscount}{$lang->features_filter_discounted_lowcase}{/if} для мотоцикла {$brand->name|escape}"/>
+{else}
+    <meta name="description" content="Купить ништяки {if $isPseudoDiscount}{$lang->features_filter_discounted_lowcase}{/if} для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
+{/if}
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+{if $noindex_nofollow}
+    <meta name="robots" content="noindex,nofollow">
+{elseif $noindex_follow}
+    <meta name="robots" content="noindex,follow">
+{else}
+    <meta name="robots" content="index,follow">
+{/if}
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="MotokofrCMS">
 
 
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
-    {if $noindex_nofollow}
-        <meta name="robots" content="noindex,nofollow">
-    {elseif $noindex_follow}
-        <meta name="robots" content="noindex,follow">
-    {else}
-        <meta name="robots" content="index,follow">
-    {/if}
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="generator" content="MotokofrCMS">
 
     {* rel prev next для блога *}
     {if $controller == "BlogController" && $total_pages_num > 1}
