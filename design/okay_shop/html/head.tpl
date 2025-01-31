@@ -152,7 +152,7 @@
 
 
     {* Meta keywords *}
-    {if !empty($meta_keywords)}
+    {if empty($meta_keywords)}
         <meta name="keywords" content="мотоцикл, кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защита, Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
     {else}
         <meta name="keywords" content="{$meta_keywords|escape}"/>
