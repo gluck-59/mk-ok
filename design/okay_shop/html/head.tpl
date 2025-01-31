@@ -170,7 +170,7 @@
 {elseif $controller == 'CategoryController'}
     <meta name="description" content="Купить {if $category->meta_title}{$category->meta_title|escape|lower}{else}{$category->name|escape|lower}{/if} для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
 {elseif $controller == 'ProductController'}
-    <meta name="description" content="Купить {$product->name|escape} {if $isPseudoDiscount}{$lang->features_filter_discounted_lowcase}{/if} для мотоцикла {$brand->name|escape}"/>
+    <meta name="description" content="Купить {$product->name|escape} {if $isPseudoDiscount}{$lang->features_filter_discounted_lowcase}{/if} для мотоцикла {$brand->meta_keywords|escape}"/>
 {else}
     <meta name="description" content="Купить ништяки {if $isPseudoDiscount}{$lang->features_filter_discounted_lowcase}{/if} для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
 {/if}
