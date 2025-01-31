@@ -153,7 +153,7 @@
 
     {* Meta keywords *}
     {if 1 || empty($meta_keywords)}
-        <meta name="keywords" content="мотоцикл, кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защита, Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha"/>
+        <meta name="keywords" content="мотоцикл, кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защита, Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
     {else}
         <meta name="keywords" content="{$meta_keywords|escape}"/>
     {/if}
@@ -167,15 +167,15 @@
     {if $controller == 'BrandController'}
         <meta name="description" content="Купить для мотоцикла {$brand->name} кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту"/>
     {elseif $controller == 'BrandsController'}
-        <meta name="description" content="Купить кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha"/>
+        <meta name="description" content="Купить кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
     {elseif $controller == 'MainController'}
-        <meta name="description" content="Купить кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha"/>
+        <meta name="description" content="Купить кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
     {elseif $controller == 'ProductsController'}
-        <meta name="description" content="Купить {if $isPseudoDiscount}{$lang->features_filter_discounted_lowcase}{/if} кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha"/>
+        <meta name="description" content="Купить {if $isPseudoDiscount}{$lang->features_filter_discounted_lowcase}{/if} кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
     {elseif $controller == 'CategoryController'}
-        <meta name="description" content="Купить {if $category->meta_title}{$category->meta_title|escape|lower}{else}{$category->name|escape|lower}{/if} для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha"/>
+        <meta name="description" content="Купить {if $category->meta_title}{$category->meta_title|escape|lower}{else}{$category->name|escape|lower}{/if} для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
     {elseif $controller == 'ProductController'}
-        <meta name="description" content="Купить {$product->name|escape} {if $isPseudoDiscount}{$lang->features_filter_discounted_lowcase}{/if} для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha"/>
+        <meta name="description" content="Купить {$product->name|escape} {if $isPseudoDiscount}{$lang->features_filter_discounted_lowcase}{/if} для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
     {/if}
 
 
