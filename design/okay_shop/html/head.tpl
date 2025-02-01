@@ -159,22 +159,21 @@
 <meta name="keywords" content="{$kw}" />
 
 {* Meta description *}
-<meta name="description" content="Купить {$meta_description} цена"/>
-{*{if $controller == 'BrandController'}*}
-{*    <meta name="description" content="Купить для мотоцикла {$brand->name} кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту"/>*}
-{*{elseif $controller == 'BrandsController'}*}
-{*    <meta name="description" content="Купить кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>*}
-{*{elseif $controller == 'MainController'}*}
-{*    <meta name="description" content="Купить кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>*}
-{*{elseif $controller == 'ProductsController'}*}
-{*    <meta name="description" content="Купить {if $isPseudoDiscount}{$lang->features_filter_discounted_lowcase}{/if} кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>*}
-{*{elseif $controller == 'CategoryController'}*}
-{*    <meta name="description" content="Купить {if $category->meta_title}{$category->meta_title|escape|lower}{else}{$category->name|escape|lower}{/if} для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>*}
-{*{elseif $controller == 'ProductController'}*}
-{*    <meta name="description" content="Купить {$product->name|escape} {if $isPseudoDiscount}{$lang->features_filter_discounted_lowcase}{/if} для мотоцикла {$brand->meta_keywords|escape}"/>*}
-{*{else}*}
-{*    <meta name="description" content="Купить ништяки {if $isPseudoDiscount}{$lang->features_filter_discounted_lowcase}{/if} для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>*}
-{*{/if}*}
+{if $controller == 'BrandController'}
+    <meta name="description" content="Купить для мотоцикла {$brand->name} кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту"/>
+{elseif $controller == 'BrandsController'}
+    <meta name="description" content="Купить кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
+{elseif $controller == 'MainController'}
+    <meta name="description" content="Купить кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
+{elseif $controller == 'ProductsController'}
+    <meta name="description" content="Купить {if $isPseudoDiscount}{$lang->features_filter_discounted_lowcase}{/if} кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
+{elseif $controller == 'CategoryController'}
+    <meta name="description" content="Купить {if $category->meta_title}{$category->meta_title|escape|lower}{else}{$category->name|escape|lower}{/if} для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
+{elseif $controller == 'ProductController'}
+    <meta name="description" content="{$meta_description} для мотоцикла {$brand->meta_keywords|escape}"/>
+{else}
+    <meta name="description" content="Купить ништяки {if $isPseudoDiscount}{$lang->features_filter_discounted_lowcase}{/if} для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
+{/if}
 
 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
