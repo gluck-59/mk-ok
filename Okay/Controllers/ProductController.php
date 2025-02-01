@@ -114,7 +114,7 @@ class ProductController extends AbstractController
 
         $this->design->assign('canonical', Router::generateUrl('product', ['url' => $product->url], true));
 
-        $productMetadataHelper->setUp($product, $category, $brand);
+        $productMetadataHelper->setUp($product, $category, $brand, $manufacturer);
         $this->setMetadataHelper($productMetadataHelper);
 
         $this->response->setContent('product.tpl');

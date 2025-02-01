@@ -18,11 +18,15 @@ class ProductMetadataHelper extends CommonMetadataHelper
     /** @var object|null */
     private $brand;
 
-    public function setUp(object $product, ?object $category = null, ?object $brand = null): void
+    /** @var object|null */
+    private $manufacturer;
+
+    public function setUp(object $product, ?object $category = null, ?object $brand = null, ?object $manufacturer = null): void
     {
         $this->product  = $product;
         $this->category = $category;
         $this->brand    = $brand;
+        $this->manufacturer    = $manufacturer;
     }
 
     /**
@@ -155,6 +159,7 @@ class ProductMetadataHelper extends CommonMetadataHelper
 
         $this->parts = [
             '{$brand}'         => ($this->brand ? $this->brand->name : ''),
+            '{$manufacturer}'         => ($this->manufacturer ? $this->manufacturer->name : 'manufacturer'),
             '{$brand_route}'   => $brandRoute,
             '{$product}'       => ($this->product ? $this->product->name : ''),
             '{$price}'         => ($this->product->variant->price != null ? $this->money->convert($this->product->variant->price, $currency->id, false) . ' ' . $currency->sign : ''),
