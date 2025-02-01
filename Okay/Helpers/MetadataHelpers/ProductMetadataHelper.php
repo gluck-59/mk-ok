@@ -159,7 +159,7 @@ class ProductMetadataHelper extends CommonMetadataHelper
 
         $this->parts = [
             '{$brand}'         => ($this->brand ? $this->brand->name : ''),
-            '{$manufacturer}'         => ($this->manufacturer ? $this->manufacturer->name : 'manufacturer'),
+            '{$manufacturer}'         => ($this->manufacturer ? $this->manufacturer->meta_title : 'manufacturer'),
             '{$brand_route}'   => $brandRoute,
             '{$product}'       => ($this->product ? $this->product->name : ''),
             '{$price}'         => ($this->product->variant->price != null ? $this->money->convert($this->product->variant->price, $currency->id, false) . ' ' . $currency->sign : ''),
