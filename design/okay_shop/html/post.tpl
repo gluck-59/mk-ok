@@ -55,7 +55,7 @@
                         {if $post->date}
                             <div class="post_information__item" title="{$lang->blog_date_public}">
                                 {include file="svg.tpl" svgId="calendar_icon"}
-                                <span>{$post->date|date:"d m Y, H:i"}</span>
+                                <span>{$post->date|date:"d m Y"}</span>
                             </div>
                         {/if}
                         {* Reading time *}
@@ -66,10 +66,10 @@
                             </div>
                         {/if}
                         {* Counts of comments *}
-                        <div class="post_information__item" title="{$lang->blog_count_comments}">
-                            {include file="svg.tpl" svgId="chat_icon"}
-                            <span>{$comments|count}</span>
-                        </div>
+{*                        <div class="post_information__item" title="{$lang->blog_count_comments}">*}
+{*                            {include file="svg.tpl" svgId="chat_icon"}*}
+{*                            <span>{$comments|count}</span>*}
+{*                        </div>*}
                     </div>
                     {* Update date *}
                     {if $post->updated_date > 0}

@@ -35,12 +35,12 @@ class BlogController extends AbstractController
         $this->response->setHeaderLastModify($post->last_modify);
 
         // Комментарии к посту
-        $commentsHelper->addCommentProcedure('post', $post->id);
+        /*$commentsHelper->addCommentProcedure('post', $post->id);
         $commentsFilter = $commentsHelper->getCommentsFilter('post', $post->id);
         $commentsSort = $commentsHelper->getCurrentSort();
         $comments = $commentsHelper->getList($commentsFilter, $commentsSort);
         $comments = $commentsHelper->attachAnswers($comments);
-        $this->design->assign('comments', $comments);
+        $this->design->assign('comments', $comments);*/
 
         // Связанные товары
         $relatedProducts = $relatedProductsHelper->getRelatedProductsList($blogEntity, ['post_id' => $post->id]);

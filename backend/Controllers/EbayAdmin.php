@@ -167,7 +167,7 @@ echo PHP_EOL.'return из стр '.__LINE__;
 
 
 
-
+//prettyDump($lots, 1);
 
             /** в итоге мы имеем массив $lots с номерами подходящих лотов
              * берем подходящий и отправляем на подробный анализ
@@ -182,7 +182,7 @@ echo PHP_EOL.'return из стр '.__LINE__;
             } else {
                 $itemDetails['debug']['errors'] = 'искали '.$request['keyword'].', массив $lots пуст. не подключен VPN?';
                 echo PHP_EOL.'искали '.$request['keyword'].', массив $lots пуст. не подключен VPN?';
-
+//prettyDump($this->parsedLot, 1);
                 if ($this->isAjax) ob_end_clean();
                 return $itemDetails;
             }

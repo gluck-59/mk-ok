@@ -134,8 +134,8 @@
 
 
 {* Title *}
-<title>{if $controller == 'BrandController'}Ништяки для{/if}
-{if $controller == 'ManufacturerController'}Ништяки производства{/if}
+<title>{if $controller == 'BrandController'}Ништяки для {/if}
+{if $controller == 'ManufacturerController'}Ништяки производства {/if}
 {$meta_title|escape}
 {if !$brand && $controller != 'ProductController'&& $controller != 'FeedbackController' && $filtersUrl == '' && $controller != 'BrandsController'}
     для мотоциклов Honda, Kawasaki, Suzuki, Yamaha, Harley-Davidson, BMW
