@@ -100,10 +100,10 @@ class YmlAdapter extends AbstractPresetAdapter
         }
 
         $result['price']['data'] = $this->money->convert($price, $this->mainCurrency->id, false);
-        if ($product->compare_price > 0) {
-            $comparePrice = $this->money->convert($comparePrice, $this->mainCurrency->id, false);
-            $result['oldprice']['data'] = $comparePrice;
-        }
+//        if ($product->compare_price > 0) {
+//            $comparePrice = $this->money->convert($comparePrice, $this->mainCurrency->id, false);
+//            $result['oldprice']['data'] = $comparePrice;
+//        }
 
         $result['currencyId']['data'] = $this->mainCurrency->code;
         $result['categoryId']['data'] = $product->main_category_id;
@@ -124,7 +124,7 @@ class YmlAdapter extends AbstractPresetAdapter
             }
         }
 
-        $result['manufacturer_warranty']['data'] = $this->feed->settings['has_manufacturer_warranty'] ? 'true' : 'false';
+//        $result['manufacturer_warranty']['data'] = $this->feed->settings['has_manufacturer_warranty'] ? 'true' : 'false';
 
         if (!empty($product->brand_name)) {
             $result['vendor']['data'] = $this->xmlFeedHelper->escape($product->brand_name);

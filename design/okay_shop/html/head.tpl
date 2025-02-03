@@ -149,10 +149,10 @@
 
 
 {* Meta keywords *}
-{if !empty($product->meta_keywords)}
-    {assign var="kw" value="{$product->meta_keywords|escape}"}
-{elseif !empty($meta_keywords)}
+{if !empty($meta_keywords)}
     {assign var="kw" value="{$meta_keywords|escape}"}
+{elseif !empty($product->meta_keywords)}
+    {assign var="kw" value="{$product->meta_keywords|escape}"}
 {else}
     {assign var="kw" value="купить кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защита, для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"}
 {/if}
