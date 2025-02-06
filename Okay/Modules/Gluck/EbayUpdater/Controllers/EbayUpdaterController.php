@@ -34,7 +34,7 @@ class EbayUpdaterController extends AbstractController
 
         // алгоритм обновления цены:: 1) sku, 2) ebayItemNo, 3) partNumber
         if ($forUpdate->sku) $request = $forUpdate->manufacturerName. ' '.$forUpdate->sku;
-        elseif ($forUpdate->ebayItemNo) $request = $forUpdate->ebayItemNo;
+        elseif ($forUpdate->ebayItemNo > 0) $request = $forUpdate->ebayItemNo;
         elseif ($forUpdate->partNumber) $request = $forUpdate->partNumber;
 
         if ($request) {

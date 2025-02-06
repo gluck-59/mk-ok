@@ -2867,6 +2867,9 @@ a.filter__catalog_link svg {
 }
 
 /***** #Product page ***************************************************************/
+#brands-manufacturers .details_boxed__manufacturer a {
+  float: right;
+}
 .product-page__sku .sku_nubmer {
   font-size: 14px;
   font-weight: 500;

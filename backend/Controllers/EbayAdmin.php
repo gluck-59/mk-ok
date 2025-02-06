@@ -228,6 +228,7 @@ echo PHP_EOL.'getitemDetails: '.$itemNo;
         }
         //  ended
         if ($endedBlock = $document->first('.d-statusmessage')) {
+//die('ee');
             $itemDetails['debug']['errors'] = 'лот '.$itemNo.' протух';
             return $itemDetails;
         }
