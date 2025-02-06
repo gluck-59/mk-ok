@@ -3404,7 +3404,7 @@ label.switch_label i{
 }
 .for_developer_toggle{
     cursor: pointer;
-    color: #2b303b;
+    /*color: #2b303b;*/
     opacity: 0.6;
     font-size: 12px;
     display: inline-block;

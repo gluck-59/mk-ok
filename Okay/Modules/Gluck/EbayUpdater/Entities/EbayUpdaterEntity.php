@@ -61,7 +61,7 @@ class EbayUpdaterEntity extends Entity
             unset($field->variant_id);
 
             $field->productId = $product->id;
-            $field->productName = $variant->name ? $product->name.' — '.$variant->name : $product->name;
+            $field->productName = $variant->name ? $product->name.' — '.$variant->sku : $product->name;
             $fields[] = $field;
         }
         return $fields;
