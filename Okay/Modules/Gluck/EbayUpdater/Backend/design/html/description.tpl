@@ -401,7 +401,7 @@
                     {foreach $tableFields as $item}
                         {assign var="old_price" value="{$old_price|ceil}"}
                         <tr class="{if $item->success == 1}success{/if}">
-                            <td><a href="/backend//index.php?controller=ProductAdmin&id={$item->productId}" target="_blank">{$item->productName}</a> {$item->$sku}</td>
+                            <td><a href="/backend//index.php?controller=ProductAdmin&id={$item->productId}" target="_blank">{$item->productName}</a>{if $item->sku} — {$item->sku}{/if}</td>
                             <td><a href="https://www.ebay.com/itm/{$item->newEbayItem_id}" target="_blank">{$item->newEbayItem_id}</a></td>
                             <td>
                                 {if $item->old_currency_id == 1}${elseif $item->old_currency_id == 5}€{else}? {/if}{$item->old_price|ceil}
