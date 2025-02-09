@@ -291,7 +291,6 @@ echo PHP_EOL.'getitemDetails: '.$itemNo;
             $price = (double) str_replace(',', '', $price);
         }
         if (!$shippingWrapper = $document->first('.ux-layout-section--shipping .ux-textspans--BOLD')) {
-echo PHP_EOL.'второй $shippingWrapper';
             $shippingWrapper = $document->first('.x-shipping-cost');
         }
         if ($shippingWrapper) {
@@ -339,14 +338,6 @@ $isEnded = false; // добавить определение $isEnded
             $lot['outPrice'] = self::calculateProfit($lot);
         } else {
             // если валюта кривая или вместо доставки херня, то покажем все это и закончим формирование лота
-//            $lot = [];
-//            $lot['ebayItemNo'] = $itemNo;
-//prettyDump($priceWrapper); // тут вычисляется валюта
-prettyDump($currency);
-prettyDump($shippingWrapper);
-prettyDump($shippingBlock);
-prettyDump($itemDetails);
-die();
             $err = ($currency[0] == 'US' ? ' price = '.$price.'<br> shpping = '.$shipping : ' ---- цена в ' . (!empty($currency) ? $currency[0] : ' неизвестной валюте: ') .', shpping = '.$shipping).($isEnded ? ' лот протух? ' : '').PHP_EOL;
             $lot['name'] = $err;
 
