@@ -86,7 +86,7 @@ class EbayAdmin extends IndexAdmin
 
     function parse($request, $isAjax = false) {
         $this->isAjax = $isAjax;
-echo PHP_EOL.'parse request: '.$request['keyword'];
+//echo PHP_EOL.'parse request: '.$request['keyword'];
         if (!$request['keyword']) {
             $itemDetails['debug']['errors'] = 'В запросе для Ebay нет keyword';
 echo PHP_EOL.'return из стр '.__LINE__;
@@ -130,7 +130,8 @@ echo PHP_EOL.'return из стр '.__LINE__;
                 if ($noItemsFoundWrapper = $document->first('h1.srp-controls__count-heading')) {
                     if (stripos($noItemsFoundWrapper->text(), '0 results') !== false ) {
                         if ($isAjax) {
-                            return array('debug' => array('errors' => '0 лотов найдено'));
+                            $itemDetails['debug']['errors'] = '0 лотов найдено';
+                            return $itemDetails;
                         } else prettyDump('0 лотов найдено');
                     }
                 }
