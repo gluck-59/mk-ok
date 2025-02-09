@@ -458,6 +458,9 @@ blockquote cite:before {
   font-size: 16px;
   line-height: 1.8;
 }
+.block__description--style, .block__description--style img {
+  margin: 0 10px;
+}
 
 .block__description iframe {
   margin-left: auto;

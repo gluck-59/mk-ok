@@ -14,6 +14,7 @@ use Okay\Admin\Requests\BackendProductsRequest;
 use Okay\Core\Import;
 use Okay\Core\QueryFactory;
 use Okay\Entities\BrandsEntity;
+use Okay\Entities\ManufacturersEntity;
 use Okay\Entities\CurrenciesEntity;
 use Okay\Entities\RouterCacheEntity;
 
@@ -58,6 +59,7 @@ class EbayAdmin extends IndexAdmin
     public function fetch(
         BackendCategoriesHelper    $backendCategoriesHelper,
         BrandsEntity               $brandsEntity,
+        ManufacturersEntity        $manufacturersEntity,
         CurrenciesEntity           $currenciesEntity,
         BackendProductsRequest     $productRequest,
         BackendProductsHelper      $backendProductsHelper,
@@ -71,12 +73,15 @@ class EbayAdmin extends IndexAdmin
             $this->parsedLot = self::parse($_POST);
             $this->design->assign('ebayRequest', $_POST); // $this->request->post('ПОЛЕ') может брать только с ПОЛЕ
             $this->design->assign('product', $this->parsedLot);
-//$this->design->assign('ebayBrand', $this->parsedLot);
         }
 
         $brandsCount = $brandsEntity->count();
         $brands = $brandsEntity->find(['limit' => $brandsCount]);
         $this->design->assign('brands',     $brands);
+
+        $manufacturersCount = $manufacturersEntity->count();
+        $manufacturers = $manufacturersEntity->mappedBy('id')->find(['limit' => $manufacturersCount]);
+        $this->design->assign('manufacturers',$manufacturers);
 
         $this->design->assign('ebayMotorListUrl', self::EBAY_MOTOR_LIST_URL);
         $this->design->assign('categories', $backendCategoriesHelper->getCategoriesTree());
@@ -129,10 +134,16 @@ echo PHP_EOL.'return из стр '.__LINE__;
                 // нет лотов
                 if ($noItemsFoundWrapper = $document->first('h1.srp-controls__count-heading')) {
                     if (stripos($noItemsFoundWrapper->text(), '0 results') !== false && stripos($noItemsFoundWrapper->text(), '0 results') == 0 ) {
-                        if ($isAjax) {
-                            $itemDetails['debug']['errors'] = '0 лотов найдено';
-                            return $itemDetails;
-                        } else prettyDump('0 лотов найдено');
+                        $itemDetails['debug']['errors'] = 'искали '.$request['keyword'].', 0 лотов найдено';
+                        echo PHP_EOL.'---------------------------------искали '.$request['keyword'].', 0 лотов найдено';
+//prettyDump($this->parsedLot, 1);
+                        if ($this->isAjax) ob_end_clean();
+                        return $itemDetails;
+
+//if ($isAjax) {
+//    $itemDetails['debug']['errors'] = '0 лотов найдено';
+//    return $itemDetails;
+//} else continue; //prettyDump('0 лотов найдено', 1);
                     }
                 }
 
