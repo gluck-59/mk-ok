@@ -18,6 +18,11 @@ Disallow: /*?utm
 Disallow: /*&utm
 Disallow: /cart
 Disallow: /en/*
+Disallow: /product.php?
+Disallow: /supplier.php?
+Disallow: /category.php?
+Disallow: /tags.php?
+Disallow: /modules/
 Disallow: /contact-form.php
 Disallow: /common_js/*
 Disallow: /dynamic_js/*
@@ -70,3 +75,12 @@ Disallow: /*?keyword
 Disallow: /*?utm
 Disallow: /*&utm
 Disallow: /cart
+Disallow: /en/*
+Disallow: /product.php?
+Disallow: /supplier.php?
+Disallow: /category.php?
+Disallow: /tags.php?
+Disallow: /modules/
+Disallow: /contact-form.php
+Disallow: /common_js/*
+Disallow: /dynamic_js/*
