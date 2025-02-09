@@ -192,7 +192,12 @@
                                     <div class="delivery padding block">
                                         {if $order->payment_details}
                                             {if $is_mobile || $is_tablet}
-                                                <p><b><a href="{$order->payment_details->Data->payload}" target="_blank">Оплатить в НСПК</a></b></p>
+                                                <a href="{$order->payment_details->Data->payload}" target="_blank">
+                                                    <center>
+                                                        <img src="/files/uploads/nspkLogo.jpg">
+                                                        <p>Оплатить в НСПК</p>
+                                                    </center>
+                                                </a>
                                             {else}
                                                 <div style="margin: -60px 0">
                                                     <center><img class="lazy" data-src="/{$config->qrcodes_dir}{$order->payment_details->Data->qrcId}.png" src="{$rootUrl}/design/{get_theme}/images/xloading.gif" alt="{$payment_method->name|escape}" title="{$payment_method->name|escape}"/></center>

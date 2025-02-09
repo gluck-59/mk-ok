@@ -1064,8 +1064,8 @@ input::-webkit-input-placeholder {
 .form__placeholder--focus:-webkit-autofill,
 .form__placeholder--focus:-webkit-autofill:hover,
 .form__placeholder--focus:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 30px #fff inset;
-  box-shadow: 0 0 0 30px #fff inset;
+  /*-webkit-box-shadow: 0 0 0 30px #fff inset;*/
+  /*box-shadow: 0 0 0 30px #fff inset;*/
   -webkit-text-fill-color: inherit !important;
   filter: none !important;
 }
@@ -1787,7 +1787,7 @@ select {
   user-select: none;
   padding: 5px 15px 5px 15px;
   color: var(--okay-body-text);
-  background: #fff;
+  background: var(--okay-bg);
   overflow: hidden;
   position: relative;
   z-index: 2;

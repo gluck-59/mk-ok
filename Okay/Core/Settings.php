@@ -288,7 +288,7 @@ class Settings
 
         $res = $this->update('pseudoDiscountProducts', implode(',', $fieldsTemp));
 
-        echo date('d.m.Y', time()).' '.implode(',', $fieldsTemp);
+        echo date('d.m.Y', time()).': '.implode(', ', $fieldsTemp);
 //        print_r($fieldsTemp, 1);
         echo PHP_EOL;
         return $this->get('pseudoDiscountProducts');
