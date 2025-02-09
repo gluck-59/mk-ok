@@ -126,6 +126,15 @@ echo PHP_EOL.'return из стр '.__LINE__;
                     //echo ('пропускаем левый итем в строке '.__LINE__);
                     continue;
                 }
+
+                // нет лотов
+                if ($noItemsFoundWrapper = $document->first('h1.srp-controls__count-heading')) {
+                    if (stripos($noItemsFoundWrapper->text(), '0 results') !== false ) {
+                        prettyDump('0 лотов найдено');
+                        return;
+                    }
+                }
+
                 // если селлер не соответсвует нашим критериям — пропускаем
                 if ($sellerBlock = $item->first('.s-item__seller-info-text')) {
                     $sellerArray = explode(' ', $sellerBlock->text());
@@ -167,7 +176,9 @@ echo PHP_EOL.'return из стр '.__LINE__;
 
 
 
+//prettyDump($curl['debug']);
 //prettyDump($lots, 1);
+
 
             /** в итоге мы имеем массив $lots с номерами подходящих лотов
              * берем подходящий и отправляем на подробный анализ
@@ -275,20 +286,25 @@ echo PHP_EOL.'getitemDetails: '.$itemNo;
         // здесь непонятно почему не работает NumberFormatter, извращаемся
         if ($priceWrapper = $document->first('.x-price-primary .ux-textspans')){
             $price = $priceWrapper->text();
-            preg_match('/US|EUR/', $price, $currency);
-            $price = preg_replace('/[A-Z$€ ]/', '', $price);
+            preg_match('/US|EUR|\$|€/', $price, $currency);
+            $price = preg_replace('/[A-Z\$€ ]/', '', $price);
             $price = (double) str_replace(',', '', $price);
         }
-        if ($shippingWrapper = $document->first('.ux-labels-values--shipping .ux-labels-values__values-content .ux-textspans--BOLD')) {
-            $shipping = preg_replace('/[A-Z$€ ]/', '', $shippingWrapper->text());
-            $shipping = (double)str_replace(',', '', $shipping);
+        if (!$shippingWrapper = $document->first('.ux-layout-section--shipping .ux-textspans--BOLD')) {
+echo PHP_EOL.'второй $shippingWrapper';
+            $shippingWrapper = $document->first('.x-shipping-cost');
         }
+        if ($shippingWrapper) {
+            $shippingBlock = preg_replace('/[a-zA-Z$€+ ]/', '', $shippingWrapper->text());
+            $shipping = (double)str_replace(',', '', $shippingBlock);
+        }
+
         $dutiesWrapper = $document->first('.ux-labels-values--importCharges .ux-textspans--BOLD');
         if ($dutiesWrapper) {
-            $duties = preg_replace('/[A-Z$€ ]/', '', $dutiesWrapper->text());
+            $duties = preg_replace('/[A-Z\$€ ]/', '', $dutiesWrapper->text());
         }
 $isEnded = false; // добавить определение $isEnded
-        if (!$isEnded && in_array($currency[0], ['US', 'EUR']) && is_double($price) && is_double($shipping)) {
+        if (!$isEnded && in_array($currency[0], ['US', 'EUR', '$', '€']) && is_double($price) && is_double($shipping)) {
             $lot['currency'] = $currency[0];
             $lot['price'] = $price;
             $lot['shipping'] = $shipping;
@@ -318,12 +334,21 @@ $isEnded = false; // добавить определение $isEnded
                     if ($i == 0 || ($i % sizeof($tr) == 0)) $lot['compatibility'] .= '<br>' . $td[$i]->text() . ' ';
                     else $lot['compatibility'] .= $td[$i]->text() . ' ';
                 }
+                $lot['compatibility'] .= '<br><br><i>Редко, но поставщики иногда лажают со списком подходящих моделей. Перед заказом давай на всякий случай сверимся с производителем.</i>';
             }
             $lot['outPrice'] = self::calculateProfit($lot);
         } else {
             // если валюта кривая или вместо доставки херня, то покажем все это и закончим формирование лота
-            $lot = [];
+//            $lot = [];
+//            $lot['ebayItemNo'] = $itemNo;
+//prettyDump($priceWrapper); // тут вычисляется валюта
+prettyDump($currency);
+prettyDump($shippingWrapper);
+prettyDump($shippingBlock);
+prettyDump($itemDetails);
+die();
             $err = ($currency[0] == 'US' ? ' price = '.$price.'<br> shpping = '.$shipping : ' ---- цена в ' . (!empty($currency) ? $currency[0] : ' неизвестной валюте: ') .', shpping = '.$shipping).($isEnded ? ' лот протух? ' : '').PHP_EOL;
+            $lot['name'] = $err;
 
 echo PHP_EOL.'$currency: ';
 print_r($currency);
@@ -335,7 +360,6 @@ echo $err;
             $lot['debug']['errors'] = $err;
         }
 
-        $lot['manufacturer'] = '';
         if ($this->isAjax) ob_end_clean();
         return (object) $lot;
     } //getItemDetails
@@ -370,20 +394,21 @@ echo $err;
 
     /**
      * возвращает рандомный UserAgent
+     * и кажется это лишнее
      *
      * @return string
      */
     private static function getRandomUseragent()
     {
         $useragents = [
-            "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.16) Gecko/20110319 Firefox/3.6.16",
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0",
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
-            "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/119.0",
-            "Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1",
-            "Mozilla/5.0 (iPad; CPU OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1",
-            "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36"
+            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.6834.162 Safari/537.36",
+//            "Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.2.16) Gecko/20110319 Firefox/3.6.16",
+//            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36 Edg/119.0.0.0",
+//            "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
+//            "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:109.0) Gecko/20100101 Firefox/119.0",
+//            "Mozilla/5.0 (iPhone; CPU iPhone OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1",
+//            "Mozilla/5.0 (iPad; CPU OS 16_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.5 Mobile/15E148 Safari/604.1",
+//            "Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Mobile Safari/537.36"
         ];
         return $useragents[rand(0, sizeof($useragents) - 1)];
     }
@@ -499,8 +524,12 @@ echo PHP_EOL.'calculateProfit: '.(double) $lot['price'] .'+'. (double) $lot['shi
         $cur = new CurrenciesEntity();
 
         switch ($lot->currency) {
-            case 'US': $currentCurrency = 'USD'; break;
-            case 'EUR': $currentCurrency = 'EUR'; break;
+            case 'US':
+            case '$':
+                $currentCurrency = 'USD'; break;
+            case 'EUR':
+            case '€':
+                $currentCurrency = 'EUR'; break;
             default: $currentCurrency = 'USD';
         }
         $currency = $cur->findOne(['code' => $currentCurrency, 'enabled' => 1]);
