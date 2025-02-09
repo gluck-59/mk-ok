@@ -128,7 +128,7 @@ echo PHP_EOL.'return из стр '.__LINE__;
                 }
                 // нет лотов
                 if ($noItemsFoundWrapper = $document->first('h1.srp-controls__count-heading')) {
-                    if (stripos($noItemsFoundWrapper->text(), '0 results') !== false ) {
+                    if (stripos($noItemsFoundWrapper->text(), '0 results') == 0 ) {
                         if ($isAjax) {
                             $itemDetails['debug']['errors'] = '0 лотов найдено';
                             return $itemDetails;
