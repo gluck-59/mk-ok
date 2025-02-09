@@ -126,12 +126,12 @@ echo PHP_EOL.'return из стр '.__LINE__;
                     //echo ('пропускаем левый итем в строке '.__LINE__);
                     continue;
                 }
-
                 // нет лотов
                 if ($noItemsFoundWrapper = $document->first('h1.srp-controls__count-heading')) {
                     if (stripos($noItemsFoundWrapper->text(), '0 results') !== false ) {
-                        prettyDump('0 лотов найдено');
-                        return;
+                        if ($isAjax) {
+                            return array('debug' => array('errors' => '0 лотов найдено'));
+                        } else prettyDump('0 лотов найдено');
                     }
                 }
 
