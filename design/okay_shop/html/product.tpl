@@ -186,13 +186,49 @@
                                 <link itemprop="url" href="{url_generator route="product" url=$product->url absolute=1}" />
                                 <time itemprop="priceValidUntil" datetime="{$product->created|date:'Ymd'}"></time>
                                 {if $product->variant->stock > 0}
-                                <link itemprop="availability" href="https://schema.org/InStock" />
+                                    <link itemprop="availability" href="https://schema.org/InStock" />
                                 {else}
-                                <link itemprop="availability" href="http://schema.org/OutOfStock" />
+                                    <link itemprop="availability" href="http://schema.org/OutOfStock" />
                                 {/if}
                                 <link itemprop="itemCondition" href="https://schema.org/NewCondition" />
                                 <span itemprop="seller" itemscope itemtype="http://schema.org/Organization">
-                                <span itemprop="name">{$settings->site_name}</span></span>
+                                    <span itemprop="name">{$settings->site_name}</span>
+                                </span>
+
+                                <div rel="schema:shippingDetails">
+                                    <div typeof="schema:OfferShippingDetails">
+                                      <div rel="schema:shippingRate">
+                                        <div typeof="schema:MonetaryAmount">
+                                          <div property="schema:value" content="0"></div>
+                                          <div property="schema:currency" content="RUB"></div>
+                                        </div>
+                                      </div>
+                                      <div rel="schema:shippingDestination">
+                                        <div typeof="schema:DefinedRegion">
+                                          <div property="schema:addressCountry" content="RU"></div>
+                                        </div>
+                                      </div>
+                                      <div rel="schema:deliveryTime">
+                                        <div typeof="schema:ShippingDeliveryTime">
+                                          <div rel="schema:handlingTime">
+                                            <div typeof="schema:QuantitativeValue">
+                                              <div property="schema:minValue" content="0"></div>
+                                              <div property="schema:maxValue" content="5"></div>
+                                              <div property="schema:unitCode" content="DAY"></div>
+                                            </div>
+                                          </div>
+                                          <div rel="schema:transitTime">
+                                            <div typeof="schema:QuantitativeValue">
+                                              <div property="schema:minValue" content="1"></div>
+                                              <div property="schema:maxValue" content="20"></div>
+                                              <div property="schema:unitCode" content="DAY"></div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                </div>
+
                             </span>
 
                             <div class="d-flex flex-wrap align-items-center details_boxed__price_amount">
