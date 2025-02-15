@@ -2,12 +2,12 @@
 {function name=categories_tree3}
     {if $categories}
         <div class="level_{$level} {if $level == 1}categories_nav__menu{else}categories_nav__subcategory{/if}">
-            <ul class="fn_category_scroll {if $level == 1}categories_menu {else}subcategory {/if}">
+            <ul class="fn_category_scroll {if $level == 1}categories_menu {else}subcategory {/if}" itemscope itemtype="https://schema.org/BreadcrumbList">
                 {foreach $categories as $c}
                     {if $c->visible && ($c->has_products || $settings->show_empty_categories)}
                         {if $c->subcategories && $c->count_children_visible && $level < 3}
-                            <li class="categories_menu__item has_child">
-                                <a class="d-flex align-items-center categories_menu__link{if $category->id == $c->id} selected{/if}" href="{url_generator route="category" url=$c->url}" data-category="{$c->id}">
+                            <li class="categories_menu__item has_child" itemprop="itemListElement" itemscope itemtype="https://schema.org/ListItem">
+                                <a class="d-flex align-items-center categories_menu__link{if $category->id == $c->id} selected{/if}" href="{url_generator route="category" url=$c->url}" data-category="{$c->id}" itemprop="item">
                                     {if $c->image}
                                         {if $level == 1 }
                                             {if strtolower(pathinfo($c->image, $smarty.const.PATHINFO_EXTENSION)) == 'svg'} 
@@ -19,14 +19,15 @@
                                             {/if}
                                         {/if}
                                     {/if}
-                                    <span class="categories_menu__name">{$c->name|escape}</span>
+                                    <span class="categories_menu__name" itemprop="name">{$c->name|escape}</span>
+                                    <meta itemprop="position" content="{$level}" />
                                     {include file='svg.tpl' svgId='arrow_right'}
                                 </a>
                                 {categories_tree3 categories=$c->subcategories level=$level + 1}
                             </li>
                         {else}
-                            <li class="categories_menu__item">
-                                <a class="categories_menu__link d-flex align-items-center d-flex align-items-center{if $category->id == $c->id} selected{/if}" href="{url_generator route='category' url=$c->url}" data-category="{$c->id}">
+                            <li class="categories_menu__item" itemscope itemtype="https://schema.org/ListItem">
+                                <a class="categories_menu__link d-flex align-items-center d-flex align-items-center{if $category->id == $c->id} selected{/if}" href="{url_generator route='category' url=$c->url}" data-category="{$c->id}" itemprop="item">
                                     {if $level == 3}
                                         <div class="d-flex align-items-center justify-content-center categories_menu__image">
                                             {if $c->image}
@@ -58,7 +59,8 @@
                                             {/if}
                                         {/if}
                                     {/if}
-                                    <span class="d-flex align-items-center categories_menu__name">{$c->name|escape}</span>
+                                    <span class="d-flex align-items-center categories_menu__name" itemprop="name">{$c->name|escape}</span>
+                                    <meta itemprop="position" content="{$level}" />
                                 </a>
                             </li>
                         {/if}
