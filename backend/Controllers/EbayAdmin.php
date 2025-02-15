@@ -306,6 +306,12 @@ echo PHP_EOL.'getitemDetails: '.$itemNo;
             $shippingWrapper = $document->first('.x-shipping-cost');
         }
         if ($shippingWrapper) {
+            // "do not ship to" или "may not ship to"
+            if (stripos($shippingWrapper->text(), 'not') !== false) {
+                $itemDetails['debug']['errors'] = $itemNo.' '.$shippingWrapper->text();
+                return $itemDetails;
+            }
+
             $shippingBlock = preg_replace('/[a-zA-Z$€+ ]/', '', $shippingWrapper->text());
             $shipping = (double)str_replace(',', '', $shippingBlock);
         }
@@ -314,8 +320,8 @@ echo PHP_EOL.'getitemDetails: '.$itemNo;
         if ($dutiesWrapper) {
             $duties = preg_replace('/[A-Z\$€ ]/', '', $dutiesWrapper->text());
         }
-$isEnded = false; // добавить определение $isEnded
-        if (!$isEnded && in_array($currency[0], ['US', 'EUR', '$', '€']) && is_double($price) && is_double($shipping)) {
+
+        if (in_array($currency[0], ['US', 'EUR', '$', '€']) && is_double($price) && is_double($shipping)) {
             $lot['currency'] = $currency[0];
             $lot['price'] = $price;
             $lot['shipping'] = $shipping;
