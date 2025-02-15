@@ -170,16 +170,17 @@ echo PHP_EOL.'return из стр '.__LINE__;
                 if ($shippingBlock = $item->first('.s-item__shipping.s-item__logisticsCost')) {
                     $shipping = preg_replace('/[a-zA-Z\$\s+]/', '', $shippingBlock->text());
                     $lot['shipping'] = $shipping;
-                    if (empty($shipping)) {
+
+                    if ($shipping == '' || stripos($shippingBlock->text(), 'not') !== false) {
 //                        echo 'пропускаем '.$itemNo[0].' — нет доставки';
                         continue;
                     }
-                }
+                } else continue; // отсуствует $shippingBlock
+
                 // item name для отладки
                 if ($nameBlock = $item->first('.s-item__info .s-item__title span')) {
                     $lot['name'] = $nameBlock->text();
                 }
-
 
                 // на выходе будет массив номеров лотов, который мы обработаем позже
                 $lot['itemNo'] = $itemNo[0];
@@ -187,10 +188,9 @@ echo PHP_EOL.'return из стр '.__LINE__;
             } // foreach
 
 
-
 //prettyDump($curl['debug']);
 //prettyDump($lots, 1);
-
+//die();
 
             /** в итоге мы имеем массив $lots с номерами подходящих лотов
              * берем подходящий и отправляем на подробный анализ
