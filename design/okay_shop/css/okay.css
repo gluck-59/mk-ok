@@ -1621,7 +1621,7 @@ select {
   user-select: none;
   padding: 0;
   color: var(--okay-body-text);
-  background: var(--okay-bg);
+  /*background: var(--okay-bg);*/
   overflow: hidden;
   position: relative;
   z-index: 2;

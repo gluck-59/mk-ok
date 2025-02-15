@@ -29,7 +29,7 @@ RewriteCond %{QUERY_STRING} ^(.*)&?page=1(?![0-9])(.*)$
 RewriteRule ^(.*)/?$ /$1?%1%3 [R=301,L]
 
 # Админка теперь по адресу /backend
-RewriteRule	^admin/?$  backend [L]
+RewriteRule	^adminka/?$  backend [L]
 
 # Кэширование / поддерживается не на всех хостингах
 <ifmodule mod_expires.c>

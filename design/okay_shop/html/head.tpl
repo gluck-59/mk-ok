@@ -133,17 +133,17 @@
     {/literal}
 
 {* Title *}
-<title>{if $controller == 'BrandController'}Ништяки для {/if}
-{if $controller == 'ManufacturerController'}Ништяки производства {/if}
+<title>{if $controller == 'BrandController'}Ништяки для&nbsp;{/if}
+{if $controller == 'ManufacturerController'}Ништяки производства&nbsp;{/if}
 {$meta_title|escape}
 {if !$brand && $controller != 'ProductController'&& $controller != 'FeedbackController' && $filtersUrl == '' && $controller != 'BrandsController'}
-    для мотоциклов Honda, Kawasaki, Suzuki, Yamaha, Harley-Davidson, BMW
+    &nbsp;для мотоциклов Honda, Kawasaki, Suzuki, Yamaha, Harley-Davidson, BMW
 {/if}
 {*if $controller == 'ProductController'}
     берется $meta_title из SEO
 {/if*}
 {if $controller == 'CategoryController' || $controller == 'BrandController' || $controller == 'BrandsController' || $controller == 'ManufacturerController'}
-    купить в Motokofr.com
+    &nbsp;купить в Motokofr.com
 {/if}
 {if $isPseudoDiscount}
     {$lang->features_filter_discounted_lowcase}

@@ -2098,7 +2098,7 @@ a.filter__catalog_link svg {
 }
 .product_preview__name a {
   color: var(--okay-body-text);
-  background: var(--okay-bg);
+  background: var(--okay-boxed-color);
   line-height: 1.2;
   font-size: 14px;
   transition: 0.3s;

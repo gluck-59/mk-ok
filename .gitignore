@@ -8,6 +8,8 @@ backend/files/*/*.*
 #files/**/*.*
 #!files/**/
 /files/*
+/moto/*
+/saw/*
 
 #!files/**/*.phtml
 #!files/**/*.php*
