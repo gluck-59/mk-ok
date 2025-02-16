@@ -68,7 +68,7 @@
                     {else}
     {*                    1b*}
                         {if $keyword}
-                            {$lang->general_search|escape}
+                            {$lang->general_search|escape} {$products|count} шт.
                         {else}
                             {$myH1|cat:$lang->products}
                         {/if}

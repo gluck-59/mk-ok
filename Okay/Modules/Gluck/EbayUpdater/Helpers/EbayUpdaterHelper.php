@@ -122,7 +122,7 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
                         // все норм
                         echo PHP_EOL . __LINE__ . ': нашли товар ' . $variant->product_id . ' по ebayItemNo ' . $variant->ebayItemNo . ', выход = ' . $newLot->currency . ' ' . $newLot->outPrice . PHP_EOL;
                         $report->success = 1;
-                        $report->description = 'нашли по ebayItemNo <a href="https://www.ebay.com/itm/' . $variant->ebayItemNo . '">' . $variant->ebayItemNo . '</a>';
+                        $report->description = 'нашли по ebayItemNo <a href="https://www.ebay.com/itm/' . $variant->ebayItemNo . '" target="_blank">' . $variant->ebayItemNo . '</a>';
                         self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
                         continue;
                     }
