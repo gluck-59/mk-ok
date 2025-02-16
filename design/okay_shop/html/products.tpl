@@ -68,7 +68,7 @@
                     {else}
     {*                    1b*}
                         {if $keyword}
-                            {$lang->general_search|escape} {$products|count} шт.
+                            {$lang->general_search|escape} {$products|count} {$products|count|plural:'ништяк':'ништяков':'ништяка'}
                         {else}
                             {$myH1|cat:$lang->products}
                         {/if}
@@ -152,7 +152,7 @@
                 </div>
             {/if}
 
-            {if $description}
+            {if $description AND !$keyword}
                 <div class="boxed boxed--big">
                     {* Table contents *}
                     {if !empty($table_of_content)}
