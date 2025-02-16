@@ -68,7 +68,7 @@
                     {else}
     {*                    1b*}
                         {if $keyword}
-                            {$lang->general_search|escape} {$products|count} {$products|count|plural:'ништяк':'ништяков':'ништяка'}
+                            {$lang->general_search|escape} {$keyword}:
                         {else}
                             {$myH1|cat:$lang->products}
                         {/if}
