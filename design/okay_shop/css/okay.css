@@ -438,7 +438,7 @@ blockquote cite:before {
 .block_explanation__header {
   font-size: 24px;
   font-weight: 600;
-  color: #222;
+  color: var(--okay-body-text);
   line-height: 1.2;
   margin-bottom: 15px;
 }

@@ -1,8 +1,8 @@
 <?php
-// насколько курсы моего банка отличаются от ЦБРФ
-const GENERAL_COEFF = 1.153;
-const USD_COEFF = 1.049;
-const EUR_COEFF = 1.017;
+// насколько курсы цифра-банка отличаются от ЦБРФ (цифра-банк — рекомендация от миши)
+const GENERAL_COEFF = 1.02;
+const USD_COEFF = 1.069;
+const EUR_COEFF = 1.066;
 
 
 if (0 /*in_array($_SERVER['SERVER_ADDR'], ['127.0.0.1', '::1', '0.0.0.0', 'localhost'])*/) {
@@ -20,7 +20,7 @@ if (0 /*in_array($_SERVER['SERVER_ADDR'], ['127.0.0.1', '::1', '0.0.0.0', 'local
             $currency['eur'] = $usd = round($item->Value * GENERAL_COEFF * EUR_COEFF, 2);
         }
     }
-//print_r($currency);
+//print_r($currency); die;
 try {
     $conn = new PDO('mysql:dbname='.$ini_array['db_name'].';host=localhost', $ini_array['db_user'],$ini_array['db_password']);
     $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::ERRMODE_EXCEPTION);
@@ -28,10 +28,6 @@ try {
 catch (PDOException $e) {
     echo PHP_EOL.date('d.m.Y', time())." Database error: " . $e->getMessage().PHP_EOL;
 }
-
-//$sql = "select * from ok_currencies";
-//$a = $conn->query($sql)->fetchAll();
-//print_r($a);
 
 $sql = 'UPDATE ok_currencies SET rate_to = CASE code WHEN "USD" THEN '.$currency["usd"].' WHEN "EUR" THEN '.$currency["eur"].' WHEN "RUB" THEN 1 END';
 $res = $conn->exec($sql);
