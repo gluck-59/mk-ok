@@ -420,13 +420,13 @@
                             <div class="col-md-6">
                                 <input name="ebayItemNo" class="variant_input" value="{$product->ebayItemNo}" placeholder="номер лота">
                                 {if $product->ebayItemNo}
-                                    <a href="https://ebay.com/itm/{$product->ebayItemNo|escape}" target="_blank">ссылка</a>
+                                    <a href="https://ebay.com/itm/{$product->ebayItemNo|escape}" target="_blank" tabindex="-1">ссылка</a>
                                 {/if}
                             </div>
                             <div class="col-md-6">
                                 <input name="supplier" class="variant_input" value="{$product->supplier}" placeholder="поставщик">
                                 {if $product->supplier}
-                                    <a href="https://www.ebay.com/sch/i.html?_ssn=oemcycles&store_name={$product->supplier|escape}" target="_blank">поставщик</a>
+                                    <a href="https://www.ebay.com/sch/i.html?_ssn=oemcycles&store_name={$product->supplier|escape}" target="_blank" tabindex="-1">поставщик</a>
                                 {/if}
                             </div>
                         </div>
