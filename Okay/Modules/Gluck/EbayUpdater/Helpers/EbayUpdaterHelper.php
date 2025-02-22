@@ -204,7 +204,6 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
                 $report->success = 0;
             }
 
-            // предохранитель от левого лота — если новая цена отличается от старой больше чем на PRICE_MAX_DIFF % — пишем только репорт
             if (is_null($variant->price)) $variant->price = 0;
             if (is_null($newLot->outPrice)) {
                 $newLot->outPrice = 0;
@@ -213,12 +212,38 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
                 $this->sleep = rand(3, 10);
             }
 
-            $priceCompare = round(abs(round($variant->price) / round($newLot->outPrice) * 100 - 100));
-            if ($priceCompare > EbayAdmin::PRICE_MAX_DIFF) {
-                unset($toUpdateVariant);
-                $report->success = 0;
-                $report->description = 'разница <b>'.$priceCompare.'%</b>, не обновили';
+// предохранитель от левого лота — если новая цена отличается от старой больше чем на PRICE_MAX_DIFF % — пишем только репорт
+/*$priceCompare = round(abs(round($variant->price) / round($newLot->outPrice) * 100 - 100));
+if ($priceCompare > EbayAdmin::PRICE_MAX_DIFF) {
+    unset($toUpdateVariant);
+    $report->success = 0;
+    $report->description = 'разница <b>'.$priceCompare.'%</b>, не обновили';
+}*/
+
+// если новая цена дороже — пишем всегда
+//            if ($variant->price < $newLot->outPrice) {
+//                $priceCompare = round($variant->price / $newLot->outPrice * 100 - 100);
+//                if (abs($priceCompare) < EbayAdmin::PRICE_MAX_DIFF) {
+//                    $report->success = 1;
+////                    echo abs($priceCompare). ' %, пишем';
+//                }
+//            }
+
+
+// если новая цена дешевле — пишем только если разница не более PRICE_MAX_DIFF %
+            if ($variant->price > $newLot->outPrice) {
+                $priceCompare = round($variant->price / $newLot->outPrice * 100 - 100);
+                if ($priceCompare >= EbayAdmin::PRICE_MAX_DIFF) {
+                    $report->success = 0;
+                    unset($toUpdateVariant);
+//                    echo $priceCompare. ' %, не пишем';
+                } else {
+                    $report->success = 1;
+//                    echo $priceCompare . ' %, пишем';
+                }
             }
+
+
 
             if (isset($toUpdateVariant)) {
                 $productsUpd = $productsEntity->update($variant->product_id, ['ebayItemNo' => $newLot->ebayItemNo, 'supplier' => $newLot->supplier, 'visible' => 1]);
