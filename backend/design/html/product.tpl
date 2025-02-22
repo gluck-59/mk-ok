@@ -293,7 +293,7 @@
     {*Изображения товара*}
     <div class="row">
         <div class="col-lg-8 col-md-12 pr-0 ">
-            <div class="fn_step-5 boxed fn_toggle_wrap min_height_230px">
+            <div class="fn_step-5 boxed fn_toggle_wrap min_height_390px">
                 <div class="heading_box">
                     {$btr->product_images|escape}
                     <i class="fn_tooltips" title="{$btr->tooltip_product_images|escape}">

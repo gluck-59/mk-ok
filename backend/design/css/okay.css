@@ -578,6 +578,9 @@ body:not(.top-nav) header.navbar {
 .min_height_335px{
     min-height: 335px;
 }
+.min_height_390px{
+    min-height: 390px;
+}
 .hidden {
     display: none!important;
 }
