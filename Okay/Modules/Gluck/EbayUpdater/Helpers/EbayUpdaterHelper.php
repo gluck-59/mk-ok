@@ -236,7 +236,7 @@ if ($priceCompare > EbayAdmin::PRICE_MAX_DIFF) {
                 if ($priceCompare >= EbayAdmin::PRICE_MAX_DIFF) {
                     $report->success = 0;
                     unset($toUpdateVariant);
-//                    echo $priceCompare. ' %, не пишем';
+                    $report->description = 'разница <b>'.$priceCompare.'%</b>, не обновили';
                 } else {
                     $report->success = 1;
 //                    echo $priceCompare . ' %, пишем';
