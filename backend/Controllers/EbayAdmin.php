@@ -31,6 +31,8 @@ class EbayAdmin extends IndexAdmin
     private $maxProfit = 1000; // в долларах
     private $profit_percent = 30; // наценка в процентах — учитываются миша, армяне и я
 
+
+
     public $debug;
     public $isAjax;
 
@@ -54,6 +56,7 @@ class EbayAdmin extends IndexAdmin
      */
     const EBAY_MOTOR_LIST_URL = 'https://www.ebay.com/sch/i.html?_stpos=03560&_fcid=186&LH_ItemCondition=3&rt=nc&LH_BIN=1&_stpos=03000&_fcid=186&_osacat=6000&_sacat=6000&_sop=15&_nkw=';
     const EBAY_ITEM_URL = 'https://www.ebay.com/itm/';
+    const PRICE_MAX_DIFF = 15; // в процентах
 
 
     public function fetch(

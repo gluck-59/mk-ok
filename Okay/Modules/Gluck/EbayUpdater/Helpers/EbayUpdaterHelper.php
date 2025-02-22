@@ -204,18 +204,17 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
                 $report->success = 0;
             }
 
-            // предохранитель от левого лота — если новая цена отличается от старой больше чем на 10% — пишем только репорт
+            // предохранитель от левого лота — если новая цена отличается от старой больше чем на PRICE_MAX_DIFF % — пишем только репорт
             if (is_null($variant->price)) $variant->price = 0;
             if (is_null($newLot->outPrice)) {
                 $newLot->outPrice = 0;
-                $this->sleep = rand(40, 60);
+                $this->sleep = rand(20, 30);
             } else {
-                $this->sleep = rand(5, 10);
+                $this->sleep = rand(3, 10);
             }
 
             $priceCompare = round(abs(round($variant->price) / round($newLot->outPrice) * 100 - 100));
-
-            if ($priceCompare > 10) {
+            if ($priceCompare > EbayAdmin::PRICE_MAX_DIFF) {
                 unset($toUpdateVariant);
                 $report->success = 0;
                 $report->description = 'разница <b>'.$priceCompare.'%</b>, не обновили';
