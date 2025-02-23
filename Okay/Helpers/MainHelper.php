@@ -116,10 +116,8 @@ class MainHelper
         if (!$referer) {
             /** @var UserReferer $userReferer */
             $userReferer = $this->SL->getService(UserReferer::class);
-//prettyDump($userReferer);
             $userReferer->parse();
-        } else {
-            file_put_contents(__DIR__.'/../../_debug.log', print_r($referer, 1).PHP_EOL, FILE_APPEND);
+
         }
     }
 

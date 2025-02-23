@@ -17,7 +17,7 @@ class UserReferer
     const CHANNEL_SOCIAL = 'social';
     const CHANNEL_REFERRAL = 'referral';
     const CHANNEL_UNKNOWN = 'unknown';
-    
+
     /** @var Parser */
     private $parser;
     
@@ -35,7 +35,8 @@ class UserReferer
             Request::getReferer(),
             Request::getCurrentUrl()
         );
-
+//prettyDump($referer);
+file_put_contents(__DIR__.'/../../../_debug.log', print_r($referer, 1).PHP_EOL, FILE_APPEND);
         if ($referer->isKnown()) {
             switch ($referer->getMedium()) {
                 case self::CHANNEL_EMAIL :
@@ -68,7 +69,7 @@ class UserReferer
                 'source' => '',
             ];
         }
-        
+
         $this->saveUserReferer($userReferer);
     }
     
