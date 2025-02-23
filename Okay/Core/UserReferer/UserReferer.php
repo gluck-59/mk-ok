@@ -35,7 +35,7 @@ class UserReferer
             Request::getReferer(),
             Request::getCurrentUrl()
         );
-
+prettyDump($referer);
         if ($referer->isKnown()) {
             switch ($referer->getMedium()) {
                 case self::CHANNEL_EMAIL :
