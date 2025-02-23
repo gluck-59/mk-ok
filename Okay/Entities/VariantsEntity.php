@@ -155,7 +155,7 @@ class VariantsEntity extends Entity
 //        $select = $this->getSelect()->debug();
         $sql = $this->queryFactory->newSqlQuery();
 
-        $sql->setStatement("delete from ok_ebayupdater_report where DATEDIFF(NOW(), updated) > 10");
+        $sql->setStatement("delete from ok_ebayupdater_report where TIMESTAMPDIFF(DAY, updated, NOW()) > 5");
         $this->db->query($sql);
 
         $sql->setStatement("SELECT v.price_updated, p.id product_id, v.id variant_id, v.price_updated, p.name product_name, p.ebayItemNo, p.partNumber, v.name variant_name, v.sku, v.price, v.currency_id

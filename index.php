@@ -13,6 +13,7 @@ use Okay\Core\OkayContainer\OkayContainer;
 use Psr\Log\LoggerInterface;
 
 ini_set('display_errors', 'off');
+//error_reporting(E_ERROR);
 
 require_once('vendor/autoload.php');
 

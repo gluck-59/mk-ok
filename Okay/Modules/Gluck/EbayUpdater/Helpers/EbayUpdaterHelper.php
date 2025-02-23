@@ -115,7 +115,7 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
                     if (!$newLot->outPrice || !$newLot->currency) {
                         echo PHP_EOL . __LINE__ . ': нашли товар ' . $variant->product_id . ' по ebayItemNo ' . $variant->ebayItemNo . ', нет цены/валюты/доставки?'. PHP_EOL;
                         $report->success = 0;
-                        $report->description = 'лот <a href="https://www.ebay.com/itm/' . $variant->ebayItemNo . '">' . $variant->ebayItemNo . '</a>, нет цены/валюты/доставки?';
+                        $report->description = 'лот <a href="https://www.ebay.com/itm/' . $variant->ebayItemNo . '" target="_blank">' . $variant->ebayItemNo . '</a>, нет цены/валюты/доставки?';
                         self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
                         continue;
                     } else {
@@ -212,25 +212,18 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
                 $this->sleep = rand(3, 10);
             }
 
-// предохранитель от левого лота — если новая цена отличается от старой больше чем на PRICE_MAX_DIFF % — пишем только репорт
-/*$priceCompare = round(abs(round($variant->price) / round($newLot->outPrice) * 100 - 100));
-if ($priceCompare > EbayAdmin::PRICE_MAX_DIFF) {
-    unset($toUpdateVariant);
-    $report->success = 0;
-    $report->description = 'разница <b>'.$priceCompare.'%</b>, не обновили';
-}*/
+            // предохранитель от левого лота — если новая цена отличается от старой больше чем на PRICE_MAX_DIFF % — пишем только репорт
 
-// если новая цена дороже — пишем всегда
-//            if ($variant->price < $newLot->outPrice) {
-//                $priceCompare = round($variant->price / $newLot->outPrice * 100 - 100);
-//                if (abs($priceCompare) < EbayAdmin::PRICE_MAX_DIFF) {
-//                    $report->success = 1;
-////                    echo abs($priceCompare). ' %, пишем';
-//                }
-//            }
+            // если новая цена дороже — пишем всегда
+            /*if ($variant->price < $newLot->outPrice) {
+                $priceCompare = round($variant->price / $newLot->outPrice * 100 - 100);
+                if (abs($priceCompare) < EbayAdmin::PRICE_MAX_DIFF) {
+                    $report->success = 1;
+                    echo abs($priceCompare). ' %, пишем';
+                }
+            }*/
 
-
-// если новая цена дешевле — пишем только если разница не более PRICE_MAX_DIFF %
+            // если новая цена дешевле — пишем только если разница не более PRICE_MAX_DIFF %
             if ($variant->price > $newLot->outPrice) {
                 $priceCompare = round($variant->price / $newLot->outPrice * 100 - 100);
                 if ($priceCompare >= EbayAdmin::PRICE_MAX_DIFF) {
@@ -239,7 +232,6 @@ if ($priceCompare > EbayAdmin::PRICE_MAX_DIFF) {
                     $report->description = 'разница <b>'.$priceCompare.'%</b>, не обновили';
                 } else {
                     $report->success = 1;
-//                    echo $priceCompare . ' %, пишем';
                 }
             }
 

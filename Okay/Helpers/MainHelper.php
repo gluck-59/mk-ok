@@ -110,11 +110,14 @@ class MainHelper
                 unset($_SESSION['user_id']);
             }
         }
-
+        $referer = UserReferer::getUserReferer();
+//prettyDump((__DIR__.'/../../_debug.log'));
+file_put_contents(__DIR__.'/../../_debug.log', print_r($referer, 1).PHP_EOL, FILE_APPEND);
         // Пытаемся определить откуда пришел пользователь, и запоминаем эту информацию
-        if (!$referer = UserReferer::getUserReferer()) {
+        if (!$referer) {
             /** @var UserReferer $userReferer */
             $userReferer = $this->SL->getService(UserReferer::class);
+//prettyDump($userReferer);
             $userReferer->parse();
         }
     }
