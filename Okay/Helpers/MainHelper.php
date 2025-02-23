@@ -96,7 +96,10 @@ class MainHelper
 
         // Пользователь, если залогинен
         if (isset($_SESSION['user_id'])) {
-prettyDump($_SERVER);
+
+if ($_SESSION['user_id'] == 2) prettyDump($_SERVER);
+
+
             /** @var UsersEntity $usersEntity */
             $usersEntity = $entityFactory->get(UsersEntity::class);
 
