@@ -97,7 +97,8 @@ class MainHelper
         // Пользователь, если залогинен
         if (isset($_SESSION['user_id'])) {
 
-if ($_SESSION['user_id'] == 2) prettyDump($_SERVER);
+prettyDump($_SESSION);
+prettyDump($_SERVER);
 
 
             /** @var UsersEntity $usersEntity */
