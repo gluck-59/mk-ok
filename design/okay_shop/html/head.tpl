@@ -139,9 +139,9 @@
 {if !$brand && $controller != 'ProductController'&& $controller != 'FeedbackController' && $filtersUrl == '' && $controller != 'BrandsController'}
     &nbsp;на мотоцикл Honda, Kawasaki, Suzuki, Yamaha, Harley-Davidson, BMW
 {/if}
-{*if $controller == 'ProductController'}
-    берется $meta_title из SEO
-{/if*}
+{if $controller == 'ProductController'}
+    {* берется $meta_title из SEO и затем -> *} {$product->partNumber}
+{/if}
 {if $controller == 'CategoryController' || $controller == 'BrandController' || $controller == 'BrandsController' || $controller == 'ManufacturerController'}
     &nbsp;купить в Motokofr.com
 {/if}
