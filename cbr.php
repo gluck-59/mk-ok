@@ -1,6 +1,9 @@
 <?php
 // насколько курсы цифра-банка отличаются от ЦБРФ (цифра-банк — рекомендация от миши)
-//echo file_get_contents('https://rub.rate.sx/1usdt');
+//$sxUsd =  file_get_contents('https://rub.rate.sx/1usdt');
+//echo $sxUsd * 0.983 * 1.02;
+//die();
+
 
 const GENERAL_COEFF = 1.02;
 const USD_COEFF = 1.069;

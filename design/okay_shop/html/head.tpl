@@ -137,7 +137,7 @@
 {if $controller == 'ManufacturerController'}Ништяки производства&nbsp;{/if}
 {$meta_title|escape}
 {if !$brand && $controller != 'ProductController'&& $controller != 'FeedbackController' && $filtersUrl == '' && $controller != 'BrandsController'}
-    &nbsp;для мотоциклов Honda, Kawasaki, Suzuki, Yamaha, Harley-Davidson, BMW
+    &nbsp;на мотоцикл Honda, Kawasaki, Suzuki, Yamaha, Harley-Davidson, BMW
 {/if}
 {*if $controller == 'ProductController'}
     берется $meta_title из SEO
@@ -162,7 +162,7 @@
 
 {* Meta description *}
 {if $controller == 'BrandController'}
-    <meta name="description" content="Купить для мотоцикла {$brand->name} кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту"/>
+    <meta name="description" content="Купить на мотоцикл {$brand->name} кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту"/>
 {elseif $controller == 'BrandsController'}
     <meta name="description" content="Купить кофры, глушитель, дуги, стекло, батвинг, люстру, платформы, сиденье, спинку, багажник, защиту для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
 {elseif $controller == 'MainController'}
@@ -172,7 +172,7 @@
 {elseif $controller == 'CategoryController'}
     <meta name="description" content="Купить {if $category->meta_title}{$category->meta_title|escape|lower}{else}{$category->name|escape|lower}{/if} для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>
 {elseif $controller == 'ProductController'}
-    {assign var="description" value="{$meta_description} {$brand->meta_keywords|escape} цена {$product->meta_description}"}
+    {assign var="description" value="{$meta_description} {$brand->meta_keywords|escape} {$product->partNumber} цена {$product->meta_description} "}
     <meta name="description" content="{$description|truncate:180}"/>
 {else}
     <meta name="description" content="Купить ништяки {if $isPseudoDiscount}{$lang->features_filter_discounted_lowcase}{/if} для мотоциклов Harley-Davidson, BMW, Honda, Kawasaki, Suzuki, Yamaha, бмв, харлей, девидсон, хонда, кавасаки, сузуки, ямаха"/>

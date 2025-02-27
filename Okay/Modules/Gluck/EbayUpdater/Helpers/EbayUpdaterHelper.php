@@ -72,7 +72,7 @@ class EbayUpdaterHelper implements ExtensionInterface
                 $newLot = $ebayAdmin->parse(['keyword' => $manufacturer->name.' '.$variant->sku]);
                 if (is_array($newLot) && $newLot['debug']['errors']) {
                     echo PHP_EOL.'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно';
-                    $report->description = 'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно<br><a href="'.$newLot['debug']['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
+                    $report->description = 'поиск по SKU '.$manufacturer->name.' '.$variant->sku.' неудачно<br><a href="'.$newLot['debug']['curl_effective_url'].'" target="_blank">curl_effective_url</a>';
 
                     self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
                     continue;
@@ -106,7 +106,7 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
 } else {
     $report->success = 1;
     echo PHP_EOL . __LINE__ . ': нашли товар ' . $variant->product_id . ' по partNumber ' . $variant->partNumber . ', выход = ' . $newLot->currency . ' ' . $newLot->outPrice;
-    $report->description = 'нашли по partNumber ' . $variant->partNumber;
+    $report->description = 'нашли по partNumber ' . $variant->partNumber.'<a href="'.$newLot['debug']['curl_effective_url'].'" target="_blank"">curl_effective_url</a>';
     self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
     continue;
 }
