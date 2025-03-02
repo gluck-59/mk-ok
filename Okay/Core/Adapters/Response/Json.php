@@ -13,7 +13,7 @@ class Json extends AbstractResponse
     {
         return [
             'Content-type: application/json; charset=utf-8',
-            'Cache-Control: must-revalidate',
+            'Cache-Control: public',
             'Pragma: no-cache',
             'Expires: -1',
         ];
