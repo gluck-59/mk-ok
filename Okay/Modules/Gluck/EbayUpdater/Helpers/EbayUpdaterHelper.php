@@ -106,7 +106,7 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
 } else {
     $report->success = 1;
     echo PHP_EOL . __LINE__ . ': нашли товар ' . $variant->product_id . ' по partNumber ' . $variant->partNumber . ', выход = ' . $newLot->currency . ' ' . $newLot->outPrice;
-    $report->description = 'нашли по partNumber ' . $variant->partNumber.'<a href="'.$newLot->debug->curl_effective_url.'" target="_blank"">curl_effective_url</a>';
+    $report->description = 'нашли по partNumber ' . $variant->partNumber;
     self::updatePrice($newLot, $variant, $report, $currenciesEntity, $productsEntity, $variantsEntity, $ebayUpdaterEntity);
     continue;
 }

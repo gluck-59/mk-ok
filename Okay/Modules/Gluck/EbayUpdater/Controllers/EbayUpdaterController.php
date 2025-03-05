@@ -28,12 +28,12 @@ class EbayUpdaterController extends AbstractController
         $ebayAdmin = new EbayAdmin($managersEntity->findOne(['login' => 'gluck']), '', '');
 
         $sql = $queryFactory->newSqlQuery();
-        $sql->setStatement('SELECT v.id variant_id, p.ebayItemNo, p.partNumber, p.manufacturer_id, v.sku, v.price, v.compare_price, v.currency_id, m.name manufacturerName  FROM ok_products p JOIN ok_variants v ON v.product_id = p.id JOIN ok_manufacturers m ON m.id = p.manufacturer_id WHERE v.id = '.$this->request->post('variantId'));
+        $sql->setStatement('SELECT v.id variant_id, p.ebayItemNo, p.partNumber, p.manufacturer_id, v.sku, v.price, v.compare_price, v.currency_id, m.name manufacturerName  FROM ok_products p JOIN ok_variants v ON v.product_id = p.id LEFT JOIN ok_manufacturers m ON m.id = p.manufacturer_id WHERE v.id = '.$this->request->post('variantId'));
         $database->query($sql);
         $forUpdate = $variantsEntity->getResult();
 
         // алгоритм обновления цены:: 1) sku, 2) ebayItemNo, 3) partNumber
-        if ($forUpdate->sku) $request = $forUpdate->manufacturerName. ' '.$forUpdate->sku;
+        if ($forUpdate->sku) $request = $forUpdate->manufacturerName ? $forUpdate->manufacturerName. ' '.$forUpdate->sku : $forUpdate->sku;
         elseif ($forUpdate->ebayItemNo > 0) $request = $forUpdate->ebayItemNo;
         elseif ($forUpdate->partNumber) $request = $forUpdate->partNumber;
 
