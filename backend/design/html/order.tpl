@@ -422,27 +422,32 @@
                                     <div class="okay_list_body_item">
                                         <div class="okay_list_row  d_flex">
                                             <div class="okay_list_boding 1okay_list_ordfig_name">
-                                                <div class="text_600 text_dark boxes_inline">{$btr->general_shipping|escape}</div>
-                                                <div class="boxes_inline">
-                                                    <select name="delivery_id" class="selectpicker form-control">
-                                                        <option value="0">{$btr->order_not_selected|escape}</option>
-                                                        {foreach $deliveries as $d}
-                                                            <option value="{$d->id|escape}" {if $d->id==$delivery->id}selected{/if} data-module_id="{$d->module_id|escape}">{$d->name|escape}</option>
-                                                        {/foreach}
-                                                    </select>
-                                                </div>
-                                                {get_design_block block="order_delivery_info"}
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-md-12">
-                                                    <input type=text name="shipping_number" class="form-control" value='{$order->shipping_number|escape}' placeholder="несколько треков — через пробел" style="width: 20vw;">
-                                                </div>
-                                            </div>
-                                            <div class="okay_list_boding okay_list_ordfig_val">
-                                                <div class="input-group">
-                                                    <input type=text name=delivery_price class="form-control" value='{$order->delivery_price|escape}'>
-                                                    <span class="input-group-addon p-0">{$currency->code|escape}</span>
-                                                </div>
+                                                <div class="text_600 text_dark boxes_inline">{$btr->general_shipping|escape}<small>ссылки на трекинг — каждая с новой строки</small></div>
+                                                <p class="clearfix"></p>
+                                                <textarea name="shipping_number" class="form-control" placeholder="несколько треков — с новой строки" style="width: 500px;max-width: 100%;height: 50px;">
+                                                    {$order->shipping_number|escape}
+                                                </textarea>
+{*                                                оригинал — селект с методами доставки, инпут для трека, цена*}
+{*                                                <div class="boxes_inline">*}
+{*                                                    <select name="delivery_id" class="selectpicker form-control">*}
+{*                                                        <option value="0">{$btr->order_not_selected|escape}</option>*}
+{*                                                        {foreach $deliveries as $d}*}
+{*                                                            <option value="{$d->id|escape}" {if $d->id==$delivery->id}selected{/if} data-module_id="{$d->module_id|escape}">{$d->name|escape}</option>*}
+{*                                                        {/foreach}*}
+{*                                                    </select>*}
+{*                                                </div>*}
+{*                                                {get_design_block block="order_delivery_info"}*}
+{*                                            </div>*}
+{*                                            <div class="row">*}
+{*                                                <div class="col-md-12">*}
+{*                                                    <input type=text name="shipping_number" class="form-control" value='{$order->shipping_number|escape}' placeholder="несколько треков — через пробел" style="width: 20vw;">*}
+{*                                                </div>*}
+{*                                            </div>*}
+{*                                            <div class="okay_list_boding okay_list_ordfig_val">*}
+{*                                                <div class="input-group">*}
+{*                                                    <input type=text name=delivery_price class="form-control" value='{$order->delivery_price|escape}'>*}
+{*                                                    <span class="input-group-addon p-0">{$currency->code|escape}</span>*}
+{*                                                </div>*}
                                             </div>
                                         </div>
                                     </div>

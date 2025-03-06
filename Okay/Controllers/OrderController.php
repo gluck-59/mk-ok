@@ -48,7 +48,7 @@ class OrderController extends AbstractController
         }
 
         if (!empty($order->shipping_number)) {
-            $shipping_numbers = explode(' ', $order->shipping_number);
+            $shipping_numbers = explode("\r\n", $order->shipping_number);
         }
         $order->shipping_number = $shipping_numbers;
 

@@ -299,21 +299,22 @@
                                         </td>
                                         <td>{$order->date|date} <span data-language="order_time">{$lang->order_time}</span> {$order->date|time}</td>
                                     </tr>
-                                    {if $delivery}
-                                        <tr>
-                                            <td>
-                                                <span data-language="order_delivery">{$lang->order_delivery}</span>
-                                            </td>
-                                            <td>{$delivery->name|escape}</td>
-                                        </tr>
-                                    {else}
-                                        <tr>
-                                            <td>
-                                                <span data-language="order_delivery">{$lang->order_delivery}</span>
-                                            </td>
-                                            <td>-= ПЕРЕВОЗЧИК НЕ ВЫБРАН =-</td>
-                                        </tr>
-                                    {/if}
+{*                                    оригинал — вернуть если перевозчик выбирается в селекте админки внутри заказа -- design/html/order.tpl : 430 *}
+{*                                    {if $delivery}*}
+{*                                        <tr>*}
+{*                                            <td>*}
+{*                                                <span data-language="order_delivery">{$lang->order_delivery}</span>*}
+{*                                            </td>*}
+{*                                            <td>{$delivery->name|escape}</td>*}
+{*                                        </tr>*}
+{*                                    {else}*}
+{*                                        <tr>*}
+{*                                            <td>*}
+{*                                                <span data-language="order_delivery">{$lang->order_delivery}</span>*}
+{*                                            </td>*}
+{*                                            <td>-= ПЕРЕВОЗЧИК НЕ ВЫБРАН =-</td>*}
+{*                                        </tr>*}
+{*                                    {/if}*}
                                     {if $order->name || $order->last_name}
                                         {assign var="recepientName" value=$order->name}
                                         {assign var="recepientLastname" value=$order->last_name}
@@ -373,7 +374,7 @@
                                         <td>
                                             {if $order->shipping_number}
                                                 {foreach $order->shipping_number as $track}
-                                                    <a href="https://www.pochta.ru/tracking?barcode={$track}" target="_blank">{$track}&nbsp;<i class="fa fa-external-link"></i></a><br>
+                                                    <a href="{$track}" target="_blank">{$track}</a>&nbsp;<i class="fa fa-external-link"></i><br>
                                                 {/foreach}
                                             {else}ожидаем
                                             {/if}</td>
