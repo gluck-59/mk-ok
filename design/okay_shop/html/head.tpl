@@ -136,7 +136,7 @@
 <title>{if $controller == 'BrandController'}Ништяки для&nbsp;{/if}
 {if $controller == 'ManufacturerController'}Ништяки производства&nbsp;{/if}
 {$meta_title|escape}
-{if !$brand && $controller != 'ProductController'&& $controller != 'FeedbackController' && $filtersUrl == '' && $controller != 'BrandsController'}
+{if !$brand && $controller != 'ProductController'&& $controller != 'FeedbackController' && $filtersUrl == '' && $controller != 'BrandsController' && $controller != 'UserController'}
     &nbsp;на мотоцикл Honda, Kawasaki, Suzuki, Yamaha, Harley-Davidson, BMW
 {/if}
 {if $controller == 'ProductController'}

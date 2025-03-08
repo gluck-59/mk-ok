@@ -1,4 +1,7 @@
 <?php
+ini_set('display_errors', 'on');
+error_reporting(E_ERROR);
+
 // насколько курсы цифра-банка отличаются от ЦБРФ (цифра-банк — рекомендация от миши)
 //$sxUsd =  file_get_contents('https://rub.rate.sx/1usdt');
 //echo $sxUsd * 0.983 * 1.02;
@@ -9,14 +12,14 @@ const GENERAL_COEFF = 1.02;
 const USD_COEFF = 1.069;
 const EUR_COEFF = 1.066;
 
-
-if (0 /*in_array($_SERVER['SERVER_ADDR'], ['127.0.0.1', '::1', '0.0.0.0', 'localhost'])*/) {
-    $ini_array = parse_ini_file("config/config.local.php");
-} else {
     $ini_array = parse_ini_file("config/config.php");
-}
 
     $cbr = simplexml_load_file('http://www.cbr.ru/scripts/XML_daily.asp?d=0');
+
+if (!$cbr) {
+    echo date('d.m.Y', time()).': cbr в дауне?, '.PHP_EOL;
+    die();
+}
     foreach ($cbr->Valute as $item) {
         if ($item->NumCode=="840")  {
             $currency['usd'] = $usd = round($item->Value * GENERAL_COEFF * USD_COEFF, 2);

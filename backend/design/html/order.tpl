@@ -422,11 +422,9 @@
                                     <div class="okay_list_body_item">
                                         <div class="okay_list_row  d_flex">
                                             <div class="okay_list_boding 1okay_list_ordfig_name">
-                                                <div class="text_600 text_dark boxes_inline">{$btr->general_shipping|escape}<small>ссылки на трекинг — каждая с новой строки</small></div>
+                                                <div class="text_600 text_dark boxes_inline">{$btr->general_shipping|escape}&nbsp;<small>ссылки на трекинг — каждая с новой строки</small></div>
                                                 <p class="clearfix"></p>
-                                                <textarea name="shipping_number" class="form-control" placeholder="несколько треков — с новой строки" style="width: 500px;max-width: 100%;height: 50px;">
-                                                    {$order->shipping_number|escape}
-                                                </textarea>
+                                                <textarea name="shipping_number" class="form-control" placeholder="несколько треков — с новой строки" style="width: 500px;max-width: 100%;height: 50px;">{$order->shipping_number|escape}</textarea>
 {*                                                оригинал — селект с методами доставки, инпут для трека, цена*}
 {*                                                <div class="boxes_inline">*}
 {*                                                    <select name="delivery_id" class="selectpicker form-control">*}
