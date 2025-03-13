@@ -282,7 +282,7 @@ class Settings
 
     public function setPseudoDiscountProducts() {
         $sql = $this->queryFactory->newSqlQuery();
-        $sql->setStatement("SELECT product_id FROM ok_products_categories pc JOIN ( SELECT RAND() * (SELECT MAX(product_id) FROM ok_products_categories) AS max_id ) AS m WHERE pc.product_id >= m.max_id group by category_id");
+        $sql->setStatement("SELECT product_id FROM ok_products_categories pc JOIN ( SELECT RAND() * (SELECT MAX(product_id) FROM ok_products_categories) AS max_id ) AS m WHERE pc.product_id >= m.max_id and  pc.category_id not in (5, 10) group by category_id");
         $this->db->query($sql);
         $fieldsTemp = $this->db->results('product_id', 'product_id');
 
