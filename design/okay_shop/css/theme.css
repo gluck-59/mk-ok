@@ -2888,7 +2888,7 @@ a.filter__catalog_link svg {
   -ms-flex-order: -1;
   order: -1;
   text-align: center;
-  max-height: 480px;
+  /*max-height: 480px;*/
   height: 100%;
 }
 .product-page__image {
