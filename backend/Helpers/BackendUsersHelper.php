@@ -65,13 +65,13 @@ class BackendUsersHelper
     {
         $usersSort = null;
         // Сортировка пользователей, сохраняем в сессии, чтобы текущая сортировка не сбрасывалась
-        if ($sort = $this->request->get('sort', 'string')) {
+        if (0 && $sort = $this->request->get('sort', 'string')) {
             $_SESSION['users_admin_sort'] = $sort;
         }
-        if (!empty($_SESSION['users_admin_sort'])) {
+        if (0 && !empty($_SESSION['users_admin_sort'])) {
             $usersSort = $_SESSION['users_admin_sort'];
         } else {
-            $usersSort = 'name';
+            $usersSort = 'id DESC';
         }
         return ExtenderFacade::execute(__METHOD__, $usersSort, func_get_args());
     }

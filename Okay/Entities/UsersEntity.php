@@ -39,7 +39,7 @@ class UsersEntity extends Entity
     ];
 
     protected static $defaultOrderFields = [
-        'name',
+        'id DESC',
     ];
 
     protected static $table = '__users';
