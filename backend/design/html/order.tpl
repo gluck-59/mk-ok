@@ -554,9 +554,10 @@
                                     </div>
                                 </div>
                             </div>
-                        {else}
+                        {/if}
+                        {if $order}
                             <div class="mb-1">
-                                <div class="heading_label" style="background-color: #fca; padding: 5px">Данные из заказа (заказ без профиля)</div>
+                                <div class="heading_label" style="background-color: #fca; padding: 5px">Данные из заказа</div>
                                 <div class="row mb-1">
                                     <div class="col-md-6">
                                         <input name="name" class="form-control" type="text" value="{$order->name|escape}"/>
