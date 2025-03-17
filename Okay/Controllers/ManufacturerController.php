@@ -257,4 +257,36 @@ class ManufacturerController extends AbstractController
 
         $this->response->setContent(json_encode($response), RESPONSE_JSON);
     }
+
+
+    /**
+     * редиректит со старого урла /manufacturer.php?id_manufacturer= на соотв новый
+     *
+     * @return void
+     */
+    public function oldManufacturer()
+    {
+        $oldManufacturerId = $this->request->get('id_manufacturer','int');
+        prettyDump($oldManufacturerId);
+
+        switch ($oldManufacturerId) {
+            case 0: $this->response->redirectTo(Router::generateUrl('main', []), 301); break;
+            case 3: $this->response->redirectTo(Router::generateUrl('manufacturer', ['url' => 'ohlins']), 301); break;
+            case 4: $this->response->redirectTo(Router::generateUrl('manufacturer', ['url' => 'gonkong']), 301); break;
+            case 5: $this->response->redirectTo(Router::generateUrl('manufacturer', ['url' => 'polsha']), 301); break;
+            case 9: $this->response->redirectTo(Router::generateUrl('manufacturer', ['url' => 'lindby']), 301); break;
+            case 10: $this->response->redirectTo(Router::generateUrl('manufacturer', ['url' => 'cobra']), 301); break;
+            case 11: $this->response->redirectTo(Router::generateUrl('manufacturer', ['url' => 'national-cycle']), 301); break;
+            case 12: $this->response->redirectTo(Router::generateUrl('manufacturer', ['url' => 'show-chrome']), 301); break;
+            case 13: $this->response->redirectTo(Router::generateUrl('manufacturer', ['url' => 'jafrum']), 301); break;
+            case 15: $this->response->redirectTo(Router::generateUrl('manufacturer', ['url' => 'mustang']), 301); break;
+            case 16: $this->response->redirectTo(Router::generateUrl('manufacturer', ['url' => 'works-connection']), 301); break;
+            case 17: $this->response->redirectTo(Router::generateUrl('manufacturer', ['url' => 'mutazu']), 301); break;
+            case 18: $this->response->redirectTo(Router::generateUrl('manufacturer', ['url' => 'kuryakyn']), 301); break;
+            case 19: $this->response->redirectTo(Router::generateUrl('manufacturer', ['url' => 'vance--hines']), 301); break;
+            case 22: $this->response->redirectTo(Router::generateUrl('manufacturer', ['url' => 'baron']), 301); break;
+            case 28: $this->response->redirectTo(Router::generateUrl('manufacturer', ['url' => 'saddlemen']), 301); break;
+
+        }
+    }
 }

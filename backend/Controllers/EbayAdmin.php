@@ -114,7 +114,7 @@ echo PHP_EOL.'return из стр '.__LINE__;
             $this->userAgent = self::getRandomUseragent();
             $curl = self::request($request, 1);
             if (!empty($this->debug['errors']) || is_bool($curl['response'])) {
-echo PHP_EOL.'return из стр '.__LINE__;
+//                echo PHP_EOL.'return из стр '.__LINE__;
                 return $this->debug;
             }
 
@@ -127,11 +127,13 @@ echo PHP_EOL.'return из стр '.__LINE__;
             foreach ($arr as $item) {
                 // парсер выдает пару пустых итемов, пропустим их
                 $link = $item->first('.s-item__link');
-                if (!$link) continue;
+                if (!$link) {
+                    continue;
+                }
                 $itm = parse_url($link->getAttribute('href'), PHP_URL_PATH);
                 preg_match('/\d{12}/', $itm, $itemNo);
                 if (!$itemNo) {
-                    //echo ('пропускаем левый итем в строке '.__LINE__);
+                    echo ('<br>пропускаем левый итем в строке '.__LINE__);
                     continue;
                 }
                 // нет лотов
@@ -139,7 +141,7 @@ echo PHP_EOL.'return из стр '.__LINE__;
                     if (stripos($noItemsFoundWrapper->text(), '0 results') !== false && stripos($noItemsFoundWrapper->text(), '0 results') == 0 ) {
                         $itemDetails['debug']['errors'] = 'искали '.$request['keyword'].', 0 лотов найдено';
                         echo PHP_EOL.'---------------------------------искали '.$request['keyword'].', 0 лотов найдено';
-//prettyDump($this->parsedLot, 1);
+
                         if ($this->isAjax) ob_end_clean();
                         return $itemDetails;
 
@@ -165,7 +167,7 @@ echo PHP_EOL.'return из стр '.__LINE__;
                     $lot['currency'] = $currency;
                     $lot['price'] = $priceBlock->text();
                     if (empty($currency)) {
-//                        echo 'пропускаем '.$itemNo[0].' по валюте';
+                        echo '<br>пропускаем '.$itemNo[0].' по валюте';
                         continue;
                     }
                 }
@@ -175,7 +177,7 @@ echo PHP_EOL.'return из стр '.__LINE__;
                     $lot['shipping'] = $shipping;
 
                     if ($shipping == '' || stripos($shippingBlock->text(), 'not') !== false) {
-//                        echo 'пропускаем '.$itemNo[0].' — нет доставки';
+                        echo '<br>пропускаем '.$itemNo[0].' — нет доставки';
                         continue;
                     }
                 } else continue; // отсуствует $shippingBlock

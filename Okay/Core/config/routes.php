@@ -335,25 +335,33 @@ return [
             'method' => 'getCommonJs',
         ],
     ],
-    'support' => [
+
+    // старые урлы
+    'old_support' => [
         'slug' => '/support.php',
+        'params' => [
+            'controller' => 'FeedbackController',
+            'method' => 'render',
+        ],
+    ],
+    'old_manufacturer' => [
+        'slug' => '/manufacturer.php?{$manufacturerId}',
+        'params' => [
+            'controller' => 'ManufacturerController',
+            'method' => 'oldManufacturer',
+        ],
+    ],
+    // остальные старые
+    'old' => [
+        'slug' => '(.*php)',
+        'patterns' => [
+            '{$url}' => '(.*)',
+        ],
         'params' => [
             'controller' => 'ProductsController',
             'method' => 'render',
         ],
     ],
-
-
-'old_product' => [
-    'slug' => '(.*php)',
-    'patterns' => [
-        '{$url}' => '(.*)',
-    ],
-    'params' => [
-        'controller' => 'ProductsController',
-        'method' => 'render',
-    ],
-],
 
 
 

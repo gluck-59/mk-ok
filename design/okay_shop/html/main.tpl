@@ -29,8 +29,6 @@
     </div>
 {/if}
 
-{* Top categories *}
-{include "top_categories.tpl"}
 {* New products *}
 {get_new_products var=new_products limit=10}
 {if $new_products}
@@ -55,6 +53,9 @@
          </div>
     </div>
 {/if}
+
+{* Top categories *}
+{include "top_categories.tpl"}
 
 {* Discount products *}
 {get_discounted_products var=discounted_products limit=10}
