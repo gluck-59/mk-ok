@@ -287,6 +287,7 @@ class ManufacturerController extends AbstractController
             case 22: $this->response->redirectTo(Router::generateUrl('manufacturer', ['url' => 'baron']), 301); break;
             case 28: $this->response->redirectTo(Router::generateUrl('manufacturer', ['url' => 'saddlemen']), 301); break;
 
+            default: $this->response->redirectTo(Router::generateUrl('main', []), 301); break;
         }
     }
 }
