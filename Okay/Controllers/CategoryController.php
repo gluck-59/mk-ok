@@ -296,4 +296,53 @@ class CategoryController extends AbstractController
 
         $this->response->setContent(json_encode($response), RESPONSE_JSON);
     }
+
+
+
+    /**
+     *  редиректит со старого урла /category.php?id_category= на соотв новый
+     *
+     * @return void
+     */
+    public function oldCategories() {
+        $oldCategoryId = $this->request->get('id_category','int');
+
+        switch ($oldCategoryId) {
+            case 0: $this->response->redirectTo(Router::generateUrl('main', []), 301); break;
+            case 1: $this->response->redirectTo(Router::generateUrl('main', []), 301); break;
+            case 5: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'bokovye-kofry']), 301); break;
+            case 7: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'batony-na-vilku']), 301); break;
+            case 8: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'bokovye-kofry']), 301); break;
+            case 9: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'zadnie-sissy-bar-kofry']), 301); break;
+            case 10: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'ruchki-stojki-ruli-rychagi']), 301); break;
+            case 11: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'bokovye-kofry']), 301); break;
+            case 12: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'sidenya-spinki-i-bagazhniki']), 301); break;
+            case 13: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'ramki-dlya-kofrov']), 301); break;
+            case 14: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'zapchasti-i-spetszakazy']), 301); break;
+            case 15: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'nakladki-i-galstuki']), 301); break;
+            case 17: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'sidenya-spinki-i-bagazhniki']), 301); break;
+            case 18: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'zadnie-sissy-bar-kofry']), 301); break;
+            case 24: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'dugi-i-slajdery']), 301); break;
+            case 25: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'lobovye-stekla-i-batvingi']), 301); break;
+            case 27: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'moto-nishtyaki']), 301); break;
+            case 28: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'lyustry-fary-optika']), 301); break;
+            case 29: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'podnozhki-platformy-i-vynosy']), 301); break;
+            case 30: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'signaly-i-dudelki']), 301); break;
+            case 63: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'zapchasti-i-spetszakazy']), 301); break;
+            case 64: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'pribory-i-paneli']), 301); break;
+            case 65: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'zapchasti-i-spetszakazy']), 301); break;
+            case 77: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'krylya-i-bugeli']), 301); break;
+            case 82: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'enduro-zaschita-i-lyzhi']), 301); break;
+            case 88: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'glushiteli']), 301); break;
+            case 89: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'zerkala']), 301); break;
+            case 90: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'nakladki-i-galstuki']), 301); break;
+            case 93: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'glushiteli']), 301); break;
+            case 94: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'glushiteli']), 301); break;
+            case 96: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'sidenya-spinki-i-bagazhniki']), 301); break;
+            case 97: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'black']), 301); break;
+            case 98: $this->response->redirectTo(Router::generateUrl('category', ['url' => 'krylya-i-bugeli']), 301); break;
+
+            default: $this->response->redirectTo(Router::generateUrl('main', []), 301); break;
+        }
+    }
 }

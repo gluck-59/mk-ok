@@ -164,4 +164,26 @@ class BrandsController extends AbstractController
 
         $this->response->setContent(json_encode($response), RESPONSE_JSON);
     }
+
+
+
+    public function oldBrands()
+    {
+        $oldSupplierId = $this->request->get('id_supplier','int');
+var_dump($oldSupplierId);
+        switch ($oldSupplierId) {
+            case 0: $this->response->redirectTo(Router::generateUrl('main', []), 301); break;
+            case 5: $this->response->redirectTo(Router::generateUrl('brand', ['url' => 'honda']), 301); break;
+            case 8: $this->response->redirectTo(Router::generateUrl('brand', ['url' => 'kawasaki']), 301); break;
+            case 9: $this->response->redirectTo(Router::generateUrl('brand', ['url' => 'suzuki']), 301); break;
+            case 10: $this->response->redirectTo(Router::generateUrl('brand', ['url' => 'yamaha']), 301); break;
+            case 11: $this->response->redirectTo(Router::generateUrl('brand', ['url' => 'harley-davidson']), 301); break;
+            case 12: $this->response->redirectTo(Router::generateUrl('brand', ['url' => 'universalnoe']), 301); break;
+            case 15: $this->response->redirectTo(Router::generateUrl('brand', ['url' => 'ktm']), 301); break;
+            case 16: $this->response->redirectTo(Router::generateUrl('brand', ['url' => 'victory']), 301); break;
+            case 20: $this->response->redirectTo(Router::generateUrl('brand', ['url' => 'bmw']), 301); break;
+
+            default: $this->response->redirectTo(Router::generateUrl('brands', []), 301); break;
+        }
+    }
 }

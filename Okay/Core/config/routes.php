@@ -351,7 +351,37 @@ return [
             'method' => 'oldManufacturer',
         ],
     ],
-    // остальные старые
+    'old_discounts' => [
+        'slug' => '/prices-drop.php',
+        'params' => [
+            'controller' => 'PageController',
+            'method' => 'oldDiscounts',
+        ],
+    ],
+    'old_brands' => [
+        'slug' => '/supplier.php?{$supplierId}',
+        'params' => [
+            'controller' => 'BrandsController',
+            'method' => 'oldBrands',
+        ],
+    ],
+    'old_category' => [
+        'slug' => '/category.php?{$categoryId}',
+        'params' => [
+            'controller' => 'CategoryController',
+            'method' => 'oldCategories',
+        ],
+    ],
+    'old_tags' => [
+        'slug' => '/tags.php?{$tag}',
+        'params' => [
+            'controller' => 'PageController',
+            'method' => 'oldTags',
+        ],
+],
+
+
+    // остальные
     'old' => [
         'slug' => '(.*php)',
         'patterns' => [

@@ -32,4 +32,24 @@ class PageController extends AbstractController
         
         $this->response->setContent('page.tpl');
     }
+
+
+    /**
+     * редирект старого урла /prices-drop.php на скидки
+     *
+     * @return void
+     * @throws \Exception
+     */
+    public function oldDiscounts()
+    {
+        $this->response->redirectTo($this->request->getRootUrl() . '/all-products/filter-discounted');
+    }
+
+
+
+    public function oldTags()
+    {
+        $oldTag = $this->request->get('tag','string');
+        $this->response->redirectTo($this->request->getRootUrl() . '/all-products?keyword='.$oldTag);
+    }
 }

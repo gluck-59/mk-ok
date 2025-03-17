@@ -267,7 +267,6 @@ class ManufacturerController extends AbstractController
     public function oldManufacturer()
     {
         $oldManufacturerId = $this->request->get('id_manufacturer','int');
-        prettyDump($oldManufacturerId);
 
         switch ($oldManufacturerId) {
             case 0: $this->response->redirectTo(Router::generateUrl('main', []), 301); break;
