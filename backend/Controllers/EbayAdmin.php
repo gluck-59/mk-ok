@@ -133,7 +133,7 @@ echo PHP_EOL.'return из стр '.__LINE__;
                 $itm = parse_url($link->getAttribute('href'), PHP_URL_PATH);
                 preg_match('/\d{12}/', $itm, $itemNo);
                 if (!$itemNo) {
-                    echo ('<br>пропускаем левый итем в строке '.__LINE__);
+//                    echo ('<br>пропускаем левый итем в строке '.__LINE__);
                     continue;
                 }
                 // нет лотов
@@ -167,7 +167,7 @@ echo PHP_EOL.'return из стр '.__LINE__;
                     $lot['currency'] = $currency;
                     $lot['price'] = $priceBlock->text();
                     if (empty($currency)) {
-                        echo '<br>пропускаем '.$itemNo[0].' по валюте';
+//                        echo '<br>пропускаем '.$itemNo[0].' по валюте';
                         continue;
                     }
                 }
@@ -177,7 +177,7 @@ echo PHP_EOL.'return из стр '.__LINE__;
                     $lot['shipping'] = $shipping;
 
                     if ($shipping == '' || stripos($shippingBlock->text(), 'not') !== false) {
-                        echo '<br>пропускаем '.$itemNo[0].' — нет доставки';
+//                        echo '<br>пропускаем '.$itemNo[0].' — нет доставки';
                         continue;
                     }
                 } else continue; // отсуствует $shippingBlock
