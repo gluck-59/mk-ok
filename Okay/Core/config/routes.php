@@ -378,6 +378,13 @@ return [
             'controller' => 'PageController',
             'method' => 'oldTags',
         ],
+    ],
+'old_/wishlists' => [
+    'slug' => '/wishlists.php',
+    'params' => [
+        'controller' => 'PageController',
+        'method' => 'oldWishlists',
+    ],
 ],
 
 
