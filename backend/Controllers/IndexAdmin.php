@@ -275,7 +275,7 @@ class IndexAdmin
 
         // Запоминаем логин менеджера для работы темы под админом
         if (!empty($this->manager->login)) {
-            setcookie('admin_login', $this->manager->login, time() + 60 * 60 * 24 * 3, '/');
+            setcookie('admin_login', $this->manager->login, time() + 60 * 60 * 24 * 30, '/');
         }
 
         if (isset($_SESSION['show_learn'])) {

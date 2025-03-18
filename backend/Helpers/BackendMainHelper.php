@@ -60,7 +60,9 @@ class BackendMainHelper
         if ($statusId = $orderStatusesEntity->order('position_asc')->cols(['id'])->find(['limit' => 1])) {
             $statusId = reset($statusId);
 
-            $newOrdersCounter = $ordersEntity->count(['status_id' => $statusId]);
+//            $newOrdersCounter = $ordersEntity->count(['status_id' => $statusId]); // ориг
+            $newOrdersCounter = $ordersEntity->count(['status_id' => $statusId, 'paid' => true]);
+
             $this->design->assign("new_orders_counter", $newOrdersCounter);
         }
 
