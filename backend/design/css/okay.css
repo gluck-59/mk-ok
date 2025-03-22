@@ -2449,7 +2449,10 @@ label.switch_label i{
     color: rgb(98, 98, 98);
 }
 .tag-primary {background-color: rgb(58, 143, 200);}
-.tag-success {background-color: rgb(16, 207, 189);}
+.tag-success {
+    background-color: rgb(255 243 0);
+    color: #696969;
+}
 .tag-info {
     background-color:rgb(220, 232, 251);
     color: #333;

@@ -234,7 +234,11 @@
                         {*Параметры элемента*}
                         <div class="okay_list_body">
                             {foreach $orders as $order}
-                            <div class="fn_step-1 fn_row okay_list_body_item " style="background-color: #{$order->status_color|escape};">
+                                {assign var=status_color value=$order->status_color|escape}
+                                {if $order->paid && $order->status_id == 1}
+                                    {$status_color="fff6c8"}
+                                {/if}
+                            <div class="fn_step-1 fn_row okay_list_body_item " style="background-color: #{$status_color};">
                                 <div class="okay_list_row">
                                     <div class="okay_list_boding okay_list_check">
                                         <input class="hidden_check" type="checkbox" id="id_{$order->id}" name="check[]" value="{$order->id}"/>
@@ -248,8 +252,7 @@
                                         {else}
                                             <span class="tag tag-update fn_history_toggle">{$btr->order_history_created} {$order->date|date} {$order->date|time} <i class="fn_icon_arrow fa fa-angle-down fa-lg m-t-2 "></i></span>
                                         {/if}
-                                        
-                                        {if $order->paid}
+                                        {if $order->paid && $order->status_id == 1}
                                             <div class="order_paid">
                                                 <span class="tag tag-success">{$btr->general_paid|escape}</span>
                                             </div>
@@ -273,9 +276,9 @@
                                                         {include file='svg_icon.tpl' svgId='tag_referral'} {$order->referer_channel|escape}
                                                     </a>
                                                 {else}
-                                                    <span class="tag tag-ind_unknown" title="{$order->referer_source|escape}">
-                                                        {include file='svg_icon.tpl' svgId='tag_unknown'} {$order->referer_channel|escape}
-                                                    </span>
+{*                                                    <span class="tag tag-ind_unknown" title="{$order->referer_source|escape}">*}
+{*                                                        {include file='svg_icon.tpl' svgId='tag_unknown'} {$order->referer_channel|escape}*}
+{*                                                    </span>*}
                                                 {/if}
                                             </div>
                                         {/if}
