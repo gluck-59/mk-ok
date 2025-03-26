@@ -70,12 +70,17 @@ class BrowsedProducts
         if ($delayedDispatch === false) {
             $this->save();
         }
-
-        if ($onlyLocal === false && ($user = $this->mainHelper->getCurrentUser())) {
+// гостей тоже посчитаем
+//        if ($onlyLocal === false && ($user = $this->mainHelper->getCurrentUser())) // ориг
+        $user = $this->mainHelper->getCurrentUser();
+        if ($onlyLocal === false)
+        {
             /** @var UserBrowsedProductsEntity $userBrowsedProductsEntity */
             $userBrowsedProductsEntity = $this->entityFactory->get(UserBrowsedProductsEntity::class);
 
-            if (!$userBrowsedProductsEntity->findOne(['user_id' => $user->id, 'product_id' => $productId])) {
+// гостей тоже посчитаем
+//            if (!$userBrowsedProductsEntity->findOne(['user_id' => $user->id, 'product_id' => $productId])) // ориг
+            {
                 $userBrowsedProductsEntity->add([
                     'user_id' => $user->id,
                     'product_id' => $productId,
