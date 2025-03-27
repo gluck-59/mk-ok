@@ -44,12 +44,16 @@ $data = $db->results();
 //print_r($data);
 
 $results = [];
-foreach($data as $d) {
-    $result['y'] = $d->qty;
-    $result['name'] = $d->categoryName;
 //    $result['categoryName'] = $d->productName;
-//    $result['manufacturerName'] = $d->manufacturerName;
-    $results[] = $result;
+foreach($data as $d) {
+    $resultCategory['y'] = $d->qty;
+    $resultCategory['name'] = $d->categoryName;
+    $results['category'][] = $resultCategory;
+
+    $resultManufacturer['y'] = $d->qty;
+    $resultManufacturer['name'] = $d->manufacturerName;
+    $results['manufacturer'][] = $resultManufacturer;
+
 }
 
 $response->setContent(json_encode($results, JSON_NUMERIC_CHECK), RESPONSE_JSON);

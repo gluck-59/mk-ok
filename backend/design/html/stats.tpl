@@ -4,8 +4,26 @@
     <script>
         $.getJSON('ajax/statViews.php', function (data) {
             window.dataViews = data
-// console.log('dataViews', window.dataViews)
+            // console.log('dataViews', window.dataViews)
         });
+
+
+        /*
+        let promise = new Promise((resolve, reject) => {});
+
+        // promise.then навешивает обработчики на успешный результат или ошибку
+        promise
+            .then(
+                result => {
+                    // первая функция-обработчик - запустится при вызове resolve
+                    alert("Fulfilled: " + result); // result - аргумент resolve
+                },
+                error => {
+                    // вторая функция - запустится при вызове reject
+                    alert("Rejected: " + error); // error - аргумент reject
+                }
+            );
+        */
     </script>
 {/literal}
 {*Название страницы*}
@@ -20,8 +38,10 @@
 </div>
 {*Контент статистики просмотров*}
 <div class="row">
-    <div class="col-lg-12 col-md-12">
-        <div id='categoryViews'></div>
+    <div class="col-md-6">
+        <div id='categoryViews'>
+            <img src="design/images/loader.gif">
+        </div>
         <!--table class="table table-bordered">
             <thead>
             <tr>
@@ -44,13 +64,16 @@
             </tbody>
         </table-->
     </div>
+    <div class="col-md-6">
+        <div id='manufacturerViews'></div>
+    </div>
 </div>
 
 
 <!--------------------------------------------------------------->
 <div class="row">
     <div class="col-lg-12 col-md-12">
-        <div class="heading_page">{$btr->stats_stats|escape}
+        <div class="heading_page">{$btr->stats_orders|escape}
             <i class="fn_tooltips" title="{$btr->tooltip_stats_stats|escape}">
                 {include file='svg_icon.tpl' svgId='icon_tooltips'}
             </i>
@@ -170,7 +193,7 @@
 
 
 
-    /***** statViews ****************/
+    /***** categoryViews ****************/
 
     setTimeout(function (){
         (function (H) {
@@ -289,10 +312,10 @@
                 },
                 colorByPoint: true,
                 data:
-                window.dataViews
+                window.dataViews.category
             }]
         });
-    }, 1000)
+    }, 2000)
 
   // console.log('statViews', $.getJSON('ajax/statViews.php', function (data) {return data}))
 
