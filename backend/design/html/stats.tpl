@@ -276,8 +276,8 @@
                     cursor: 'pointer',
                     dataLabels: {
                         enabled: true,
-                        format: '<b>{point.name}</b><br>{point.percentage}%',
-                        distance: 20
+                        format: '<b>{point.name}</b><br>{point.percentage:.0f}%',
+                        distance: 20,
                     }
                 }
             },
