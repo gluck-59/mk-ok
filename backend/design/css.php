@@ -12,13 +12,14 @@ use Okay\Core\TemplateConfig\Css;
 
 return [
     (new Css('jquery-ui.min.css'))->setDir('backend/design/js/jquery'),
-    (new Css('jquery.fancybox.min.css')), 
+    (new Css('jquery.fancybox.min.css')),
     (new Css('grid.css')),
     (new Css('reboot.css')),
     (new Css('font-awesome.min.css')),
     (new Css('toastr.css')),
     (new Css('simple-hint.css')),
-    (new Css('bootstrap-select.css')),
+//(new Css('bootstrap.min.css')), // админка перестает работать
+(new Css('bootstrap-select.css')), // /*TODO выяснить
     (new Css('jquery.scrollbar.css')),
     (new Css('bootstrap_theme.css')),
     (new Css('okay.css')),

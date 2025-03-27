@@ -13,7 +13,7 @@ use Okay\Core\TemplateConfig\Js;
 return [
     (new Js('jquery/jquery.js')),
     (new Js('jquery.scrollbar.min.js')),
-    (new Js('bootstrap.min.js')),
+//(new Js('bootstrap.min.js')),
     (new Js('bootstrap-select.js')),
     (new Js('jquery/jquery-ui.min.js')),
     (new Js('jquery.dd.min.js')),
@@ -22,4 +22,7 @@ return [
     (new Js('intro_js/intro_okay.js')),
     (new Js('toastr.min.js')),
     (new Js('Sortable.js')),
+
+//    (new Js('bootstrap-sortable.js'))->setPosition('footer'),
+
 ];
