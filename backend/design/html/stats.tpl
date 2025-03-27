@@ -20,18 +20,8 @@
 </div>
 {*Контент статистики просмотров*}
 <div class="row">
-    <div class="col-md-4">
+    <div class="col-md-12">
         <div id='categoryViews'>
-            <img src="design/images/ajax_preloader.gif">
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div id='manufacturerViews'>
-            <img src="design/images/ajax_preloader.gif">
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div id='brandViews'>
             <img src="design/images/ajax_preloader.gif">
         </div>
     </div>
@@ -163,172 +153,104 @@
 
     /***** categoryViews ****************/
 
-        (function (H) {
-            H.seriesTypes.pie.prototype.animate = function (init) {
-                const series = this,
-                    chart = series.chart,
-                    points = series.points,
-                    {
-                        animation
-                    } = series.options,
-                    {
-                        startAngleRad
-                    } = series;
 
-                function fanAnimate(point, startAngleRad) {
-                    const graphic = point.graphic,
-                        args = point.shapeArgs;
-
-                    if (graphic && args) {
-
-                        graphic
-                            // Set inital animation values
-                            .attr({
-                                start: startAngleRad,
-                                end: startAngleRad,
-                                opacity: 1
-                            })
-                            // Animate to the final position
-                            .animate({
-                                start: args.start,
-                                end: args.end
-                            }, {
-                                duration: animation.duration / points.length
-                            }, function () {
-                                // On complete, start animating the next point
-                                if (points[point.index + 1]) {
-                                    fanAnimate(points[point.index + 1], args.end);
-                                }
-                                // On the last point, fade in the data labels, then
-                                // apply the inner size
-                                if (point.index === series.points.length - 1) {
-                                    series.dataLabelsGroup.animate({
-                                            opacity: 1
-                                        },
-                                        void 0,
-                                        function () {
-                                            points.forEach(point => {
-                                                point.opacity = 1;
-                                            });
-                                            series.update({
-                                                enableMouseTracking: true
-                                            }, false);
-                                            chart.update({
-                                                plotOptions: {
-                                                    pie: {
-                                                        innerSize: '40%',
-                                                        borderRadius: 8
-                                                    }
-                                                }
-                                            });
-                                        });
-                                }
-                            });
-                    }
-                }
-
-                if (init) {
-                    // Hide points on init
-                    points.forEach(point => {
-                        point.opacity = 0;
-                    });
-                } else {
-                    fanAnimate(points[0], startAngleRad);
-                }
-            };
-        }(Highcharts));
 
 getViewStat("ajax/statViews.php").then(response =>
-         Highcharts.chart('categoryViews', {
-            chart: {
-                type: 'pie'
-            },
-            title: {
-                text: 'Что смотрят'
-            },
-            subtitle: {
-                text: 'По категориям'
-            },
-            tooltip: {
-                headerFormat: '',
-                pointFormat:
-                    '<span style="color:{point.color}">\u25cf</span> ' +
-                    '{point.name}: <b>{point.percentage:.1f}%</b>'
-            },
-            accessibility: {
-                point: {
-                    valueSuffix: '%'
-                }
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    borderWidth: 2,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: true,
-                        format: '<b>{point.name}</b><br>{point.percentage:.0f}%',
-                        distance: 30,
-                    }
-                }
-            },
-            series: [{
-                // Disable mouse tracking on load, enable after custom animation
-                enableMouseTracking: false,
-                animation: {
-                    duration: 1000
-                },
-                colorByPoint: true,
-                data: response.category
-            }]
-        },
-             Highcharts.chart('brandViews', {
-                 chart: {
-                     type: 'pie'
-                 },
-                 title: {
-                     text: 'Что смотрят'
-                 },
-                 subtitle: {
-                     text: 'По маркам'
-                 },
-                 tooltip: {
-                     headerFormat: '',
-                     pointFormat:
-                         '<span style="color:{point.color}">\u25cf</span> ' +
-                         '{point.name}: <b>{point.percentage:.1f}%</b>'
-                 },
-                 accessibility: {
-                     point: {
-                         valueSuffix: '%'
-                     }
-                 },
-                 plotOptions: {
-                     pie: {
-                         allowPointSelect: true,
-                         borderWidth: 2,
-                         cursor: 'pointer',
-                         dataLabels: {
-                             enabled: true,
-                             format: '<b>{point.name}</b><br>{point.percentage:.0f}%',
-                             distance: 30,
-                         }
-                     }
-                 },
-                 series: [{
-                     // Disable mouse tracking on load, enable after custom animation
-                     enableMouseTracking: false,
-                     animation: {
-                         duration: 1000
-                     },
-                     colorByPoint: true,
-                     data: response.brand
-                 }]
-             })
+    Highcharts.chart('categoryViews', {
+      chart: {
+        height: 500,
+        type: 'pie',
+        events: {
+          render: function() {
+            const chart = this,
+                  renderer = chart.renderer;
 
+            chart.series.forEach(series => {
+              if (!series.customLabel) {
+                series.customLabel = renderer.text(series.name).attr({
+                  y: 20,
+                  'text-anchor': 'middle'
+                }).add();
+              }
 
+              const bBox = series.customLabel.getBBox();
+              series.customLabel.attr({
+                x: series.center[0] + chart.plotLeft
+              });
+            })
+          }
+        }
+      },
+      credits: {
+        enabled: false
+      },
+      title: null,
+      tooltip: {
+        pointFormat: '{point.name} {point.percentage:.0f}%<br>{point.y}'
+      },
+      plotOptions: {
+        pie: {
+          backgroundColor: null,
+          allowPointSelect: true,
+          cursor: 'pointer',
+          depth: 30,
+          dataLabels: {
+            formatter: function() {
+              if (this.y > 0) {
+                return `${this.point.name} ${this.point.y}`
+              }
+            },
+            enabled: true,
+            connectorColor: '#777777',
+            connectorWidth: 1.5,
+          },
+          alignColumns: true,
+          states: {
+            inactive: {
+              enabled: false
+            },
+            hover: {
+              enabled: false
+            }
+          }
+        }
+      },
+      series: [{
+        name: 'Категории',
+        colorByPoint: true,
+        type: 'pie',
+        data: response.category,
+        center: ['15%', 200],
+        size: '80%',
+        showInLegend: true,
+        point: {
+          events: {
+            legendItemClick: function() {
+              const point = this,
+                    series = point.series.chart.series;
 
-         ))
+              for (let i = 1; i < 3; i++) {
+                series[i].points[point.index].setVisible(!point.visible);
+              }
+            }
+          }
+        }
+      }, {
+        name: 'Марки',
+        colorByPoint: true,
+        type: 'pie',
+          data: response.brand,
+        center: ['50%', 200],
+        size: '80%'
+      }, {
+        name: 'manufacturer',
+        colorByPoint: true,
+        type: 'pie',
+          data: response.manufacturer,
+        center: ['85%', 200],
+        size: '80%'
+      }]
+    }))
     .catch(error =>
         console.error(error)
     );
