@@ -34,7 +34,7 @@ $select->cols([
     ->groupBy([
         $groupBy
     ])
-    ->limit(10)
+    ->limit(5)
 //    ->debugPrint()
 ;
 

@@ -21,7 +21,7 @@
 {*Контент статистики просмотров*}
 <div class="row">
     <div class="col-lg-12 col-md-12">
-        <div id='containerViews'></div>
+        <div id='categoryViews'></div>
         <!--table class="table table-bordered">
             <thead>
             <tr>
@@ -248,7 +248,7 @@
             };
         }(Highcharts));
 
-        Highcharts.chart('containerViews', {
+        Highcharts.chart('categoryViews', {
             chart: {
                 type: 'pie'
             },
@@ -256,7 +256,7 @@
                 text: 'Что смотрят'
             },
             subtitle: {
-                text: 'Custom animation of pie series'
+                text: 'По категориям'
             },
             tooltip: {
                 headerFormat: '',
