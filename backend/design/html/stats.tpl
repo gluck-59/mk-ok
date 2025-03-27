@@ -2,28 +2,10 @@
 <link rel="stylesheet" href="design/css/table.css">
 {literal}
     <script>
-        $.getJSON('ajax/statViews.php', function (data) {
-            window.dataViews = data
-            // console.log('dataViews', window.dataViews)
-        });
-
-
-        /*
-        let promise = new Promise((resolve, reject) => {});
-
-        // promise.then навешивает обработчики на успешный результат или ошибку
-        promise
-            .then(
-                result => {
-                    // первая функция-обработчик - запустится при вызове resolve
-                    alert("Fulfilled: " + result); // result - аргумент resolve
-                },
-                error => {
-                    // вторая функция - запустится при вызове reject
-                    alert("Rejected: " + error); // error - аргумент reject
-                }
-            );
-        */
+        // $.getJSON('ajax/statViews.php', function (data) {
+        //     window.dataViews = data
+        //     // console.log('dataViews', window.dataViews)
+        // });
     </script>
 {/literal}
 {*Название страницы*}
@@ -38,34 +20,20 @@
 </div>
 {*Контент статистики просмотров*}
 <div class="row">
-    <div class="col-md-6">
+    <div class="col-md-4">
         <div id='categoryViews'>
-            <img src="design/images/loader.gif">
+            <img src="design/images/ajax_preloader.gif">
         </div>
-        <!--table class="table table-bordered">
-            <thead>
-            <tr>
-                <th>Товар</th>
-                <th>Категория</th>
-                <th>Производитель</th>
-                <th>Марка</th>
-                <th>Просмотров</th>
-            </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>2</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>4</td>
-                </tr>
-            </tbody>
-        </table-->
     </div>
-    <div class="col-md-6">
-        <div id='manufacturerViews'></div>
+    <div class="col-md-4">
+        <div id='manufacturerViews'>
+            <img src="design/images/ajax_preloader.gif">
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div id='brandViews'>
+            <img src="design/images/ajax_preloader.gif">
+        </div>
     </div>
 </div>
 
@@ -195,7 +163,6 @@
 
     /***** categoryViews ****************/
 
-    setTimeout(function (){
         (function (H) {
             H.seriesTypes.pie.prototype.animate = function (init) {
                 const series = this,
@@ -271,7 +238,8 @@
             };
         }(Highcharts));
 
-        Highcharts.chart('categoryViews', {
+getViewStat("ajax/statViews.php").then(response =>
+         Highcharts.chart('categoryViews', {
             chart: {
                 type: 'pie'
             },
@@ -300,7 +268,7 @@
                     dataLabels: {
                         enabled: true,
                         format: '<b>{point.name}</b><br>{point.percentage:.0f}%',
-                        distance: 20,
+                        distance: 30,
                     }
                 }
             },
@@ -311,14 +279,78 @@
                     duration: 1000
                 },
                 colorByPoint: true,
-                data:
-                window.dataViews.category
+                data: response.category
             }]
+        },
+             Highcharts.chart('brandViews', {
+                 chart: {
+                     type: 'pie'
+                 },
+                 title: {
+                     text: 'Что смотрят'
+                 },
+                 subtitle: {
+                     text: 'По маркам'
+                 },
+                 tooltip: {
+                     headerFormat: '',
+                     pointFormat:
+                         '<span style="color:{point.color}">\u25cf</span> ' +
+                         '{point.name}: <b>{point.percentage:.1f}%</b>'
+                 },
+                 accessibility: {
+                     point: {
+                         valueSuffix: '%'
+                     }
+                 },
+                 plotOptions: {
+                     pie: {
+                         allowPointSelect: true,
+                         borderWidth: 2,
+                         cursor: 'pointer',
+                         dataLabels: {
+                             enabled: true,
+                             format: '<b>{point.name}</b><br>{point.percentage:.0f}%',
+                             distance: 30,
+                         }
+                     }
+                 },
+                 series: [{
+                     // Disable mouse tracking on load, enable after custom animation
+                     enableMouseTracking: false,
+                     animation: {
+                         duration: 1000
+                     },
+                     colorByPoint: true,
+                     data: response.brand
+                 }]
+             })
+
+
+
+         ))
+    .catch(error =>
+        console.error(error)
+    );
+
+
+
+    // вызов промиса
+    function getViewStat(url) {
+        return new Promise((succeed, fail) => {
+            const xhr = new XMLHttpRequest();
+            xhr.open("GET", url);
+            xhr.addEventListener("load", () => {
+                if (xhr.status >=200 && xhr.status < 400)
+                    succeed(JSON.parse(xhr.response));
+                else
+                    fail(new Error(`из промиса: Request failed ${xhr.statusText}`));
+            });
+            xhr.addEventListener("error из промиса", () => fail(new Error("ХЗ что")));
+            xhr.send();
         });
-    }, 2000)
+    }
 
-  // console.log('statViews', $.getJSON('ajax/statViews.php', function (data) {return data}))
-
-
+    // console.log('statViews', $.getJSON('ajax/statViews.php', function (data) {return data}))
 </script>
 {/literal}

@@ -54,6 +54,10 @@ foreach($data as $d) {
     $resultManufacturer['name'] = $d->manufacturerName;
     $results['manufacturer'][] = $resultManufacturer;
 
+    $resultBrand['y'] = $d->qty;
+    $resultBrand['brand'] = $d->brandName;
+    $results['brand'][] = $resultBrand;
+
 }
 
 $response->setContent(json_encode($results, JSON_NUMERIC_CHECK), RESPONSE_JSON);
