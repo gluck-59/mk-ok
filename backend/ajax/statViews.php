@@ -19,44 +19,88 @@ $queryFactory = $DI->get(QueryFactory::class);
 /** @var Database $db */
 $db = $DI->get(Database::class);
 
-$groupBy = 'c.id';
+$results = [];
 
-$select = $queryFactory->newSelect();
-$select->cols([
-    'COUNT(*) AS qty', 'lp.name productName', 'c.name categoryName', 'm.name manufacturerName', 'b.name brandName'
+
+// категории
+
+$selectCategories = $queryFactory->newSelect();
+$selectCategories->cols([
+    'COUNT(*) AS qty',  'c.name categoryName'
 ])->from('__user_browsed_products ubp')
 //    ->where('o.closed ')
     ->join('left', '__products p', 'p.id = ubp.product_id')
-    ->join('left', '__lang_products lp', 'p.id = lp.product_id AND lp.lang_id = 1')
+//    ->join('left', '__lang_products lp', 'p.id = lp.product_id AND lp.lang_id = 1')
     ->join('left', '__categories c', 'c.id = p.main_category_id')
-    ->join('left', '__manufacturers m', 'm.id = p.manufacturer_id')
-    ->join('left', '__brands b', 'b.id = p.brand_id')
-    ->groupBy([$groupBy])
+//    ->join('left', '__manufacturers m', 'm.id = p.manufacturer_id')
+//    ->join('left', '__brands b', 'b.id = p.brand_id')
+    ->groupBy(['c.id'])
     ->limit(5)
 //    ->debugPrint()
 ;
 
-$db->query($select);
+$db->query($selectCategories);
 $data = $db->results();
-
-//print_r($data);
-
-$results = [];
-//    $result['categoryName'] = $d->productName;
+$result = [];
 foreach($data as $d) {
-    $resultCategory['y'] = $d->qty;
-    $resultCategory['name'] = $d->categoryName;
-    $results['category'][] = $resultCategory;
-
-    $resultManufacturer['y'] = $d->qty;
-    $resultManufacturer['name'] = $d->manufacturerName;
-    $results['manufacturer'][] = $resultManufacturer;
-
-    $resultBrand['y'] = $d->qty;
-    $resultBrand['brand'] = $d->brandName;
-    $results['brand'][] = $resultBrand;
-
+    $result['y'] = $d->qty;
+    $result['name'] = $d->categoryName;
+    $results['category'][] = $result;
 }
+
+
+ // производители
+$selectManufacturers = $queryFactory->newSelect();
+$selectManufacturers->cols([
+    'COUNT(*) AS qty',  'm.name manufacturerName'
+])->from('__user_browsed_products ubp')
+//    ->where('o.closed ')
+    ->join('left', '__products p', 'p.id = ubp.product_id')
+//    ->join('left', '__lang_products lp', 'p.id = lp.product_id AND lp.lang_id = 1')
+//    ->join('left', '__categories c', 'c.id = p.main_category_id')
+    ->join('left', '__manufacturers m', 'm.id = p.manufacturer_id')
+//    ->join('left', '__brands b', 'b.id = p.brand_id')
+    ->groupBy(['m.id'])
+    ->limit(5)
+//    ->debugPrint()
+;
+
+$db->query($selectManufacturers);
+$data = $db->results();
+$result = [];
+foreach($data as $d) {
+    $result['y'] = $d->qty;
+    $result['name'] = $d->manufacturerName;
+    $results['manufacturers'][] = $result;
+}
+
+
+
+// марки
+$selectBrands = $queryFactory->newSelect();
+$selectBrands->cols([
+    'COUNT(*) AS qty',  'b.name brandName'
+])->from('__user_browsed_products ubp')
+//    ->where('o.closed ')
+    ->join('left', '__products p', 'p.id = ubp.product_id')
+//    ->join('left', '__lang_products lp', 'p.id = lp.product_id AND lp.lang_id = 1')
+//    ->join('left', '__categories c', 'c.id = p.main_category_id')
+//    ->join('left', '__manufacturers m', 'm.id = p.manufacturer_id')
+    ->join('left', '__brands b', 'b.id = p.brand_id')
+    ->groupBy(['b.id'])
+    ->limit(5)
+//    ->debugPrint()
+;
+
+$db->query($selectBrands);
+$data = $db->results();
+$result = [];
+foreach($data as $d) {
+    $result['y'] = $d->qty;
+    $result['name'] = $d->brandName;
+    $results['brands'][] = $result;
+}
+
 
 $response->setContent(json_encode($results, JSON_NUMERIC_CHECK), RESPONSE_JSON);
 $response->sendContent();

@@ -228,7 +228,7 @@ getViewStat("ajax/statViews.php").then(response =>
         colorByPoint: true,
         type: 'pie',
         data: response.category,
-        center: ['50%', '50%'],
+        center: ['15%', '50%'],
         size: '70%',
         showInLegend: false,
         point: {
@@ -243,22 +243,23 @@ getViewStat("ajax/statViews.php").then(response =>
             }
           }
         }
-      }
-      /*, {
-        name: 'Марки',
-        colorByPoint: true,
-        type: 'pie',
-          data: response.brand,
-        center: ['50%', 200],
-        size: '80%'
-      }, {
+      },
+      {
         name: 'Производители',
         colorByPoint: true,
         type: 'pie',
-          data: response.manufacturer,
+          data: response.manufacturers,
         center: ['85%', 200],
         size: '80%'
-      }*/
+      },
+      {
+          name: 'Марки',
+          colorByPoint: true,
+          type: 'pie',
+          data: response.brands,
+          center: ['50%', 200],
+          size: '80%'
+      }
       ]
     }))
     .catch(error =>
