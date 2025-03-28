@@ -49,6 +49,7 @@ $selectManufacturers = $queryFactory->newSelect();
 $selectManufacturers->cols([
     'COUNT(*) AS qty',  'm.name manufacturerName'
 ])->from('__user_browsed_products ubp')
+    ->where('p.manufacturer_id > 0')
     ->join('left', '__products p', 'p.id = ubp.product_id')
     ->join('left', '__manufacturers m', 'm.id = p.manufacturer_id')
     ->groupBy(['m.id'])
