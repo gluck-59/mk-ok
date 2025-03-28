@@ -142,9 +142,15 @@
             // Create the chart
             var chart = new Highcharts.Chart(options);
         });
+    Highcharts.setOptions({
+        colors: ['#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263',      '#6AF9C4']
     });
+
+
+    });
+
     // Apply the theme
-    var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
+    // var highchartsOptions = Highcharts.setOptions(Highcharts.theme);
 
 
 
@@ -219,12 +225,12 @@ getViewStat("ajax/statViews.php").then(response =>
       },
       series: [{
         name: 'Категории',
-        colorByPoint: false,
+        colorByPoint: true,
         type: 'pie',
         data: response.category,
         center: ['50%', '50%'],
         size: '70%',
-        showInLegend: true,
+        showInLegend: false,
         point: {
           events: {
             legendItemClick: function() {
