@@ -31,9 +31,7 @@ $select->cols([
     ->join('left', '__categories c', 'c.id = p.main_category_id')
     ->join('left', '__manufacturers m', 'm.id = p.manufacturer_id')
     ->join('left', '__brands b', 'b.id = p.brand_id')
-    ->groupBy([
-        $groupBy
-    ])
+    ->groupBy([$groupBy])
     ->limit(5)
 //    ->debugPrint()
 ;

@@ -168,7 +168,7 @@ getViewStat("ajax/statViews.php").then(response =>
             chart.series.forEach(series => {
               if (!series.customLabel) {
                 series.customLabel = renderer.text(series.name).attr({
-                  y: 20,
+                  y: 50,
                   'text-anchor': 'middle'
                 }).add();
               }
@@ -184,7 +184,9 @@ getViewStat("ajax/statViews.php").then(response =>
       credits: {
         enabled: false
       },
-      title: null,
+        title: {
+            text: 'Статистика просмотров'
+        },
       tooltip: {
         pointFormat: '{point.name} {point.percentage:.0f}%<br>{point.y}'
       },
@@ -217,11 +219,11 @@ getViewStat("ajax/statViews.php").then(response =>
       },
       series: [{
         name: 'Категории',
-        colorByPoint: true,
+        colorByPoint: false,
         type: 'pie',
         data: response.category,
-        center: ['15%', 200],
-        size: '80%',
+        center: ['50%', '50%'],
+        size: '70%',
         showInLegend: true,
         point: {
           events: {
@@ -235,7 +237,8 @@ getViewStat("ajax/statViews.php").then(response =>
             }
           }
         }
-      }, {
+      }
+      /*, {
         name: 'Марки',
         colorByPoint: true,
         type: 'pie',
@@ -243,13 +246,14 @@ getViewStat("ajax/statViews.php").then(response =>
         center: ['50%', 200],
         size: '80%'
       }, {
-        name: 'manufacturer',
+        name: 'Производители',
         colorByPoint: true,
         type: 'pie',
           data: response.manufacturer,
         center: ['85%', 200],
         size: '80%'
-      }]
+      }*/
+      ]
     }))
     .catch(error =>
         console.error(error)
