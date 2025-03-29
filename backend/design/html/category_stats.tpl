@@ -112,7 +112,7 @@
             <div class="okay_list_head">
                 <div class="okay_list_heading okay_list_categorystats_categories">{$btr->general_category|escape}</div>
                 <div class="okay_list_heading okay_list_categorystats_total">{$btr->general_sales_amount|escape}</div>
-                <div class="okay_list_heading okay_list_categorystats_setting">{$btr->general_amount|escape}</div>
+                <div class="okay_list_heading okay_list_categorystats_setting">{$btr->general_amt|escape}</div>
             </div>
             {*Параметры элемента*}
             <div class="okay_list_body">

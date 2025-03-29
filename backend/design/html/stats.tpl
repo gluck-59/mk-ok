@@ -21,7 +21,7 @@
 {*Контент статистики просмотров*}
 <div class="row">
     <div class="col-md-12">
-        <div id='categoryViews'>
+        <div id='statViews'>
             <img src="design/images/ajax_preloader.gif">
         </div>
     </div>
@@ -157,12 +157,12 @@
 
 
 
-    /***** categoryViews ****************/
+    /***** statViews ****************/
 
 
 
 getViewStat("ajax/statViews.php").then(response =>
-    Highcharts.chart('categoryViews', {
+    Highcharts.chart('statViews', {
       chart: {
         height: 500,
         type: 'pie',

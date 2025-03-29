@@ -177,8 +177,11 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
                 case 'EUR':
                     $currencyModel = $currenciesEntity->findOne(['code' => 'EUR']);
                     break;
+                case 'GBP':
+                    $currencyModel = $currenciesEntity->findOne(['code' => 'GBP']);
+                    break;
                 default:
-                    $currencyModel = $currenciesEntity->findOne(['code' => 'USD']);
+                    $currencyModel = $currenciesEntity->findOne(['code' => 'EUR']);
             }
             $report->newEbayItem_id = $newLot->ebayItemNo;
             $report->old_currency_id = $variant->currency_id;
