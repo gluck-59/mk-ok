@@ -31,6 +31,7 @@
                     </a>
                 </div>
             {/if}
+            &nbsp;<span class="muted">{$viewed} просмотров</span>
         </div>
     </div>
 </div>

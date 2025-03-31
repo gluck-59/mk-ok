@@ -143,7 +143,7 @@
             var chart = new Highcharts.Chart(options);
         });
     Highcharts.setOptions({
-        colors: ['#50B432', '#ED561B', '#DDDF00', '#24CBE5', '#64E572', '#FF9655', '#FFF263',      '#6AF9C4']
+        colors: ['#50B432', '#ED561B', '#b49e08', '#298796', '#9b430d']
     });
 
 

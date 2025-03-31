@@ -56,4 +56,14 @@ class UserBrowsedProductsEntity extends Entity
             ->bindValue('user_id', $userId);
         $this->db->query($delete);
     }
+
+    public function getViewed($productId) {
+        $query = $this->queryFactory->newSqlQuery();
+        $select = $this->queryFactory->newSelect();
+        $select->from(self::getTable())
+            ->cols(['count(1) count '])
+            ->where('product_id = '.$productId);
+
+        return $select->result('count');
+    }
 }

@@ -15,6 +15,7 @@ use Okay\Admin\Helpers\BackendProductsHelper;
 use Okay\Admin\Helpers\BackendVariantsHelper;
 use Okay\Admin\Helpers\BackendFeaturesHelper;
 use Okay\Admin\Helpers\BackendSpecialImagesHelper;
+use Okay\Entities\UserBrowsedProductsEntity;
 
 class ProductAdmin extends IndexAdmin
 {
@@ -30,7 +31,8 @@ class ProductAdmin extends IndexAdmin
         BackendFeaturesHelper      $backendFeaturesHelper,
         BackendSpecialImagesHelper $backendSpecialImagesHelper,
         BackendValidateHelper      $backendValidateHelper,
-        RouterCacheEntity          $routerCacheEntity
+        RouterCacheEntity          $routerCacheEntity,
+        UserBrowsedProductsEntity $userBrowsedProductsEntity
     ) {
 
         if ($this->request->method('post') && !empty($_POST)) {
@@ -143,12 +145,12 @@ class ProductAdmin extends IndexAdmin
         $manufacturersCount = $manufacturersEntity->count();
         $manufacturers = $manufacturersEntity->mappedBy('id')->find(['limit' => $manufacturersCount]);
 
-
         $this->design->assign('brands',     $brands);
         $this->design->assign('manufacturers',$manufacturers);
         $this->design->assign('categories', $categoriesTree);
         $this->design->assign('currencies', $currenciesEntity->find());
         $this->design->assign('ebayMotorListUrl', EbayAdmin::EBAY_MOTOR_LIST_URL);
+        $this->design->assign('viewed', $userBrowsedProductsEntity->getViewed($product->id));
 
         $this->response->setContent($this->design->fetch('product.tpl'));
     }
