@@ -26,6 +26,7 @@ $selectCategories = $queryFactory->newSelect();
 $selectCategories->cols([
     'COUNT(*) AS qty',  'c.name categoryName'
 ])->from('__user_browsed_products ubp')
+    ->where('p.main_category_id <> 5')
     ->join('left', '__products p', 'p.id = ubp.product_id')
     ->join('left', '__categories c', 'c.id = p.main_category_id')
     ->groupBy(['c.id'])
