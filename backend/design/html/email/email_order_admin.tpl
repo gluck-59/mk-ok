@@ -52,8 +52,9 @@
                                                             </tr>
                                                             <tr>
                                                                 <td class="es-p10t es-p0b es-p40r es-p40l" align="center">
-                                                                    <p>{$btr->email_inform_order_first|escape} <strong>№ {$order->id}</strong> {$btr->email_from|escape} <strong>{$order->date|date}:{$order->date|time}.</strong><br> {$btr->email_inform_order_last|escape}
-                                                                        <span class="es-status-color">{$order_status->name|escape}</span></p>
+{*                                                                    <p>{$btr->email_inform_order_first|escape} <strong>№ {$order->id}</strong> {$btr->email_from|escape} <strong>{$order->date|date}:{$order->date|time}.</strong><br> {$btr->email_inform_order_last|escape}*}
+{*                                                                        <span class="es-status-color">{$order_status->name|escape}</span></p>*}
+                                                                    <p>{$order->date|date}:{$order->date|time}</p>
                                                                 </td>
                                                             </tr>
                                                             <tr>
