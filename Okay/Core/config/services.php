@@ -136,13 +136,13 @@ $services = [
             new SR(QueryFactory::class),
         ],
     ],
-    Validator::class => [
-        'class' => Validator::class,
-        'arguments' => [
-            new SR(Settings::class),
+//    Validator::class => [
+//        'class' => Validator::class,
+//        'arguments' => [
+//            new SR(Settings::class),
 //            new SR(Recaptcha::class),
-        ],
-    ],
+//        ],
+//    ],
     Settings::class => [
         'class' => Settings::class,
         'arguments' => [
@@ -298,13 +298,13 @@ $services = [
             ],
         ]
     ],
-//    Recaptcha::class => [
-//        'class' => Recaptcha::class,
-//        'arguments' => [
-//            new SR(Settings::class),
-//            new SR(Request::class),
-//        ],
-//    ],
+    Recaptcha::class => [
+        'class' => Recaptcha::class,
+        'arguments' => [
+            new SR(Settings::class),
+            new SR(Request::class),
+        ],
+    ],
     Managers::class => [
         'class' => Managers::class,
     ],
