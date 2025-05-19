@@ -298,13 +298,13 @@ $services = [
             ],
         ]
     ],
-    Recaptcha::class => [
-        'class' => Recaptcha::class,
-        'arguments' => [
-            new SR(Settings::class),
-            new SR(Request::class),
-        ],
-    ],
+//    Recaptcha::class => [
+//        'class' => Recaptcha::class,
+//        'arguments' => [
+//            new SR(Settings::class),
+//            new SR(Request::class),
+//        ],
+//    ],
     Managers::class => [
         'class' => Managers::class,
     ],
