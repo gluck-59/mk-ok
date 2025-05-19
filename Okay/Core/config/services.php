@@ -140,7 +140,7 @@ $services = [
         'class' => Validator::class,
         'arguments' => [
             new SR(Settings::class),
-//            new SR(Recaptcha::class),
+            new SR(Recaptcha::class),
         ],
     ],
     Settings::class => [
