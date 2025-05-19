@@ -65,36 +65,36 @@
                         {$menu_header}
                     </div>
                     {* header contacts *}
-                    <div class="header-contact">
-                        <div class="header-contact__inner {if !$settings->site_phones && !$settings->site_email} header-contact__inner--adress{/if}">
-                            {if $settings->site_phones}
-                                {foreach $settings->site_phones as $phone}
-                                    <div class="header-contact__item header-contact--phone{if $phone@first} header-contact__item--visible{/if}">
+{*                    <div class="header-contact">*}
+{*                        <div class="header-contact__inner {if !$settings->site_phones && !$settings->site_email} header-contact__inner--adress{/if}">*}
+{*                            {if $settings->site_phones}*}
+{*                                {foreach $settings->site_phones as $phone}*}
+{*                                    <div class="header-contact__item header-contact--phone{if $phone@first} header-contact__item--visible{/if}">*}
 {*                                        <a class="d-flex align-items-center header-contact__section" href="tel:{preg_replace('~[^0-9\+]~', '', $phone)}">*}
-                                        <a class="d-flex align-items-center header-contact__section" href="https://t.me/{$phone}" target="_blank">
-                                            {include file="svg.tpl" svgId="telegram_icon"}
-                                            <span>Telegram</span>
-                                        </a>
-                                    </div>
-                                {/foreach}
-                            {/if}
-                            {if $settings->order_email}
-                                <div class="header-contact__item header-contact--email {if !$settings->site_phones} header-contact__item--visible{/if}">
-                                    <a class="d-flex align-items-center header-contact__section" href="mailto:{$settings->order_email|escape}" >
-                                        {include file="svg.tpl" svgId="email_icon"}
-                                        <span>Email</span>
-                                    </a>
-                                </div>
-                            {/if}
-                            {if $settings->site_working_hours}
-                                <div class="header-contact__item header-contact--time {if !$settings->site_phones && !$settings->site_email} header-contact__item--visible{/if}">
-                                    <div class="d-flex align-items-center header-contact__section">
-                                        <div class="header-contact__title-s">{$settings->site_working_hours}</div>
-                                    </div>
-                                </div>
-                            {/if}
-                         </div>
-                    </div>
+{*                                        <a class="d-flex align-items-center header-contact__section" href="https://t.me/{$phone}" target="_blank">*}
+{*                                            {include file="svg.tpl" svgId="telegram_icon"}*}
+{*                                            <span>Telegram</span>*}
+{*                                        </a>*}
+{*                                    </div>*}
+{*                                {/foreach}*}
+{*                            {/if}*}
+{*                            {if $settings->order_email}*}
+{*                                <div class="header-contact__item header-contact--email {if !$settings->site_phones} header-contact__item--visible{/if}">*}
+{*                                    <a class="d-flex align-items-center header-contact__section" href="mailto:{$settings->order_email|escape}" >*}
+{*                                        {include file="svg.tpl" svgId="email_icon"}*}
+{*                                        <span>Email</span>*}
+{*                                    </a>*}
+{*                                </div>*}
+{*                            {/if}*}
+{*                            {if $settings->site_working_hours}*}
+{*                                <div class="header-contact__item header-contact--time {if !$settings->site_phones && !$settings->site_email} header-contact__item--visible{/if}">*}
+{*                                    <div class="d-flex align-items-center header-contact__section">*}
+{*                                        <div class="header-contact__title-s">{$settings->site_working_hours}</div>*}
+{*                                    </div>*}
+{*                                </div>*}
+{*                            {/if}*}
+{*                         </div>*}
+{*                    </div>*}
                 </div>
             </div>
         </div>
@@ -194,48 +194,48 @@
         <div class="container">
             <div class="f_row flex-column flex-md-row justify-content-md-between align-items-start">
                 {* Footer contacts *}
-                <div class="f_col-lg">
-                    <div class="footer__title d-flex align-items-center justify-content-between">
-                        <span data-language="index_contacts">{$lang->index_contacts}</span>
-                        <span class="fn_switch_parent footer__title_arrow hidden-lg-up">{include file="svg.tpl" svgId="arrow_right"}</span>
-                    </div>
-                    <div class="footer__content footer__hidden">
-                        {if $settings->site_phones}
-                            {foreach $settings->site_phones as $phone}
-                                <div class="footer__contact_item">
+{*                <div class="f_col-lg">*}
+{*                    <div class="footer__title d-flex align-items-center justify-content-between">*}
+{*                        <span data-language="index_contacts">{$lang->index_contacts}</span>*}
+{*                        <span class="fn_switch_parent footer__title_arrow hidden-lg-up">{include file="svg.tpl" svgId="arrow_right"}</span>*}
+{*                    </div>*}
+{*                    <div class="footer__content footer__hidden">*}
+{*                        {if $settings->site_phones}*}
+{*                            {foreach $settings->site_phones as $phone}*}
+{*                                <div class="footer__contact_item">*}
 {*                                    <a class="d-flex align-items-start phone" href="tel:{preg_replace('~[^0-9\+]~', '', $phone)}">*}
-                                    <a class="d-flex align-items-start phone" href="https://t.me/{$phone}" target="_blank">
-                                        {include file="svg.tpl" svgId="telegram_icon"}
-                                        <span>Telegram</span>
-                                    </a>
-                                </div>
-                            {/foreach}
-                        {/if}
-                        {if $settings->order_email}
-                            <div class="footer__contact_item">
-                                <a class="d-flex align-items-start email " href="mailto:{$settings->order_email|escape}">
-                                    {include file="svg.tpl" svgId="email_icon"}
+{*                                    <a class="d-flex align-items-start phone" href="https://t.me/{$phone}" target="_blank">*}
+{*                                        {include file="svg.tpl" svgId="telegram_icon"}*}
+{*                                        <span>Telegram</span>*}
+{*                                    </a>*}
+{*                                </div>*}
+{*                            {/foreach}*}
+{*                        {/if}*}
+{*                        {if $settings->order_email}*}
+{*                            <div class="footer__contact_item">*}
+{*                                <a class="d-flex align-items-start email " href="mailto:{$settings->order_email|escape}">*}
+{*                                    {include file="svg.tpl" svgId="email_icon"}*}
 {*                                    <span>{$settings->site_email|escape}</span>*}
-                                    <span>Email</span>
-                                </a>
-                            </div>
-                        {/if}
-                        {if $settings->site_working_hours}
-                            <div class="footer__contact_item">
-                                <div class="d-flex align-items-start open_hours">
-                                    {include file="svg.tpl" svgId="time_icon"}
-                                    {$settings->site_working_hours}
-                                </div>
-                            </div>
-                        {/if}
+{*                                    <span>Email</span>*}
+{*                                </a>*}
+{*                            </div>*}
+{*                        {/if}*}
+{*                        {if $settings->site_working_hours}*}
+{*                            <div class="footer__contact_item">*}
+{*                                <div class="d-flex align-items-start open_hours">*}
+{*                                    {include file="svg.tpl" svgId="time_icon"}*}
+{*                                    {$settings->site_working_hours}*}
+{*                                </div>*}
+{*                            </div>*}
+{*                        {/if}*}
 {*                        <div class="footer__contact_item">*}
 {*                            <a class="fn_callback callback d-inline-flex align-items-center" href="#fn_callback" data-language="index_back_call">*}
 {*                                {include file="svg.tpl" svgId="support_icon"}*}
 {*                                <span>{$lang->index_back_call}</span>*}
 {*                            </a>*}
 {*                        </div>*}
-                    </div>
-                </div>
+{*                    </div>*}
+{*                </div>*}
                 {* Main menu *}
                 <div class="f_col-lg">
                     <div class="footer__title d-flex align-items-center justify-content-between">
