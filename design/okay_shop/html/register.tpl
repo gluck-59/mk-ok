@@ -117,7 +117,14 @@
                             </svg>
                             Сохранять минимально возможные cookie. Без них часть функционала не будет работать.
                         </label>
-                        <button type="submit" value="{$lang->register_create_account}" class="form__button button--blick g-recaptcha" name="register" {if $settings->captcha_type == "invisible"}data-sitekey="{$settings->public_recaptcha_invisible}" data-badge='bottomleft' data-callback="onSubmit"{/if}>
+                        <label class="checkbox">
+                            <input id="politika" type="checkbox" {if $request_data.name} checked{/if} class="checkbox__input">
+                            <svg class="checkbox__icon" viewBox="0 0 20 20">
+                                <path class="checkbox__mark" fill="none" d="M4 10 l5 4 8-8.5"></path>
+                            </svg>
+                            Принимаю <a href="/politika-konfidentsialnosti">Соглашение и политику конфиденциальности</a>
+                        </label>
+                        <button type="submit" style="display: none" value="{$lang->register_create_account}" class="hidden form__button button--blick g-recaptcha" name="register" {if $settings->captcha_type == "invisible"}data-sitekey="{$settings->public_recaptcha_invisible}" data-badge='bottomleft' data-callback="onSubmit"{/if}>
                             <span data-language="register_create_account">{$lang->register_create_account}</span>
                         </button>
                     </div>
@@ -141,4 +148,12 @@
             $("#postal_index").val(suggestion.data.postal_code);
         }
     });
+
+    $('#politika, #cookie').on('change', function (){
+        if ($('#cookie').prop('checked') && $('#politika').prop('checked')) {
+            $('[name=register]').show()
+        } else {
+            $('[name=register]').hide()
+        }
+    })
 </script>

@@ -70,7 +70,7 @@
     </nav>
 </div>
 
-{* Subscribing *}
+{* Subscribing
 <div class="sidebar__boxed sidebar__boxed--subscribe hidden-md-down">
     <div class="sidebar_subscribe">
         <div class="sidebar_subscribe__title">
@@ -85,6 +85,8 @@
         </form>
     </div>
 </div>
+*}
+
 
 {if $controller != "AuthorsController" && !$post}
     {* Featured products *}

@@ -267,7 +267,7 @@
                         {/if}
                     </div>
                 </div>
-                {* Subscribing *}
+                {* Subscribing
                 <div class="f_col-lg">
                     <div class="footer__title footer__title d-flex align-items-center justify-content-between">
                         <span data-language="subscribe_heading">{$lang->subscribe_heading}</span>
@@ -295,7 +295,7 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
+                    </div>*}
                     {* Social buttons *}
                     {if $site_social}
                         <div class="footer__title d-flex align-items-center justify-content-between">
