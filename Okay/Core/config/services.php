@@ -136,13 +136,13 @@ $services = [
             new SR(QueryFactory::class),
         ],
     ],
-//    Validator::class => [
-//        'class' => Validator::class,
-//        'arguments' => [
-//            new SR(Settings::class),
-//            new SR(Recaptcha::class),
-//        ],
-//    ],
+    Validator::class => [
+        'class' => Validator::class,
+        'arguments' => [
+            new SR(Settings::class),
+            new SR(Recaptcha::class),
+        ],
+    ],
     Settings::class => [
         'class' => Settings::class,
         'arguments' => [
