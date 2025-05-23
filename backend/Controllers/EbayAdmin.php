@@ -240,6 +240,7 @@ echo PHP_EOL.'нет keyword, return из стр '.__LINE__;
     public function getitemDetails($itemNo) {
 echo PHP_EOL.'getitemDetails: '.$itemNo;
         $itemDetails = self::request(['request' => $itemNo], 2);
+//prettyDump($itemDetails, 1);
         // лот протух? или еще какая хуйня?
         if (is_array($itemDetails) && $itemDetails['debug']['errors']) {
             return $itemDetails;
@@ -453,10 +454,10 @@ echo $err;
 
         if ($type == 1 && isset($_POST['minprice'])) $url = $url . '&_udlo=' . $_POST['minprice'];
         if ($type == 1 && isset($_POST['maxprice'])) $url = $url . '&_udhi=' . $_POST['maxprice'];
-
         $curlOptions = [
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_FOLLOWLOCATION => true,
 //            CURLOPT_HEADER =>true, // заголовки ответа
             CURLOPT_NOBODY => false, // сама страница, для отладки
             CURLOPT_FAILONERROR => true,
@@ -465,6 +466,7 @@ echo $err;
             CURLOPT_VERBOSE => false // для обновлятеля надо TRUE ?
         ];
         $curl = curl_init();
+
         // если это первый запрос то отдельным запросом надо установить страну доставки &shipToCountryCode=ESP&shippingZipCode=03560
         if ($setCookie) {
             curl_setopt_array($curl, array(
@@ -490,8 +492,9 @@ echo $err;
 
         $this->debug['curl_effective_url'] = curl_getinfo($curl, CURLINFO_EFFECTIVE_URL);
         $response = curl_exec($curl);
-
+//prettyDump($response, 1);
         $curlError = curl_error($curl);
+
         if (!empty($curlError)) {
             $this->debug['errors'] = $curlError;
         }
