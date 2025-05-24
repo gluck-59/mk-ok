@@ -210,9 +210,9 @@ if (is_array($newLot) && $newLot['debug']['errors']) {
             if (is_null($variant->price)) $variant->price = 0;
             if (is_null($newLot->outPrice)) {
                 $newLot->outPrice = 0;
-                $this->sleep = rand(20, 30);
+                $this->sleep = rand(5, 10);
             } else {
-                $this->sleep = rand(3, 10);
+                $this->sleep = rand(0, 5);
             }
 
             // предохранитель от левого лота — если новая цена отличается от старой больше чем на PRICE_MAX_DIFF % — пишем только репорт

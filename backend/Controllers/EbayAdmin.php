@@ -110,6 +110,7 @@ echo PHP_EOL.'нет keyword, return из стр '.__LINE__;
         // если на входе номер лота — сразу идем за ним
         if (strlen($request['keyword']) == 12 && is_numeric($request['keyword'])) {
             $this->parsedLot = self::getitemDetails($request['keyword']);
+            $this->userAgent = self::getRandomUseragent();
         } else {
             $this->userAgent = self::getRandomUseragent();
             $curl = self::request($request, 1);
@@ -462,7 +463,7 @@ echo $err;
             CURLOPT_NOBODY => false, // сама страница, для отладки
             CURLOPT_FAILONERROR => true,
             CURLOPT_MAXREDIRS => 10,
-            CURLOPT_USERAGENT => $this->userAgent,
+            CURLOPT_USERAGENT => self::getRandomUseragent(),
             CURLOPT_VERBOSE => false // для обновлятеля надо TRUE ?
         ];
         $curl = curl_init();
@@ -470,12 +471,12 @@ echo $err;
         // если это первый запрос то отдельным запросом надо установить страну доставки &shipToCountryCode=ESP&shippingZipCode=03560
         if ($setCookie) {
             curl_setopt_array($curl, array(
-                CURLOPT_URL => 'https://www.ebay.com/itemmodules/196433866393?module_groups=GET_RATES_MODAL&co=0&isGetRates=1&rt=nc&quantity=&shipToCountryCode=ESP&shippingZipCode=03560',
+                CURLOPT_URL => $url,
                 CURLOPT_RETURNTRANSFER => true,
                 CURLOPT_NOBODY => true, // сама страница, для отладки
                 CURLOPT_FAILONERROR => true,
                 CURLOPT_MAXREDIRS => 10,
-                CURLOPT_USERAGENT => $this->userAgent,
+                CURLOPT_USERAGENT => self::getRandomUseragent(),
                 CURLOPT_VERBOSE => false,
                 CURLOPT_HTTPHEADER => array('Cookie: __uzma=734e4981-0b87-402d-9ff6-2d5631cb7d99; __uzmb=1738324428; __uzme=8983; __ssds=2; __ssuzjsr2=a9be0cd8e; __uzmaj2=0f7ae11a-823f-4812-abf0-ce6dfbad1c09; __uzmbj2=1738324428; __gads=ID=8384702f6d3af88f:T=1741120123:RT=1741120123:S=ALNI_Mar05PCPVfMQeGUdpBQ3CDLsWfwjw; __gpi=UID=00001051b7286fc2:T=1741120123:RT=1741120123:S=ALNI_MbbtBcnaQEsF3arkrXwNR-HWLe2MA; AMP_MKTG_f93443b04c=JTdCJTIycmVmZXJyZXIlMjIlM0ElMjJodHRwcyUzQSUyRiUyRm1vdG9rb2ZyLmNvbSUyRiUyMiUyQyUyMnJlZmVycmluZ19kb21haW4lMjIlM0ElMjJtb3Rva29mci5jb20lMjIlN0Q=; AMP_f93443b04c=JTdCJTIyZGV2aWNlSWQlMjIlM0ElMjIzODhhYWUwNy0wZGY0LTRjYzQtYjZmNS01NmU4M2EzNDY2YmUlMjIlMkMlMjJzZXNzaW9uSWQlMjIlM0ExNzQxMzM1Njg4NzI1JTJDJTIyb3B0T3V0JTIyJTNBZmFsc2UlMkMlMjJsYXN0RXZlbnRUaW1lJTIyJTNBMTc0MTMzNzUxMDcyOCUyQyUyMmxhc3RFdmVudElkJTIyJTNBMTAxJTJDJTIycGFnZUNvdW50ZXIlMjIlM0E0JTdE; ds1=ats/1741420281034; __uzmlj2=b/cwD0RcQwLw7s0ikxcwMAumReAMXvrLTDd/H1sJgEY=; ak_bmsc=2DD995D451A066B7EB99B32B68A20088~000000000000000000000000000000~YAAQXjYQYII0MtaVAQAAH0A54Rs0VRy536W41fSY2X/+ytrjbMiZ1xgQzFbhm/8BqkMB82pK1CThCKLU+bx45Q7vNa1ktms38TTOvKeHIEVckwLGA4cs1v9hPX3W3w4Rd+6a5/Y6uhcEinPNF+fpS0fSXw0z2ZrUXGYch51kdYAlic034UA7YZpZoMerS2B4dX2Y9ShV7oGyuabqqm5zveST6MEopKtCtiactpbRp7pDE/33Qe/O5H9cLT2AMU3GIdOFoVWwuU6Hhl2IWjVMhm+hAjLTuCfTX0AqQTCei/ZXS/hnkdQnOoCu0gEpPncnzrL/00ThLN4eZpS8EUiBNHgxE0bELsfPxU6lxI4YBwJ5u13F2DoSKZv19Iv0rMPtDkO3F6L/O7Bc; ebay=%5Ejs%3D1%5EsfLMD%3D0%5Edv%3D67bcec54%5Esin%3Din%5Esbf%3D%2300000004%5E; __uzmc=453531529590328; __uzmd=1743245589; __uzmf=7f6000e3f43350-ae5a-4308-a11c-9f0a2b4b135717383244280124921161235-255acca2add5b51e15295; ds2=ssts/1743245589733^; __uzmcj2=51055967012441; __uzmdj2=1743245590; __uzmfj2=7f6000e3f43350-ae5a-4308-a11c-9f0a2b4b135717383244284894921161976-bccfe3f4219efc2c9670; bm_sv=6EE182B07633021F9A5DFB7ED91DCC98~YAAQXjYQYPUgP9aVAQAAF8yI4RtkoQHoVyAlLQM+0Q9U6QPp/FBEJqHNkLya5EMkUIH9aT5LOCzE7qKovzcVLikE98U/bcpxIjTARJc8aaxN0uTuMSRwletxWhp5CfZCFEroOUk/gQn++Z5APzFtpqkcquXSic22beVeSkLo6scW5ugXaSHwXUphujoMv3v7JjkWAQpnxyMmFkM19/M/P68SN/ZuM1tsFJbhUVac9ktt/mqrG93dHfdjYypYuGA=~1; totp=1743245593462.zfcQH6q95KlG5nH1meVGamhWZgX1DTspYYtn+QcoeN/cdXGeZJ4iBTBROgvEiQx7Y+e7jGGCriZ9Q1gUrzc5OQ==.eXEGGEkp1ZPwRtHKqS6F1zourw-iLK4sm1d9F_ZPkxs; dp1=bu1p/Z2x1Y2s1OQ**6baa381a^kms/in6baa381a^pbf/%230000e400e0000000800000000069c9049a^u1f/Ruben6baa381a^tzo/-12c6b7e1d80^bl/ESen-US6baa381a^')
             ));
