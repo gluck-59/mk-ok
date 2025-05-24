@@ -459,6 +459,7 @@ echo $err;
             CURLOPT_URL => $url,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_REFERER, 'https://www.ebay.com',
 //            CURLOPT_HEADER =>true, // заголовки ответа
             CURLOPT_NOBODY => false, // сама страница, для отладки
             CURLOPT_FAILONERROR => true,
@@ -473,6 +474,8 @@ echo $err;
             curl_setopt_array($curl, array(
                 CURLOPT_URL => $url,
                 CURLOPT_RETURNTRANSFER => true,
+                CURLOPT_FOLLOWLOCATION => true,
+                CURLOPT_REFERER, 'https://www.ebay.com',
                 CURLOPT_NOBODY => true, // сама страница, для отладки
                 CURLOPT_FAILONERROR => true,
                 CURLOPT_MAXREDIRS => 10,
